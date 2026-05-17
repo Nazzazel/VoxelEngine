@@ -1,0 +1,11 @@
+{
+	"InstallScripts" : 
+	[
+		"E:/Users/kappa/source/repos/VoxelEngine/thirdparty/glfw/build/cmake_install.cmake",
+		"E:/Users/kappa/source/repos/VoxelEngine/thirdparty/glfw/build/src/cmake_install.cmake",
+		"E:/Users/kappa/source/repos/VoxelEngine/thirdparty/glfw/build/examples/cmake_install.cmake",
+		"E:/Users/kappa/source/repos/VoxelEngine/thirdparty/glfw/build/tests/cmake_install.cmake",
+		"E:/Users/kappa/source/repos/VoxelEngine/thirdparty/glfw/build/docs/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
