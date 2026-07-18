@@ -8,7 +8,7 @@
 
 
 #include "i_engine_system.hpp"
-
+//#include "Core/Engine/Manager/Systems/Logger/logger_system.hpp"
 
 namespace engine
 {
@@ -27,10 +27,11 @@ namespace engine
             auto system = std::make_unique<T>(std::forward<Args>(args)...);
 
             uint32_t error_code = system->OnInit();                             //Calling OnInit every single Registered Instance, so it can correctly set itself up.
-            if (error_code != 0){return error_code;}                            //Exit in first stage
+           // if (error_code != 0){return error_code;}                            //Exit in first stage
 
-            uint32_t error_code_2 = system->SetSystemManager(this);
-            if (error_code_2 != 0){return (error_code_2 << 8 ) | error_code;}   //Exit in 2nd stage plus bit shift //AN:I don't ever have that mayne errors
+            //auto* base_system = static_cast<IEngineSystem*>(system.get());
+            //uint32_t error_code_2 = base_system->SetSystemManager(this);
+            //if (error_code_2 != 0){return (error_code_2 << 8 ) | error_code;}   //Exit in 2nd stage plus bit shift //AN:I don't ever have that mayne errors
                                                                                 //TODO CREATE A ERROR HANDELER FOR SYSTEMS.
 
             m_Systems.push_back(std::move(system));

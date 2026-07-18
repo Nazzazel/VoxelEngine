@@ -209,7 +209,3 @@ namespace engine
 
     }
 }
-
-
-git config user.name "Nazzazel"
-git config user.email "kappa135790@gmail.com"
