@@ -1,0 +1,90 @@
+\doxysection{lve::\+Lve\+Device Class Reference}
+\hypertarget{classlve_1_1LveDevice}{}\label{classlve_1_1LveDevice}\index{lve::LveDevice@{lve::LveDevice}}
+
+
+Collaboration diagram for lve::\+Lve\+Device:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=215pt]{classlve_1_1LveDevice__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classlve_1_1LveDevice_a937d604b4c9960502be568ed0b90b6f7}\label{classlve_1_1LveDevice_a937d604b4c9960502be568ed0b90b6f7} 
+{\bfseries Lve\+Device} (Lve\+Window \&window)
+\item 
+\Hypertarget{classlve_1_1LveDevice_acd0d35625590c8930b8045383c06a495}\label{classlve_1_1LveDevice_acd0d35625590c8930b8045383c06a495} 
+{\bfseries Lve\+Device} (const Lve\+Device \&)=delete
+\item 
+\Hypertarget{classlve_1_1LveDevice_a71420defc7321ff439441bf311b5de3a}\label{classlve_1_1LveDevice_a71420defc7321ff439441bf311b5de3a} 
+void {\bfseries operator=} (const Lve\+Device \&)=delete
+\item 
+\Hypertarget{classlve_1_1LveDevice_a2ec8815791e048ac42a73fcbfe1b154a}\label{classlve_1_1LveDevice_a2ec8815791e048ac42a73fcbfe1b154a} 
+{\bfseries Lve\+Device} (Lve\+Device \&\&)=delete
+\item 
+\Hypertarget{classlve_1_1LveDevice_a0a7c2ce480c9381910528bb05ef68f70}\label{classlve_1_1LveDevice_a0a7c2ce480c9381910528bb05ef68f70} 
+Lve\+Device \& {\bfseries operator=} (Lve\+Device \&\&)=delete
+\item 
+\Hypertarget{classlve_1_1LveDevice_ad526b86bacbf86e02e39545107d744c6}\label{classlve_1_1LveDevice_ad526b86bacbf86e02e39545107d744c6} 
+Vk\+Command\+Pool {\bfseries get\+Command\+Pool} ()
+\item 
+\Hypertarget{classlve_1_1LveDevice_a77a7182fcee7b2301dcc58184295d7c2}\label{classlve_1_1LveDevice_a77a7182fcee7b2301dcc58184295d7c2} 
+Vk\+Device {\bfseries device} ()
+\item 
+\Hypertarget{classlve_1_1LveDevice_a55d6c0c85051695441171542989a8e0c}\label{classlve_1_1LveDevice_a55d6c0c85051695441171542989a8e0c} 
+Vk\+Surface\+KHR {\bfseries surface} ()
+\item 
+\Hypertarget{classlve_1_1LveDevice_a254300a2f7f230dc7ada90e81f31a480}\label{classlve_1_1LveDevice_a254300a2f7f230dc7ada90e81f31a480} 
+Vk\+Queue {\bfseries graphics\+Queue} ()
+\item 
+\Hypertarget{classlve_1_1LveDevice_ac6d54903e3f471b21fa41a2be1e5f71a}\label{classlve_1_1LveDevice_ac6d54903e3f471b21fa41a2be1e5f71a} 
+Vk\+Queue {\bfseries present\+Queue} ()
+\item 
+\Hypertarget{classlve_1_1LveDevice_ac59496a1cadcd9b4df16500951b6e02a}\label{classlve_1_1LveDevice_ac59496a1cadcd9b4df16500951b6e02a} 
+\doxymbox{\hyperlink{structlve_1_1SwapChainSupportDetails}{Swap\+Chain\+Support\+Details}} {\bfseries get\+Swap\+Chain\+Support} ()
+\item 
+\Hypertarget{classlve_1_1LveDevice_a9e90353d9b2c4aaed29459e2a9502b6c}\label{classlve_1_1LveDevice_a9e90353d9b2c4aaed29459e2a9502b6c} 
+uint32\+\_\+t {\bfseries find\+Memory\+Type} (uint32\+\_\+t type\+Filter, Vk\+Memory\+Property\+Flags properties)
+\item 
+\Hypertarget{classlve_1_1LveDevice_af94a82b1a728852111ecfee9a67b43a1}\label{classlve_1_1LveDevice_af94a82b1a728852111ecfee9a67b43a1} 
+\doxymbox{\hyperlink{structlve_1_1QueueFamilyIndices}{Queue\+Family\+Indices}} {\bfseries find\+Physical\+Queue\+Families} ()
+\item 
+\Hypertarget{classlve_1_1LveDevice_acc0a3bdd9c331a758699cb8aea9c0ea2}\label{classlve_1_1LveDevice_acc0a3bdd9c331a758699cb8aea9c0ea2} 
+Vk\+Format {\bfseries find\+Supported\+Format} (const std::\+vector$<$ Vk\+Format $>$ \&candidates, Vk\+Image\+Tiling tiling, Vk\+Format\+Feature\+Flags features)
+\item 
+\Hypertarget{classlve_1_1LveDevice_a84d8712914cef5da8f4ed4f1bf6a4802}\label{classlve_1_1LveDevice_a84d8712914cef5da8f4ed4f1bf6a4802} 
+void {\bfseries create\+Buffer} (Vk\+Device\+Size size, Vk\+Buffer\+Usage\+Flags usage, Vk\+Memory\+Property\+Flags properties, Vk\+Buffer \&buffer, Vk\+Device\+Memory \&buffer\+Memory)
+\item 
+\Hypertarget{classlve_1_1LveDevice_ac7fcce44bbce3e72e0dc6da19c1dc226}\label{classlve_1_1LveDevice_ac7fcce44bbce3e72e0dc6da19c1dc226} 
+Vk\+Command\+Buffer {\bfseries begin\+Single\+Time\+Commands} ()
+\item 
+\Hypertarget{classlve_1_1LveDevice_ac81d96ab43a2f07c931dc585f5cdbb19}\label{classlve_1_1LveDevice_ac81d96ab43a2f07c931dc585f5cdbb19} 
+void {\bfseries end\+Single\+Time\+Commands} (Vk\+Command\+Buffer command\+Buffer)
+\item 
+\Hypertarget{classlve_1_1LveDevice_a36cc0ef762c8219dfee5f3bebd36db68}\label{classlve_1_1LveDevice_a36cc0ef762c8219dfee5f3bebd36db68} 
+void {\bfseries copy\+Buffer} (Vk\+Buffer src\+Buffer, Vk\+Buffer dst\+Buffer, Vk\+Device\+Size size)
+\item 
+\Hypertarget{classlve_1_1LveDevice_af91dda27f6d2764c68882d62b65108f0}\label{classlve_1_1LveDevice_af91dda27f6d2764c68882d62b65108f0} 
+void {\bfseries copy\+Buffer\+To\+Image} (Vk\+Buffer buffer, Vk\+Image image, uint32\+\_\+t width, uint32\+\_\+t height, uint32\+\_\+t layer\+Count)
+\item 
+\Hypertarget{classlve_1_1LveDevice_a87f209ec7d32437db3f9303745d6bd25}\label{classlve_1_1LveDevice_a87f209ec7d32437db3f9303745d6bd25} 
+void {\bfseries create\+Image\+With\+Info} (const Vk\+Image\+Create\+Info \&image\+Info, Vk\+Memory\+Property\+Flags properties, Vk\+Image \&image, Vk\+Device\+Memory \&image\+Memory)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classlve_1_1LveDevice_a3c4169c2199d569b4e16f57b7a898db8}\label{classlve_1_1LveDevice_a3c4169c2199d569b4e16f57b7a898db8} 
+const bool {\bfseries enable\+Validation\+Layers} = true
+\item 
+\Hypertarget{classlve_1_1LveDevice_aa48eff5e5208837ece6d09e2bd6d52cf}\label{classlve_1_1LveDevice_aa48eff5e5208837ece6d09e2bd6d52cf} 
+Vk\+Physical\+Device\+Properties {\bfseries properties}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+Engine/\+\+ZZZZZZZ\+\_\+\+GARBAGE\+\_\+\+TEMP\+\_\+\+FILES/\+\+Vulkan for later DO NOT TOUCH FOR NOW/\+lve\+\_\+device.\+hpp\item 
+Engine/\+\+ZZZZZZZ\+\_\+\+GARBAGE\+\_\+\+TEMP\+\_\+\+FILES/\+\+Vulkan for later DO NOT TOUCH FOR NOW/\+lve\+\_\+device.\+cpp\end{DoxyCompactItemize}

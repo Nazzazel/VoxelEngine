@@ -1,0 +1,35 @@
+\doxysection{opengl\+\_\+vertex\+\_\+buffer.\+hpp}
+\hypertarget{opengl__vertex__buffer_8hpp_source}{}\label{opengl__vertex__buffer_8hpp_source}\index{Backends/OpenGL/Buffers/opengl\_vertex\_buffer.hpp@{Backends/OpenGL/Buffers/opengl\_vertex\_buffer.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}Engine/RenderingAPI/Buffers/vertex\_buffer.hpp"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}Engine/RenderingAPI/Buffers/buffer\_layout.hpp"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }backends}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keyword}{class\ }OpenGLVertexBuffer\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{classengine_1_1VertexBuffer}{engine::VertexBuffer}}}
+\DoxyCodeLine{00009\ \ \ \ \ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ OpenGLVertexBuffer(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ data,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ size);}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \string~OpenGLVertexBuffer();}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Bind()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Unbind()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Layout}}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetLayout(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{classengine_1_1BufferLayout}{engine::BufferLayout}}\&\ layout)\textcolor{keyword}{\ override\ \ \ \ \ }\{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Layout\ =\ layout;\ \}}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classengine_1_1BufferLayout}{engine::BufferLayout}}\&\ GetLayout()\textcolor{keyword}{\ const\ override\ \ \ \ \ \ \ \ \ \ }\{\textcolor{keywordflow}{return}\ m\_Layout;\}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ m\_VertexBufferID;}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classengine_1_1BufferLayout}{engine::BufferLayout}}\ m\_Layout;}
+\DoxyCodeLine{00025\ \ \ \ \ \};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \}}
+
+\end{DoxyCode}

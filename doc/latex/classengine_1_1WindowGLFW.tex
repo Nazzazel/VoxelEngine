@@ -1,0 +1,185 @@
+\doxysection{engine::\+Window\+GLFW Class Reference}
+\hypertarget{classengine_1_1WindowGLFW}{}\label{classengine_1_1WindowGLFW}\index{engine::WindowGLFW@{engine::WindowGLFW}}
+
+
+Inheritance diagram for engine::\+Window\+GLFW:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classengine_1_1WindowGLFW__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for engine::\+Window\+GLFW:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classengine_1_1WindowGLFW__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classengine_1_1WindowGLFW_ab5621e9c3389d21c729bcc4980eedeef}\label{classengine_1_1WindowGLFW_ab5621e9c3389d21c729bcc4980eedeef} 
+{\bfseries Window\+GLFW} (const std::\+string \&title, int width, int height, \doxymbox{\hyperlink{classengine_1_1Window}{Window}} \texorpdfstring{$\ast$}{*}shared)
+\item 
+void \doxymbox{\hyperlink{classengine_1_1WindowGLFW_aad7d07921c53b41118724d67b2bd821f}{Poll\+Events}} () override
+\item 
+bool \doxymbox{\hyperlink{classengine_1_1WindowGLFW_a97707c89d47b681a8f55ada0ecb03e3d}{Should\+Close}} () override
+\item 
+void \doxymbox{\hyperlink{classengine_1_1WindowGLFW_a52a4e39dfbc395630693b53795e66702}{Make\+Context\+Current}} () override
+\item 
+void \doxymbox{\hyperlink{classengine_1_1WindowGLFW_a8533ebc4fdc0b24502470f45058278bb}{Swap\+Buffers}} () override
+\item 
+void \doxymbox{\hyperlink{classengine_1_1WindowGLFW_a8144c34435ea2441cd76b3969078fd21}{Set\+Name}} (const std::\+string \&name) override
+\item 
+GLFWwindow \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{classengine_1_1WindowGLFW_a7a0431b288f308e8d349e3cec18e36e9}{Get\+Native\+Window}} () override
+\item 
+void \doxymbox{\hyperlink{classengine_1_1WindowGLFW_aa7d998017ef3e3f3dbd5c392300875cb}{Get\+Window\+Size}} (int \&window\+Width, int \&window\+Height) override
+\item 
+void \doxymbox{\hyperlink{classengine_1_1WindowGLFW_a42b99bb5dc3bb27c6c42f96cb6b3a608}{Get\+Framebuffer\+Size}} (int \&framebuffer\+Width, int \&framebuffer\+Height) override
+\item 
+bool \doxymbox{\hyperlink{classengine_1_1WindowGLFW_a3c1fc5a3938eb6972318436be750e5ca}{Is\+Focused}} () const override
+\item 
+bool \doxymbox{\hyperlink{classengine_1_1WindowGLFW_abd87d6b6c1e3ec351abbee8e3ef94dff}{Is\+Minimized}} () const override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{classengine_1_1Window}{engine::\+\+Window}}}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries Add\+Resize\+Listener} (Resize\+Callback callback)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Types inherited from \doxymbox{\hyperlink{classengine_1_1Window}{engine::\+\+Window}}}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classengine_1_1Window_a06ab3bf11480eeaceedc5f5bb607849f}\label{classengine_1_1Window_a06ab3bf11480eeaceedc5f5bb607849f} 
+enum class {\bfseries Window\+Type} \{ {\bfseries Console}
+, {\bfseries Default}
+ \}
+\item 
+using {\bfseries Resize\+Callback} = std::\+function$<$void(int, int)$>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \doxymbox{\hyperlink{classengine_1_1Window}{engine::\+\+Window}}}
+\begin{DoxyCompactItemize}
+\item 
+static \doxymbox{\hyperlink{classengine_1_1Window}{Window}} \texorpdfstring{$\ast$}{*} {\bfseries Create} (const std::\+string \&title, int width, int height, \doxymbox{\hyperlink{classengine_1_1Window}{Window}} \texorpdfstring{$\ast$}{*}shared=nullptr)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \doxymbox{\hyperlink{classengine_1_1Window}{engine::\+\+Window}}}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries Notify\+Resize} (int w, int h)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classengine_1_1WindowGLFW_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classengine_1_1WindowGLFW_a42b99bb5dc3bb27c6c42f96cb6b3a608}\index{engine::WindowGLFW@{engine::WindowGLFW}!GetFramebufferSize@{GetFramebufferSize}}
+\index{GetFramebufferSize@{GetFramebufferSize}!engine::WindowGLFW@{engine::WindowGLFW}}
+\doxysubsubsection{\texorpdfstring{GetFramebufferSize()}{GetFramebufferSize()}}
+{\footnotesize\ttfamily \label{classengine_1_1WindowGLFW_a42b99bb5dc3bb27c6c42f96cb6b3a608} 
+void engine::\+\+Window\+GLFW::\+\+Get\+Framebuffer\+Size (\begin{DoxyParamCaption}\item[{int \&}]{framebuffer\+Width}{, }\item[{int \&}]{framebuffer\+Height}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1Window}{engine::\+\+Window}}.
+
+\Hypertarget{classengine_1_1WindowGLFW_a7a0431b288f308e8d349e3cec18e36e9}\index{engine::WindowGLFW@{engine::WindowGLFW}!GetNativeWindow@{GetNativeWindow}}
+\index{GetNativeWindow@{GetNativeWindow}!engine::WindowGLFW@{engine::WindowGLFW}}
+\doxysubsubsection{\texorpdfstring{GetNativeWindow()}{GetNativeWindow()}}
+{\footnotesize\ttfamily \label{classengine_1_1WindowGLFW_a7a0431b288f308e8d349e3cec18e36e9} 
+GLFWwindow \texorpdfstring{$\ast$}{*} engine::\+\+Window\+GLFW::\+\+Get\+Native\+Window (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1Window}{engine::\+\+Window}}.
+
+\Hypertarget{classengine_1_1WindowGLFW_aa7d998017ef3e3f3dbd5c392300875cb}\index{engine::WindowGLFW@{engine::WindowGLFW}!GetWindowSize@{GetWindowSize}}
+\index{GetWindowSize@{GetWindowSize}!engine::WindowGLFW@{engine::WindowGLFW}}
+\doxysubsubsection{\texorpdfstring{GetWindowSize()}{GetWindowSize()}}
+{\footnotesize\ttfamily \label{classengine_1_1WindowGLFW_aa7d998017ef3e3f3dbd5c392300875cb} 
+void engine::\+\+Window\+GLFW::\+\+Get\+Window\+Size (\begin{DoxyParamCaption}\item[{int \&}]{window\+Width}{, }\item[{int \&}]{window\+Height}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1Window}{engine::\+\+Window}}.
+
+\Hypertarget{classengine_1_1WindowGLFW_a3c1fc5a3938eb6972318436be750e5ca}\index{engine::WindowGLFW@{engine::WindowGLFW}!IsFocused@{IsFocused}}
+\index{IsFocused@{IsFocused}!engine::WindowGLFW@{engine::WindowGLFW}}
+\doxysubsubsection{\texorpdfstring{IsFocused()}{IsFocused()}}
+{\footnotesize\ttfamily \label{classengine_1_1WindowGLFW_a3c1fc5a3938eb6972318436be750e5ca} 
+bool engine::\+\+Window\+GLFW::\+\+Is\+Focused (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1Window}{engine::\+\+Window}}.
+
+\Hypertarget{classengine_1_1WindowGLFW_abd87d6b6c1e3ec351abbee8e3ef94dff}\index{engine::WindowGLFW@{engine::WindowGLFW}!IsMinimized@{IsMinimized}}
+\index{IsMinimized@{IsMinimized}!engine::WindowGLFW@{engine::WindowGLFW}}
+\doxysubsubsection{\texorpdfstring{IsMinimized()}{IsMinimized()}}
+{\footnotesize\ttfamily \label{classengine_1_1WindowGLFW_abd87d6b6c1e3ec351abbee8e3ef94dff} 
+bool engine::\+\+Window\+GLFW::\+\+Is\+Minimized (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1Window}{engine::\+\+Window}}.
+
+\Hypertarget{classengine_1_1WindowGLFW_a52a4e39dfbc395630693b53795e66702}\index{engine::WindowGLFW@{engine::WindowGLFW}!MakeContextCurrent@{MakeContextCurrent}}
+\index{MakeContextCurrent@{MakeContextCurrent}!engine::WindowGLFW@{engine::WindowGLFW}}
+\doxysubsubsection{\texorpdfstring{MakeContextCurrent()}{MakeContextCurrent()}}
+{\footnotesize\ttfamily \label{classengine_1_1WindowGLFW_a52a4e39dfbc395630693b53795e66702} 
+void engine::\+\+Window\+GLFW::\+\+Make\+Context\+Current (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1Window}{engine::\+\+Window}}.
+
+\Hypertarget{classengine_1_1WindowGLFW_aad7d07921c53b41118724d67b2bd821f}\index{engine::WindowGLFW@{engine::WindowGLFW}!PollEvents@{PollEvents}}
+\index{PollEvents@{PollEvents}!engine::WindowGLFW@{engine::WindowGLFW}}
+\doxysubsubsection{\texorpdfstring{PollEvents()}{PollEvents()}}
+{\footnotesize\ttfamily \label{classengine_1_1WindowGLFW_aad7d07921c53b41118724d67b2bd821f} 
+void engine::\+\+Window\+GLFW::\+\+Poll\+Events (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1Window}{engine::\+\+Window}}.
+
+\Hypertarget{classengine_1_1WindowGLFW_a8144c34435ea2441cd76b3969078fd21}\index{engine::WindowGLFW@{engine::WindowGLFW}!SetName@{SetName}}
+\index{SetName@{SetName}!engine::WindowGLFW@{engine::WindowGLFW}}
+\doxysubsubsection{\texorpdfstring{SetName()}{SetName()}}
+{\footnotesize\ttfamily \label{classengine_1_1WindowGLFW_a8144c34435ea2441cd76b3969078fd21} 
+void engine::\+\+Window\+GLFW::\+\+Set\+Name (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1Window}{engine::\+\+Window}}.
+
+\Hypertarget{classengine_1_1WindowGLFW_a97707c89d47b681a8f55ada0ecb03e3d}\index{engine::WindowGLFW@{engine::WindowGLFW}!ShouldClose@{ShouldClose}}
+\index{ShouldClose@{ShouldClose}!engine::WindowGLFW@{engine::WindowGLFW}}
+\doxysubsubsection{\texorpdfstring{ShouldClose()}{ShouldClose()}}
+{\footnotesize\ttfamily \label{classengine_1_1WindowGLFW_a97707c89d47b681a8f55ada0ecb03e3d} 
+bool engine::\+\+Window\+GLFW::\+\+Should\+Close (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1Window}{engine::\+\+Window}}.
+
+\Hypertarget{classengine_1_1WindowGLFW_a8533ebc4fdc0b24502470f45058278bb}\index{engine::WindowGLFW@{engine::WindowGLFW}!SwapBuffers@{SwapBuffers}}
+\index{SwapBuffers@{SwapBuffers}!engine::WindowGLFW@{engine::WindowGLFW}}
+\doxysubsubsection{\texorpdfstring{SwapBuffers()}{SwapBuffers()}}
+{\footnotesize\ttfamily \label{classengine_1_1WindowGLFW_a8533ebc4fdc0b24502470f45058278bb} 
+void engine::\+\+Window\+GLFW::\+\+Swap\+Buffers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1Window}{engine::\+\+Window}}.
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+Engine/\+\+Platform/\+\+GLFW/\+window\+GLFW.\+hpp\item 
+Engine/\+\+Platform/\+\+GLFW/\+window\+GLFW.\+cpp\end{DoxyCompactItemize}

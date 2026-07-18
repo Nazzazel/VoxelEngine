@@ -1,0 +1,7 @@
+C:\Users\kappa\source\repos\VoxelEngine\thirdparty\glad\src\glad.c;C:\Users\kappa\source\repos\VoxelEngine\Compile\Backends\x64\Debug\Intermediate\glad.obj
+C:\Users\kappa\source\repos\VoxelEngine\Backends\OpenGL\Buffers\opengl_index_buffer.cpp;C:\Users\kappa\source\repos\VoxelEngine\Compile\Backends\x64\Debug\Intermediate\opengl_index_buffer.obj
+C:\Users\kappa\source\repos\VoxelEngine\Backends\OpenGL\Buffers\opengl_vertex_array.cpp;C:\Users\kappa\source\repos\VoxelEngine\Compile\Backends\x64\Debug\Intermediate\opengl_vertex_array.obj
+C:\Users\kappa\source\repos\VoxelEngine\Backends\OpenGL\Buffers\opengl_vertex_buffer.cpp;C:\Users\kappa\source\repos\VoxelEngine\Compile\Backends\x64\Debug\Intermediate\opengl_vertex_buffer.obj
+C:\Users\kappa\source\repos\VoxelEngine\Backends\OpenGL\Renderer\opengl_renderer.cpp;C:\Users\kappa\source\repos\VoxelEngine\Compile\Backends\x64\Debug\Intermediate\opengl_renderer.obj
+C:\Users\kappa\source\repos\VoxelEngine\Backends\OpenGL\Shader\opengl_shader.cpp;C:\Users\kappa\source\repos\VoxelEngine\Compile\Backends\x64\Debug\Intermediate\opengl_shader.obj
+C:\Users\kappa\source\repos\VoxelEngine\Backends\API\renderer_api.cpp;C:\Users\kappa\source\repos\VoxelEngine\Compile\Backends\x64\Debug\Intermediate\renderer_api.obj

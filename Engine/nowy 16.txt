@@ -1,0 +1,84 @@
+E:\vsstudio\Librarys\glm;E:\VulkanSDK\1.4.341.1\Include;E:\vsstudio\Librarys\glad\include;$(SolutionDir)$(Platform)\$(Configuration);$(SolutionDir);$(SolutionDir)thirdparty\glfw\include;$(SolutionDir)thirdparty\glm;%(AdditionalIncludeDirectories)
+
+
+
+
+$(SolutionDir)Engine;$(SolutionDir)thirdparty\glm;%(AdditionalIncludeDirectories)
+
+
+
+
+E:\vsstudio\Librarys\glm;E:\vsstudio\Librarys\glfw-3.4\include;E:\VulkanSDK\1.4.341.1\Include;E:\vsstudio\Librarys\glad\include;$(SolutionDir)$(Platform)\$(Configuration);$(SolutionDir)Lib\;$(SolutionDir)thirdparty\glfw\include;%(AdditionalIncludeDirectories)
+
+
+$(SolutionDir)Engine;$(SolutionDir)thirdparty\glm;$(SolutionDir)thirdparty\glfw\include;$(SolutionDir)thirdparty\glad\include;%(AdditionalIncludeDirectories)
+
+
+
+
+
+
+
+
+
+
+
+$(SolutionDir)Engine;$(SolutionDir)thirdparty\glm;$(SolutionDir)thirdparty\glfw\include;$(SolutionDir)thirdparty\glad\include;%(AdditionalIncludeDirectories)
+
+
+
+
+
+
+$(SolutionDir)Backends\OpenGL;$(SolutionDir)Engine;$(SolutionDir)DebugTools;$(SolutionDir)thirdparty\glad\include;$(SolutionDir)thirdparty\glfw\include;%(AdditionalIncludeDirectories)
+
+
+
+#include "Engine/Renderer/api/renderer.h"
+#include "Backends/OpenGL/opengl_renderer.h"
+
+
+namespace engine
+{
+    Renderer* Renderer::Create()
+    {
+        // TODO cabability of chaniging the Renderer for now OpenGL
+        return new OpenGLRenderer();
+    }
+}
+
+
+
+
+
+
+
+
+👉 GLAD initialization timing (currently fragile in your setup)
+
+
+1️⃣ Add GLAD + OpenGL Renderer properly
+2️⃣ First clear screen + background color
+3️⃣ Input system (keyboard/mouse abstraction)
+
+👉 
+OpenGL DebugRenderer (draw lines, AABB, voxel chunks)
+👉 OR 
+how to plug DebugTools into your multi-window system
+
+
+🔥 “make chunk system + first voxel cube”
+
+or
+
+🔥 “build real in-game debug overlay (Minecraft F3 style)”
+
+Just tell me 👍
+
+🔥 
+how Minecraft handles movement + chunks with fixed timestep
+🔥 or 
+how to build ultra-responsive input system (keyboard + mouse latency control)
+
+
+$(SolutionDir)Engine;$(SolutionDir)thirdparty\glm;$(SolutionDir)thirdparty\glfw\include;$(SolutionDir)thirdparty\glad\include;$(SolutionDir)Backends;$(VULKAN_SDK)\Include;$(SolutionDir);%(AdditionalIncludeDirectories)

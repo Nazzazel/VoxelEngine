@@ -1,0 +1,39 @@
+\doxysection{lve\+\_\+window.\+hpp}
+\hypertarget{lve__window_8hpp_source}{}\label{lve__window_8hpp_source}\index{Engine/ZZZZZZZ\_GARBAGE\_TEMP\_FILES/Vulkan for later DO NOT TOUCH FOR NOW/lve\_window.hpp@{Engine/ZZZZZZZ\_GARBAGE\_TEMP\_FILES/Vulkan for later DO NOT TOUCH FOR NOW/lve\_window.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\#define\ GLFW\_INCLUDE\_VULKAN}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\#include\ <GLFW/glfw3.h>}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\#include\ <string>}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//namespace\ lve\ \{}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//class\ LveWindow\ \{}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ public:}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ \ LveWindow(int\ w,\ int\ h,\ std::string\ name);}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//\ \ \string~LveWindow();}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ \ LveWindow(const\ LveWindow\ \&)\ =\ delete;}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ LveWindow\ \&operator=(const\ LveWindow\ \&)\ =\ delete;}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//\ \ bool\ shouldClose()\ \{\ return\ glfwWindowShouldClose(window);\ \}}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ \ }}
+\DoxyCodeLine{00020\ \textcolor{comment}{//\ \ void\ createWindowSurface(VkInstance\ instance,\ VkSurfaceKHR\ *surface);}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//\ \ VkExtent2D\ getExtent()\ \{\ return\ \{\ static\_cast<uint32\_t>(width),\ static\_cast<uint32\_t>(height)\ \};\ \}}}
+\DoxyCodeLine{00023\ \textcolor{comment}{//}}
+\DoxyCodeLine{00024\ \textcolor{comment}{//\ private:}}
+\DoxyCodeLine{00025\ \textcolor{comment}{//\ \ void\ initWindow();}}
+\DoxyCodeLine{00026\ \textcolor{comment}{//}}
+\DoxyCodeLine{00027\ \textcolor{comment}{//\ \ const\ int\ width;}}
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ \ const\ int\ height;}}
+\DoxyCodeLine{00029\ \textcolor{comment}{//}}
+\DoxyCodeLine{00030\ \textcolor{comment}{//\ \ std::string\ windowName;}}
+\DoxyCodeLine{00031\ \textcolor{comment}{//\ \ GLFWwindow\ *window;}}
+\DoxyCodeLine{00032\ \textcolor{comment}{//\};}}
+\DoxyCodeLine{00033\ \textcolor{comment}{//\}\ \ //\ namespace\ lve}}
+
+\end{DoxyCode}

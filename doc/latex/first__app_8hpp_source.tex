@@ -1,0 +1,50 @@
+\doxysection{first\+\_\+app.\+hpp}
+\hypertarget{first__app_8hpp_source}{}\label{first__app_8hpp_source}\index{Engine/ZZZZZZZ\_GARBAGE\_TEMP\_FILES/Vulkan for later DO NOT TOUCH FOR NOW/first\_app.hpp@{Engine/ZZZZZZZ\_GARBAGE\_TEMP\_FILES/Vulkan for later DO NOT TOUCH FOR NOW/first\_app.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}lve\_pipeline.hpp"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}lve\_window.hpp"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}lve\_device.hpp"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}lve\_swap\_chain.hpp"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }lve\ \{}
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{classlve_1_1FirstApp}{FirstApp}}\ \{}
+\DoxyCodeLine{00011\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00012\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ WIDTH\ =\ 800;}
+\DoxyCodeLine{00013\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ HEIGHT\ =\ 600;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \textcolor{keywordtype}{void}\ run();}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00018\ \ \ LveWindow\ lveWindow\{WIDTH,\ HEIGHT,\ \textcolor{stringliteral}{"{}Hello\ Vulkan!"{}}\};}
+\DoxyCodeLine{00019\ \ \ \doxymbox{\hyperlink{classlve_1_1LveDevice}{LveDevice}}\ lveDevice\{\ lveWindow\ \};}
+\DoxyCodeLine{00020\ \ \ \doxymbox{\hyperlink{classlve_1_1LveSwapChain}{LveSwapChain}}\ swapChain\{lveDevice,\ lveWindow.getExtent()\ \};}
+\DoxyCodeLine{00021\ \ \ \doxymbox{\hyperlink{classlve_1_1LvePipeline}{LvePipeline}}\ pipeline\{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ lveDevice,}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \textcolor{stringliteral}{"{}shaders/simple\_shader.vert.spv"{}},\ }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \textcolor{stringliteral}{"{}shaders/simple\_shader.frag.spv"{}},}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ LvePipeline::defultPipelineConfigInfo(WIDTH,HEIGHT)}
+\DoxyCodeLine{00026\ \ \ \};}
+\DoxyCodeLine{00027\ \};}
+\DoxyCodeLine{00028\ \}\ \ \textcolor{comment}{//\ namespace\ lve}}
+\DoxyCodeLine{00029\ \textcolor{comment}{//a)shape}}
+\DoxyCodeLine{00030\ \textcolor{comment}{//b)\ size}}
+\DoxyCodeLine{00031\ \textcolor{comment}{//c)\ rectangle}}
+\DoxyCodeLine{00032\ \textcolor{comment}{//d)\ horizontal}}
+\DoxyCodeLine{00033\ \textcolor{comment}{//e)\ vertical}}
+\DoxyCodeLine{00034\ \textcolor{comment}{//f)\ square}}
+\DoxyCodeLine{00035\ \textcolor{comment}{//g)\ diagonal}}
+\DoxyCodeLine{00036\ \textcolor{comment}{//h)\ lower}}
+\DoxyCodeLine{00037\ \textcolor{comment}{//i)\ corner}}
+\DoxyCodeLine{00038\ \textcolor{comment}{//j)\ triangle}}
+\DoxyCodeLine{00039\ \textcolor{comment}{//k)\ angle}}
+\DoxyCodeLine{00040\ \textcolor{comment}{//l)\ right\ angle}}
+\DoxyCodeLine{00041\ \textcolor{comment}{//m)\ parallel}}
+\DoxyCodeLine{00042\ \textcolor{comment}{//n)\ upper}}
+\DoxyCodeLine{00043\ \textcolor{comment}{//o)\ lower}}
+\DoxyCodeLine{00044\ \textcolor{comment}{//p)\ centre}}
+
+\end{DoxyCode}

@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/VoxelGame.dir/link.d CMakeFiles/VoxelGame.dir/main.cpp.o -o VoxelGame  ../Engine/libEngine.a ../libglad.a ../thirdparty/glfw/src/libglfw3.a ../DebugTools/libDebugTools.a ../Backends/libBackends.a /usr/lib/librt.a -lm -ldl

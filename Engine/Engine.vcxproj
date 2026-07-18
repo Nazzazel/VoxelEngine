@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{0cef2b2e-6058-4bcb-80f7-d1e86a02ad24}</ProjectGuid>
+    <RootNamespace>VulkanTest</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Engine</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\CommonPropertySheets\Common.props" />
+    <Import Project="..\CommonPropertySheets\DebugCommon.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\CommonPropertySheets\Common.props" />
+    <Import Project="..\CommonPropertySheets\ReleseCommon.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine;$(SolutionDir)thirdparty\glm;$(SolutionDir)thirdparty\glfw\include;$(SolutionDir)thirdparty\glad\include;$(SolutionDir)Backends;$(VULKAN_SDK)\Include;$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>E:\vsstudio\Librarys\glfw-3.4\build\src\Debug;E:\VulkanSDK\1.4.341.1\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine;$(SolutionDir)thirdparty\glm;$(SolutionDir)thirdparty\glfw\include;$(SolutionDir)thirdparty\glad\include;$(SolutionDir)Backends;$(VULKAN_SDK)\Include;$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>E:\vsstudio\Librarys\glfw-3.4\build\src\Release;E:\VulkanSDK\1.4.341.1\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Assets\AssetManager\asset_manager.cpp" />
+    <ClCompile Include="Assets\Shader\Load\shader_loader.cpp" />
+    <ClCompile Include="Assets\Shader\ShaderManager\shader_manager.cpp" />
+    <ClCompile Include="Core\application.cpp" />
+    <ClCompile Include="Platform\Input\Debug\debug_input.cpp" />
+    <ClCompile Include="Platform\Input\input.cpp" />
+    <ClCompile Include="Platform\Platform\platform.cpp" />
+    <ClCompile Include="Platform\GLFW\windowGLFW.cpp" />
+    <ClCompile Include="Platform\WindowCreation\window.cpp" />
+    <ClCompile Include="RenderingAPI\Buffers\index_buffer.cpp" />
+    <ClCompile Include="RenderingAPI\Buffers\vertex_array.cpp" />
+    <ClCompile Include="RenderingAPI\Buffers\vertex_buffer.cpp" />
+    <ClCompile Include="RenderingAPI\Shader\game_shader.cpp" />
+    <ClCompile Include="RenderingAPI\Renderer\renderer.cpp" />
+    <ClCompile Include="RenderingAPI\Texture\texture.cpp" />
+    <ClCompile Include="Tests\Objects\Console\console.cpp" />
+    <ClCompile Include="Tests\Objects\Rotating Cube\rcube.cpp" />
+    <ClCompile Include="Tests\Objects\Triangle\triangle.cpp" />
+    <ClCompile Include="Platform\Input\TextInput\text_input.cpp" />
+    <ClCompile Include="ZZZZZZZ_GARBAGE_TEMP_FILES\CHANGE\shader_library111.cpp" />
+    <ClCompile Include="ZZZZZZZ_GARBAGE_TEMP_FILES\CHANGE\shader_type111.cpp" />
+    <ClCompile Include="Assets\Shader\Lib\shader_library.cpp" />
+    <ClCompile Include="Src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Assets\AssetManager\asset_manager.hpp" />
+    <ClInclude Include="Assets\AssetManager\Interfaces\IAssetProvider.h" />
+    <ClInclude Include="Assets\Shader\Load\shader_loader.hpp" />
+    <ClInclude Include="Assets\Shader\ShaderManager\Core\ShaderTypeID.h" />
+    <ClInclude Include="Assets\Shader\ShaderManager\shader_manager.hpp" />
+    <ClInclude Include="Core\application.hpp" />
+    <ClInclude Include="Platform\Input\action.hpp" />
+    <ClInclude Include="Platform\Input\Debug\debug_input.hpp" />
+    <ClInclude Include="Platform\Input\input.hpp" />
+    <ClInclude Include="Platform\Input\input_mode.hpp" />
+    <ClInclude Include="Platform\Input\key_code.hpp" />
+    <ClInclude Include="Platform\Platform\platform.hpp" />
+    <ClInclude Include="Platform\GLFW\windowGLFW.hpp" />
+    <ClInclude Include="Platform\WindowCreation\window.hpp" />
+    <ClInclude Include="RenderingAPI\Buffers\buffer_layout.hpp" />
+    <ClInclude Include="RenderingAPI\Buffers\index_buffer.hpp" />
+    <ClInclude Include="RenderingAPI\Buffers\vertex_array.hpp" />
+    <ClInclude Include="RenderingAPI\Buffers\vertex_buffer.hpp" />
+    <ClInclude Include="RenderingAPI\Shader\game_shader.hpp" />
+    <ClInclude Include="RenderingAPI\Renderer\renderer.hpp" />
+    <ClInclude Include="RenderingAPI\Texture\texture.hpp" />
+    <ClInclude Include="Tests\Objects\Console\console.hpp" />
+    <ClInclude Include="Tests\Objects\Rotating Cube\rcube.hpp" />
+    <ClInclude Include="Tests\Objects\Triangle\triangle.hpp" />
+    <ClInclude Include="Platform\Input\TextInput\text_input.hpp" />
+    <ClInclude Include="ZZZZZZZ_GARBAGE_TEMP_FILES\CHANGE\shader_library111.hpp" />
+    <ClInclude Include="ZZZZZZZ_GARBAGE_TEMP_FILES\CHANGE\shader_type111.hpp" />
+    <ClInclude Include="Assets\Shader\Lib\shader_library.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Res\Assets\Shaders\Basic\OpenGL\frag.shader" />
+    <None Include="Res\Assets\Shaders\Basic\OpenGL\vert.shader" />
+    <None Include="Res\shaders\basic.shader" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DebugTools\DebugTools.vcxproj">
+      <Project>{13feba6c-57dd-4982-a986-5dac947cad78}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="INFO.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

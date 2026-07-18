@@ -1,0 +1,55 @@
+\doxysection{engine::\+Renderer Class Reference}
+\hypertarget{classengine_1_1Renderer}{}\label{classengine_1_1Renderer}\index{engine::Renderer@{engine::Renderer}}
+
+
+Inheritance diagram for engine::\+Renderer:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=222pt]{classengine_1_1Renderer__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for engine::\+Renderer:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=174pt]{classengine_1_1Renderer__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classengine_1_1Renderer_ae4c37f3b2a6855351436d2c680f6b53d}\label{classengine_1_1Renderer_ae4c37f3b2a6855351436d2c680f6b53d} 
+virtual bool {\bfseries Init} ()=0
+\item 
+\Hypertarget{classengine_1_1Renderer_a26b9b6dcc42a3edffafed87f947d9794}\label{classengine_1_1Renderer_a26b9b6dcc42a3edffafed87f947d9794} 
+virtual void {\bfseries Begin\+Frame} ()=0
+\item 
+\Hypertarget{classengine_1_1Renderer_a4a3668039d1cb9017879b8c24d162cbd}\label{classengine_1_1Renderer_a4a3668039d1cb9017879b8c24d162cbd} 
+virtual void {\bfseries End\+Frame} ()=0
+\item 
+\Hypertarget{classengine_1_1Renderer_ab5979d843aa5a5ab0569822754c6a2b6}\label{classengine_1_1Renderer_ab5979d843aa5a5ab0569822754c6a2b6} 
+virtual void {\bfseries On\+Resize} (int width, int height)=0
+\item 
+\Hypertarget{classengine_1_1Renderer_a0ae7b0d71b4eebc7ee26f57e3c3a7cd1}\label{classengine_1_1Renderer_a0ae7b0d71b4eebc7ee26f57e3c3a7cd1} 
+virtual const glm::\+mat4 \& {\bfseries Get\+Projection} () const =0
+\item 
+\Hypertarget{classengine_1_1Renderer_a905a1af73996507ba24e49f2131e4629}\label{classengine_1_1Renderer_a905a1af73996507ba24e49f2131e4629} 
+virtual void {\bfseries Draw\+Indexed} (const std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{classengine_1_1VertexArray}{Vertex\+Array}} $>$ \&vao)=0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classengine_1_1Renderer_afda215d4a55a5978e3552b5262f943fb}\label{classengine_1_1Renderer_afda215d4a55a5978e3552b5262f943fb} 
+static std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{classengine_1_1Renderer}{Renderer}} $>$ {\bfseries Create} ()
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+Engine/\+\+Rendering\+API/\+\+Renderer/\+renderer.\+hpp\item 
+Engine/\+\+Rendering\+API/\+\+Renderer/\+renderer.\+cpp\end{DoxyCompactItemize}

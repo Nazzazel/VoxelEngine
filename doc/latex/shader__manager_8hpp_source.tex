@@ -1,0 +1,53 @@
+\doxysection{shader\+\_\+manager.\+hpp}
+\hypertarget{shader__manager_8hpp_source}{}\label{shader__manager_8hpp_source}\index{Engine/Assets/Shader/ShaderManager/shader\_manager.hpp@{Engine/Assets/Shader/ShaderManager/shader\_manager.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{comment}{//\#include\ <unordered\_map>}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\#include\ "{}Engine/Renderer/API/shader.hpp"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Engine/Assets/AssetManager/Interfaces/IAssetProvider.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Engine/Assets/Shader/ShaderManager/Core/ShaderTypeID.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}Engine/Assets/Shader/Load/shader\_loader.hpp"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}Engine/RenderingAPI/Shader/game\_shader.hpp"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }engine}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{class\ }ShaderManager}
+\DoxyCodeLine{00018\ \ \ \ \ \{}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ ShaderManager(\doxymbox{\hyperlink{classengine_1_1IAssetProvider}{IAssetProvider}}\&\ provider);}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \string~ShaderManager();}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{comment}{//std::string\ ParseOpenGlShader(const\ std::string\&\ filepath);}}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{comment}{//std::string\ GetShaderData(const\ std::string\&\ filepath);}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Add(ShaderTypeID\ type);}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classengine_1_1GameShader}{GameShader}}*\ Get(ShaderTypeID\ type);}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{comment}{//MAYBE//\ shaderLibrary.Add("{}basic"{},\ Shader::Create("{}basic"{}));\ auto\ shader\ =\ shaderLibrary.Get("{}basic"{});}}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{comment}{//void\ Add(ShaderTypeID\ type,\ std::unique\_ptr<GameShader>\ shader);\ //\ shaderLibrary.Add("{}basic"{},\ Shader::Create("{}basic"{}));\ auto\ shader\ =\ shaderLibrary.Get("{}basic"{});}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{comment}{//static\ std::string\ ShaderTypeToString(ShaderTypeID\ type);}}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ std::unordered\_map<ShaderTypeID,\ std::unique\_ptr<GameShader>>\ m\_Shaders;}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classengine_1_1IAssetProvider}{IAssetProvider}}\&\ m\_provider;}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classengine_1_1ShaderLoader}{ShaderLoader}}\ m\_shader\_loader;}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ std::string\ ShaderTypeIDToString(ShaderTypeID\ type);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \};}
+\DoxyCodeLine{00047\ \}}
+
+\end{DoxyCode}

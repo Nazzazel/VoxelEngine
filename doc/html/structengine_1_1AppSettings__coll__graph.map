@@ -1,0 +1,7 @@
+<map id="engine::AppSettings" name="engine::AppSettings">
+<area shape="rect" id="Node000001" title=" " alt="" coords="90,262,290,379"/>
+<area shape="rect" id="Node000002" href="$structengine_1_1WindowConfig.html" title=" " alt="" coords="5,5,162,189"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="74,186,80,214,88,237,95,249,89,249,83,239,75,215,73,192"/>
+<area shape="rect" id="Node000003" href="$structengine_1_1AdditionalParams.html" title=" " alt="" coords="208,39,386,156"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="294,154,286,198,270,239,263,251,260,247,265,237,281,197,291,158"/>
+</map>

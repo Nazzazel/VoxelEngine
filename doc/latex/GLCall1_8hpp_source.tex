@@ -1,0 +1,46 @@
+\doxysection{GLCall1.\+hpp}
+\hypertarget{GLCall1_8hpp_source}{}\label{GLCall1_8hpp_source}\index{Backends/OpenGL/Debug/GLCall1.hpp@{Backends/OpenGL/Debug/GLCall1.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <glad/glad.h>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}DebugTools/Core/Logger/logger.hpp"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifdef\ \_DEBUG}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ ASSERT(x)\ if\ (!(x))\ \_\_debugbreak();\ }}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ GLCall(x)\ do\ \{\ \(\backslash\)}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{GLClearError();\ \(\backslash\)}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{x;\ \(\backslash\)}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{ASSERT(GLLogCall(\#x,\ \_\_FILE\_\_,\ \_\_LINE\_\_));\(\backslash\)}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\}while(0)}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ ASSERT(x)\ ((void)0)}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ GLCall(x)\ x}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ GLClearError()}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordflow}{while}\ (glGetError()\ !=\ GL\_NO\_ERROR);}
+\DoxyCodeLine{00024\ \}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ GLLogCall(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ function,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ file,\ \textcolor{keywordtype}{int}\ line)}
+\DoxyCodeLine{00027\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordflow}{while}\ (GLenum\ error\ =\ glGetError())}
+\DoxyCodeLine{00029\ \ \ \ \ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ debugtools::Logger::Log(debugtools::LogLevel::Error,}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[OpenGL\ Error]\ ("{}}\ +\ std::to\_string(error)\ +}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{})\ |\ Function\ -\/>\ "{}}\ +\ function\ +}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ |\ File\ -\/>\ "{}}\ +\ file\ +}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ |\ Line\ -\/>\ "{}}\ +\ std::to\_string(line)}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}[OpenGL\ Error]\ ("{}}\ <<\ error\ <<\ \textcolor{stringliteral}{"{})\ |\ Function\ -\/>\ "{}}\ <<\ function\ <<\ \textcolor{stringliteral}{"{}\ |\ File\ -\/>\ "{}}\ <<\ file\ <<\ \textcolor{stringliteral}{"{}\ |\ Line\ -\/>\ "{}}\ <<\ line\ <<\ std::endl;}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00038\ \ \ \ \ \}}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00040\ \}}
+
+\end{DoxyCode}

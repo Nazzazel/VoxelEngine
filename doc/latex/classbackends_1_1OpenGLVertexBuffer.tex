@@ -1,0 +1,93 @@
+\doxysection{backends::\+Open\+GLVertex\+Buffer Class Reference}
+\hypertarget{classbackends_1_1OpenGLVertexBuffer}{}\label{classbackends_1_1OpenGLVertexBuffer}\index{backends::OpenGLVertexBuffer@{backends::OpenGLVertexBuffer}}
+
+
+Inheritance diagram for backends::\+Open\+GLVertex\+Buffer:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{classbackends_1_1OpenGLVertexBuffer__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for backends::\+Open\+GLVertex\+Buffer:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{classbackends_1_1OpenGLVertexBuffer__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classbackends_1_1OpenGLVertexBuffer_acb53a2adc3cfffe898c09b1fb364fe0b}\label{classbackends_1_1OpenGLVertexBuffer_acb53a2adc3cfffe898c09b1fb364fe0b} 
+{\bfseries Open\+GLVertex\+Buffer} (const void \texorpdfstring{$\ast$}{*}data, unsigned int size)
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLVertexBuffer_a82d3c7d2fb7a397228f5681bdd2ed532}{Bind}} () const override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLVertexBuffer_a401d127cf92613501efa5aa435a8eb0f}{Unbind}} () const override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLVertexBuffer_ab3a0210ed06490a226dac63b0ad695ab}{Set\+Layout}} (const \doxymbox{\hyperlink{classengine_1_1BufferLayout}{engine::\+\+Buffer\+Layout}} \&layout) override
+\item 
+const \doxymbox{\hyperlink{classengine_1_1BufferLayout}{engine::\+\+Buffer\+Layout}} \& \doxymbox{\hyperlink{classbackends_1_1OpenGLVertexBuffer_ae2239513d378d2c0bac49d0e751112d5}{Get\+Layout}} () const override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \doxymbox{\hyperlink{classengine_1_1VertexBuffer}{engine::\+\+Vertex\+Buffer}}}
+\begin{DoxyCompactItemize}
+\item 
+static std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{classengine_1_1VertexBuffer}{Vertex\+Buffer}} $>$ {\bfseries Create} (const void \texorpdfstring{$\ast$}{*}data, unsigned int size)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classbackends_1_1OpenGLVertexBuffer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classbackends_1_1OpenGLVertexBuffer_a82d3c7d2fb7a397228f5681bdd2ed532}\index{backends::OpenGLVertexBuffer@{backends::OpenGLVertexBuffer}!Bind@{Bind}}
+\index{Bind@{Bind}!backends::OpenGLVertexBuffer@{backends::OpenGLVertexBuffer}}
+\doxysubsubsection{\texorpdfstring{Bind()}{Bind()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLVertexBuffer_a82d3c7d2fb7a397228f5681bdd2ed532} 
+void backends::\+\+Open\+GLVertex\+Buffer::\+\+Bind (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1VertexBuffer}{engine::\+\+Vertex\+Buffer}}.
+
+\Hypertarget{classbackends_1_1OpenGLVertexBuffer_ae2239513d378d2c0bac49d0e751112d5}\index{backends::OpenGLVertexBuffer@{backends::OpenGLVertexBuffer}!GetLayout@{GetLayout}}
+\index{GetLayout@{GetLayout}!backends::OpenGLVertexBuffer@{backends::OpenGLVertexBuffer}}
+\doxysubsubsection{\texorpdfstring{GetLayout()}{GetLayout()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLVertexBuffer_ae2239513d378d2c0bac49d0e751112d5} 
+const \doxymbox{\hyperlink{classengine_1_1BufferLayout}{engine::\+\+Buffer\+Layout}} \& backends::\+\+Open\+GLVertex\+Buffer::\+\+Get\+Layout (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1VertexBuffer}{engine::\+\+Vertex\+Buffer}}.
+
+\Hypertarget{classbackends_1_1OpenGLVertexBuffer_ab3a0210ed06490a226dac63b0ad695ab}\index{backends::OpenGLVertexBuffer@{backends::OpenGLVertexBuffer}!SetLayout@{SetLayout}}
+\index{SetLayout@{SetLayout}!backends::OpenGLVertexBuffer@{backends::OpenGLVertexBuffer}}
+\doxysubsubsection{\texorpdfstring{SetLayout()}{SetLayout()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLVertexBuffer_ab3a0210ed06490a226dac63b0ad695ab} 
+void backends::\+\+Open\+GLVertex\+Buffer::\+\+Set\+Layout (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{classengine_1_1BufferLayout}{engine::\+\+Buffer\+Layout}} \&}]{layout}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1VertexBuffer}{engine::\+\+Vertex\+Buffer}}.
+
+\Hypertarget{classbackends_1_1OpenGLVertexBuffer_a401d127cf92613501efa5aa435a8eb0f}\index{backends::OpenGLVertexBuffer@{backends::OpenGLVertexBuffer}!Unbind@{Unbind}}
+\index{Unbind@{Unbind}!backends::OpenGLVertexBuffer@{backends::OpenGLVertexBuffer}}
+\doxysubsubsection{\texorpdfstring{Unbind()}{Unbind()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLVertexBuffer_a401d127cf92613501efa5aa435a8eb0f} 
+void backends::\+\+Open\+GLVertex\+Buffer::\+\+Unbind (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1VertexBuffer}{engine::\+\+Vertex\+Buffer}}.
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+Backends/\+\+Open\+GL/\+\+Buffers/\+opengl\+\_\+vertex\+\_\+buffer.\+hpp\item 
+Backends/\+\+Open\+GL/\+\+Buffers/\+opengl\+\_\+vertex\+\_\+buffer.\+cpp\end{DoxyCompactItemize}

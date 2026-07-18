@@ -1,0 +1,2 @@
+/usr/bin/ar qc libBackends.a CMakeFiles/Backends.dir/API/renderer_api.cpp.o CMakeFiles/Backends.dir/OpenGL/Buffers/opengl_index_buffer.cpp.o CMakeFiles/Backends.dir/OpenGL/Buffers/opengl_vertex_array.cpp.o CMakeFiles/Backends.dir/OpenGL/Buffers/opengl_vertex_buffer.cpp.o CMakeFiles/Backends.dir/OpenGL/Renderer/opengl_renderer.cpp.o CMakeFiles/Backends.dir/OpenGL/Shader/opengl_shader.cpp.o
+/usr/bin/ranlib libBackends.a

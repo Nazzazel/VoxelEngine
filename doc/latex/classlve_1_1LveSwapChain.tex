@@ -1,0 +1,72 @@
+\doxysection{lve::\+Lve\+Swap\+Chain Class Reference}
+\hypertarget{classlve_1_1LveSwapChain}{}\label{classlve_1_1LveSwapChain}\index{lve::LveSwapChain@{lve::LveSwapChain}}
+
+
+Collaboration diagram for lve::\+Lve\+Swap\+Chain:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{classlve_1_1LveSwapChain__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classlve_1_1LveSwapChain_ae8796a8e5655992f5277a0a612753fb6}\label{classlve_1_1LveSwapChain_ae8796a8e5655992f5277a0a612753fb6} 
+{\bfseries Lve\+Swap\+Chain} (\doxymbox{\hyperlink{classlve_1_1LveDevice}{Lve\+Device}} \&device\+Ref, Vk\+Extent2D window\+Extent)
+\item 
+\Hypertarget{classlve_1_1LveSwapChain_ab96dac1c6f4ae3d0a44bd4331639b635}\label{classlve_1_1LveSwapChain_ab96dac1c6f4ae3d0a44bd4331639b635} 
+{\bfseries Lve\+Swap\+Chain} (const Lve\+Swap\+Chain \&)=delete
+\item 
+\Hypertarget{classlve_1_1LveSwapChain_a4f369077af4a919b2f6088638849fe74}\label{classlve_1_1LveSwapChain_a4f369077af4a919b2f6088638849fe74} 
+void {\bfseries operator=} (const Lve\+Swap\+Chain \&)=delete
+\item 
+\Hypertarget{classlve_1_1LveSwapChain_aa70792aff4b89eebb91f6810c72830e8}\label{classlve_1_1LveSwapChain_aa70792aff4b89eebb91f6810c72830e8} 
+Vk\+Framebuffer {\bfseries get\+Frame\+Buffer} (int index)
+\item 
+\Hypertarget{classlve_1_1LveSwapChain_a4539d19076f329c857dffd1169e7884f}\label{classlve_1_1LveSwapChain_a4539d19076f329c857dffd1169e7884f} 
+Vk\+Render\+Pass {\bfseries get\+Render\+Pass} ()
+\item 
+\Hypertarget{classlve_1_1LveSwapChain_a180eabe19e4a8ef86ced7b8b3139f51b}\label{classlve_1_1LveSwapChain_a180eabe19e4a8ef86ced7b8b3139f51b} 
+Vk\+Image\+View {\bfseries get\+Image\+View} (int index)
+\item 
+\Hypertarget{classlve_1_1LveSwapChain_a99c9280b96c0f62572aed80e04778e46}\label{classlve_1_1LveSwapChain_a99c9280b96c0f62572aed80e04778e46} 
+size\+\_\+t {\bfseries image\+Count} ()
+\item 
+\Hypertarget{classlve_1_1LveSwapChain_a225c16ad99996129c5f4dbb65cca7b59}\label{classlve_1_1LveSwapChain_a225c16ad99996129c5f4dbb65cca7b59} 
+Vk\+Format {\bfseries get\+Swap\+Chain\+Image\+Format} ()
+\item 
+\Hypertarget{classlve_1_1LveSwapChain_a75f920a3e6a562d59ff093bbcd8454c7}\label{classlve_1_1LveSwapChain_a75f920a3e6a562d59ff093bbcd8454c7} 
+Vk\+Extent2D {\bfseries get\+Swap\+Chain\+Extent} ()
+\item 
+\Hypertarget{classlve_1_1LveSwapChain_aa90af4c5465ffb501dc4e0c57a842b94}\label{classlve_1_1LveSwapChain_aa90af4c5465ffb501dc4e0c57a842b94} 
+uint32\+\_\+t {\bfseries width} ()
+\item 
+\Hypertarget{classlve_1_1LveSwapChain_a41de592e480eb27ac0b484016c04fcf2}\label{classlve_1_1LveSwapChain_a41de592e480eb27ac0b484016c04fcf2} 
+uint32\+\_\+t {\bfseries height} ()
+\item 
+\Hypertarget{classlve_1_1LveSwapChain_ab43806ec6b3aac5413e4c80e3dcd4738}\label{classlve_1_1LveSwapChain_ab43806ec6b3aac5413e4c80e3dcd4738} 
+float {\bfseries extent\+Aspect\+Ratio} ()
+\item 
+\Hypertarget{classlve_1_1LveSwapChain_ae10f7f0b0bf9ebdc3fc9a4b7e9cf717a}\label{classlve_1_1LveSwapChain_ae10f7f0b0bf9ebdc3fc9a4b7e9cf717a} 
+Vk\+Format {\bfseries find\+Depth\+Format} ()
+\item 
+\Hypertarget{classlve_1_1LveSwapChain_a78e5a3c70f06d4e33fc121fcf73db6d2}\label{classlve_1_1LveSwapChain_a78e5a3c70f06d4e33fc121fcf73db6d2} 
+Vk\+Result {\bfseries acquire\+Next\+Image} (uint32\+\_\+t \texorpdfstring{$\ast$}{*}image\+Index)
+\item 
+\Hypertarget{classlve_1_1LveSwapChain_ada08574540e030b33668d650ca8c70f4}\label{classlve_1_1LveSwapChain_ada08574540e030b33668d650ca8c70f4} 
+Vk\+Result {\bfseries submit\+Command\+Buffers} (const Vk\+Command\+Buffer \texorpdfstring{$\ast$}{*}buffers, uint32\+\_\+t \texorpdfstring{$\ast$}{*}image\+Index)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classlve_1_1LveSwapChain_adaaaed0ea30a7189a4e3244e6a11854c}\label{classlve_1_1LveSwapChain_adaaaed0ea30a7189a4e3244e6a11854c} 
+static constexpr int {\bfseries MAX\+\_\+\+FRAMES\+\_\+\+IN\+\_\+\+FLIGHT} = 2
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+Engine/\+\+ZZZZZZZ\+\_\+\+GARBAGE\+\_\+\+TEMP\+\_\+\+FILES/\+\+Vulkan for later DO NOT TOUCH FOR NOW/\+lve\+\_\+swap\+\_\+chain.\+hpp\item 
+Engine/\+\+ZZZZZZZ\+\_\+\+GARBAGE\+\_\+\+TEMP\+\_\+\+FILES/\+\+Vulkan for later DO NOT TOUCH FOR NOW/\+lve\+\_\+swap\+\_\+chain.\+cpp\end{DoxyCompactItemize}

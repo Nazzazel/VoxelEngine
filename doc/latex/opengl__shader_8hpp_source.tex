@@ -1,0 +1,83 @@
+\doxysection{opengl\+\_\+shader.\+hpp}
+\hypertarget{opengl__shader_8hpp_source}{}\label{opengl__shader_8hpp_source}\index{Backends/OpenGL/Shader/opengl\_shader.hpp@{Backends/OpenGL/Shader/opengl\_shader.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{comment}{//\#include\ "{}Engine/Renderer/API/shader.hpp"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Engine/RenderingAPI/Shader/game\_shader.hpp"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }backends}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{class\ }OpenGLShader}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::GameShader}}}
+\DoxyCodeLine{00016\ \ \ \ \ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ OpenGLShader(\textcolor{keyword}{const}\ std::string\&\ vertexSrc,\ \textcolor{keyword}{const}\ std::string\&\ fragmentSrc);}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \string~OpenGLShader();}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ OpenGLShader(\textcolor{keyword}{const}\ OpenGLShader\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ OpenGLShader\&\ operator=(\textcolor{keyword}{const}\ OpenGLShader\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Bind()\ \ \ \ \ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Unbind()\ \ \ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Float}}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetFloat\ \ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{float}\ value\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )\textcolor{keyword}{override};}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetFloat2\ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )\textcolor{keyword}{override};}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetFloat3\ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ z\ \ \ \ \ \ \ \ \ \ \ \ \ )\textcolor{keyword}{override};}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetFloat4\ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ z,\ \textcolor{keywordtype}{float}\ w\ \ \ \ )\textcolor{keyword}{override};}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetFloatArray\ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{float}*\ values,\ \textcolor{keywordtype}{int}\ count\ \ \ \ \ \ \ \ \ \ \ \ \ \ )\textcolor{keyword}{override};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Int}}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetInt\ \ \ \ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{int}\ value\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )\textcolor{keyword}{override};}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetInt2\ \ \ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )\textcolor{keyword}{override};}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetInt3\ \ \ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{int}\ z\ \ \ \ \ \ \ \ \ \ \ )\textcolor{keyword}{override};}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetInt4\ \ \ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{int}\ z,\ \textcolor{keywordtype}{int}\ w\ \ \ \ )\textcolor{keyword}{override};}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetIntArray\ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{int}*\ values,\ \textcolor{keywordtype}{int}\ count\ \ \ \ \ \ \ \ )\textcolor{keyword}{override};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Unsigned\ Int}}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetUInt\ \ \ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ value\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )\textcolor{keyword}{override};}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetUInt2\ \ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ y\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )\textcolor{keyword}{override};}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetUInt3\ \ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ z\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )\textcolor{keyword}{override};}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetUInt4\ \ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ z,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ w\ \ \ \ )\textcolor{keyword}{override};}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetUIntArray\ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}*\ values,\ \textcolor{keywordtype}{int}\ count\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )\textcolor{keyword}{override};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetBool\ \ \ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{bool}\ value\ \ \ \ )\textcolor{keyword}{override};}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetMat3\ \ \ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ glm::mat3\&\ value\ \ \ \ )\textcolor{keyword}{override};}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetMat4\ \ \ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ glm::mat4\&\ value\ \ \ \ )\textcolor{keyword}{override};}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetDouble\ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{double}\ value\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )\textcolor{keyword}{override};}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetDouble2\ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{double}\ x,\ \textcolor{keywordtype}{double}\ y\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )\textcolor{keyword}{override};}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetDouble3\ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{double}\ x,\ \textcolor{keywordtype}{double}\ y,\ \textcolor{keywordtype}{double}\ z\ \ \ \ \ \ \ \ \ \ \ \ \ \ )\textcolor{keyword}{override};}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetDouble4\ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{double}\ x,\ \textcolor{keywordtype}{double}\ y,\ \textcolor{keywordtype}{double}\ z,\ \textcolor{keywordtype}{double}\ w\ \ \ \ )\textcolor{keyword}{override};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ m\_Program;}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ CompileShader(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ type,\ \textcolor{keyword}{const}\ std::string\&\ source);}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ CreateShader(\textcolor{keyword}{const}\ std::string\&\ vertexSrc,\ \textcolor{keyword}{const}\ std::string\&\ fragmentSrc);}
+\DoxyCodeLine{00065\ \ \ \ \ }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ std::unordered\_map<std::string,\ int>\ m\_UniformCache;}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ GetUniformLocation(\textcolor{keyword}{const}\ std::string\&\ name);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ }
+\DoxyCodeLine{00071\ \ \ \ \ }
+\DoxyCodeLine{00072\ \ \ \ \ }
+\DoxyCodeLine{00073\ \ \ \ \ \};}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \}}
+
+\end{DoxyCode}

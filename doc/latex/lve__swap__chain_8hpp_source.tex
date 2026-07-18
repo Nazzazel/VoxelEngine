@@ -1,0 +1,86 @@
+\doxysection{lve\+\_\+swap\+\_\+chain.\+hpp}
+\hypertarget{lve__swap__chain_8hpp_source}{}\label{lve__swap__chain_8hpp_source}\index{Engine/ZZZZZZZ\_GARBAGE\_TEMP\_FILES/Vulkan for later DO NOT TOUCH FOR NOW/lve\_swap\_chain.hpp@{Engine/ZZZZZZZ\_GARBAGE\_TEMP\_FILES/Vulkan for later DO NOT TOUCH FOR NOW/lve\_swap\_chain.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}lve\_device.hpp"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ vulkan\ headers}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vulkan/vulkan.h>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ std\ lib\ headers}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }lve\ \{}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }LveSwapChain\ \{}
+\DoxyCodeLine{00015\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ MAX\_FRAMES\_IN\_FLIGHT\ =\ 2;}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ LveSwapChain(\doxymbox{\hyperlink{classlve_1_1LveDevice}{LveDevice}}\ \&deviceRef,\ VkExtent2D\ windowExtent);}
+\DoxyCodeLine{00019\ \ \ \string~LveSwapChain();}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ LveSwapChain(\textcolor{keyword}{const}\ LveSwapChain\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00022\ \ \ \textcolor{keywordtype}{void}\ operator=(\textcolor{keyword}{const}\ LveSwapChain\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ VkFramebuffer\ getFrameBuffer(\textcolor{keywordtype}{int}\ index)\ \{\ \textcolor{keywordflow}{return}\ swapChainFramebuffers[index];\ \}}
+\DoxyCodeLine{00025\ \ \ VkRenderPass\ getRenderPass()\ \{\ \textcolor{keywordflow}{return}\ renderPass;\ \}}
+\DoxyCodeLine{00026\ \ \ VkImageView\ getImageView(\textcolor{keywordtype}{int}\ index)\ \{\ \textcolor{keywordflow}{return}\ swapChainImageViews[index];\ \}}
+\DoxyCodeLine{00027\ \ \ \textcolor{keywordtype}{size\_t}\ imageCount()\ \{\ \textcolor{keywordflow}{return}\ swapChainImages.size();\ \}}
+\DoxyCodeLine{00028\ \ \ VkFormat\ getSwapChainImageFormat()\ \{\ \textcolor{keywordflow}{return}\ swapChainImageFormat;\ \}}
+\DoxyCodeLine{00029\ \ \ VkExtent2D\ getSwapChainExtent()\ \{\ \textcolor{keywordflow}{return}\ swapChainExtent;\ \}}
+\DoxyCodeLine{00030\ \ \ uint32\_t\ width()\ \{\ \textcolor{keywordflow}{return}\ swapChainExtent.width;\ \}}
+\DoxyCodeLine{00031\ \ \ uint32\_t\ height()\ \{\ \textcolor{keywordflow}{return}\ swapChainExtent.height;\ \}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordtype}{float}\ extentAspectRatio()\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(swapChainExtent.width)\ /\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(swapChainExtent.height);}
+\DoxyCodeLine{00035\ \ \ \}}
+\DoxyCodeLine{00036\ \ \ VkFormat\ findDepthFormat();}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ VkResult\ acquireNextImage(uint32\_t\ *imageIndex);}
+\DoxyCodeLine{00039\ \ \ VkResult\ submitCommandBuffers(\textcolor{keyword}{const}\ VkCommandBuffer\ *buffers,\ uint32\_t\ *imageIndex);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00042\ \ \ \textcolor{keywordtype}{void}\ createSwapChain();}
+\DoxyCodeLine{00043\ \ \ \textcolor{keywordtype}{void}\ createImageViews();}
+\DoxyCodeLine{00044\ \ \ \textcolor{keywordtype}{void}\ createDepthResources();}
+\DoxyCodeLine{00045\ \ \ \textcolor{keywordtype}{void}\ createRenderPass();}
+\DoxyCodeLine{00046\ \ \ \textcolor{keywordtype}{void}\ createFramebuffers();}
+\DoxyCodeLine{00047\ \ \ \textcolor{keywordtype}{void}\ createSyncObjects();}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \textcolor{comment}{//\ Helper\ functions}}
+\DoxyCodeLine{00050\ \ \ VkSurfaceFormatKHR\ chooseSwapSurfaceFormat(}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<VkSurfaceFormatKHR>\ \&availableFormats);}
+\DoxyCodeLine{00052\ \ \ VkPresentModeKHR\ chooseSwapPresentMode(}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<VkPresentModeKHR>\ \&availablePresentModes);}
+\DoxyCodeLine{00054\ \ \ VkExtent2D\ chooseSwapExtent(\textcolor{keyword}{const}\ VkSurfaceCapabilitiesKHR\ \&capabilities);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ VkFormat\ swapChainImageFormat;}
+\DoxyCodeLine{00057\ \ \ VkExtent2D\ swapChainExtent;}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ std::vector<VkFramebuffer>\ swapChainFramebuffers;}
+\DoxyCodeLine{00060\ \ \ VkRenderPass\ renderPass;}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ std::vector<VkImage>\ depthImages;}
+\DoxyCodeLine{00063\ \ \ std::vector<VkDeviceMemory>\ depthImageMemorys;}
+\DoxyCodeLine{00064\ \ \ std::vector<VkImageView>\ depthImageViews;}
+\DoxyCodeLine{00065\ \ \ std::vector<VkImage>\ swapChainImages;}
+\DoxyCodeLine{00066\ \ \ std::vector<VkImageView>\ swapChainImageViews;}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \doxymbox{\hyperlink{classlve_1_1LveDevice}{LveDevice}}\ \&device;}
+\DoxyCodeLine{00069\ \ \ VkExtent2D\ windowExtent;}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ VkSwapchainKHR\ swapChain;}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ std::vector<VkSemaphore>\ imageAvailableSemaphores;}
+\DoxyCodeLine{00074\ \ \ std::vector<VkSemaphore>\ renderFinishedSemaphores;}
+\DoxyCodeLine{00075\ \ \ std::vector<VkFence>\ inFlightFences;}
+\DoxyCodeLine{00076\ \ \ std::vector<VkFence>\ imagesInFlight;}
+\DoxyCodeLine{00077\ \ \ \textcolor{keywordtype}{size\_t}\ currentFrame\ =\ 0;}
+\DoxyCodeLine{00078\ \};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \}\ \ \textcolor{comment}{//\ namespace\ lve}}
+
+\end{DoxyCode}

@@ -1,0 +1,105 @@
+
+==================================================================
+//Backends
+	
+	Static library made for housing Graphical API's.
+
+==================================================================
+//Backends
+
+==================================================================
+//Engine
+
+
+==================================================================
+==================================================================
+==================================================================
+==================================================================
+==================================================================
+//TODO:
+	- Add more backends (Vulkan, DirectX, etc.)
+	- Implement a more robust resource management system
+	- Add support for more platforms (mobile, consoles, etc.)
+	- Improve documentation and examples
+
+
+
+
+==================================================================
+//Chain of execution
+
+	Voxel Engine (main.cpp) (dependant on Engine [Application] )
+		|
+		|
+		|  [Engine]
+		|-> (application.cpp)]
+			|
+			|-> Application::Application() 
+			|	|
+			|	 -> engine::Platform::Init();	// Initializes the platform GLFW, rights Colors and refreshrate
+			|	|
+			|	 -> 1.Window::Create			// Creating a GLFW window, setting up callbacks and input handling // V-sync or not
+			|	|
+			|	 -> 2.RendererAPI::SetAPI		// Setting the Graphic API for the entire project.
+			|	|
+			|	 -> 3.engine::Renderer::Create() // Initializes the renderer(OpenGL,vulkan etc) ,and sets up the OpenGL context
+			|
+			 -> (Application::Run())
+				 |
+				  -> Main game loop
+				 |	 |
+				 |	  -> 4.m_GameWindow->PollEvents();			// Polling for window events (input, resizing, etc.)
+				 |	 |
+				 |	  -> 5.OnUpdate(deltaTime);					// Updating game logic, physics, and other systems with the time elapsed since the last frame (deltaTime)
+				 |	 |
+				 |	  -> 6.m_GameWindow->MakeContextCurrent();	// Ensures the OpenGL context is current for rendering operations (important for multi-threaded rendering or multiple windows)
+				 |	 |
+				 |	  -> 7.m_Renderer->BeginFrame();			// Prepares the renderer for a new frame (clearing buffers, setting states, etc.)
+				 |	 |
+				 |	  -> 8.OnRender();							// Executes the rendering commands for the current frame (drawing objects, UI, etc.)
+				 |	 |
+				 |	  -> 9.m_Renderer->EndFrame();				// Finalizes the rendering for the current frame (swapping buffers, etc.)
+				
+
+
+
+			-> Renderer (renderer.cpp)
+			-> OpenGLBackend (opengl_backend.cpp)
+	
+
+-----------------------------------------
+3.engine::Renderer::Create()
+|
+ -> switch (rendererAPI)
+ 	|
+ 	 -> case RendererAPI::OpenGL:
+ 			|
+ 			 -> bool OpenGLRenderer::Init()
+			|		 |
+			|		  -> 3.1//Init of GLAD
+			|		  -> 3.2//Setting up Viewport
+			|		  -> 3.3//Setting up basic OpenGL states (depth testing, blending, etc.)
+			|		  ->
+			|		  ->
+			|		  -> 3.6//Loading and compiling shaders //WIP
+			|		  ->
+			|		  ->
+			|
+			|
+ 			|
+ 			 -> bool OpenGLRenderer::BeginFrame()
+ 			|		 |
+			|		  -> //Clears the screen with a specified color
+			|		  -> //Resets any necessary states for the new frame
+			|
+ 			 -> bool OpenGLRenderer::EndFrame()
+					 |
+					  -> //Swaps the buffers to display the rendered frame
+					  
+	-->3.6 //Loading and compiling shaders (WIP)
+
+
+
+
+
+

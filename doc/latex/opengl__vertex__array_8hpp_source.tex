@@ -1,0 +1,40 @@
+\doxysection{opengl\+\_\+vertex\+\_\+array.\+hpp}
+\hypertarget{opengl__vertex__array_8hpp_source}{}\label{opengl__vertex__array_8hpp_source}\index{Backends/OpenGL/Buffers/opengl\_vertex\_array.hpp@{Backends/OpenGL/Buffers/opengl\_vertex\_array.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}Engine/RenderingAPI/Buffers/vertex\_array.hpp"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}Engine/RenderingAPI/Buffers/index\_buffer.hpp"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }backends}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{class\ }OpenGLVertexArray\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{classengine_1_1VertexArray}{engine::VertexArray}}}
+\DoxyCodeLine{00011\ \ \ \ \ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ OpenGLVertexArray();}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \string~OpenGLVertexArray();}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Bind()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Unbind()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ AddVertexBuffer(std::unique\_ptr<engine::VertexBuffer>\ vb)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetIndexBuffer(std::unique\_ptr<engine::IndexBuffer>\ ibo)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ GetIndexCount()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ m\_VertexArrayID;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ std::vector<std::unique\_ptr<engine::VertexBuffer>>\ m\_VertexBuffers;}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ std::unique\_ptr<engine::IndexBuffer>\ m\_IndexBuffer;}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,165 @@
+VoxelGame/
+├── src/
+│   ├── Core/
+│   │   ├── Application/
+│   │   │   ├── EntryPoint.cpp
+│   │   │   ├── GameApp.cpp
+│   │   │   └── Lifecycle/
+│   │   │       ├── StateMachine.hpp
+│   │   │       └── ErrorRecovery.hpp
+│   │   ├── Config/
+│   │   │   └── Settings/
+│   │   │       └── VoxelConstants.hpp
+│   │   └── Messaging/
+│   │       └── EventBus.hpp
+│   ├── Input/
+│   │   ├── Keyboard/
+│   │   │   ├── KeyMapping.hpp
+│   │   │   └── InputState.hpp
+│   │   └── Mouse/
+│   │       ├── Picking/
+│   │       │   └── Raycaster.hpp
+│   │       └── Movement/
+│   │           └── CameraController.hpp
+│   ├── World/
+│   │   ├── Chunk/
+│   │   │   ├── Data/
+│   │   │   │   ├── ChunkData.hpp
+│   │   │   │   └── BlockState.hpp
+│   │   │   ├── Management/
+│   │   │   │   ├── ChunkManager.hpp
+│   │   │   │   └── Threading/
+│   │   │   │       └── ChunkLoader.hpp
+│   │   │   └── Generation/
+│   │   │       ├── Noise/
+│   │   │       │   ├── Perlin.hpp
+│   │   │       │   └── Simplex.hpp
+│   │   │       └── Biomes/
+│   │   │           └── BiomeRegistry.hpp
+│   │   └── Voxels/
+│   │       └── Registry/
+│   │           └── BlockDefinitions.hpp
+│   ├── Rendering/
+│   │   ├── Pipeline/
+│   │   │   ├── Shaders/
+│   │   │   │   ├── ShaderLoader.hpp
+│   │   │   │   └── GLSL/
+│   │   │   │       └── Uniforms.hpp
+│   │   │   └── Geometry/
+│   │   │       ├── MeshBuilder.hpp
+│   │   │       └── Culling/
+│   │   │           ├── Frustum.hpp
+│   │   │           └── Occlusion.hpp
+│   │   ├── Lighting/
+│   │   │   ├── VoxelLighting/
+│   │   │   │   ├── Propagation.hpp
+│   │   │   │   └── AmbientOcclusion.hpp
+│   │   │   └── Shadows/
+│   │   │       └── CascadedShadowMaps.hpp
+│   │   └── Texturing/
+│   │       ├── Atlas/
+│   │       │   └── TexturePacker.hpp
+│   │       └── Samplers/
+│   │           └── Filtering.hpp
+│   ├── Physics/
+│   │   ├── Collision/
+│   │   │   ├── AABB/
+│   │   │   │   └── CollisionDetector.hpp
+│   │   │   └── Manifolds/
+│   │   │       └── PhysicsSolver.hpp
+│   │   └── Simulation/
+│   │       ├── Gravity/
+│   │       │   └── FluidDynamics.hpp
+│   │       └── Entity/
+│   │           └── Rigidbody.hpp
+│   ├── Entities/
+│   │   ├── Player/
+│   │   │   ├── Movement/
+│   │   │   │   └── Kinematics.hpp
+│   │   │   └── Inventory/
+│   │   │       └── Hotbar.hpp
+│   │   └── Mobs/
+│   │       ├── AI/
+│   │       │   └── Pathfinding/
+│   │       │       └── AStar.hpp
+│   │       └── Animation/
+│   │           └── Skeletal.hpp
+│   └── Assets/
+│       ├── Serializers/
+│       │   ├── SaveFile/
+│       │   │   └── BinaryWriter.hpp
+│       │   └── Formats/
+│       │       └── JSONParser.hpp
+│       └── Management/
+│           └── ResourceCache.hpp
+
+
+
+
+---------------------------------------------------
+
+Looking at your Application class header, you are currently defining a very rigid architecture where every "manager" is a std::unique_ptr owned directly by the Application class.
+
+Since you mentioned these need to be a "reactive layer," you should move away from raw unique_ptr members for every single system. Instead, consider a System Registry or Service Locator pattern. This allows your systems to interact with each other without the Application class having to know about every single one.
+
+Given your voxel engine focus and current architecture, here are the managers you should add to handle that "reactive" requirement:
+1. The Essential Reactive Managers
+
+    Event Manager (Message Bus): This is the heart of a "reactive" engine. Instead of the Renderer calling the AssetManager directly, you broadcast an event (e.g., Event::AssetLoaded). Other systems subscribe to these events.
+
+        Why: It keeps your PhysicsManager, Renderer, and AssetManager decoupled. If a chunk of voxels finishes loading, the AssetManager emits an event; the Renderer listens and updates the GPU buffer automatically.
+
+    Command/Task Manager (Job System): Since you are building a voxel engine, you will eventually face frame drops when generating/loading chunks. A TaskManager allows you to offload heavy calculations (procedural generation, file I/O) to worker threads without stalling your main loop.
+
+    Configuration/Settings Manager: Your AppSettings struct is currently static. You need a manager that handles real-time changes to these settings (e.g., changing VSync or resolution mid-game) and notifies the Window and Renderer to re-initialize or adjust their state accordingly.
+
+2. Architectural Refactoring Tips
+
+Looking at your private members, you are heading toward a "God Class" problem. To keep it reactive, consider these changes:
+A. Centralized System Registry
+
+Instead of specific unique_ptr members, use a map or a base class list.
+C++
+
+// Instead of individual pointers:
+std::unordered_map<std::type_index, std::shared_ptr<void>> m_Systems;
+
+template<typename T>
+void RegisterSystem(std::shared_ptr<T> system);
+
+template<typename T>
+T& GetSystem();
+
+This allows you to add/remove systems dynamically without changing the Application header every time you add a new manager.
+B. The "Reactive" Update Pattern
+
+Currently, you have OnUpdate(float dt). A more reactive way to handle your managers is to give them a lifecycle:
+C++
+
+class ISystem {
+public:
+    virtual void OnEvent(Event& e) = 0; // The "reactive" part
+    virtual void OnUpdate(float dt) = 0;
+};
+
+Now, in your Application::Run() loop, you just iterate through a std::vector<ISystem*> and call Update() on all of them.
+C. Avoid std::unique_ptr<void>
+
+In your code, you have std::vector<std::unique_ptr<void>> m_EngineObjects;. Avoid this. You cannot delete a void pointer safely in C++ because the destructor won't be called for the underlying type. Use a base class like IEngineSystem with a virtual destructor instead.
+3. Immediate "Voxel-Specific" Managers
+
+Since you are doing voxels, you will likely need:
+
+    Chunk Manager: Handles the lifecycle of voxel chunks—loading, unloading, and keeping them in memory.
+
+    Voxel Interaction Manager: Handles things like raycasting against the voxel grid to select/place blocks. This bridges the gap between your InputManager and your game logic.
+
+Summary Checklist for your Application.hpp
+
+    Event Bus: Create this first. It allows your AssetManager to talk to your Renderer without them being linked.
+
+    Interface Base Class: Create an ISystem class that has OnUpdate, OnRender, and OnEvent virtual methods.
+
+    Refactor to a System Container: Stop hard-coding every manager as a std::unique_ptr member.
+
+Does your current AssetManager already support asynchronous loading, or is it purely synchronous? Knowing this will help determine how you should build your Task/Job system.

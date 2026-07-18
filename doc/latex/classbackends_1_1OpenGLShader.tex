@@ -1,0 +1,339 @@
+\doxysection{backends::\+Open\+GLShader Class Reference}
+\hypertarget{classbackends_1_1OpenGLShader}{}\label{classbackends_1_1OpenGLShader}\index{backends::OpenGLShader@{backends::OpenGLShader}}
+
+
+Inheritance diagram for backends::\+Open\+GLShader:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classbackends_1_1OpenGLShader__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for backends::\+Open\+GLShader:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classbackends_1_1OpenGLShader__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classbackends_1_1OpenGLShader_aa9d56457973782ba9b2cf6d6f949135f}\label{classbackends_1_1OpenGLShader_aa9d56457973782ba9b2cf6d6f949135f} 
+{\bfseries Open\+GLShader} (const std::\+string \&vertex\+Src, const std::\+string \&fragment\+Src)
+\item 
+\Hypertarget{classbackends_1_1OpenGLShader_ac04ce44fc58a01bc4a4581e4b4515fcb}\label{classbackends_1_1OpenGLShader_ac04ce44fc58a01bc4a4581e4b4515fcb} 
+{\bfseries Open\+GLShader} (const Open\+GLShader \&)=delete
+\item 
+\Hypertarget{classbackends_1_1OpenGLShader_ab7b8392e6a82abea25222cd11c166430}\label{classbackends_1_1OpenGLShader_ab7b8392e6a82abea25222cd11c166430} 
+Open\+GLShader \& {\bfseries operator=} (const Open\+GLShader \&)=delete
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLShader_a6a9c7a26df617b4c0d983a5e2dc68c12}{Bind}} () const override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLShader_a05564372e186f69ea0e36a4e22265cf6}{Unbind}} () const override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLShader_a71fc9101ab7be3bb2d1f95bb6c03c62a}{Set\+Float}} (const std::\+string \&name, float value) override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLShader_a4e9c4bddb75785eff890bc7617e74727}{Set\+Float2}} (const std::\+string \&name, float x, float y) override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLShader_ac85b9a6d8d73d0715d65779926b70520}{Set\+Float3}} (const std::\+string \&name, float x, float y, float z) override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLShader_a9622c6ee973d5f8aad1e142662006ddb}{Set\+Float4}} (const std::\+string \&name, float x, float y, float z, float w) override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLShader_aac567e774868b7c7c388a6207795de4d}{Set\+Float\+Array}} (const std::\+string \&name, float \texorpdfstring{$\ast$}{*}values, int count) override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLShader_a9093d034cea6253159be38dc75310602}{Set\+Int}} (const std::\+string \&name, int value) override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLShader_aeddc53bac14dc30c4ae2370693df9893}{Set\+Int2}} (const std::\+string \&name, int x, int y) override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLShader_a78c229f18dc13569244a27885b506c1f}{Set\+Int3}} (const std::\+string \&name, int x, int y, int z) override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLShader_a4e710f2f814e090eacaf85907d54d14b}{Set\+Int4}} (const std::\+string \&name, int x, int y, int z, int w) override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLShader_a09cb25e89f9e72e1e9bf403bed2e86b7}{Set\+Int\+Array}} (const std::\+string \&name, int \texorpdfstring{$\ast$}{*}values, int count) override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLShader_a81218cf08b9c3a1fa576072dbcb83ba4}{Set\+UInt}} (const std::\+string \&name, unsigned int value) override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLShader_a64a8c5949861b7a104605b36ebb46674}{Set\+UInt2}} (const std::\+string \&name, unsigned int x, unsigned int y) override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLShader_a7e1d2b89ff734c06e28b675d5c80c401}{Set\+UInt3}} (const std::\+string \&name, unsigned int x, unsigned int y, unsigned int z) override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLShader_a0646de55e09761b325c7e68d8fb7d1f6}{Set\+UInt4}} (const std::\+string \&name, unsigned int x, unsigned int y, unsigned int z, unsigned int w) override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLShader_afe8b5dde51af9516a8ef3f84800ad320}{Set\+UInt\+Array}} (const std::\+string \&name, unsigned int \texorpdfstring{$\ast$}{*}values, int count) override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLShader_a913c3d29409d3e8d493d80530d363f0a}{Set\+Bool}} (const std::\+string \&name, bool value) override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLShader_a59adf9f436c6d288881577d52eaf5d39}{Set\+Mat3}} (const std::\+string \&name, const glm::\+mat3 \&value) override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLShader_a34c640c1a9da1193d20801bc64262808}{Set\+Mat4}} (const std::\+string \&name, const glm::\+mat4 \&value) override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLShader_a29cb8ab190d265307cb5ab65074c4b2b}{Set\+Double}} (const std::\+string \&name, double value) override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLShader_a2a377f1c589c1983ef2a17956dad4e10}{Set\+Double2}} (const std::\+string \&name, double x, double y) override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLShader_ac79244f50a580f609676f59747f279cd}{Set\+Double3}} (const std::\+string \&name, double x, double y, double z) override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLShader_a34906a3da66aaaf99dba4595819ca1f7}{Set\+Double4}} (const std::\+string \&name, double x, double y, double z, double w) override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::\+\+Game\+Shader}}}
+\begin{DoxyCompactItemize}
+\item 
+static std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::\+\+Game\+Shader}} $>$ {\bfseries Create} (const std::\+string \&vertex\+Src, const std::\+string \&fragment\+Src)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classbackends_1_1OpenGLShader_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classbackends_1_1OpenGLShader_a6a9c7a26df617b4c0d983a5e2dc68c12}\index{backends::OpenGLShader@{backends::OpenGLShader}!Bind@{Bind}}
+\index{Bind@{Bind}!backends::OpenGLShader@{backends::OpenGLShader}}
+\doxysubsubsection{\texorpdfstring{Bind()}{Bind()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLShader_a6a9c7a26df617b4c0d983a5e2dc68c12} 
+void backends::\+\+Open\+GLShader::\+\+Bind (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::\+\+Game\+Shader}}.
+
+\Hypertarget{classbackends_1_1OpenGLShader_a913c3d29409d3e8d493d80530d363f0a}\index{backends::OpenGLShader@{backends::OpenGLShader}!SetBool@{SetBool}}
+\index{SetBool@{SetBool}!backends::OpenGLShader@{backends::OpenGLShader}}
+\doxysubsubsection{\texorpdfstring{SetBool()}{SetBool()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLShader_a913c3d29409d3e8d493d80530d363f0a} 
+void backends::\+\+Open\+GLShader::\+\+Set\+Bool (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{bool}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::\+\+Game\+Shader}}.
+
+\Hypertarget{classbackends_1_1OpenGLShader_a29cb8ab190d265307cb5ab65074c4b2b}\index{backends::OpenGLShader@{backends::OpenGLShader}!SetDouble@{SetDouble}}
+\index{SetDouble@{SetDouble}!backends::OpenGLShader@{backends::OpenGLShader}}
+\doxysubsubsection{\texorpdfstring{SetDouble()}{SetDouble()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLShader_a29cb8ab190d265307cb5ab65074c4b2b} 
+void backends::\+\+Open\+GLShader::\+\+Set\+Double (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{double}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::\+\+Game\+Shader}}.
+
+\Hypertarget{classbackends_1_1OpenGLShader_a2a377f1c589c1983ef2a17956dad4e10}\index{backends::OpenGLShader@{backends::OpenGLShader}!SetDouble2@{SetDouble2}}
+\index{SetDouble2@{SetDouble2}!backends::OpenGLShader@{backends::OpenGLShader}}
+\doxysubsubsection{\texorpdfstring{SetDouble2()}{SetDouble2()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLShader_a2a377f1c589c1983ef2a17956dad4e10} 
+void backends::\+\+Open\+GLShader::\+\+Set\+Double2 (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{double}]{x}{, }\item[{double}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::\+\+Game\+Shader}}.
+
+\Hypertarget{classbackends_1_1OpenGLShader_ac79244f50a580f609676f59747f279cd}\index{backends::OpenGLShader@{backends::OpenGLShader}!SetDouble3@{SetDouble3}}
+\index{SetDouble3@{SetDouble3}!backends::OpenGLShader@{backends::OpenGLShader}}
+\doxysubsubsection{\texorpdfstring{SetDouble3()}{SetDouble3()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLShader_ac79244f50a580f609676f59747f279cd} 
+void backends::\+\+Open\+GLShader::\+\+Set\+Double3 (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{double}]{x}{, }\item[{double}]{y}{, }\item[{double}]{z}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::\+\+Game\+Shader}}.
+
+\Hypertarget{classbackends_1_1OpenGLShader_a34906a3da66aaaf99dba4595819ca1f7}\index{backends::OpenGLShader@{backends::OpenGLShader}!SetDouble4@{SetDouble4}}
+\index{SetDouble4@{SetDouble4}!backends::OpenGLShader@{backends::OpenGLShader}}
+\doxysubsubsection{\texorpdfstring{SetDouble4()}{SetDouble4()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLShader_a34906a3da66aaaf99dba4595819ca1f7} 
+void backends::\+\+Open\+GLShader::\+\+Set\+Double4 (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{double}]{x}{, }\item[{double}]{y}{, }\item[{double}]{z}{, }\item[{double}]{w}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::\+\+Game\+Shader}}.
+
+\Hypertarget{classbackends_1_1OpenGLShader_a71fc9101ab7be3bb2d1f95bb6c03c62a}\index{backends::OpenGLShader@{backends::OpenGLShader}!SetFloat@{SetFloat}}
+\index{SetFloat@{SetFloat}!backends::OpenGLShader@{backends::OpenGLShader}}
+\doxysubsubsection{\texorpdfstring{SetFloat()}{SetFloat()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLShader_a71fc9101ab7be3bb2d1f95bb6c03c62a} 
+void backends::\+\+Open\+GLShader::\+\+Set\+Float (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{float}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::\+\+Game\+Shader}}.
+
+\Hypertarget{classbackends_1_1OpenGLShader_a4e9c4bddb75785eff890bc7617e74727}\index{backends::OpenGLShader@{backends::OpenGLShader}!SetFloat2@{SetFloat2}}
+\index{SetFloat2@{SetFloat2}!backends::OpenGLShader@{backends::OpenGLShader}}
+\doxysubsubsection{\texorpdfstring{SetFloat2()}{SetFloat2()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLShader_a4e9c4bddb75785eff890bc7617e74727} 
+void backends::\+\+Open\+GLShader::\+\+Set\+Float2 (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{float}]{x}{, }\item[{float}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::\+\+Game\+Shader}}.
+
+\Hypertarget{classbackends_1_1OpenGLShader_ac85b9a6d8d73d0715d65779926b70520}\index{backends::OpenGLShader@{backends::OpenGLShader}!SetFloat3@{SetFloat3}}
+\index{SetFloat3@{SetFloat3}!backends::OpenGLShader@{backends::OpenGLShader}}
+\doxysubsubsection{\texorpdfstring{SetFloat3()}{SetFloat3()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLShader_ac85b9a6d8d73d0715d65779926b70520} 
+void backends::\+\+Open\+GLShader::\+\+Set\+Float3 (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{float}]{x}{, }\item[{float}]{y}{, }\item[{float}]{z}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::\+\+Game\+Shader}}.
+
+\Hypertarget{classbackends_1_1OpenGLShader_a9622c6ee973d5f8aad1e142662006ddb}\index{backends::OpenGLShader@{backends::OpenGLShader}!SetFloat4@{SetFloat4}}
+\index{SetFloat4@{SetFloat4}!backends::OpenGLShader@{backends::OpenGLShader}}
+\doxysubsubsection{\texorpdfstring{SetFloat4()}{SetFloat4()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLShader_a9622c6ee973d5f8aad1e142662006ddb} 
+void backends::\+\+Open\+GLShader::\+\+Set\+Float4 (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{float}]{x}{, }\item[{float}]{y}{, }\item[{float}]{z}{, }\item[{float}]{w}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::\+\+Game\+Shader}}.
+
+\Hypertarget{classbackends_1_1OpenGLShader_aac567e774868b7c7c388a6207795de4d}\index{backends::OpenGLShader@{backends::OpenGLShader}!SetFloatArray@{SetFloatArray}}
+\index{SetFloatArray@{SetFloatArray}!backends::OpenGLShader@{backends::OpenGLShader}}
+\doxysubsubsection{\texorpdfstring{SetFloatArray()}{SetFloatArray()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLShader_aac567e774868b7c7c388a6207795de4d} 
+void backends::\+\+Open\+GLShader::\+\+Set\+Float\+Array (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{float \texorpdfstring{$\ast$}{*}}]{values}{, }\item[{int}]{count}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::\+\+Game\+Shader}}.
+
+\Hypertarget{classbackends_1_1OpenGLShader_a9093d034cea6253159be38dc75310602}\index{backends::OpenGLShader@{backends::OpenGLShader}!SetInt@{SetInt}}
+\index{SetInt@{SetInt}!backends::OpenGLShader@{backends::OpenGLShader}}
+\doxysubsubsection{\texorpdfstring{SetInt()}{SetInt()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLShader_a9093d034cea6253159be38dc75310602} 
+void backends::\+\+Open\+GLShader::\+\+Set\+Int (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{int}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::\+\+Game\+Shader}}.
+
+\Hypertarget{classbackends_1_1OpenGLShader_aeddc53bac14dc30c4ae2370693df9893}\index{backends::OpenGLShader@{backends::OpenGLShader}!SetInt2@{SetInt2}}
+\index{SetInt2@{SetInt2}!backends::OpenGLShader@{backends::OpenGLShader}}
+\doxysubsubsection{\texorpdfstring{SetInt2()}{SetInt2()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLShader_aeddc53bac14dc30c4ae2370693df9893} 
+void backends::\+\+Open\+GLShader::\+\+Set\+Int2 (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::\+\+Game\+Shader}}.
+
+\Hypertarget{classbackends_1_1OpenGLShader_a78c229f18dc13569244a27885b506c1f}\index{backends::OpenGLShader@{backends::OpenGLShader}!SetInt3@{SetInt3}}
+\index{SetInt3@{SetInt3}!backends::OpenGLShader@{backends::OpenGLShader}}
+\doxysubsubsection{\texorpdfstring{SetInt3()}{SetInt3()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLShader_a78c229f18dc13569244a27885b506c1f} 
+void backends::\+\+Open\+GLShader::\+\+Set\+Int3 (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{int}]{x}{, }\item[{int}]{y}{, }\item[{int}]{z}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::\+\+Game\+Shader}}.
+
+\Hypertarget{classbackends_1_1OpenGLShader_a4e710f2f814e090eacaf85907d54d14b}\index{backends::OpenGLShader@{backends::OpenGLShader}!SetInt4@{SetInt4}}
+\index{SetInt4@{SetInt4}!backends::OpenGLShader@{backends::OpenGLShader}}
+\doxysubsubsection{\texorpdfstring{SetInt4()}{SetInt4()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLShader_a4e710f2f814e090eacaf85907d54d14b} 
+void backends::\+\+Open\+GLShader::\+\+Set\+Int4 (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{int}]{x}{, }\item[{int}]{y}{, }\item[{int}]{z}{, }\item[{int}]{w}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::\+\+Game\+Shader}}.
+
+\Hypertarget{classbackends_1_1OpenGLShader_a09cb25e89f9e72e1e9bf403bed2e86b7}\index{backends::OpenGLShader@{backends::OpenGLShader}!SetIntArray@{SetIntArray}}
+\index{SetIntArray@{SetIntArray}!backends::OpenGLShader@{backends::OpenGLShader}}
+\doxysubsubsection{\texorpdfstring{SetIntArray()}{SetIntArray()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLShader_a09cb25e89f9e72e1e9bf403bed2e86b7} 
+void backends::\+\+Open\+GLShader::\+\+Set\+Int\+Array (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{int \texorpdfstring{$\ast$}{*}}]{values}{, }\item[{int}]{count}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::\+\+Game\+Shader}}.
+
+\Hypertarget{classbackends_1_1OpenGLShader_a59adf9f436c6d288881577d52eaf5d39}\index{backends::OpenGLShader@{backends::OpenGLShader}!SetMat3@{SetMat3}}
+\index{SetMat3@{SetMat3}!backends::OpenGLShader@{backends::OpenGLShader}}
+\doxysubsubsection{\texorpdfstring{SetMat3()}{SetMat3()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLShader_a59adf9f436c6d288881577d52eaf5d39} 
+void backends::\+\+Open\+GLShader::\+\+Set\+Mat3 (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{const glm::\+mat3 \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::\+\+Game\+Shader}}.
+
+\Hypertarget{classbackends_1_1OpenGLShader_a34c640c1a9da1193d20801bc64262808}\index{backends::OpenGLShader@{backends::OpenGLShader}!SetMat4@{SetMat4}}
+\index{SetMat4@{SetMat4}!backends::OpenGLShader@{backends::OpenGLShader}}
+\doxysubsubsection{\texorpdfstring{SetMat4()}{SetMat4()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLShader_a34c640c1a9da1193d20801bc64262808} 
+void backends::\+\+Open\+GLShader::\+\+Set\+Mat4 (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{const glm::\+mat4 \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::\+\+Game\+Shader}}.
+
+\Hypertarget{classbackends_1_1OpenGLShader_a81218cf08b9c3a1fa576072dbcb83ba4}\index{backends::OpenGLShader@{backends::OpenGLShader}!SetUInt@{SetUInt}}
+\index{SetUInt@{SetUInt}!backends::OpenGLShader@{backends::OpenGLShader}}
+\doxysubsubsection{\texorpdfstring{SetUInt()}{SetUInt()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLShader_a81218cf08b9c3a1fa576072dbcb83ba4} 
+void backends::\+\+Open\+GLShader::\+\+Set\+UInt (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{unsigned int}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::\+\+Game\+Shader}}.
+
+\Hypertarget{classbackends_1_1OpenGLShader_a64a8c5949861b7a104605b36ebb46674}\index{backends::OpenGLShader@{backends::OpenGLShader}!SetUInt2@{SetUInt2}}
+\index{SetUInt2@{SetUInt2}!backends::OpenGLShader@{backends::OpenGLShader}}
+\doxysubsubsection{\texorpdfstring{SetUInt2()}{SetUInt2()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLShader_a64a8c5949861b7a104605b36ebb46674} 
+void backends::\+\+Open\+GLShader::\+\+Set\+UInt2 (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{unsigned int}]{x}{, }\item[{unsigned int}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::\+\+Game\+Shader}}.
+
+\Hypertarget{classbackends_1_1OpenGLShader_a7e1d2b89ff734c06e28b675d5c80c401}\index{backends::OpenGLShader@{backends::OpenGLShader}!SetUInt3@{SetUInt3}}
+\index{SetUInt3@{SetUInt3}!backends::OpenGLShader@{backends::OpenGLShader}}
+\doxysubsubsection{\texorpdfstring{SetUInt3()}{SetUInt3()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLShader_a7e1d2b89ff734c06e28b675d5c80c401} 
+void backends::\+\+Open\+GLShader::\+\+Set\+UInt3 (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{unsigned int}]{x}{, }\item[{unsigned int}]{y}{, }\item[{unsigned int}]{z}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::\+\+Game\+Shader}}.
+
+\Hypertarget{classbackends_1_1OpenGLShader_a0646de55e09761b325c7e68d8fb7d1f6}\index{backends::OpenGLShader@{backends::OpenGLShader}!SetUInt4@{SetUInt4}}
+\index{SetUInt4@{SetUInt4}!backends::OpenGLShader@{backends::OpenGLShader}}
+\doxysubsubsection{\texorpdfstring{SetUInt4()}{SetUInt4()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLShader_a0646de55e09761b325c7e68d8fb7d1f6} 
+void backends::\+\+Open\+GLShader::\+\+Set\+UInt4 (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{unsigned int}]{x}{, }\item[{unsigned int}]{y}{, }\item[{unsigned int}]{z}{, }\item[{unsigned int}]{w}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::\+\+Game\+Shader}}.
+
+\Hypertarget{classbackends_1_1OpenGLShader_afe8b5dde51af9516a8ef3f84800ad320}\index{backends::OpenGLShader@{backends::OpenGLShader}!SetUIntArray@{SetUIntArray}}
+\index{SetUIntArray@{SetUIntArray}!backends::OpenGLShader@{backends::OpenGLShader}}
+\doxysubsubsection{\texorpdfstring{SetUIntArray()}{SetUIntArray()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLShader_afe8b5dde51af9516a8ef3f84800ad320} 
+void backends::\+\+Open\+GLShader::\+\+Set\+UInt\+Array (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{name}{, }\item[{unsigned int \texorpdfstring{$\ast$}{*}}]{values}{, }\item[{int}]{count}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::\+\+Game\+Shader}}.
+
+\Hypertarget{classbackends_1_1OpenGLShader_a05564372e186f69ea0e36a4e22265cf6}\index{backends::OpenGLShader@{backends::OpenGLShader}!Unbind@{Unbind}}
+\index{Unbind@{Unbind}!backends::OpenGLShader@{backends::OpenGLShader}}
+\doxysubsubsection{\texorpdfstring{Unbind()}{Unbind()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLShader_a05564372e186f69ea0e36a4e22265cf6} 
+void backends::\+\+Open\+GLShader::\+\+Unbind (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1GameShader}{engine::\+\+Game\+Shader}}.
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+Backends/\+\+Open\+GL/\+\+Shader/\+opengl\+\_\+shader.\+hpp\item 
+Backends/\+\+Open\+GL/\+\+Shader/\+opengl\+\_\+shader.\+cpp\end{DoxyCompactItemize}

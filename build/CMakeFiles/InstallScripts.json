@@ -1,0 +1,14 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/nazzazel/Programming/cpp/projects/VoxelEngine/build/cmake_install.cmake",
+		"/home/nazzazel/Programming/cpp/projects/VoxelEngine/build/thirdparty/glfw/cmake_install.cmake",
+		"/home/nazzazel/Programming/cpp/projects/VoxelEngine/build/thirdparty/glfw/src/cmake_install.cmake",
+		"/home/nazzazel/Programming/cpp/projects/VoxelEngine/build/thirdparty/glfw/docs/cmake_install.cmake",
+		"/home/nazzazel/Programming/cpp/projects/VoxelEngine/build/DebugTools/cmake_install.cmake",
+		"/home/nazzazel/Programming/cpp/projects/VoxelEngine/build/Backends/cmake_install.cmake",
+		"/home/nazzazel/Programming/cpp/projects/VoxelEngine/build/Engine/cmake_install.cmake",
+		"/home/nazzazel/Programming/cpp/projects/VoxelEngine/build/VoxelGame/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

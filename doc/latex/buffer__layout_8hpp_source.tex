@@ -1,0 +1,152 @@
+\doxysection{buffer\+\_\+layout.\+hpp}
+\hypertarget{buffer__layout_8hpp_source}{}\label{buffer__layout_8hpp_source}\index{Engine/RenderingAPI/Buffers/buffer\_layout.hpp@{Engine/RenderingAPI/Buffers/buffer\_layout.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }engine}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{enum\ class}\ ShaderDataType}
+\DoxyCodeLine{00012\ \ \ \ \ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ Float,\ Float2,\ Float3,\ Float4,}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ Int,\ Int2,\ Int3,\ Int4,}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ UInt,\ UInt2,\ UInt3,\ UInt4,}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ Bool,\textcolor{comment}{//new}}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ Mat3,Mat4,}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ Double,\ Double2,\ Double3,\ Double4}
+\DoxyCodeLine{00019\ \ \ \ \ \};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ ShaderDataTypeSize(ShaderDataType\ type)}
+\DoxyCodeLine{00023\ \ \ \ \ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (type)}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Float\ \ \ \ \ \ :\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{sizeof}(float);}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Float2\ \ \ \ \ :\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{sizeof}(float)\ *\ 2;}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Float3\ \ \ \ \ :\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{sizeof}(float)\ *\ 3;}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Float4\ \ \ \ \ :\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{sizeof}(float)\ *\ 4;}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Int\ \ \ \ \ \ \ \ :\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{sizeof}(int);}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Int2\ \ \ \ \ \ \ :\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{sizeof}(int)\ *\ 2;}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Int3\ \ \ \ \ \ \ :\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{sizeof}(int)\ *\ 3;}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Int4\ \ \ \ \ \ \ :\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{sizeof}(int)\ *\ 4;}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::UInt\ \ \ \ \ \ \ :\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned}\ int);}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::UInt2\ \ \ \ \ \ :\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned}\ int)\ *\ 2;}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::UInt3\ \ \ \ \ \ :\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned}\ int)\ *\ 3;}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::UInt4\ \ \ \ \ \ :\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned}\ int)\ *\ 4;}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Bool\ \ \ \ \ \ \ :\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{sizeof}(bool);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Mat3\ \ \ \ \ \ \ :\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{sizeof}(float)\ *\ 3\ *\ 3;}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Mat4\ \ \ \ \ \ \ :\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{sizeof}(float)\ *\ 4\ *\ 4;}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Double\ \ \ \ \ :\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{sizeof}(double);}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Double2\ \ \ \ :\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{sizeof}(double)\ *\ 2;}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Double3\ \ \ \ :\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{sizeof}(double)\ *\ 3;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Double4\ \ \ \ :\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{sizeof}(double)\ *\ 4;}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00052\ \ \ \ \ \}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{struct\ }BufferElement\ }
+\DoxyCodeLine{00055\ \ \ \ \ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ ShaderDataType\ Type;}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ std::string\ Name;}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{comment}{//unsigned\ int\ Type;\ //OLD\ ONE}}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ Size;}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ Offset;}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ Normalised;}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ BufferElement(ShaderDataType\ type,\ \textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{bool}\ normalizes\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ :Type(type)}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ ,Name(name)}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ ,Size(ShaderDataTypeSize(type))}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ ,Offset(0)}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ ,Normalised(normalizes)\ \{\}}
+\DoxyCodeLine{00069\ \ \ \ \ \};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keyword}{class\ }BufferLayout}
+\DoxyCodeLine{00072\ \ \ \ \ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ BufferLayout()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ BufferLayout(\textcolor{keyword}{const}\ std::initializer\_list<BufferElement>\&\ elements)}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ :\ m\_Elements(elements)}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ CalculateOffsetsAndStride();}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<BufferElement>\&\ GetElements()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_Elements;\ \}}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ uint32\_t\ GetStride()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_Stride;\ \}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ CalculateOffsetsAndStride()}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ offset\ =\ 0;}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ m\_Stride\ =\ 0;}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ element\ :\ m\_Elements)}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ element.Offset\ =\ offset;}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ offset\ +=\ element.Size;}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_Stride\ +=\ element.Size;}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ std::vector<BufferElement>\ m\_Elements;}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ uint32\_t\ m\_Stride\ =\ 0;}
+\DoxyCodeLine{00103\ \ \ \ \ }
+\DoxyCodeLine{00104\ \ \ \ \ \};}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ GetComponentCount(ShaderDataType\ type)}
+\DoxyCodeLine{00107\ \ \ \ \ \{}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (type)}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Float:\ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Float2:\ \ \ \ \textcolor{keywordflow}{return}\ 2;}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Float3:\ \ \ \ \textcolor{keywordflow}{return}\ 3;}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Float4:\ \ \ \ \textcolor{keywordflow}{return}\ 4;}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Int:\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Int2:\ \ \ \ \ \ \textcolor{keywordflow}{return}\ 2;}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Int3:\ \ \ \ \ \ \textcolor{keywordflow}{return}\ 3;}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Int4:\ \ \ \ \ \ \textcolor{keywordflow}{return}\ 4;}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::UInt:\ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::UInt2:\ \ \ \ \ \textcolor{keywordflow}{return}\ 2;}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::UInt3:\ \ \ \ \ \textcolor{keywordflow}{return}\ 3;}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::UInt4:\ \ \ \ \ \textcolor{keywordflow}{return}\ 4;}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Bool:\ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Mat3:\ \ \ \ \ \ \textcolor{keywordflow}{return}\ 3\ *\ 3;\textcolor{comment}{//TODO\ NOT\ SURE}}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Mat4:\ \ \ \ \ \ \textcolor{keywordflow}{return}\ 4\ *\ 4;}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Double:\ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Double2:\ \ \ \textcolor{keywordflow}{return}\ 2;}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Double3:\ \ \ \textcolor{keywordflow}{return}\ 3;}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ShaderDataType::Double4:\ \ \ \textcolor{keywordflow}{return}\ 4;}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00141\ \ \ \ \ \}}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ \ \ }
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,176 @@
+\doxysection{application.\+hpp}
+\hypertarget{application_8hpp_source}{}\label{application_8hpp_source}\index{Engine/Core/application.hpp@{Engine/Core/application.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}Engine/Platform/Platform/platform.hpp"{}}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{comment}{//Engine}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Engine/Assets/AssetManager/asset\_manager.hpp"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Engine/RenderingAPI/Shader/game\_shader.hpp"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}Engine/Platform/WindowCreation/window.hpp"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}Engine/RenderingAPI/Renderer/renderer.hpp"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}Engine/Tests/Objects/Triangle/triangle.hpp"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}Engine/Tests/Objects/Rotating\ Cube/rcube.hpp"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{comment}{//DebugTools}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}DebugTools/Core/Timer/time\_manager.hpp"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}DebugTools/Tools/tool\_manager.hpp"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}DebugTools/Tools/ConsoleTool/console\_tool.hpp"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}DebugTools/Core/Logger/logger.hpp"{}}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ "{}Backends/API/renderer\_api.hpp"{}}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{comment}{//System}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ <array>}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{comment}{//Aditional\ namespace\ for\ clarity}}
+\DoxyCodeLine{00031\ \textcolor{comment}{//This\ is\ used\ for\ arg\ from\ app\ using\ engine}}
+\DoxyCodeLine{00032\ \textcolor{keyword}{namespace\ }engine}
+\DoxyCodeLine{00033\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structengine_1_1EngineConfig}{EngineConfig}}}
+\DoxyCodeLine{00035\ \ \ \ \ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{comment}{//TODO\ deal\ with\ this\ like\ a\ file\ read\ or\ smg///\ For\ those\ are\ Default\ values}}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{comment}{//TODO\ later\ lol}}
+\DoxyCodeLine{00038\ \ \ \ \ \};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{struct\ }WindowConfig}
+\DoxyCodeLine{00041\ \ \ \ \ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ m\_windowWidth;}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ m\_windowHeight;}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ std::string\ m\_title;}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ WindowConfig(}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \ \textcolor{keywordtype}{int}\ windowWidth,}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \ \textcolor{keywordtype}{int}\ windowHeight,}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ title)}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ :\ m\_windowWidth(windowWidth),\ m\_windowHeight(windowHeight),\ m\_title(title)\ \{\}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{int}\ GetWindowWidth()\textcolor{keyword}{\ const\ \ \ \ \ \ \ \ \ \ \ \ }\{\textcolor{keywordflow}{return}\ m\_windowWidth;\}}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{int}\ GetWindowHeight()\textcolor{keyword}{\ const\ \ \ \ \ \ \ \ \ \ \ }\{\textcolor{keywordflow}{return}\ m\_windowHeight;\}}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ [[nodiscard]]\ std::string\&\ GetTitle()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{keywordflow}{return}\ m\_title;\}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structengine_1_1AdditionalParams}{AdditionalParams}}\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ m\_memoryBudgetMB\ =\ 8000;\ \textcolor{comment}{//\ Memory\ size}}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{comment}{//bool\ enableVSync;\ \ \ \ \ \ //\ Example:\ Graphics\ flag}}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \ \textcolor{keywordtype}{bool}\ m\_debugMode\ =\ \textcolor{keyword}{false};\ \ \ \ \ \ \ \textcolor{comment}{//\ Debugging\ flag}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ AdditionalParams(}}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ size\_t\ memoryBudgetMB\ =\ 8000,}}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ bool\ debugMode\ =\ false)}}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ //-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ :\ m\_memoryBudgetMB(memoryBudgetMB),\ m\_debugMode(debugMode)\{\}}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{size\_t}\ GetMemoryBudget()\textcolor{keyword}{\ const\ \ \ \ \ }\{\textcolor{keywordflow}{return}\ m\_memoryBudgetMB;\}}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{bool}\ IsDebugModeActive()\textcolor{keyword}{\ const\ \ \ \ }\{\ \textcolor{keywordflow}{return}\ m\_debugMode;\ \}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \};}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{struct\ }AppSettings\ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{comment}{//EngineConfig\ engine\_configuration;}}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structengine_1_1WindowConfig}{WindowConfig}}\ m\_window\_configuration;}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structengine_1_1AdditionalParams}{AdditionalParams}}\ m\_extra;}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ AppSettings(}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structengine_1_1WindowConfig}{WindowConfig}}\&\ window\_configuration,}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structengine_1_1AdditionalParams}{AdditionalParams}}\&\ extra)}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ :\ m\_window\_configuration(window\_configuration),\ m\_extra(extra)\{\}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \doxymbox{\hyperlink{structengine_1_1WindowConfig}{WindowConfig}}\ GetWindowConfiguration()\textcolor{keyword}{\ \ \ const\ \ \ }\{\textcolor{keywordflow}{return}\ m\_window\_configuration;\}}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \doxymbox{\hyperlink{structengine_1_1AdditionalParams}{AdditionalParams}}\ GetExtra()\textcolor{keyword}{\ \ \ \ \ \ \ \ \ \ \ \ \ const\ \ \ }\{\textcolor{keywordflow}{return}\ m\_extra;\}}
+\DoxyCodeLine{00092\ \ \ \ \ \};}
+\DoxyCodeLine{00093\ \}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \textcolor{keyword}{namespace\ }engine}
+\DoxyCodeLine{00097\ \{}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keyword}{class\ }Window;}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keyword}{class\ }Renderer;}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{comment}{//\ struct\ addon\_params(int\ argc,\ char**\ argv);}}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{comment}{//\ struct\ AppParams}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keyword}{class\ }Application}
+\DoxyCodeLine{00105\ \ \ \ \ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ Application(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{structengine_1_1AppSettings}{AppSettings}}\&\ settings);}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \string~Application();}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Run();}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classengine_1_1Window}{Window}}\&\ GetWindow()\ \{\ \textcolor{keywordflow}{return}\ *m\_MainWindow;\ \}}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classengine_1_1AssetManager}{AssetManager}}\&\ GetAssetManager()\ \{\ \textcolor{keywordflow}{return}\ *m\_AssetManager;\ \}}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{comment}{//TODO\ other\ types\ of\ getters\ for\ ex\ toolmanager}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ for\ game-\/specific\ logic\ later}}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ OnInit()\ \{\}\textcolor{comment}{//TODO}}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ OnUpdate(\textcolor{keywordtype}{float}\ dt)\ \{\}}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ OnRender(\doxymbox{\hyperlink{classengine_1_1Renderer}{Renderer}}\&\ m\_Renderer)\ \{\}}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ OnShutdown()\ \{\}\ \textcolor{comment}{//TODO}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ std::unique\_ptr<Window>\ m\_MainWindow;}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \textcolor{comment}{//std::unique\_ptr<Window>\ m\_GameWindow;}}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{comment}{//std::unique\_ptr<Window>\ m\_AdditionalWindow;}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{comment}{//std::unique\_ptr<Window>\ m\_DebugMenuWindow;\ //\ Menu\ to\ choose\ debugging\ tools\ from}}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{comment}{//std::unique\_ptr<Window>\ m\_ConsoleWindow;\ \ \ //\ Window\ for\ my\ own\ console}}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Alfa\ for\ tests\ and\ othe\ purposes}}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \textcolor{comment}{//std::unique\_ptr<Window>\ m\_AlfaConsoleWindow;\ \ \ //\ Window\ for\ my\ own\ console\ jjdfgshjidsfgkshfg}}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ std::unique\_ptr<Renderer>\ m\_Renderer;}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \textcolor{comment}{//IDK\ if\ I\ need\ this\ but\ I\ will\ add\ it\ later\ if\ I\ do}}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ std::unique\_ptr<AssetManager>\ m\_AssetManager;}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Handler\ for\ tools\ aka\ debug\ tools\ and\ registering\ other\ types\ of\ tools\ //TODO}}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ std::unique\_ptr<debugtools::ToolManager>\ m\_ToolManager;}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structengine_1_1AppSettings}{AppSettings}}\ m\_Settings;\textcolor{comment}{//INIT\ and\ app\ settings\ get\ from\ the\ projects\ stitting\ atop/using\ engine}}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ deltaTime\ =\ 0.0f;;}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_Running\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ void\ StatsInit();}}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ FpsDelta();}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ crap\ =\ 1.0f;\textcolor{comment}{//TODO\ delete}}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Tests\ //TODO\ delete}}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ std::unique\_ptr<Triangle>\ m\_Triangle;\textcolor{comment}{//TODO\ delete}}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ std::unique\_ptr<Rot\_Cube>\ m\_Rot\_Cube;\textcolor{comment}{//TODO\ delete}}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \ \ \ \ \};}
+\DoxyCodeLine{00170\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,155 @@
+\doxysection{game\+\_\+shader.\+hpp}
+\hypertarget{game__shader_8hpp_source}{}\label{game__shader_8hpp_source}\index{Engine/RenderingAPI/Shader/game\_shader.hpp@{Engine/RenderingAPI/Shader/game\_shader.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{comment}{//\#include\ "{}Engine/Assets/Shader/ShaderManager/Core/ShaderTypeID.h"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <glm/glm.hpp>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }engine}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{classengine_1_1GameShader}{GameShader}}}
+\DoxyCodeLine{00012\ \ \ \ \ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \doxymbox{\hyperlink{classengine_1_1GameShader}{\string~GameShader}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Bind()\ \ \ \ \ \textcolor{keyword}{const}\ \ =\ 0;}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Unbind()\ \ \ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Float}}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ SetFloat\ \ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{float}\ value\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )\ =\ 0;}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ SetFloat2\ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )\ =\ 0;}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ SetFloat3\ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ z\ \ \ \ \ \ \ \ \ \ \ \ \ )\ =\ 0;}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ SetFloat4\ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ z,\ \textcolor{keywordtype}{float}\ w\ \ \ \ )\ =\ 0;}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ SetFloatArray\ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{float}*\ values,\ \textcolor{keywordtype}{int}\ count\ \ \ \ \ \ \ \ \ \ \ \ \ \ )\ =\ 0;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Int}}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ SetInt\ \ \ \ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{int}\ value\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )\ =\ 0;}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ SetInt2\ \ \ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )\ =\ 0;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ SetInt3\ \ \ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{int}\ z\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )\ =\ 0;}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ SetInt4\ \ \ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{int}\ z,\ \textcolor{keywordtype}{int}\ w\ \ \ \ \ \ \ \ \ \ \ \ )\ =\ 0;}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ SetIntArray\ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{int}*\ values,\ \textcolor{keywordtype}{int}\ count\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )\ =\ 0;}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Unsigned\ Int}}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ SetUInt\ \ \ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ value\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )\ =\ 0;}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ SetUInt2\ \ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ y\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )\ =\ 0;}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ SetUInt3\ \ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ z\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )\ =\ 0;}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ SetUInt4\ \ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ z,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ w\ \ \ \ \ \ \ \ \ \ \ \ )\ =\ 0;}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ SetUIntArray\ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}*\ values,\ \textcolor{keywordtype}{int}\ count\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )\ =\ 0;}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Bool}}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ SetBool\ \ \ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{bool}\ value)\ =\ 0;}
+\DoxyCodeLine{00046\ \ \ \ \ \ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ SetMat3\ \ \ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ glm::mat3\&\ value)\ =\ 0;}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ SetMat4\ \ \ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ glm::mat4\&\ value)\ =\ 0;}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Int}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ SetDouble\ \ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{double}\ value\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )\ =\ 0;}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ SetDouble2\ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{double}\ x,\ \textcolor{keywordtype}{double}\ y\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )\ =\ 0;}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ SetDouble3\ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{double}\ x,\ \textcolor{keywordtype}{double}\ y,\ \textcolor{keywordtype}{double}\ z\ \ \ \ \ \ \ \ \ \ \ \ \ \ )\ =\ 0;}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ SetDouble4\ \ \ \ \ (\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{double}\ x,\ \textcolor{keywordtype}{double}\ y,\ \textcolor{keywordtype}{double}\ z,\ \textcolor{keywordtype}{double}\ w\ \ \ \ )\ =\ 0;}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ }
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{comment}{//virtual\ =\ 0;}}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{comment}{//virtual\ =\ 0;}}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{comment}{//virtual\ =\ 0;}}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{comment}{//virtual\ =\ 0;}}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{comment}{//virtual\ =\ 0;}}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::unique\_ptr<engine::GameShader>\ Create(\textcolor{keyword}{const}\ std::string\&\ vertexSrc,\ \textcolor{keyword}{const}\ std::string\&\ fragmentSrc);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{comment}{//static\ std::unique\_ptr<engine::GameShader>\ Create();}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{comment}{//std::string\ LoadShader(backends::RendererAPIType\ type,\ const\ std::string\&\ filepath);}}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{comment}{//File\ parsing\ }}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \textcolor{comment}{//\ const\ std::string\&\ ParseShader(const\ std::string\&\ filepath);}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{comment}{//unsigned\ int\ CompileShader(ShaderType\ type,\ const\ std::string\&\ source);}}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{comment}{//unsigned\ int\ CreateShader(const\ std::string\&\ vertexShader,\ const\ std::string\&\ fragmentShader);}}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00082\ \textcolor{comment}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00083\ \textcolor{comment}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00084\ \textcolor{comment}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00085\ \textcolor{comment}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00086\ \textcolor{comment}{\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00087\ \ \ \ \ \};}
+\DoxyCodeLine{00088\ \}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \textcolor{comment}{//\#pragma\ once}}
+\DoxyCodeLine{00095\ \textcolor{comment}{//\#include\ <string>}}
+\DoxyCodeLine{00096\ \textcolor{comment}{//\#include\ <memory>}}
+\DoxyCodeLine{00097\ \textcolor{comment}{//}}
+\DoxyCodeLine{00098\ \textcolor{comment}{//\#include\ <Engine/Res/Assets/Shaders/ShadersLib/shader\_library.hpp>}}
+\DoxyCodeLine{00099\ \textcolor{comment}{//}}
+\DoxyCodeLine{00100\ \textcolor{comment}{//}}
+\DoxyCodeLine{00101\ \textcolor{comment}{//namespace\ engine}}
+\DoxyCodeLine{00102\ \textcolor{comment}{//\{}}
+\DoxyCodeLine{00103\ \textcolor{comment}{//}}
+\DoxyCodeLine{00104\ \textcolor{comment}{//\ \ //\ \ enum\ ShaderType}}
+\DoxyCodeLine{00105\ \textcolor{comment}{//\ \ //\ \ \{}}
+\DoxyCodeLine{00106\ \textcolor{comment}{//}}
+\DoxyCodeLine{00107\ \textcolor{comment}{//\ \ \ \ \ \ //FRAGMENT\_SHADER\ =\ 0,}}
+\DoxyCodeLine{00108\ \textcolor{comment}{//\ \ \ \ \ \ //VERTEX\_SHADER\ =\ 1,}}
+\DoxyCodeLine{00109\ \textcolor{comment}{//\ \ \ \ \ \ //GEOMETRY\_SHADER\ =\ 2\ //\ TODO\ USELESS\ for\ now}}
+\DoxyCodeLine{00110\ \textcolor{comment}{//\ \ //\ \ \ \ \ }}
+\DoxyCodeLine{00111\ \textcolor{comment}{//\ \ //\ \ \};}}
+\DoxyCodeLine{00112\ \textcolor{comment}{//}}
+\DoxyCodeLine{00113\ \textcolor{comment}{//\ \ \ \ class\ GameShader}}
+\DoxyCodeLine{00114\ \textcolor{comment}{//\ \ \ \ \{}}
+\DoxyCodeLine{00115\ \textcolor{comment}{//\ \ \ \ public:}}
+\DoxyCodeLine{00116\ \textcolor{comment}{//}}
+\DoxyCodeLine{00117\ \textcolor{comment}{//\ \ \ \ \ \ \ \ virtual\ \string~GameShader()\ =\ default;}}
+\DoxyCodeLine{00118\ \textcolor{comment}{//}}
+\DoxyCodeLine{00119\ \textcolor{comment}{//\ \ \ \ \ \ virtual\ void\ Bind()\ =\ 0;}}
+\DoxyCodeLine{00120\ \textcolor{comment}{//\ \ \ \ \ \ virtual\ void\ Unbind()\ =\ 0;}}
+\DoxyCodeLine{00121\ \textcolor{comment}{//}}
+\DoxyCodeLine{00122\ \textcolor{comment}{//\ \ \ \ \ \ \ \ //\ Optional\ but\ VERY\ useful}}
+\DoxyCodeLine{00123\ \textcolor{comment}{//\ \ \ \ \ \ \ \ virtual\ void\ SetInt(const\ std::string\&\ name,\ int\ value)\ =\ 0;}}
+\DoxyCodeLine{00124\ \textcolor{comment}{//\ \ \ \ \ \ \ \ virtual\ void\ SetFloat(const\ std::string\&\ name,\ float\ value)\ =\ 0;}}
+\DoxyCodeLine{00125\ \textcolor{comment}{//}}
+\DoxyCodeLine{00126\ \textcolor{comment}{//}}
+\DoxyCodeLine{00127\ \textcolor{comment}{//\ \ \ \ \ \ \ \ static\ std::unique\_ptr<engine::GameShader>\ Create(engine::ShaderTypeID\ type);}}
+\DoxyCodeLine{00128\ \textcolor{comment}{//}}
+\DoxyCodeLine{00129\ \textcolor{comment}{//\ \ \ \ \ \ \ \ //static\ std::unique\_ptr<engine::GameShader>\ Create();}}
+\DoxyCodeLine{00130\ \textcolor{comment}{//}}
+\DoxyCodeLine{00131\ \textcolor{comment}{//\ \ private:}}
+\DoxyCodeLine{00132\ \textcolor{comment}{//}}
+\DoxyCodeLine{00133\ \textcolor{comment}{//\ \ \ \ \ \ std::string\ LoadShader(backends::RendererAPIType\ type,\ const\ std::string\&\ filepath);}}
+\DoxyCodeLine{00134\ \textcolor{comment}{//\ \ \ \ \ \ }}
+\DoxyCodeLine{00135\ \textcolor{comment}{//\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00136\ \textcolor{comment}{//\ \ \ \ \ \ \ \ //File\ parsing\ }}
+\DoxyCodeLine{00137\ \textcolor{comment}{//\ \ \ \ \ \ \ //\ const\ std::string\&\ ParseShader(const\ std::string\&\ filepath);}}
+\DoxyCodeLine{00138\ \textcolor{comment}{//}}
+\DoxyCodeLine{00139\ \textcolor{comment}{//\ \ \ \ \ \ //unsigned\ int\ CompileShader(ShaderType\ type,\ const\ std::string\&\ source);}}
+\DoxyCodeLine{00140\ \textcolor{comment}{//\ \ \ \ \ \ //unsigned\ int\ CreateShader(const\ std::string\&\ vertexShader,\ const\ std::string\&\ fragmentShader);}}
+\DoxyCodeLine{00141\ \textcolor{comment}{//\ \ \ \ \ \ }}
+\DoxyCodeLine{00142\ \textcolor{comment}{//}}
+\DoxyCodeLine{00143\ \textcolor{comment}{//\ \ \ \ \ \ \ \ /*}}
+\DoxyCodeLine{00144\ \textcolor{comment}{//\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00145\ \textcolor{comment}{//\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00146\ \textcolor{comment}{//\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00147\ \textcolor{comment}{//\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00148\ \textcolor{comment}{//\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00149\ \textcolor{comment}{//\ \ \ \ \};}}
+\DoxyCodeLine{00150\ \textcolor{comment}{//\}}}
+
+\end{DoxyCode}

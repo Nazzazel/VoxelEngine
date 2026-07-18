@@ -1,0 +1,7 @@
+﻿  first_app.cpp
+  lve_pipeline.cpp
+  lve_swap_chain.cpp
+  lve_window.cpp
+  lve_device.cpp
+  Generating Code...
+  VulkanTest.vcxproj -> C:\Users\kappa\source\repos\VulkanTest\Compile\VoxelEngine\x64\Debug\VoxelEngine.exe

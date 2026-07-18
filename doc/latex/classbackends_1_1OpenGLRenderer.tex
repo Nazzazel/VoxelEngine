@@ -1,0 +1,114 @@
+\doxysection{backends::\+Open\+GLRenderer Class Reference}
+\hypertarget{classbackends_1_1OpenGLRenderer}{}\label{classbackends_1_1OpenGLRenderer}\index{backends::OpenGLRenderer@{backends::OpenGLRenderer}}
+
+
+Inheritance diagram for backends::\+Open\+GLRenderer:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=222pt]{classbackends_1_1OpenGLRenderer__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for backends::\+Open\+GLRenderer:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=222pt]{classbackends_1_1OpenGLRenderer__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{classbackends_1_1OpenGLRenderer_abbac9f579a5d6ac4755347f3d911c5c8}{Init}} () override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLRenderer_a7030e4046002e3afa3d98237905cb41b}{Begin\+Frame}} () override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLRenderer_a129d813219d77e9a06ff14a54d1265eb}{End\+Frame}} () override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLRenderer_a9c6b644c50db92a816cfa960b7b2916f}{On\+Resize}} (int width, int height) override
+\item 
+const glm::\+mat4 \& \doxymbox{\hyperlink{classbackends_1_1OpenGLRenderer_abc02f35605585c4d8f1d05e37df1afb1}{Get\+Projection}} () const override
+\item 
+void \doxymbox{\hyperlink{classbackends_1_1OpenGLRenderer_ad17bcda2bd950be59c392851b91508f6}{Draw\+Indexed}} (const std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{classengine_1_1VertexArray}{engine::\+\+Vertex\+Array}} $>$ \&vao) override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \doxymbox{\hyperlink{classengine_1_1Renderer}{engine::\+\+Renderer}}}
+\begin{DoxyCompactItemize}
+\item 
+static std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{classengine_1_1Renderer}{Renderer}} $>$ {\bfseries Create} ()
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classbackends_1_1OpenGLRenderer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classbackends_1_1OpenGLRenderer_a7030e4046002e3afa3d98237905cb41b}\index{backends::OpenGLRenderer@{backends::OpenGLRenderer}!BeginFrame@{BeginFrame}}
+\index{BeginFrame@{BeginFrame}!backends::OpenGLRenderer@{backends::OpenGLRenderer}}
+\doxysubsubsection{\texorpdfstring{BeginFrame()}{BeginFrame()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLRenderer_a7030e4046002e3afa3d98237905cb41b} 
+void backends::\+\+Open\+GLRenderer::\+\+Begin\+Frame (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1Renderer}{engine::\+\+Renderer}}.
+
+\Hypertarget{classbackends_1_1OpenGLRenderer_ad17bcda2bd950be59c392851b91508f6}\index{backends::OpenGLRenderer@{backends::OpenGLRenderer}!DrawIndexed@{DrawIndexed}}
+\index{DrawIndexed@{DrawIndexed}!backends::OpenGLRenderer@{backends::OpenGLRenderer}}
+\doxysubsubsection{\texorpdfstring{DrawIndexed()}{DrawIndexed()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLRenderer_ad17bcda2bd950be59c392851b91508f6} 
+void backends::\+\+Open\+GLRenderer::\+\+Draw\+Indexed (\begin{DoxyParamCaption}\item[{const std::\+unique\+\_\+ptr$<$ \doxymbox{\hyperlink{classengine_1_1VertexArray}{engine::\+\+Vertex\+Array}} $>$ \&}]{vao}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1Renderer}{engine::\+\+Renderer}}.
+
+\Hypertarget{classbackends_1_1OpenGLRenderer_a129d813219d77e9a06ff14a54d1265eb}\index{backends::OpenGLRenderer@{backends::OpenGLRenderer}!EndFrame@{EndFrame}}
+\index{EndFrame@{EndFrame}!backends::OpenGLRenderer@{backends::OpenGLRenderer}}
+\doxysubsubsection{\texorpdfstring{EndFrame()}{EndFrame()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLRenderer_a129d813219d77e9a06ff14a54d1265eb} 
+void backends::\+\+Open\+GLRenderer::\+\+End\+Frame (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1Renderer}{engine::\+\+Renderer}}.
+
+\Hypertarget{classbackends_1_1OpenGLRenderer_abc02f35605585c4d8f1d05e37df1afb1}\index{backends::OpenGLRenderer@{backends::OpenGLRenderer}!GetProjection@{GetProjection}}
+\index{GetProjection@{GetProjection}!backends::OpenGLRenderer@{backends::OpenGLRenderer}}
+\doxysubsubsection{\texorpdfstring{GetProjection()}{GetProjection()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLRenderer_abc02f35605585c4d8f1d05e37df1afb1} 
+const glm::\+mat4 \& backends::\+\+Open\+GLRenderer::\+\+Get\+Projection (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1Renderer}{engine::\+\+Renderer}}.
+
+\Hypertarget{classbackends_1_1OpenGLRenderer_abbac9f579a5d6ac4755347f3d911c5c8}\index{backends::OpenGLRenderer@{backends::OpenGLRenderer}!Init@{Init}}
+\index{Init@{Init}!backends::OpenGLRenderer@{backends::OpenGLRenderer}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLRenderer_abbac9f579a5d6ac4755347f3d911c5c8} 
+bool backends::\+\+Open\+GLRenderer::\+\+Init (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1Renderer}{engine::\+\+Renderer}}.
+
+\Hypertarget{classbackends_1_1OpenGLRenderer_a9c6b644c50db92a816cfa960b7b2916f}\index{backends::OpenGLRenderer@{backends::OpenGLRenderer}!OnResize@{OnResize}}
+\index{OnResize@{OnResize}!backends::OpenGLRenderer@{backends::OpenGLRenderer}}
+\doxysubsubsection{\texorpdfstring{OnResize()}{OnResize()}}
+{\footnotesize\ttfamily \label{classbackends_1_1OpenGLRenderer_a9c6b644c50db92a816cfa960b7b2916f} 
+void backends::\+\+Open\+GLRenderer::\+\+On\+Resize (\begin{DoxyParamCaption}\item[{int}]{width}{, }\item[{int}]{height}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{classengine_1_1Renderer}{engine::\+\+Renderer}}.
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+Backends/\+\+Open\+GL/\+\+Renderer/\+opengl\+\_\+renderer.\+hpp\item 
+Backends/\+\+Open\+GL/\+\+Renderer/\+opengl\+\_\+renderer.\+cpp\end{DoxyCompactItemize}

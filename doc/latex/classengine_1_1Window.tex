@@ -1,0 +1,87 @@
+\doxysection{engine::\+Window Class Reference}
+\hypertarget{classengine_1_1Window}{}\label{classengine_1_1Window}\index{engine::Window@{engine::Window}}
+
+
+Inheritance diagram for engine::\+Window:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classengine_1_1Window__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for engine::\+Window:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=208pt]{classengine_1_1Window__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classengine_1_1Window_a06ab3bf11480eeaceedc5f5bb607849f}\label{classengine_1_1Window_a06ab3bf11480eeaceedc5f5bb607849f} 
+enum class {\bfseries Window\+Type} \{ {\bfseries Console}
+, {\bfseries Default}
+ \}
+\item 
+\Hypertarget{classengine_1_1Window_a29ea428a9e5150e62c9a964c335d05f1}\label{classengine_1_1Window_a29ea428a9e5150e62c9a964c335d05f1} 
+using {\bfseries Resize\+Callback} = std::\+function$<$void(int, int)$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classengine_1_1Window_ab776017165ec2a217aec9d3bacb6089c}\label{classengine_1_1Window_ab776017165ec2a217aec9d3bacb6089c} 
+virtual void {\bfseries Poll\+Events} ()=0
+\item 
+\Hypertarget{classengine_1_1Window_ab98aefef551ae3db768c86ef54d24865}\label{classengine_1_1Window_ab98aefef551ae3db768c86ef54d24865} 
+virtual bool {\bfseries Should\+Close} ()=0
+\item 
+\Hypertarget{classengine_1_1Window_af9c784a6572f60830ddd0c281c3694ab}\label{classengine_1_1Window_af9c784a6572f60830ddd0c281c3694ab} 
+virtual void {\bfseries Make\+Context\+Current} ()=0
+\item 
+\Hypertarget{classengine_1_1Window_ab6a9d638c0071a9281154be21b2aceac}\label{classengine_1_1Window_ab6a9d638c0071a9281154be21b2aceac} 
+virtual void {\bfseries Swap\+Buffers} ()=0
+\item 
+\Hypertarget{classengine_1_1Window_af0a7f4974a73ab950f617b3c513ef3d7}\label{classengine_1_1Window_af0a7f4974a73ab950f617b3c513ef3d7} 
+virtual void {\bfseries Set\+Name} (const std::\+string \&name)=0
+\item 
+\Hypertarget{classengine_1_1Window_acbc209f915c36db761b152fa7472a79e}\label{classengine_1_1Window_acbc209f915c36db761b152fa7472a79e} 
+virtual GLFWwindow \texorpdfstring{$\ast$}{*} {\bfseries Get\+Native\+Window} ()=0
+\item 
+\Hypertarget{classengine_1_1Window_a3466806cfc3a2a06a36195caf13824ea}\label{classengine_1_1Window_a3466806cfc3a2a06a36195caf13824ea} 
+virtual void {\bfseries Get\+Window\+Size} (int \&window\+Width, int \&window\+Height)=0
+\item 
+\Hypertarget{classengine_1_1Window_aa26cf93ef8b558f1a29a8a4fdef00bc6}\label{classengine_1_1Window_aa26cf93ef8b558f1a29a8a4fdef00bc6} 
+virtual void {\bfseries Get\+Framebuffer\+Size} (int \&framebuffer\+Width, int \&framebuffer\+Height)=0
+\item 
+\Hypertarget{classengine_1_1Window_a490c60df8b67e1dafff7f9c07ba67c4e}\label{classengine_1_1Window_a490c60df8b67e1dafff7f9c07ba67c4e} 
+virtual bool {\bfseries Is\+Focused} () const =0
+\item 
+\Hypertarget{classengine_1_1Window_ab22562e83b2f7d2e29cf1200363f13b3}\label{classengine_1_1Window_ab22562e83b2f7d2e29cf1200363f13b3} 
+virtual bool {\bfseries Is\+Minimized} () const =0
+\item 
+\Hypertarget{classengine_1_1Window_a37fd0511a448a72d0e306b340d3cef90}\label{classengine_1_1Window_a37fd0511a448a72d0e306b340d3cef90} 
+void {\bfseries Add\+Resize\+Listener} (Resize\+Callback callback)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classengine_1_1Window_a37ed158581101175a287c82c7d8caed8}\label{classengine_1_1Window_a37ed158581101175a287c82c7d8caed8} 
+static \doxymbox{\hyperlink{classengine_1_1Window}{Window}} \texorpdfstring{$\ast$}{*} {\bfseries Create} (const std::\+string \&title, int width, int height, \doxymbox{\hyperlink{classengine_1_1Window}{Window}} \texorpdfstring{$\ast$}{*}shared=nullptr)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classengine_1_1Window_a581ba7372113ef55bba6ef85c3f4d22d}\label{classengine_1_1Window_a581ba7372113ef55bba6ef85c3f4d22d} 
+void {\bfseries Notify\+Resize} (int w, int h)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+Engine/\+\+Platform/\+\+Window\+Creation/\+window.\+hpp\item 
+Engine/\+\+Platform/\+\+Window\+Creation/\+window.\+cpp\end{DoxyCompactItemize}
