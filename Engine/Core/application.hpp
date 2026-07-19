@@ -15,7 +15,7 @@
 #include "DebugTools/Core/Timer/time_manager.hpp"
 #include "DebugTools/Tools/tool_manager.hpp"
 #include "DebugTools/Tools/ConsoleTool/console_tool.hpp"
-#include "DebugTools/Core/Logger/logger.hpp"
+//#include "DebugTools/Core/Logger/logger.hpp"
 
 
 #include "Backends/API/renderer_api.hpp"

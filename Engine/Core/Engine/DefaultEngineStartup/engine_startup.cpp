@@ -4,10 +4,22 @@
 
 #include "engine_startup.hpp"
 
+#include "Core/Engine/Manager/Systems/Logger/logger_system.hpp"
+
 namespace engine
 {
-    const int EngineStartup::Init()
+
+
+    Result EngineStartup::Init(SystemManager& m_SystemManager)
     {
-        return 0;
+
+        //if (auto res = mgr.RegisterSystem<LoggerSystem>(); !res) return res;
+        //m_SystemManager.RegisterSystem<>();
+       // m_SystemManager.RegisterSystem<engine::LoggerSystem>();
+       // m_SystemManager.RegisterSystem<engine::>();
+
     }
+
+
+
 } // engine

@@ -11,13 +11,14 @@ namespace engine
 {
     //std::vector<LogMessage> LoggerSystem::m_Messages;
 
-    uint32_t LoggerSystem::OnInit() // Forced
+    Result LoggerSystem::OnInit() // Forced
     {
+        //if (!m_Messages.empty()) std::cout << "dddddddddd" << "\n";
        // DT_INFO("LoggerSystem Initiated");
-        return 0;
+        return {};
     }
 
-    uint32_t LoggerSystem::OnUpdate(float dt)
+    Result LoggerSystem::OnUpdate(float dt)
     {
        // std::cout << dt << std::endl;
        // std::cout << "lo434432543l" <<dt << std::endl;
@@ -28,21 +29,25 @@ namespace engine
         {
             std::cout << GetFormatedLog(msg) << "\n";
         }
+
         ClearLog();
-        return 0;
+        return {};
     }
 
-    uint32_t LoggerSystem::OnShutdown()
+    Result LoggerSystem::OnShutdown()
     {
         ClearLog();
-        return 0;
+        return {};
     }
 
-    uint32_t LoggerSystem::ClearLog()
+    Result LoggerSystem::ClearLog()
     {
         //TODO dddd
         m_Messages.clear();
-        return 0;
+
+        //return ENGINE_ERR(Memory, NullPointer, 1);
+
+        return {};//CLear Auto Init -> Code 0 -> O Problems / Code 0 -> no Problems
     }
 
     std::string_view LoggerSystem::ReturnLogClassString( LogLevel log_level) const
@@ -50,11 +55,13 @@ namespace engine
 
         switch (log_level)
         {
-        case LogLevel::INFO:    return  "INFO"; break;
-        case LogLevel::WARNING: return  "WARNING"; break;
-        case LogLevel::DEBUG:   return  "DEBUG"; break;
-        case LogLevel::ERROR:   return  "ERROR"; break;
-        case LogLevel::MSG:     return  "MSG"; break;
+            //break; structure an old fossil left from tests, it will stay here until I will not change that\
+            // It does not do anything either way.
+        case LogLevel::INFO:    return  "INFO";     break;
+        case LogLevel::WARNING: return  "WARNING";  break;
+        case LogLevel::DEBUG:   return  "DEBUG";    break;
+        case LogLevel::ERROR:   return  "ERROR";    break;
+        case LogLevel::MSG:     return  "MSG";      break;
         }
         return "UNKNOWN";
     }

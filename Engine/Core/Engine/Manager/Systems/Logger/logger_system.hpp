@@ -15,6 +15,7 @@
 
 namespace engine
 {
+
     enum class LogLevel
     {
         ERROR,
@@ -37,7 +38,7 @@ namespace engine
         : m_time(time), m_level(level), m_message(message), m_file(file), m_line(line) {}
     };
 
-    class LoggerSystem: public engine::IEngineSystem {
+    class LoggerSystem : public IEngineSystem {
     public:
        // template <typename... Args> void AddInfo    (Args&&... args)    const  {LogToConsole(LogLevel::INFO,       std::forward<Args>(args)...);}
        // template <typename... Args> void AddWarning (Args&&... args)    const  {LogToConsole(LogLevel::WARNING,    std::forward<Args>(args)...);}
@@ -51,11 +52,11 @@ namespace engine
        //template <typename... Args> void AddDebug       (Args&&... args)    const  {LogMessage("11:12:14",LogLevel::DEBUG   ,std::forward<Args>(args)...,__FILE__,__LINE__);}
        //template <typename... Args> void AddMsg         (Args&&... args)    const  {LogMessage("11:12:14",LogLevel::MSG     ,std::forward<Args>(args)...,__FILE__,__LINE__);}
 
-        template <typename... Args> void AddInfo        (Args&&... args)    const   {m_Messages.emplace_back(LogMessage("11:12:14",LogLevel::INFO       ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__));}
-        template <typename... Args> void AddWarning     (Args&&... args)    const   {m_Messages.emplace_back(LogMessage("11:12:14",LogLevel::WARNING    ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__));}
-        template <typename... Args> void AddError       (Args&&... args)    const   {m_Messages.emplace_back(LogMessage("11:12:14",LogLevel::ERROR      ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__));}
-        template <typename... Args> void AddDebug       (Args&&... args)    const   {m_Messages.emplace_back(LogMessage("11:12:14",LogLevel::DEBUG      ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__));}
-        template <typename... Args> void AddMsg         (Args&&... args)    const   {m_Messages.emplace_back(LogMessage("11:12:14",LogLevel::MSG        ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__));}
+       template <typename... Args> void AddInfo        (Args&&... args)    const   {m_Messages.emplace_back(LogMessage("11:12:14",LogLevel::INFO       ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__));}
+       template <typename... Args> void AddWarning     (Args&&... args)    const   {m_Messages.emplace_back(LogMessage("11:12:14",LogLevel::WARNING    ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__));}
+       template <typename... Args> void AddError       (Args&&... args)    const   {m_Messages.emplace_back(LogMessage("11:12:14",LogLevel::ERROR      ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__));}
+       template <typename... Args> void AddDebug       (Args&&... args)    const   {m_Messages.emplace_back(LogMessage("11:12:14",LogLevel::DEBUG      ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__));}
+       template <typename... Args> void AddMsg         (Args&&... args)    const   {m_Messages.emplace_back(LogMessage("11:12:14",LogLevel::MSG        ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__));}
     private:
 
         std::string_view ReturnLogClassString( LogLevel log_level) const;
@@ -63,29 +64,30 @@ namespace engine
         std::string GetFormatedLog(const LogMessage& log) const;
 
     public:
-        ~LoggerSystem() = default;
-        [[nodiscard]] uint32_t OnInit() override;
-        [[nodiscard]] uint32_t OnUpdate(float dt) override;
-        [[nodiscard]] uint32_t OnShutdown() override;
+         ~LoggerSystem() = default;
+         [[nodiscard]] Result OnInit() override;
+         [[nodiscard]] Result OnUpdate(float dt) override ;
+         [[nodiscard]] Result OnShutdown() override ;
+
     private:
         //
-        uint32_t ClearLog();
+         [[nodiscard]] Result ClearLog();
 
 
 
 
-    private:
-        template <typename... Args>
-        std::string ArgToString(Args&&... args) const {
-            std::stringstream ss;
-            (ss << ... << args);
-            return ss.str();
-        }
+     private:
+         template <typename... Args>
+         std::string ArgToString(Args&&... args) const {
+             std::stringstream ss;
+             (ss << ... << args);
+             return ss.str();
+         }
 
 
-        mutable std::vector<LogMessage> m_Messages;
+         mutable std::vector<LogMessage> m_Messages;
 
-    };
+     };
 
 
 }

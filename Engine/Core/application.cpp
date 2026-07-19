@@ -3,9 +3,10 @@
 #include <GLFW/glfw3.h>
 #include <Platform/Input/Debug/debug_input.hpp>
 
-#include "Engine/DefaultEngineStartup/engine_startup.hpp"
+//#include "Engine/DefaultEngineStartup/engine_startup.hpp"
+//#include "Engine/Manager/Systems/Logger/logger_system.hpp"
 #include "Engine/Manager/Systems/Logger/logger_system.hpp"
-#include "Engine/Manager/Systems/Platform/platform.hpp"
+#include "Engine/Manager/Systems/Platform/platform_system.hpp"
 //#include <tracy/Tracy.hpp>
 #define TRACY_ENABLE
 //#include <GLFW/glfw3.h>
@@ -29,7 +30,7 @@ namespace engine
         //In addition it adds stability
         //-------------------------------------------
         //Modeles That are being setup:
-        //Platform::Init();
+        Platform::Init();
         //debugtools::Logger
         //
         //m_AssetManager = std::make_unique<AssetManager>(); // plus other managers
@@ -37,20 +38,38 @@ namespace engine
         //
         //
         //-------------------------------------------
+
+
+
+
         m_SystemManager = std::make_unique<engine::SystemManager>();
 
         m_SystemManager->RegisterSystem<engine::LoggerSystem>();
+
+
+        //s
+        //m_SystemManager->RegisterSystem<engine::LoggerSystem>();
+
+        // The IDE might handle this much better
+        //auto manager = std::move(m_SystemManager);
+        //uint32_t a = m_SystemManager->RegisterSystem<engine::ddd>();
         //m_SystemManager->RegisterSystem<engine::PlatformSystem>();
 
-        auto h = m_SystemManager->GetSystem<engine::LoggerSystem>();
+        //auto h = m_SystemManager->GetSystem<engine::LoggerSystem>();
         //h->AddInfo("gggg");
-        h->AddInfo("dd");
+        //h->AddInfo("dd");
         //h->AddWarning("gggg");
        // h->AddInfo("gggg");
        // h->AddError("gggg");
 
 
-        const int result = engine::EngineStartup::Init();
+        //const int result = engine::EngineStartup::Init();//push THE REGISTRY
+       // engine::EngineStartup engine_startup{};
+
+       // engine_startup.Init(*m_SystemManager);
+       // auto h = m_SystemManager->GetSystem<engine::LoggerSystem>();
+        //h->AddInfo("gggg");
+
         //TODO check int
         //-------------------------------------------
 
