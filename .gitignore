@@ -6,6 +6,7 @@ cmake-build-debug/
 cmake-build-release/
 build/
 **/build/
+x64/
 
 
 # Compiled objects and binaries
