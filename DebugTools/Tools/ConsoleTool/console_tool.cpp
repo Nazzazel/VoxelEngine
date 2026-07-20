@@ -13,7 +13,7 @@ namespace debugtools
        // for (const auto& msg : logs)
        // {
        //     std::cout << msg.text << std::endl;
-       // }
+       // }h
     }
 
     void ConsoleTool::OnUpdate(float dt)
