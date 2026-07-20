@@ -1,5 +1,5 @@
 #pragma once
-#include "DebugTools/Tools/itool.hpp"
+#include "Tools/itool.hpp"
 
 namespace debugtools
 {

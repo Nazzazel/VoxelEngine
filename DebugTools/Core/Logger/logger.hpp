@@ -3,7 +3,7 @@
 #include <vector>
 
 #include <ostream>
-#include "DebugTools/Core/Timer/time_utils.hpp"
+//#include "DebugTools/Core/Timer/time_utils.hpp"
 
 
 
@@ -45,7 +45,8 @@ namespace debugtools
         std::string text;
 
 
-        LogMessage(LogLevel lvl, const std::string& msg) : level(lvl), text(msg), time(debugtools::TimeUtil::CurrentTime()) {}
+        //LogMessage(LogLevel lvl, const std::string& msg) : level(lvl), text(msg), time(debugtools::TimeUtil::CurrentTime()) {}
+        LogMessage(LogLevel lvl, const std::string& msg) : level(lvl), text(msg), time("67:67:67") {}
 
 		//friend std::ostream& operator<<(std::ostream& os, const LogMessage& msg)
 		//{

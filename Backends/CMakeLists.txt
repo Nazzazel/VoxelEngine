@@ -5,3 +5,5 @@ add_library(Backends STATIC ${BACKENDS_SOURCES})
 
 # Ensure dependencies can locate top-level includes
 target_include_directories(Backends PUBLIC .)
+# In Backends/CMakeLists.txt
+target_link_libraries(Backends PUBLIC Engine)

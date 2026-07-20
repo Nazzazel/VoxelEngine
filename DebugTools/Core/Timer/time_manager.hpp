@@ -4,8 +4,8 @@
 #include <memory>
 #include <string>
 
-#include <DebugTools/Core/Timer/timer.hpp>
-#include "DebugTools/Core/Logger/logger.hpp"
+#include "Core/Timer/timer.hpp"
+#include "Core/Logger/logger.hpp"
 
 
 namespace debugtools

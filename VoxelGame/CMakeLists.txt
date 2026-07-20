@@ -23,3 +23,7 @@ target_link_libraries(VoxelGame PRIVATE Engine glad glfw )
 
 # 2. Add this line to turn on the profiling macros during compilation
 target_compile_definitions(VoxelGame PRIVATE TRACY_ENABLE)
+
+target_precompile_headers(VoxelGame
+        REUSE_FROM Engine
+)
