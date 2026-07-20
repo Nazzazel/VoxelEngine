@@ -1,0 +1,20 @@
+# CLion and IDE files
+.idea/
+
+# Build directories (CLion creates these)
+cmake-build-debug/
+cmake-build-release/
+build/
+**/build/
+
+
+# Compiled objects and binaries
+*.o
+*.a
+*.so
+*.out
+*.exe
+
+VoxelEngine
+# OS specific junk
+.DS_Store

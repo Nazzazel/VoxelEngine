@@ -5,9 +5,10 @@
 
 //#include "Engine/DefaultEngineStartup/engine_startup.hpp"
 //#include "Engine/Manager/Systems/Logger/logger_system.hpp"
-#include "../Engine/DefaultEngineStartup/engine_startup.hpp"
+#include "EngineStartUp/engine_startup.hpp"
 #include "../Engine/Manager/Systems/Logger/logger_system.hpp"
 #include "../Engine/Manager/Systems/Platform/platform_system.hpp"
+#include "API/renderer_api.hpp"
 //#include <tracy/Tracy.hpp>
 #define TRACY_ENABLE
 //#include <GLFW/glfw3.h>

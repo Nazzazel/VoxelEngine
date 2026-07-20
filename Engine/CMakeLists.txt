@@ -9,19 +9,20 @@ file(GLOB_RECURSE ENGINE_SOURCES
 )
 
 add_library(Engine STATIC ${ENGINE_SOURCES}
-        Core/Engine/DefaultEngineStartup/engine_startup.cpp
-        Core/Engine/DefaultEngineStartup/engine_startup.hpp
+        Core/Application/EngineStartUp/engine_startup.cpp
+        Core/Application/EngineStartUp/engine_startup.hpp
         Core/Engine/Manager/SystemManager/system_manager.hpp
-        Core/Engine/Manager/SystemManager/i_engine_system.hpp
+        Core/Engine/Manager/SystemManager/EngineSystem.hpp
         Core/Engine/Manager/Systems/Logger/logger_system.cpp
         Core/Engine/Manager/Systems/Logger/logger_system.hpp
         Core/Engine/Manager/Systems/Platform/platform_system.cpp
         Core/Engine/Manager/Systems/Platform/platform_system.hpp
         Core/Engine/Manager/Systems/Result/result_handler.cpp
         Core/Engine/Manager/Systems/Result/result_handler.hpp
-        Core/Engine/Manager/Systems/Result/result.hpp
+        Core/Base/Result/result.hpp
         Core/Engine/Manager/Systems/Result/ResultCodesForCategories/result_code_handler.hpp
-        Core/Engine/Manager/Systems/Result/ResultCodesForCategories/ResultCodes.hpp
+        Core/Base/Result/ResultCodes.hpp
+        Core/Application/Additions/StartUpConfig/start_up_config.hpp
 
 )
 

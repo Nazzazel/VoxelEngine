@@ -6,7 +6,7 @@
 #include <cstdint>
 #include <string_view>
 
-#include "Core/Engine/Manager/Systems/Result/result.hpp"
+#include "../../../../../Base/Result/result.hpp"
 
 namespace engine
 {

@@ -3,22 +3,16 @@
 
 //Engine
 #include "Engine/Assets/AssetManager/asset_manager.hpp"
-#include "Engine/RenderingAPI/Shader/game_shader.hpp"
 #include "Engine/Platform/WindowCreation/window.hpp"
 #include "Engine/RenderingAPI/Renderer/renderer.hpp"
-#include "Engine/Tests/Objects/Triangle/triangle.hpp"
 #include "Engine/Tests/Objects/Rotating Cube/rcube.hpp"
 
 
 
 //DebugTools
-#include "DebugTools/Core/Timer/time_manager.hpp"
 #include "DebugTools/Tools/tool_manager.hpp"
-#include "DebugTools/Tools/ConsoleTool/console_tool.hpp"
-//#include "DebugTools/Core/Logger/logger.hpp"
 
 
-#include "Backends/API/renderer_api.hpp"
 
 //System
 #include <memory>
@@ -27,72 +21,7 @@
 #include <array>
 
 #include "../Engine/Manager/SystemManager/system_manager.hpp"
-
-
-//Aditional namespace for clarity
-//This is used for arg from app using engine
-namespace engine
-{
-    struct EngineConfig
-    {
-        //TODO deal with this like a file read or smg/// For those are Default values
-        //TODO later lol
-    };
-
-    struct WindowConfig
-    {
-        int m_windowWidth;
-        int m_windowHeight;
-        std::string m_title;
-
-        WindowConfig(
-            //---------------------------------------------------------------
-            const  int windowWidth,
-            const  int windowHeight,
-                   std::string title)
-            //---------------------------------------------------------------
-        : m_windowWidth(windowWidth), m_windowHeight(windowHeight), m_title(title) {}
-
-        [[nodiscard]] int GetWindowWidth() const            {return m_windowWidth;}
-        [[nodiscard]] int GetWindowHeight() const           {return m_windowHeight;}
-        [[nodiscard]] std::string& GetTitle()               {return m_title;}
-
-    };
-
-    struct AdditionalParams {
-        const size_t m_memoryBudgetMB = 8000; // Memory size
-        //bool enableVSync;      // Example: Graphics flag
-        const  bool m_debugMode = false;       // Debugging flag
-
-        // AdditionalParams(
-        //     //---------------------------------------------------------------
-        //     size_t memoryBudgetMB = 8000,
-        //     bool debugMode = false)
-        //     //---------------------------------------------------------------
-        // : m_memoryBudgetMB(memoryBudgetMB), m_debugMode(debugMode){}
-
-
-        [[nodiscard]] size_t GetMemoryBudget() const     {return m_memoryBudgetMB;}
-        [[nodiscard]] bool IsDebugModeActive() const    { return m_debugMode; }
-
-    };
-
-    //
-    struct AppSettings {
-        //EngineConfig engine_configuration;
-        WindowConfig m_window_configuration;
-        AdditionalParams m_extra;
-
-        AppSettings(
-            const WindowConfig& window_configuration,
-            const AdditionalParams& extra)
-            : m_window_configuration(window_configuration), m_extra(extra){}
-
-
-        [[nodiscard]] WindowConfig GetWindowConfiguration()   const   {return m_window_configuration;}
-        [[nodiscard]] AdditionalParams GetExtra()             const   {return m_extra;}
-    };
-}
+#include "Additions/StartUpConfig/start_up_config.hpp"
 
 
 namespace engine
@@ -112,7 +41,6 @@ namespace engine
         void Run();
 
         Window& GetWindow() { return *m_MainWindow; }
-
 		AssetManager& GetAssetManager() { return *m_AssetManager; }
 
 

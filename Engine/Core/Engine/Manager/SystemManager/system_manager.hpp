@@ -10,9 +10,9 @@
 
 
 
-#include "i_engine_system.hpp"
-#include "Core/Engine/Manager/Systems/Result/result.hpp"
-#include "Core/Engine/Manager/Systems/Result/ResultCodesForCategories/ResultCodes.hpp"
+#include "EngineSystem.hpp"
+#include "../../../Base/Result/result.hpp"
+#include "Core/Base/Result/ResultCodes.hpp"
 //#include "Core/Engine/Manager/Systems/Logger/logger_system.hpp"
 
 namespace engine

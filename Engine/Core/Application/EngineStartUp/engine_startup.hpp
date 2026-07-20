@@ -5,7 +5,7 @@
 #include <memory>
 
 #include "Core/Engine/Manager/SystemManager/system_manager.hpp"
-#include "Core/Engine/Manager/Systems/Result/result.hpp"
+#include "../../Base/Result/result.hpp"
 
 
 namespace engine
