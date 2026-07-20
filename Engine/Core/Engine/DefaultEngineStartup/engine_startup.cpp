@@ -10,15 +10,17 @@ namespace engine
 {
 
 
-    Result EngineStartup::Init(SystemManager& m_SystemManager)
-    {
+  Result EngineStartup::Init(SystemManager& m_SystemManager)
+  {
 
-        //if (auto res = mgr.RegisterSystem<LoggerSystem>(); !res) return res;
-        //m_SystemManager.RegisterSystem<>();
-       // m_SystemManager.RegisterSystem<engine::LoggerSystem>();
-       // m_SystemManager.RegisterSystem<engine::>();
+      if (auto result = m_SystemManager.RegisterSystem<LoggerSystem>(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
+     // if (auto result = m_SystemManager.RegisterSystem<PlatformSystem>(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
+      //m_SystemManager.RegisterSystem<>();
+     // m_SystemManager.RegisterSystem<engine::LoggerSystem>();
+     // m_SystemManager.RegisterSystem<engine::>();
+      return {};
 
-    }
+  }
 
 
 

@@ -3,12 +3,16 @@
 //
 
 #pragma once
+#include <iomanip>
 #include <memory>
 #include <vector>
+#include <iostream>
+
 
 
 #include "i_engine_system.hpp"
 #include "Core/Engine/Manager/Systems/Result/result.hpp"
+#include "Core/Engine/Manager/Systems/Result/ResultCodesForCategories/ResultCodes.hpp"
 //#include "Core/Engine/Manager/Systems/Logger/logger_system.hpp"
 
 namespace engine
@@ -23,14 +27,19 @@ namespace engine
         template<typename T, typename... Args>
         Result RegisterSystem(Args&&... args)
         {
-               // if (GetSystem<T>()!=nullptr) return ; //The System is already initiated//TODO
+
+                if (GetSystem<T>()!=nullptr) return SYSTEM_RESULT(SystemAlreadyInitialized,Warning); //The System is already initiated//TODO
                 auto system = std::make_unique<T>(std::forward<Args>(args)...);
 
-                Result OnInitResult = system->OnInit();                                 //Calling OnInit every single Registered Instance, so it can correctly set itself up.
-                if (OnInitResult.IsFailure()) return OnInitResult;                      //Exit in first stage
 
                 Result SetSystemManagerResult = system->SetSystemManager(this);
-                if (SetSystemManagerResult.IsFailure()) return SetSystemManagerResult;  //Exit in 2nd stage
+                if (SetSystemManagerResult.IsFailure()  ){ return SetSystemManagerResult;}  //Exit in the first stage
+
+                Result OnInitResult = system->OnInit();                                     //Calling OnInit every single Registered Instance, so it can correctly set itself up.
+                if (OnInitResult.IsFailure()            ) {return OnInitResult;          }  //Exit in the second stage
+
+
+
 
                 //TODO CREATE A ERROR HANDELER FOR SYSTEMS.
                 //TODO MAKE RESULTSD HERE
@@ -41,8 +50,9 @@ namespace engine
         }
 
 
-        void UpdateAll(float dt) const{
-            for (auto& sys : m_Systems) sys->OnUpdate(dt);
+        Result UpdateAll(float dt) const{
+            for (auto& sys : m_Systems){ if (Result result = sys->OnUpdate(dt);result.IsFailure()) return result;}
+            return {};
         }
 
         // I am not implementing the ID CAUSE it is pointless.
@@ -56,13 +66,14 @@ namespace engine
             return nullptr;
         }
 
-        void ShutdownAll()
+        Result ShutdownAll()
         {
             for (auto it = m_Systems.rbegin(); it != m_Systems.rend(); ++it)
             {
                 (*it)->OnShutdown();
             }
             m_Systems.clear(); // All systems (including GL objects) are destroyed safely here
+            return {};
         }
     };
 };

@@ -20,9 +20,7 @@ add_library(Engine STATIC ${ENGINE_SOURCES}
         Core/Engine/Manager/Systems/Result/result_handler.cpp
         Core/Engine/Manager/Systems/Result/result_handler.hpp
         Core/Engine/Manager/Systems/Result/result.hpp
-        Core/Engine/Manager/Systems/Result/ResultCodesForCategories/codes_memory.hpp
         Core/Engine/Manager/Systems/Result/ResultCodesForCategories/result_code_handler.hpp
-        Core/Engine/Manager/Systems/Result/ResultCodesForCategories/codes_general.hpp
         Core/Engine/Manager/Systems/Result/ResultCodesForCategories/ResultCodes.hpp
 
 )

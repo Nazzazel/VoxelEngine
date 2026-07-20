@@ -7,6 +7,8 @@
 #include <format>
 
 
+
+
 namespace engine
 {
     //std::vector<LogMessage> LoggerSystem::m_Messages;
@@ -15,6 +17,10 @@ namespace engine
     {
         //if (!m_Messages.empty()) std::cout << "dddddddddd" << "\n";
        // DT_INFO("LoggerSystem Initiated");
+        //return MEM_ERR(None,Severity::Info)
+        //std::cout << "3" << std::endl;
+       // return MEM_ERR(AllocationFailed,Warning);
+        std::cout << "LOGGER Initialized" << "\n";
         return {};
     }
 
@@ -28,6 +34,7 @@ namespace engine
         for (const auto& msg : m_Messages)
         {
             std::cout << GetFormatedLog(msg) << "\n";
+           // std::cout << GetDetailedFormatedLog(msg) << "\n";
         }
 
         ClearLog();
@@ -68,7 +75,7 @@ namespace engine
 
     std::string LoggerSystem::GetFormatedLog(const LogMessage& log) const
     {
-        std::string log_file_line = std::string(log.m_file) + " : "  + std::to_string(log.m_line);
+       // std::string log_file_line = std::string(log.m_file) + " : "  + std::to_string(log.m_line);
        // std::stringstream log_stream = log.m_file + log.m_file;
 //        std::string translatedMessage = log.
         //return
@@ -79,13 +86,23 @@ namespace engine
 
 
         //Newer Versuioin //TODO test and implement
+        return std::format("[{}] [{}] {}",
+                       log.m_time,
+                       ReturnLogClassString(log.m_level),
+                       log.m_message
+                       );
+
+
+    }
+
+    std::string LoggerSystem::GetDetailedFormatedLog(const LogMessage& log) const
+    {
         return std::format("[{}] [{}] {} FILE/LINE: {} : {}",
                        log.m_time,
                        ReturnLogClassString(log.m_level),
                        log.m_message,
                        log.m_file,
-                       log.m_line);
-
-
+                       log.m_line
+                       );
     }
 } // engine

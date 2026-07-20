@@ -5,6 +5,7 @@
 
 //#include "Engine/DefaultEngineStartup/engine_startup.hpp"
 //#include "Engine/Manager/Systems/Logger/logger_system.hpp"
+#include "Engine/DefaultEngineStartup/engine_startup.hpp"
 #include "Engine/Manager/Systems/Logger/logger_system.hpp"
 #include "Engine/Manager/Systems/Platform/platform_system.hpp"
 //#include <tracy/Tracy.hpp>
@@ -43,8 +44,7 @@ namespace engine
 
 
         m_SystemManager = std::make_unique<engine::SystemManager>();
-
-        m_SystemManager->RegisterSystem<engine::LoggerSystem>();
+        auto r = m_SystemManager->RegisterSystem<engine::LoggerSystem>();
 
 
         //s
@@ -55,18 +55,18 @@ namespace engine
         //uint32_t a = m_SystemManager->RegisterSystem<engine::ddd>();
         //m_SystemManager->RegisterSystem<engine::PlatformSystem>();
 
-        //auto h = m_SystemManager->GetSystem<engine::LoggerSystem>();
-        //h->AddInfo("gggg");
+       // auto h = m_SystemManager->GetSystem<engine::LoggerSystem>();
+       // h->AddInfo("gggg");
         //h->AddInfo("dd");
         //h->AddWarning("gggg");
        // h->AddInfo("gggg");
        // h->AddError("gggg");
 
 
-        //const int result = engine::EngineStartup::Init();//push THE REGISTRY
-       // engine::EngineStartup engine_startup{};
+       // Result result = engine::EngineStartup::Init();//push THE REGISTRY
+        engine::EngineStartup engine_startup{};
+        Result result = engine_startup.Init(*m_SystemManager);
 
-       // engine_startup.Init(*m_SystemManager);
        // auto h = m_SystemManager->GetSystem<engine::LoggerSystem>();
         //h->AddInfo("gggg");
 
@@ -154,7 +154,7 @@ namespace engine
         OnInit();
         //m_SystemManager->GetSystem<engine::LoggerSystem>()->OnInit();
 
-
+        auto k_logger = m_SystemManager->GetSystem<engine::LoggerSystem>();
 
 
         while (m_EngineRunning && !m_MainWindow->ShouldClose())
@@ -205,7 +205,8 @@ namespace engine
 
             for (int key : engine::DebugInput::GetPressedMouseButtons())
             {
-                std::cout << "MouseKey: " << key << "\n";
+                k_logger->AddInfo("MouseKey: ",key);
+                //std::cout << "MouseKey: " << key << "\n";
             }
 //------------------------------------------------------------------------------------------------
             //debugtools::TimerManager::Instance().Stop();

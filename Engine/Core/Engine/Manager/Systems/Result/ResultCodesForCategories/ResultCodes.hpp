@@ -41,17 +41,73 @@ namespace engine
     //The err_code could be both for INFO,ERROR or Warning or any other severity level
     //naming conventin was made due to ussual usecase and avoiding of repetivenes like result_code
     #define ENGINE_RESULT(category, err_code, severity) \
-    ::engine::Result::Create(::engine::ResultCategory::category, err_code, severity, \
+    ::engine::Result::Create(::engine::ResultCategory::category,\
+    static_cast<uint16_t>(err_code),\
+    ::engine::Severity::severity, \
     (static_cast<uint64_t>(__LINE__) | (::engine::Hash(::engine::GetFileName(__FILE__)) << 16)))
 
 
+    //$ ARE PLACES where you need to manuallu scecify the Category and class category on which the err_codes will base the judgment on;
+    //TEMPLATE :: #define _ERR(err_code,     severity) ENGINE_RESULT($ , ::engine::$::Error::err_code, severity)//
+
+    //#define _RESULT(code, sev) ::engine::memory::MemoryErr(code, sev, __LINE__, __FILE__)
+    //FOR First arg("Memory","General") look up result.hpp
+    #define GENERAL_RESULT(         err_code, severity) ENGINE_RESULT(General       , ::engine::general::Error::err_code        , severity)//EXAMPLE GENERAL_ERR(None,Info)
+    #define SYSTEM_RESULT(          err_code, severity) ENGINE_RESULT(System        , ::engine::system::Error::err_code         , severity)//
+    #define PLATFORM_RESULT(        err_code, severity) ENGINE_RESULT(Platform      , ::engine::platform::Error::err_code       , severity)//
+    #define CONFIGURATION_RESULT(   err_code, severity) ENGINE_RESULT(Configuration , ::engine::configuration::Error::err_code   , severity)//
 
 
+    #define MEMORY_RESULT(          err_code, severity) ENGINE_RESULT(Memory        , ::engine::memory::Error::err_code         , severity)//EXAMPLE MEM_ERR(None,1)
 
-    //#define MEM_ERR(code, sev) ::engine::memory::MemoryErr(code, sev, __LINE__, __FILE__)
-    //FOR First arg("Memory") look up result.hpp
-    #define GENERAL_ERR(code, sev)  ENGINE_RESULT(General   , ::engine::general::Error::code  , sev)//EXAMPLE GENERAL_ERR(None,1)
-    #define MEM_ERR(code, sev)      ENGINE_RESULT(Memory    , ::engine::memory::Error::code   , sev)//EXAMPLE MEM_ERR(None,1)
+    //#define MEM_ERR(err_code,     severity) ENGINE_RESULT(Memory , ::engine::memory::Error::err_code, severity)//EXAMPLE MEM_ERR(None,1)
+
+    //engine::Severity::Info;
+
+    namespace general
+    {
+        enum class Error : uint16_t {
+            None = 0,
+            InvalidParameter,
+            NotImplemented,
+            Timeout,
+            OperationFailed
+        };
+    }
+
+    namespace system
+    {
+        enum class Error : uint16_t {
+            None = 0,
+            SystemAlreadyInitialized,
+            DependencyMissing,
+            FailedToInitialize,
+            SystemManagerNotSet,
+            SystemNotFound
+        };
+    }
+    namespace platform
+    {
+        enum class Error : uint16_t {
+            None = 0,
+            LibraryLoadFailed,
+            GraphicsContextCreationFailed,
+            ThreadingError,
+            FileSystemAccessDenied
+
+        };
+    }
+    namespace configuration
+    {
+        enum class Error : uint16_t {
+            None = 0,
+            FileNotFound,
+            ParseError,
+            InvalidValue,
+            MissingRequiredSection
+
+        };
+    }
 
 
 
@@ -59,38 +115,16 @@ namespace engine
     {
         enum class Error : uint16_t {
             None = 0,
-            AllocationFailed,
-            OutOfBounds,
-            AlignmentError,
-            PoolExhausted
-        };
-    }
-    namespace general
-    {
-        enum class Error : uint16_t {
-            None = 0
-
+            AllocationFailed = 1 ,
+            OutOfBounds = 2,
+            AlignmentError = 3,
+            PoolExhausted = 4
         };
     }
 
-}
 
-/*
- *
-* namespace engine::memory {
-    // Local enum for your memory-specific errors
-    enum class Error : uint16_t {
-        None = 0,
-        AllocationFailed,
-        OutOfBounds,
-        AlignmentError,
-        PoolExhausted
-    };
+    //TODO add the rest of the categories
 
-    // Helper: Returns a Memory-category result
-    inline Result MemoryErr(Error code, uint8_t severity, uint16_t line, const char* file) {
-        return Result::Create(static_cast<uint16_t>(code), Category::Memory, severity, line, file);
-    }
+
+
 }
- *
- */

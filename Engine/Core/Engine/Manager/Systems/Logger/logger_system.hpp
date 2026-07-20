@@ -62,6 +62,7 @@ namespace engine
         std::string_view ReturnLogClassString( LogLevel log_level) const;
 
         std::string GetFormatedLog(const LogMessage& log) const;
+        std::string GetDetailedFormatedLog(const LogMessage& log) const;
 
     public:
          ~LoggerSystem() = default;

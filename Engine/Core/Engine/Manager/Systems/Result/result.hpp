@@ -4,36 +4,23 @@
 
 #pragma once
 #include <cstdint>
-#include <string_view>
 
 namespace engine
 {
-    // Every class in your engine inherits or uses a Macro
-    //#define ENGINE_RESULT(code) \
-//::engine::Result::Create(code, ::engine::Category::General, Hash(__FILE__), __LINE__)
-// #define ENGINE_RESULT(cat, code, sev) \
-// ::engine::Result::Create(code, ::engine::ResultCategory::cat, sev, \
-// (static_cast<uint64_t>(__LINE__) | (static_cast<uint64_t>(::engine::Hash(__FILE__)) << 16)))
-
-
-    // constexpr uint32_t Hash(std::string_view s) {
-    //     uint32_t hash = 5381;
-    //     for (char c : s) hash = ((hash << 5) + hash) + c;
-    //     return hash;
-    // }
 
     enum class Severity : uint8_t {
         Info = 0,     // Just for telemetry/tracking
-        Warning = 1,  // Something went wrong, but we have a workaround
-        Error = 2,    // A feature failed, need to report
-        Fatal = 3     // System must abort (crash or terminate)
+        Warning,  // Something went wrong, but we have a workaround
+        Error,    // A feature failed, need to report
+        Fatal     // System must abort (crash or terminate)
     };
+
     // 0 is always Success.
-    // Define specific error ranges or enums if you want, but keep them as uint16_t.
     enum class ResultCategory : uint8_t {
         // --- General ---
         General = 0,
-        System,             // Core OS/Platform abstraction
+        System,                //Menager for systems like LoggerSystem,FileSystem
+        Platform,             // Core OS/Platform abstraction
         Configuration,      // Config file/Startup settings
 
         // --- Hardware / Resources ---
@@ -55,13 +42,14 @@ namespace engine
         Profiling,          // Telemetry, instrumentation
         Logging,            // Logger internal errors
 
-        // End of enum (always keep at the end)
+        // End of enum (always keep at the end for iletation purposes)
         Count
     };
 
     struct [[nodiscard]] Result {
         
     private:
+        //Init of packed var
         uint64_t m_packed = 0;
         // Private constructor used by the static creator
         explicit constexpr Result(uint64_t packed) noexcept : m_packed(packed) {}
@@ -72,9 +60,6 @@ namespace engine
         constexpr Result() noexcept : m_packed(0) {}
 
         // Explicit constructor for creating a result
-         // static constexpr Result Create(uint16_t code, ResultCategory cat = ResultCategory::General, uint64_t payload = 0) noexcept {
-         //     return Result((static_cast<uint64_t>(cat) << 16) | code | (payload << 24));
-         // }
         static constexpr Result Create(
                 //64-bit packet structure //CPU register optimize
                 ResultCategory category = ResultCategory::General, //[00-07]     | Size :   8bit -> 0...255     Possible Categories
@@ -84,7 +69,7 @@ namespace engine
         {
             // 1. Mask inputs to ensure they don't overflow their allocated slots
             uint64_t cat_bits = static_cast<uint64_t>(static_cast<uint8_t>(category)) & 0xFF;           // 8 bits
-            uint64_t err_bits = (static_cast<uint64_t>(errorCode) & 0xFFFF) << 8;                       // 16 bits at offset 8
+            uint64_t err_bits = (static_cast<uint64_t>(static_cast<uint8_t>(errorCode)) & 0xFFFF) << 8;                       // 16 bits at offset 8
             uint64_t sev_bits = (static_cast<uint64_t>(static_cast<uint8_t>(severity)) & 0xF) << 24;    // 4 bits at offset 24
             uint64_t pay_bits = (payload & 0xFFFFFFFFFULL) << 28;      // 36 bits at offset 28
 
@@ -101,10 +86,10 @@ namespace engine
         }
 
         // --- Accessors ---
-         [[nodiscard]] constexpr ResultCategory getCategory() const { return static_cast<ResultCategory>(m_packed & 0xFF); }
-         [[nodiscard]] constexpr uint16_t getErrorCode() const { return static_cast<uint16_t>((m_packed >> 8) & 0xFFFF); }
-         [[nodiscard]] constexpr Severity getSeverity() const { return static_cast<Severity>((m_packed >> 24) & 0xF); }
-         [[nodiscard]] constexpr uint64_t getPayload() const { return (m_packed >> 28); }
+         [[nodiscard]] constexpr ResultCategory getCategory()   const noexcept  { return static_cast<ResultCategory>(m_packed & 0xFF); }
+         [[nodiscard]] constexpr uint16_t getErrorCode()        const noexcept  { return static_cast<uint16_t>((m_packed >> 8) & 0xFFFF); }
+         [[nodiscard]] constexpr Severity getSeverity()         const noexcept  { return static_cast<Severity>((m_packed >> 24) & 0xF); }
+         [[nodiscard]] constexpr uint64_t getPayload()          const noexcept  { return (m_packed >> 28); }
 
 
     };
