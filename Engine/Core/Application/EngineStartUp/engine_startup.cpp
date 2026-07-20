@@ -2,7 +2,7 @@
 // Created by nazzazel on 13.07.2026.
 //
 
-#include "engine_startup.hpp"
+#include "../../Engine/DefaultEngineStartup/engine_startup.hpp"
 
 #include "Core/Engine/Manager/Systems/Logger/logger_system.hpp"
 

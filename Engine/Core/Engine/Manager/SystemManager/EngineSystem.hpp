@@ -5,8 +5,7 @@
 #pragma once
 #include <cstdint>
 
-#include "Core/Engine/Manager/Systems/Result/result.hpp"
-#include "Core/Engine/Manager/Systems/Result/ResultCodesForCategories/ResultCodes.hpp"
+#include "Core/Base/Result/ResultCodes.hpp"
 
 //#include "Core/Engine/Manager/Systems/Platform/platform.hpp"
 
