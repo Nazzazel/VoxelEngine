@@ -42,8 +42,6 @@ namespace engine
         virtual ~Application();
 
         void Run();
-
-        IWindow& GetWindow() { return *m_MainWindow; }
 		//AssetManager& GetAssetManager() { return *m_AssetManager; }//TODO
 
 

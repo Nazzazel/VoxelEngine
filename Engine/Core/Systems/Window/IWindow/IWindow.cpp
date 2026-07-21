@@ -7,9 +7,9 @@
 
 namespace engine
 {
-    IWindow* IWindow::Create(const std::string& title, int width, int height, IWindow* shared,SystemManager* m_SystemManager)
+    IWindow* IWindow::Create(const std::string& title, int width, int height, IWindow* shared,SystemManager* system_manager)
     {
-        return new WindowGLFW(title, width, height,shared);
+        return new WindowGLFW(title, width, height,shared,system_manager);
     }
 
 

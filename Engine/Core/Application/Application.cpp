@@ -2,6 +2,8 @@
 #include "Application.hpp"
 #include <GLFW/glfw3.h>
 
+#include "Core/Systems/Window/WindowSystem.hpp"
+
 
 // #include <Platform/Input/Debug/debug_input.hpp>
 //
@@ -37,19 +39,18 @@ namespace engine
 
     Application::~Application()
     {
-        m_SystemManager->ShutdownAll();
-
-        m_MainWindow.reset();
+        Result result = m_SystemManager->ShutdownAll();//TODO / Result here is kinda useless, but I will (propably) do it later
     }
 
 
 
     void Application::Run()
     {
-        auto logger = m_SystemManager->GetSystem<LoggerSystem>();
+        LoggerSystem* logger = m_SystemManager->GetSystem<LoggerSystem>();
+        WindowSystem* window = m_SystemManager->GetSystem<WindowSystem>();
 
         logger->AddInfo("dddd");
-        while (m_EngineRunning && !m_MainWindow->ShouldClose())
+        while (m_EngineRunning && !window->GetWindow()->ShouldClose())
         {
             m_SystemManager->UpdateAll(1);
            // std::cout << "ddddd\n";

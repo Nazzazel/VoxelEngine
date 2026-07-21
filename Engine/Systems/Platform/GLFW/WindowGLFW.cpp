@@ -4,13 +4,14 @@
 
 #include "WindowGLFW.hpp"
 
+#include "Core/Manager/SystemManager.hpp"
 #include "Core/Systems/Platform/PlatformSystem.hpp"
 
 
 namespace engine
 {
-    WindowGLFW::WindowGLFW(const std::string& title, int width, int height, IWindow* shared, SystemManager* m_SystemManager)
-    : m_Window(nullptr), m_Width(width), m_Height(height), m_Title(title), m_SharedWindow(shared)
+    WindowGLFW::WindowGLFW(const std::string& title, int width, int height, IWindow* shared, SystemManager* system_manager)
+    : m_Window(nullptr), m_Width(width), m_Height(height), m_Title(title), m_SharedWindow(shared), m_SystemManager(system_manager)
     {
         std::cout << "gffghfhgfgh\n";
     }
@@ -32,7 +33,7 @@ namespace engine
         m_Window = glfwCreateWindow(m_Width, m_Height, m_Title.c_str(), nullptr, sharedContext);
         if (!m_Window)
         {
-            m_SystemManager->ShutdownAll();
+            if (Result result = m_SystemManager->ShutdownAll();result.IsFailure()){return result;}
             return PLATFORM_RESULT(WindowCreationFailed,Fatal);// do it later  //TODO
             // debugtools::Logger::Log(debugtools::LogLevel::Error, "Failed to create GLFW window");
             //return Result::Failure;

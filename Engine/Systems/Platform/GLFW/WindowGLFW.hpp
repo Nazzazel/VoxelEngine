@@ -15,7 +15,7 @@ namespace engine
     class WindowGLFW : public IWindow
     {
     public:
-        WindowGLFW(const std::string& title, int width, int height, IWindow* shared, SystemManager* m_SystemManager);
+        WindowGLFW(const std::string& title, int width, int height, IWindow* shared, SystemManager* system_manager);
         ~WindowGLFW() override;
 
         // Lifecycle
@@ -51,6 +51,8 @@ namespace engine
 
         int m_Width, m_Height;
         std::string m_Title;
+
+        SystemManager* m_SystemManager;
 
     };
 

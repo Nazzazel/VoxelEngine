@@ -33,7 +33,7 @@ namespace engine
 
 
 
-        const SystemManager* m_SystemManager = nullptr;
+        engine::SystemManager* m_SystemManager = nullptr;
         const LoggerSystem* m_Logger = nullptr;
 
     private:
