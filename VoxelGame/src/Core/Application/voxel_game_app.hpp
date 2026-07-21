@@ -5,7 +5,7 @@
 #pragma once
 
 
-#include "../../../../Engine/Core/Application/application.hpp"
+#include "../../../../Engine/Core/Application/Application.hpp"
 #include "Engine/RenderingAPI/Renderer/renderer.hpp"
 
 #include "DebugTools/Core/Logger/logger.hpp"
@@ -25,13 +25,14 @@ namespace voxelgame
 
         void OnUpdate(float dt) override;
 
-        void OnRender(engine::Renderer& renderer) override;
+        //void OnRender(engine::Renderer& renderer) override;
+        void OnRender() override;
 
         void OnShutdown() override;
 
     private:
 
-        std::unique_ptr<engine::Rot_Cube> m_Rot_Cube;//TODO delete
+        //std::unique_ptr<engine::Rot_Cube> m_Rot_Cube;//TODO delete
 
 
     };

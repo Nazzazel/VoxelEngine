@@ -1,13 +1,9 @@
 //
-// Created by nazzazel on 13.07.2026.
+// Created by nazzazel on 21.07.2026.
 //
 
+
 #pragma once
-#include <cstdint>
-
-#include "Core/Base/Result/ResultCodes.hpp"
-
-//#include "Core/Engine/Manager/Systems/Platform/platform.hpp"
 
 
 namespace engine

@@ -3,8 +3,6 @@
 //
 
 #pragma once
-#include <cstdint>
-
 namespace engine
 {
 
@@ -59,6 +57,7 @@ namespace engine
         // Default constructor is Success
         constexpr Result() noexcept : m_packed(0) {}
 
+        static constexpr Result SUCCESS() {return {};};
         // Explicit constructor for creating a result
         static constexpr Result Create(
                 //64-bit packet structure //CPU register optimize

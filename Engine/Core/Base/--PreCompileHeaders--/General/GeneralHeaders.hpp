@@ -6,8 +6,5 @@
 
 
 // STL
-#include <iostream>
-#include <vector>
-#include <string>
-#include <memory>
-#include <algorithm>
+#include "Std.hpp"
+#include "EngineBaseHeaders.hpp"

@@ -2,11 +2,8 @@
 // Created by nazzazel on 13.07.2026.
 //
 #pragma once
-#include <memory>
 
-#include "Core/Engine/Manager/SystemManager/system_manager.hpp"
-#include "../../Base/Result/result.hpp"
-
+#include "Core/Manager/SystemManager.hpp"
 
 namespace engine
 {

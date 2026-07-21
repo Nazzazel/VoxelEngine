@@ -17,10 +17,10 @@ namespace voxelgame
         {
             std::cout << "ffff132424" << std::endl;
 
-            DT_ERROR("lol");
+            DT_ERROR("lol");//TODO first
             // debugtools::Logger::Log(debugtools::LogLevel::Info, "hhhhhhh");
-            m_Rot_Cube = std::make_unique<engine::Rot_Cube>();
-            m_Rot_Cube->Init(GetAssetManager());
+           // m_Rot_Cube = std::make_unique<engine::Rot_Cube>();
+           // m_Rot_Cube->Init(GetAssetManager());
 
         }
 
@@ -50,18 +50,19 @@ namespace voxelgame
 
         }
 
-        void VoxelGameApp::OnRender(engine::Renderer& renderer)
+        //void VoxelGameApp::OnRender(engine::Renderer& renderer)
+        void VoxelGameApp::OnRender()
         {
-            float ab = 3.0f;
+          // float ab = 3.0f;
 
-            m_Rot_Cube->AdditionalData(ab);
-            m_Rot_Cube->Draw(renderer);
-            //std::cout << "ggggg "<< std::endl;
-            //renderer.DrawTriangle(); //TODO remove this later
+          // m_Rot_Cube->AdditionalData(ab);
+          // m_Rot_Cube->Draw(renderer);
+          // //std::cout << "ggggg "<< std::endl;
+          // //renderer.DrawTriangle(); //TODO remove this later
 
-            // rendering logic (later voxel world)
+          // // rendering logic (later voxel world)
 
-            //renderer.DrawIndexed()
+          // //renderer.DrawIndexed()
 
         }
 

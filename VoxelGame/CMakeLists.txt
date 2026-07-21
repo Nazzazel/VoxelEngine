@@ -5,7 +5,7 @@ add_executable(VoxelGame ${VOXEL_GAME_SOURCES}
         src/Core/camera.cpp
         src/Core/camera.hpp
         ../thirdparty/tracy/public/TracyClient.cpp
-        src/Core/Application/entry_point.cpp
+        src/Core/Application/EntryPoint.cpp
         src/Core/Application/voxel_game_app.cpp
         src/Core/Application/voxel_game_app.hpp
         src/Input/Devices/Keyboard/keyboard.cpp
@@ -24,6 +24,10 @@ target_link_libraries(VoxelGame PRIVATE Engine glad glfw )
 # 2. Add this line to turn on the profiling macros during compilation
 target_compile_definitions(VoxelGame PRIVATE TRACY_ENABLE)
 
-target_precompile_headers(VoxelGame
-        REUSE_FROM Engine
-)
+#target_precompile_headers(VoxelGame
+#        REUSE_FROM Engine
+#)
+#target_precompile_headers(Engine
+#        PUBLIC
+#        ${CMAKE_CURRENT_SOURCE_DIR}/Core/Base/--PreCompileHeaders--/pch.hpp
+#)

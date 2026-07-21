@@ -6,7 +6,7 @@
 #include <cstdint>
 #include <string_view>
 
-#include "result.hpp"
+#include "Result.hpp"
 
 
 namespace engine
@@ -83,7 +83,7 @@ namespace engine
             DependencyMissing,
             FailedToInitialize,
             SystemManagerNotSet,
-            SystemNotFound
+            SystemNotFound,
         };
     }
     namespace platform
@@ -93,8 +93,10 @@ namespace engine
             LibraryLoadFailed,
             GraphicsContextCreationFailed,
             ThreadingError,
-            FileSystemAccessDenied
+            FileSystemAccessDenied,
 
+            //Specific
+            GLFWInitiationFail
         };
     }
     namespace configuration

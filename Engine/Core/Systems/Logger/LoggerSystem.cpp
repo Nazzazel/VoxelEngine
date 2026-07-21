@@ -1,12 +1,8 @@
 //
-// Created by nazzazel on 13.07.2026.
+// Created by nazzazel on 21.07.2026.
 //
 
-#include "logger_system.hpp"
-
-#include <format>
-
-
+#include "LoggerSystem.hpp"
 
 
 namespace engine
@@ -68,6 +64,7 @@ namespace engine
         case LogLevel::WARNING: return  "WARNING";  break;
         case LogLevel::DEBUG:   return  "DEBUG";    break;
         case LogLevel::ERROR:   return  "ERROR";    break;
+        case LogLevel::FATAL:   return  "FATAL";    break;
         case LogLevel::MSG:     return  "MSG";      break;
         }
         return "UNKNOWN";

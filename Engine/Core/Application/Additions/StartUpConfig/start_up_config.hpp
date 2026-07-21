@@ -3,8 +3,9 @@
 //
 
 #pragma once
+#include <utility>
 
-#include <string>
+#include "string"
 
 //Aditional namespace for clarity
 //This is used for arg from app using engine
@@ -29,7 +30,7 @@ namespace engine
             const  int windowHeight,
                    std::string title)
             //---------------------------------------------------------------
-        : m_windowWidth(windowWidth), m_windowHeight(windowHeight), m_title(title) {}
+        : m_windowWidth(windowWidth), m_windowHeight(windowHeight), m_title(std::move(title)) {}
 
         [[nodiscard]] int GetWindowWidth() const            {return m_windowWidth;}
         [[nodiscard]] int GetWindowHeight() const           {return m_windowHeight;}

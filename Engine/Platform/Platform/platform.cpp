@@ -6,9 +6,6 @@ namespace engine
 {
     void Platform::Init()
     {
-        
-		//debugtools::TimerManager::AddTimer("Platform Init Timer");
-
 
 		debugtools::Logger::Log(debugtools::LogLevel::Info,"Platform Init");
 
@@ -50,18 +47,6 @@ namespace engine
         //}
 
         debugtools::Logger::Log(debugtools::LogLevel::Info, "Successfully initialized GLFW");
-
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
-        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-#ifdef _DEBUG
-        glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
-#endif
-
-#ifdef __APPLE__
-        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-#endif
 
         debugtools::Logger::Log(debugtools::LogLevel::Info, "OpenGL context configured");
 

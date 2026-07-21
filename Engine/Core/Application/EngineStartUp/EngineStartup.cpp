@@ -2,9 +2,10 @@
 // Created by nazzazel on 13.07.2026.
 //
 
-#include "engine_startup.hpp"
+#include "EngineStartup.hpp"
+#include "Core/Systems/Logger/LoggerSystem.hpp"
+#include "Core/Systems/Platform/PlatformSystem.hpp"
 
-#include "Core/Engine/Manager/Systems/Logger/logger_system.hpp"
 
 namespace engine
 {
@@ -14,6 +15,9 @@ namespace engine
   {
 
       if (auto result = m_SystemManager.RegisterSystem<LoggerSystem>(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
+      if (auto result = m_SystemManager.RegisterSystem<PlatformSystem>(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
+      std::cout << "3\n";
+
       //if (auto result = m_SystemManager.RegisterSystem<PlatformSystem>(); result.IsFailure()) return result;
 
 
