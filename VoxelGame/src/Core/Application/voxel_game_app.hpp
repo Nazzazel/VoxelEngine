@@ -5,7 +5,7 @@
 #pragma once
 
 
-#include "../../../../Engine/Core/Application/Application.hpp"
+#include "Core/Application/Application.hpp"
 #include "Engine/RenderingAPI/Renderer/renderer.hpp"
 
 #include "DebugTools/Core/Logger/logger.hpp"

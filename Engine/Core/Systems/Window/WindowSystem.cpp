@@ -4,21 +4,22 @@
 
 #include "WindowSystem.hpp"
 
+
+
 namespace engine
 {
 
     Result WindowSystem::OnInit() // Forced
     {
-        m_Window = std::unique_ptr<IWindow>(
-            IWindow::Create( m_Title, m_Width, m_Height, m_WindowType ));
+        m_SystemManager = this->GetSystemManager();
 
-        m_Window->Initialize(); //TODO deal with err code
+        m_Logger = m_SystemManager->GetSystem<LoggerSystem>();
 
-
+            m_Window = std::unique_ptr<IWindow>(IWindow::Create( m_Title, m_Width, m_Height, m_SharedWindow, m_SystemManager ));
+            //TODO deal with err code
+            if (Result result = m_Window->Initialize(); result.IsFailure()) return result;
             return {};
     }
-
-
 
     Result WindowSystem::OnUpdate(float dt)
     {

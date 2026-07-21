@@ -6,10 +6,12 @@
 #pragma once
 #include "Core/Systems/IEngineSystem.hpp"
 #include "IWindow/IWindow.hpp"
+#include "Core/Manager/SystemManager.hpp"
 
 
 namespace engine
 {
+
     class WindowSystem : public IEngineSystem
     {
     public:
@@ -27,10 +29,12 @@ namespace engine
         void PreInitWindowConfig(const std::string& title, int width, int height, IWindow* shared = nullptr);
 
     private:
-
-        const SystemManager* m_SystemManager = nullptr;
         std::unique_ptr<IWindow> m_Window;
 
+
+
+        const SystemManager* m_SystemManager = nullptr;
+        const LoggerSystem* m_Logger = nullptr;
 
     private:
         int m_Width = 0, m_Height = 0;

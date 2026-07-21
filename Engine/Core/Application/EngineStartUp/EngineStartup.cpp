@@ -21,9 +21,9 @@ namespace engine
       if (Result result = m_SystemManager.RegisterSystem<PlatformSystem >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
       if (Result result = m_SystemManager.RegisterSystem<WindowSystem   >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
 
-      backends::RendererAPI::SetAPI(backends::RendererAPIType::OpenGL);
-      m_Renderer = std::unique_ptr<Renderer>(Renderer::Create());
-      m_Renderer->Init();
+     // backends::RendererAPI::SetAPI(backends::RendererAPIType::OpenGL);
+     // m_Renderer = std::unique_ptr<Renderer>(Renderer::Create());
+     // m_Renderer->Init();
       //m_MainWindow->AddResizeListener([this](int w, int h)
 
       //engine::DebugInput::Init(m_MainWindow->GetNativeWindow());
@@ -58,6 +58,10 @@ namespace engine
       //m_SystemManager.RegisterSystem<>();
      // m_SystemManager.RegisterSystem<engine::LoggerSystem>();
      // m_SystemManager.RegisterSystem<engine::>();
+
+       if (Result result = Configure(m_SystemManager, m_Settings); result.IsFailure()){return result;}
+       if (Result result = Initialize(m_SystemManager);               result.IsFailure()){return result;}
+
       return {};
 
   }
@@ -70,11 +74,13 @@ namespace engine
             m_Settings.GetWindowConfiguration().GetWindowWidth(),
             m_Settings.GetWindowConfiguration().GetWindowHeight());
 
+
       return {};
   }
 
   Result EngineStartup::Initialize(SystemManager& m_SystemManager)
   {
+      if (Result result = m_SystemManager.InitialiseAll(); result.IsFailure()){return result;}
       return {};
   }
 } // engine

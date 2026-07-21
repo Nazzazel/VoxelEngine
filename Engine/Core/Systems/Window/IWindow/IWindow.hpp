@@ -12,7 +12,7 @@ namespace engine
     public:
         virtual ~IWindow() = default;
 
-        [[nodiscard]] static IWindow* Create(const std::string& title, int width, int height, IWindow* shared );
+        [[nodiscard]] static IWindow* Create(const std::string& title, int width, int height, IWindow* shared, SystemManager* m_SystemManager);
 
         // Lifecycle
         [[nodiscard]] virtual Result Initialize() = 0;

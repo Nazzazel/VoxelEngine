@@ -28,13 +28,6 @@ namespace engine
         engine::EngineStartup engine_startup{};
         Result result = engine_startup.Init(*m_SystemManager,m_Settings);
 
-        m_MainWindow = std::unique_ptr<IWindow>(
-            IWindow::Create(
-                m_Settings.GetWindowConfiguration().GetTitle(),
-                m_Settings.GetWindowConfiguration().GetWindowWidth(),
-                m_Settings.GetWindowConfiguration().GetWindowHeight()));
-        m_MainWindow->Initialize(); //TODO deal with err code
-
 
 
 

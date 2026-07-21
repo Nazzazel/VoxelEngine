@@ -19,7 +19,6 @@
 //#include "../Engine/Manager/SystemManager/system_manager.hpp"
 #include "Additions/StartUpConfig/start_up_config.hpp"
 #include "Core/Manager/SystemManager.hpp"
-#include "Core/Systems/Platform/IWindow/IWindow.hpp"
 #include "API/renderer_api.hpp"
 #include "EngineStartUp/EngineStartup.hpp"
 

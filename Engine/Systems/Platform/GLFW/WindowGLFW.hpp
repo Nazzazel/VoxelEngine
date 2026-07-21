@@ -3,10 +3,11 @@
 //
 
 #pragma once
-#include "Core/Systems/Platform/IWindow/IWindow.hpp"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include "Core/Systems/Window/IWindow/IWindow.hpp"
+
 
 
 namespace engine
@@ -14,7 +15,7 @@ namespace engine
     class WindowGLFW : public IWindow
     {
     public:
-        WindowGLFW(const std::string& title, int width, int height, IWindow* shared);
+        WindowGLFW(const std::string& title, int width, int height, IWindow* shared, SystemManager* m_SystemManager);
         ~WindowGLFW() override;
 
         // Lifecycle
