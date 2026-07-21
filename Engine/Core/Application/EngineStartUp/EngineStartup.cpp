@@ -3,19 +3,36 @@
 //
 
 #include "EngineStartup.hpp"
+
+#include "Core/Application/Additions/StartUpConfig/start_up_config.hpp"
 #include "Core/Systems/Logger/LoggerSystem.hpp"
 #include "Core/Systems/Platform/PlatformSystem.hpp"
+#include "Core/Systems/Window/WindowSystem.hpp"
 
 
 namespace engine
 {
 
 
-  Result EngineStartup::Init(SystemManager& m_SystemManager)
+  Result EngineStartup::Init(SystemManager& m_SystemManager, AppSettings& m_Settings )
   {
 
-      if (auto result = m_SystemManager.RegisterSystem<LoggerSystem>(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
-      if (auto result = m_SystemManager.RegisterSystem<PlatformSystem>(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
+      if (Result result = m_SystemManager.RegisterSystem<LoggerSystem   >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
+      if (Result result = m_SystemManager.RegisterSystem<PlatformSystem >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
+      if (Result result = m_SystemManager.RegisterSystem<WindowSystem   >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
+
+      backends::RendererAPI::SetAPI(backends::RendererAPIType::OpenGL);
+      m_Renderer = std::unique_ptr<Renderer>(Renderer::Create());
+      m_Renderer->Init();
+      //m_MainWindow->AddResizeListener([this](int w, int h)
+
+      //engine::DebugInput::Init(m_MainWindow->GetNativeWindow());
+      /// engine::DebugInput::Init(m_MainWindow->GetNativeWindow()); //KEY HANDLER
+      ///
+      /// todo 3 m_AssetManager->GetShaderManager().Add(engine::ShaderTypeID::Basic);
+      ///
+      /// //         //m_Rot_Cube = std::make_unique<Rot_Cube>();
+      //         //m_Rot_Cube->Init(*m_AssetManager);
       std::cout << "3\n";
 
       //if (auto result = m_SystemManager.RegisterSystem<PlatformSystem>(); result.IsFailure()) return result;
@@ -45,6 +62,19 @@ namespace engine
 
   }
 
+  Result EngineStartup::Configure(SystemManager& m_SystemManager,AppSettings& m_Settings)
+  {
+      // Configuraten of the system mainly passing or pre Init apply of settings
+      auto window = m_SystemManager.GetSystem<WindowSystem>(); window->PreInitWindowConfig(
+            m_Settings.GetWindowConfiguration().GetTitle(),
+            m_Settings.GetWindowConfiguration().GetWindowWidth(),
+            m_Settings.GetWindowConfiguration().GetWindowHeight());
 
+      return {};
+  }
 
+  Result EngineStartup::Initialize(SystemManager& m_SystemManager)
+  {
+      return {};
+  }
 } // engine

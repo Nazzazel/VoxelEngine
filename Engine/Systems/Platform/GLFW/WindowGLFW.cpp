@@ -4,7 +4,7 @@
 
 #include "WindowGLFW.hpp"
 
-#include "Platform/Platform/platform.hpp"
+#include "Core/Systems/Platform/PlatformSystem.hpp"
 
 
 namespace engine
@@ -32,8 +32,9 @@ namespace engine
         m_Window = glfwCreateWindow(m_Width, m_Height, m_Title.c_str(), nullptr, sharedContext);
         if (!m_Window)
         {
-            engine::Platform::Shutdown();
-            return {};// do it later  //TODO
+
+            return PLATFORM_RESULT(WindowCreationFailed,Fatal);// do it later  //TODO
+            m_SystemManager->ShutdownAll();
             // debugtools::Logger::Log(debugtools::LogLevel::Error, "Failed to create GLFW window");
             //return Result::Failure;
         }

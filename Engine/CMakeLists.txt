@@ -15,7 +15,7 @@ add_library(Engine STATIC ${ENGINE_SOURCES}
         Core/Base/Result/Result.hpp
         Core/Base/Result/ResultCodes.hpp
         Core/Application/Additions/StartUpConfig/start_up_config.hpp
-        Core/Platform/IWindow/IWindow.hpp
+        Core/Systems/Window/IWindow/IWindow.hpp
         Core/Platform/IInput.hpp
         Core/Platform/PlatformTypes.hpp
         Systems/Platform/GLFW/WindowGLFW.cpp
@@ -35,7 +35,9 @@ add_library(Engine STATIC ${ENGINE_SOURCES}
         Core/Systems/Logger/LoggerSystem.hpp
         Core/Systems/IEngineSystem.hpp
         Core/Systems/Platform/PlatformSystem.cpp
-        Core/Platform/IWindow/IWindow.cpp
+        Core/Systems/Window/IWindow/IWindow.cpp
+        Core/Systems/Window/WindowSystem.cpp
+        Core/Systems/Window/WindowSystem.hpp
 
 )
 

@@ -5,7 +5,6 @@
 
 #include "Core/Manager/SystemManager.hpp"
 #include "GLFW/glfw3.h"
-#include "Platform/Platform/platform.hpp"
 
 namespace engine
 {
@@ -22,9 +21,13 @@ namespace engine
 
         m_Logger->AddInfo("Platform Initiation ");
 
-        GLFWCheck();
 
-        HintSetup
+        if (Result result = GLFWCheck(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
+        m_Logger->AddInfo("Checked GLFW");
+        if (Result result = HintSetup(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
+        m_Logger->AddInfo("Setup GLFW Hint");
+
+
         // m_LoggerSystemPtr = m_SystemManager->GetSystem<engine::LoggerSystem>();
         // if (!m_LoggerSystemPtr)
         // {
@@ -80,9 +83,6 @@ namespace engine
         return Result::SUCCESS();
     }
 
-    //const LoggerSystem* PlatformSystem::GetLogger() const
-    //{
-    //    return m_LoggerSystemPtr;
-    //};
+
 
 } // engine

@@ -47,12 +47,12 @@ namespace engine
        //template <typename... Args> void AddDebug       (Args&&... args)    const  {LogMessage("11:12:14",LogLevel::DEBUG   ,std::forward<Args>(args)...,__FILE__,__LINE__);}
        //template <typename... Args> void AddMsg         (Args&&... args)    const  {LogMessage("11:12:14",LogLevel::MSG     ,std::forward<Args>(args)...,__FILE__,__LINE__);}
 
-       template <typename... Args> void AddInfo        (Args&&... args)    const   {m_Messages.emplace_back(LogMessage("11:12:14",LogLevel::INFO       ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__));}
-       template <typename... Args> void AddWarning     (Args&&... args)    const   {m_Messages.emplace_back(LogMessage("11:12:14",LogLevel::WARNING    ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__));}
-       template <typename... Args> void AddError       (Args&&... args)    const   {m_Messages.emplace_back(LogMessage("11:12:14",LogLevel::ERROR      ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__));}
-       template <typename... Args> void AddFatal       (Args&&... args)    const   {m_Messages.emplace_back(LogMessage("11:12:14",LogLevel::FATAL      ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__));}
-       template <typename... Args> void AddDebug       (Args&&... args)    const   {m_Messages.emplace_back(LogMessage("11:12:14",LogLevel::DEBUG      ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__));}
-       template <typename... Args> void AddMsg         (Args&&... args)    const   {m_Messages.emplace_back(LogMessage("11:12:14",LogLevel::MSG        ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__));}
+       template <typename... Args> void AddInfo        (Args&&... args)    const   {m_Messages.emplace_back("11:12:14",LogLevel::INFO       ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__);}
+       template <typename... Args> void AddWarning     (Args&&... args)    const   {m_Messages.emplace_back("11:12:14",LogLevel::WARNING    ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__);}
+       template <typename... Args> void AddError       (Args&&... args)    const   {m_Messages.emplace_back("11:12:14",LogLevel::ERROR      ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__);}
+       template <typename... Args> void AddFatal       (Args&&... args)    const   {m_Messages.emplace_back("11:12:14",LogLevel::FATAL      ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__);}
+       template <typename... Args> void AddDebug       (Args&&... args)    const   {m_Messages.emplace_back("11:12:14",LogLevel::DEBUG      ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__);}
+       template <typename... Args> void AddMsg         (Args&&... args)    const   {m_Messages.emplace_back("11:12:14",LogLevel::MSG        ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__);}
     private:
 
         std::string_view ReturnLogClassString( LogLevel log_level) const;

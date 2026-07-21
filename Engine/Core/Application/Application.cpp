@@ -26,7 +26,7 @@ namespace engine
        m_SystemManager = std::make_unique<engine::SystemManager>();
 
         engine::EngineStartup engine_startup{};
-        Result result = engine_startup.Init(*m_SystemManager);
+        Result result = engine_startup.Init(*m_SystemManager,m_Settings);
 
         m_MainWindow = std::unique_ptr<IWindow>(
             IWindow::Create(
@@ -43,7 +43,11 @@ namespace engine
      }
 
     Application::~Application()
-    = default;
+    {
+        m_SystemManager->ShutdownAll();
+
+        m_MainWindow.reset();
+    }
 
 
 
@@ -170,7 +174,7 @@ namespace engine
 //
 //
 //
-//         //engine::DebugInput::Init(m_MainWindow->GetNativeWindow());
+      /// engine::DebugInput::Init(m_MainWindow->GetNativeWindow()); //KEY HANDLER
 //
 //
 // 		//todo 3 m_AssetManager->GetShaderManager().Add(engine::ShaderTypeID::Basic);

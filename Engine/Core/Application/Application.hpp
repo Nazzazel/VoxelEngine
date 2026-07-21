@@ -19,7 +19,7 @@
 //#include "../Engine/Manager/SystemManager/system_manager.hpp"
 #include "Additions/StartUpConfig/start_up_config.hpp"
 #include "Core/Manager/SystemManager.hpp"
-#include "Core/Platform/IWindow/IWindow.hpp"
+#include "Core/Systems/Platform/IWindow/IWindow.hpp"
 #include "API/renderer_api.hpp"
 #include "EngineStartUp/EngineStartup.hpp"
 
@@ -66,7 +66,7 @@ namespace engine
         virtual void OnShutdown() {} //TODO
 
     private:
-        std::unique_ptr<IWindow> m_MainWindow;
+
 
         std::unique_ptr<engine::SystemManager> m_SystemManager;
 

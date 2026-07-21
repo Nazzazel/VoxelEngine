@@ -96,7 +96,8 @@ namespace engine
             FileSystemAccessDenied,
 
             //Specific
-            GLFWInitiationFail
+            GLFWInitiationFail,
+            WindowCreationFailed,
         };
     }
     namespace configuration

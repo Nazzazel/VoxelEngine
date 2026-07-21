@@ -3,7 +3,7 @@
 //
 
 #pragma once
-#include "../../../Core/Platform/IWindow/IWindow.hpp"
+#include "Core/Systems/Platform/IWindow/IWindow.hpp"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>

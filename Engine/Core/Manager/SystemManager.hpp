@@ -24,8 +24,10 @@ namespace engine
                     Result SetSystemManagerResult = system->SetSystemManager(this);
                     if (SetSystemManagerResult.IsFailure()  ){ return SetSystemManagerResult;}  //Exit in the first stage
 
-                    Result OnInitResult = system->OnInit();                                     //Calling OnInit every single Registered Instance, so it can correctly set itself up.
-                    if (OnInitResult.IsFailure()            ) {return OnInitResult;          }  //Exit in the second stage
+                    m_Systems.push_back(std::move(system));
+
+                    // Result OnInitResult = system->OnInit();                                     //Calling OnInit every single Registered Instance, so it can correctly set itself up.
+                    // if (OnInitResult.IsFailure()            ) {return OnInitResult;          }  //Exit in the second stage
 
 
 
@@ -33,15 +35,29 @@ namespace engine
                     //TODO CREATE A ERROR HANDELER FOR SYSTEMS.
                     //TODO MAKE RESULTSD HERE
 
-                    m_Systems.push_back(std::move(system));
+
 
                 return {};
             }
 
 
+            Result InitialiseAll() const{
+                for (auto& sys : m_Systems){ if (Result result = sys->OnInit();result.IsFailure()) return result;}
+                return {};
+            }
+
             Result UpdateAll(float dt) const{
                 for (auto& sys : m_Systems){ if (Result result = sys->OnUpdate(dt);result.IsFailure()) return result;}
                 return {};
+            }
+
+            template<typename T>
+            T* GetSystem()
+            {
+                for (auto& sys : m_Systems) {
+                    if (auto ptr = dynamic_cast<T*>(sys.get())) return ptr;
+                }
+                return nullptr;
             }
 
             // I am not implementing the ID CAUSE it is pointless.

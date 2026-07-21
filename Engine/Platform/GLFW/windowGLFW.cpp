@@ -1,6 +1,5 @@
 #include "Engine/Platform/GLFW/windowGLFW.hpp"
 
-#include "Engine/Platform/Platform/platform.hpp"
 
 #include "DebugTools/Core/Logger/logger.hpp"
 #include <iostream>

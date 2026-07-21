@@ -7,12 +7,19 @@
 
 namespace engine
 {
+    struct AppSettings;
+
     class EngineStartup
     {
         public:
-        Result Init(SystemManager& m_SystemManager);
+        Result Init(SystemManager& m_SystemManager, AppSettings& m_Settings);
 
     private:
+        //CONFIG
+        Result Configure(SystemManager& m_SystemManager, AppSettings& m_Settings);
+        //INITIALIZATION
+        Result Initialize(SystemManager& m_SystemManager);
+
     };
 } // engine
 
