@@ -3,7 +3,7 @@
 
 
 //#include "Engine/Renderer/API/shader.hpp"
-#include "Engine/RenderingAPI/Shader/game_shader.hpp"
+#include "Core/Systems/Assets/Shaders/IShader.hpp"
 
 
 namespace backends
@@ -12,7 +12,7 @@ namespace backends
 
 
 	class OpenGLShader
-		: public engine::GameShader
+		: public engine::IShader
 	{
 	public:
 		OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc);

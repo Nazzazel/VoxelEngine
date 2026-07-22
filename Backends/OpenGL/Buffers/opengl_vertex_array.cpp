@@ -1,6 +1,6 @@
 #include "opengl_vertex_array.hpp"
-#include "Engine/RenderingAPI/Buffers/vertex_buffer.hpp"
-#include "Engine/RenderingAPI/Buffers/buffer_layout.hpp"
+#include "Engine/Renderer/Buffers/vertex_buffer.hpp"
+#include "Engine/Renderer/Buffers/buffer_layout.hpp"
 #include <glad/glad.h>
 
 #include "Backends/OpenGL/Debug/GLScope.hpp"

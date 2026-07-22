@@ -1,6 +1,6 @@
 #pragma once
-#include "Engine/RenderingAPI/Buffers/vertex_array.hpp"
-#include "Engine/RenderingAPI/Buffers/index_buffer.hpp"
+#include "Engine/Renderer/Buffers/vertex_array.hpp"
+#include "Engine/Renderer/Buffers/index_buffer.hpp"
 
 #include <vector>
 

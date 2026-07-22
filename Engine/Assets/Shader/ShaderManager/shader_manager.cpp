@@ -32,7 +32,7 @@ namespace engine
 		
 		std::string basePath = m_provider.GetAssetRoot() + "Engine/Res/Assets/Shaders/";//TODO change later
 
-		std::unique_ptr<engine::GameShader> shader;
+		std::unique_ptr<engine::IShader> shader;
 
 		switch (api)
 		{
@@ -45,7 +45,7 @@ namespace engine
 				"/";
 
 
-			shader = engine::GameShader::Create(
+			shader = engine::IShader::Create(
 					m_shader_loader.OpenGLShaderLoader(basePath + "vert.shader"),
 					m_shader_loader.OpenGLShaderLoader(basePath + "frag.shader")
 				);
@@ -80,7 +80,7 @@ namespace engine
 
 	}
 
-	GameShader* ShaderManager::Get(ShaderTypeID type)
+	IShader* ShaderManager::Get(ShaderTypeID type)
 	{
 		auto it = m_Shaders.find(type);
 		return (it != m_Shaders.end()) ? it->second.get() : nullptr;

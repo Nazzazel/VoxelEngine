@@ -1,10 +1,10 @@
 #pragma once
 #include "Engine/Assets/AssetManager/asset_manager.hpp"
 #include "../../../Core/Systems/Renderer/IRenderer/IRenderer.hpp"
-#include "Engine/RenderingAPI/Shader/game_shader.hpp"
-#include "Engine/RenderingAPI/Buffers/vertex_array.hpp"
-#include "Engine/RenderingAPI/Buffers/vertex_buffer.hpp"
-#include "Engine/RenderingAPI/Buffers/index_buffer.hpp"
+#include "../../../Core/Systems/Assets/Shaders/IShader.hpp"
+#include "Engine/Renderer/Buffers/vertex_array.hpp"
+#include "Engine/Renderer/Buffers/vertex_buffer.hpp"
+#include "Engine/Renderer/Buffers/index_buffer.hpp"
 
 namespace engine
 {
@@ -31,7 +31,7 @@ namespace engine
 		//std::unique_ptr<VertexBuffer> m_vbo;
 		//std::unique_ptr<IndexBuffer>  m_ibo;
 
-		engine::GameShader* m_shader = nullptr;
+		engine::IShader* m_shader = nullptr;
 
 		//ERASE LATER
 		int location;

@@ -25,7 +25,12 @@ namespace engine
       if (Result result = m_SystemManager.RegisterSystem<PlatformSystem >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
       if (Result result = m_SystemManager.RegisterSystem<WindowSystem   >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
       if (Result result = m_SystemManager.RegisterSystem<RendererSystem >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
-      //if (Result result = m_SystemManager.RegisterSystem<RendererSystem >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
+      //if (Result result = m_SystemManager.RegisterSystem<AssetSystem >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
+
+
+
+      //Unique Game stuff
+      //if (Result result = m_SystemManager.RegisterSystem<WorldSystem >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
 
 
 

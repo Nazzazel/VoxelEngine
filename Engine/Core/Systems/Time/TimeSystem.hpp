@@ -18,12 +18,22 @@ namespace engine
         Result OnUpdate(float dt) override;
         Result OnShutdown() override;
 
-        std::string CurrentTime() const;
-        float GetDeltaTime();
+        [[nodiscard]] std::string CurrentTime() const;
+        [[nodiscard]] float GetDeltaTime();
 
+        [[nodiscard]] std::string CurrentTimestamp() const; // e.g., "12:30:45.123"
+        [[nodiscard]] double GetTime() const;               // Total seconds since startup
 
+        [[nodiscard]] float GetFPS() const;
 
 
     private:
+        float m_DeltaTime = 0.0f;
+
+        std::chrono::steady_clock::time_point m_StartTime;
+
+        mutable float m_FPS = 0.0f;
+        mutable float m_FrameCountTimer = 0.0f;
+        mutable int m_FrameCount = 0;
     };
 } // engine

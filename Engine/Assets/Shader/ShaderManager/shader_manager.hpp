@@ -3,9 +3,9 @@
 //#include <unordered_map>
 //#include "Engine/Renderer/API/shader.hpp"
 #include "Engine/Assets/AssetManager/Interfaces/IAssetProvider.h"
-#include "Engine/Assets/Shader/ShaderManager/Core/ShaderTypeID.h"
+#include "../ShaderTypeID.h"
 #include "Engine/Assets/Shader/Load/shader_loader.hpp"
-#include "Engine/RenderingAPI/Shader/game_shader.hpp"
+#include "../../../Core/Systems/Assets/Shaders/IShader.hpp"
 
 #include <string>
 #include <unordered_map>
@@ -26,7 +26,7 @@ namespace engine
 
 
 		void Add(ShaderTypeID type);
-		GameShader* Get(ShaderTypeID type);
+		IShader* Get(ShaderTypeID type);
 		//MAYBE// shaderLibrary.Add("basic", Shader::Create("basic")); auto shader = shaderLibrary.Get("basic");
 		
 		
@@ -35,7 +35,7 @@ namespace engine
 
 		//static std::string ShaderTypeToString(ShaderTypeID type);
 	private:
-		std::unordered_map<ShaderTypeID, std::unique_ptr<GameShader>> m_Shaders;
+		std::unordered_map<ShaderTypeID, std::unique_ptr<IShader>> m_Shaders;
 
 		IAssetProvider& m_provider;
 

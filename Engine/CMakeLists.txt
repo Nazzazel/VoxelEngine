@@ -42,7 +42,11 @@ add_library(Engine STATIC ${ENGINE_SOURCES}
         Core/Systems/Systems.hpp
         Core/Systems/Renderer/RendererSystem.cpp
         Core/Systems/Renderer/RendererSystem.hpp
-
+        Core/Systems/Assets/AssetSystem.cpp
+        Core/Systems/Assets/AssetSystem.hpp
+        Core/Systems/Assets/Shaders/ShaderManager.cpp
+        Core/Systems/Assets/Shaders/ShaderManager.hpp
+        Core/Systems/Assets/Shaders/Specialized/IComputeShader.hpp
 
 
 )
