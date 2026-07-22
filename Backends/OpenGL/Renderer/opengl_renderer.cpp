@@ -11,7 +11,6 @@
 
 
 //DebugTools
-#include "DebugTools/Core/Logger/logger.hpp"
 #include "Backends/OpenGL/Debug/GLScope.hpp"
 
 
@@ -36,7 +35,7 @@ static void APIENTRY OpenGLDebugCallback(
 
     std::string msg = "[OpenGL][" + severityStr + "] " + message;
 
-    debugtools::Logger::Log(debugtools::LogLevel::Error, msg);
+    //TODO DEAL WITH THIS //TODO DEAL WITH THIS debugtools::Logger::Log(debugtools::LogLevel::Error, msg);
 
     
     if (severity == GL_DEBUG_SEVERITY_HIGH)
@@ -52,7 +51,7 @@ namespace backends
 
     OpenGLRenderer::OpenGLRenderer()
     {
-		debugtools::Logger::Log(debugtools::LogLevel::Info, "OpenGL Renderer Created");
+		//TODO DEAL WITH THIS //TODO DEAL WITH THIS debugtools::Logger::Log(debugtools::LogLevel::Info, "OpenGL Renderer Created");
         int nrAttributes;
         glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
         std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes << std::endl;
@@ -61,12 +60,11 @@ namespace backends
     OpenGLRenderer::~OpenGLRenderer()
     {
         
-        debugtools::Logger::Log(debugtools::LogLevel::Info, "OpenGL Renderer Destroyed");
+        //TODO DEAL WITH THIS //TODO DEAL WITH THIS debugtools::Logger::Log(debugtools::LogLevel::Info, "OpenGL Renderer Destroyed");
     }
 
-    bool OpenGLRenderer::Init()
+    engine::Result OpenGLRenderer::Init()
     {
-        
         if (!glfwGetCurrentContext())
         {
             throw std::runtime_error("OpenGL context not available!");
@@ -154,7 +152,7 @@ namespace backends
 
 
 
-        return true;
+        return {};
     }
     
     void OpenGLRenderer::BeginFrame()

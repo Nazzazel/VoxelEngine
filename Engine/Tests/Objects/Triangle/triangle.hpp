@@ -1,6 +1,6 @@
 #pragma once
 #include "Engine/Assets/AssetManager/asset_manager.hpp"
-#include "Engine/RenderingAPI/Renderer/renderer.hpp"
+#include "../../../Core/Systems/Renderer/IRenderer/IRenderer.hpp"
 #include "Engine/RenderingAPI/Shader/game_shader.hpp"
 #include "Engine/RenderingAPI/Buffers/vertex_array.hpp"
 #include "Engine/RenderingAPI/Buffers/vertex_buffer.hpp"
@@ -8,7 +8,7 @@
 
 namespace engine
 {
-	class Renderer;
+	class IRenderer;
 	class AssetManager;
 	class VertexBuffer;
 	class IndexBuffer;
@@ -23,7 +23,7 @@ namespace engine
 		
 		void Init(AssetManager& assets);
 
-		void Draw(Renderer& renderer);
+		void Draw(IRenderer& renderer);
 
 
 	private:

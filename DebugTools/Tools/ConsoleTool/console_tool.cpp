@@ -1,5 +1,4 @@
 #include "console_tool.hpp"
-#include "Core/Logger/logger.hpp"
 //#include "Engine/Core/Base/--Pre"
 
 // UI is abstract (you define later)

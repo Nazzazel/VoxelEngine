@@ -2,7 +2,7 @@
 // Created by nazzazel on 13.07.2026.
 //
 
-#include "voxel_game_app.hpp"
+#include "VoxelGameApp.hpp"
 
 namespace voxelgame
 {
@@ -11,23 +11,21 @@ namespace voxelgame
         VoxelGameApp::VoxelGameApp(const engine::AppSettings& settings)
                 : Application(settings){}
 
-
-
-        void VoxelGameApp::OnInit()
+        void VoxelGameApp::OnInit(engine::IAppInterface* engine)
         {
-            std::cout << "ffff132424" << std::endl;
+            //std::cout << "ffff132424" << std::endl;
 
-            DT_ERROR("lol");//TODO first
-            // debugtools::Logger::Log(debugtools::LogLevel::Info, "hhhhhhh");
+            //DT_ERROR("lol");//TODO first
+            // //TODO DEAL WITH THIS debugtools::Logger::Log(debugtools::LogLevel::Info, "hhhhhhh");
            // m_Rot_Cube = std::make_unique<engine::Rot_Cube>();
            // m_Rot_Cube->Init(GetAssetManager());
 
         }
 
-        void VoxelGameApp::OnUpdate(float dt)
+        void VoxelGameApp::OnUpdate(engine::IAppInterface* engine)
         {
-
-            // debugtools::Logger::Log(debugtools::LogLevel::Info, "DDDDDD");
+            engine->GetLoggerSystem()->AddInfo("lol engine");
+            // //TODO DEAL WITH THIS debugtools::Logger::Log(debugtools::LogLevel::Info, "DDDDDD");
             //auto shader = GetAssetManager().GetShaderManager().Get(engine::ShaderTypeID::Basic); //TODO remove this later
             //shader->Bind(); //TODO remove this later
 
@@ -38,7 +36,7 @@ namespace voxelgame
             //float fps = (dt > 0.0f) ? (1.0f / dt) : 0.0f;
             //float msPerFrame = dt * 1000.0f;
 
-            //debugtools::Logger::Log(debugtools::LogLevel::Info,
+            ////TODO DEAL WITH THIS debugtools::Logger::Log(debugtools::LogLevel::Info,
             //    "   dt:     " + std::to_string(dt) +
             //    " | fps:    " + std::to_string(fpsSmoothed) +
             //    " | ms:     " + std::to_string(msPerFrame)
@@ -68,7 +66,6 @@ namespace voxelgame
 
         void VoxelGameApp::OnShutdown()
         {
-            DT_INFO("Voxel Game Shutting down");
             std::cout << "exittttttttttttttttt" << std::endl;
         }
 } // voxelgame

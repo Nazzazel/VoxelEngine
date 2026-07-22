@@ -90,7 +90,7 @@ namespace engine
 
     }
 
-    void Triangle::Draw(Renderer& renderer)
+    void Triangle::Draw(IRenderer& renderer)
     {
         m_shader->Bind();
 

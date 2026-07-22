@@ -27,7 +27,7 @@ static bool GLLogCall(const char* function, const char* file, int line)
 {
     while (GLenum error = glGetError())
     {
-        debugtools::Logger::Log(debugtools::LogLevel::Error,
+        //TODO DEAL WITH THIS //TODO DEAL WITH THIS debugtools::Logger::Log(debugtools::LogLevel::Error,
             "[OpenGL Error] (" + std::to_string(error) +
             ") | Function -> " + function +
             " | File -> " + file +

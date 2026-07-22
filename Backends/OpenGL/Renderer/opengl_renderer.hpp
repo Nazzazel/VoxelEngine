@@ -1,19 +1,20 @@
 #pragma once
-#include "Engine/RenderingAPI/Renderer/renderer.hpp"
-#include "Engine/RenderingAPI/Buffers/vertex_array.hpp"
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "Core/Systems/Renderer/IRenderer/IRenderer.hpp"
+
 namespace backends
 {
-    class OpenGLRenderer : public engine::Renderer
+    class OpenGLRenderer : public engine::IRenderer
     {
     public:
         OpenGLRenderer();
         ~OpenGLRenderer();
 
-        bool Init() override;
+        engine::Result Init() override;
         void BeginFrame() override;
         void EndFrame() override;
 

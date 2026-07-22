@@ -7,6 +7,7 @@
 #include "Core/Systems/IEngineSystem.hpp"
 #include "IWindow/IWindow.hpp"
 #include "Core/Manager/SystemManager.hpp"
+#include "Core/Systems/Logger/LoggerSystem.hpp"
 
 
 namespace engine

@@ -7,7 +7,10 @@
 #include "Core/Application/Additions/StartUpConfig/start_up_config.hpp"
 #include "Core/Systems/Logger/LoggerSystem.hpp"
 #include "Core/Systems/Platform/PlatformSystem.hpp"
+#include "Core/Systems/Renderer/RendererSystem.hpp"
+#include "Core/Systems/Time/TimeSystem.hpp"
 #include "Core/Systems/Window/WindowSystem.hpp"
+#include "../../Systems/Renderer/IRenderer/IRenderer.hpp"
 
 
 namespace engine
@@ -17,11 +20,15 @@ namespace engine
   Result EngineStartup::Init(SystemManager& m_SystemManager, AppSettings& m_Settings )
   {
 
+      if (Result result = m_SystemManager.RegisterSystem<TimeSystem     >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
       if (Result result = m_SystemManager.RegisterSystem<LoggerSystem   >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
       if (Result result = m_SystemManager.RegisterSystem<PlatformSystem >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
       if (Result result = m_SystemManager.RegisterSystem<WindowSystem   >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
+      if (Result result = m_SystemManager.RegisterSystem<RendererSystem >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
+      //if (Result result = m_SystemManager.RegisterSystem<RendererSystem >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
 
-     // backends::RendererAPI::SetAPI(backends::RendererAPIType::OpenGL);
+
+
      // m_Renderer = std::unique_ptr<Renderer>(Renderer::Create());
      // m_Renderer->Init();
       //m_MainWindow->AddResizeListener([this](int w, int h)
@@ -33,7 +40,6 @@ namespace engine
       ///
       /// //         //m_Rot_Cube = std::make_unique<Rot_Cube>();
       //         //m_Rot_Cube->Init(*m_AssetManager);
-      std::cout << "3\n";
 
       //if (auto result = m_SystemManager.RegisterSystem<PlatformSystem>(); result.IsFailure()) return result;
 

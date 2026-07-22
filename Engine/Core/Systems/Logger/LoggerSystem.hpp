@@ -5,6 +5,8 @@
 
 #pragma once
 #include "Core/Systems/IEngineSystem.hpp"
+#include "Core/Systems/Time/TimeSystem.hpp"
+#include "Core/Manager/SystemManager.hpp"
 
 namespace engine
 {
@@ -32,7 +34,6 @@ namespace engine
         : m_time(time), m_level(level), m_message(message), m_file(file), m_line(line) {}
     };
 
-
  class LoggerSystem : public IEngineSystem {
     public:
        // template <typename... Args> void AddInfo    (Args&&... args)    const  {LogToConsole(LogLevel::INFO,       std::forward<Args>(args)...);}
@@ -47,12 +48,12 @@ namespace engine
        //template <typename... Args> void AddDebug       (Args&&... args)    const  {LogMessage("11:12:14",LogLevel::DEBUG   ,std::forward<Args>(args)...,__FILE__,__LINE__);}
        //template <typename... Args> void AddMsg         (Args&&... args)    const  {LogMessage("11:12:14",LogLevel::MSG     ,std::forward<Args>(args)...,__FILE__,__LINE__);}
 
-       template <typename... Args> void AddInfo        (Args&&... args)    const   {m_Messages.emplace_back("11:12:14",LogLevel::INFO       ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__);}
-       template <typename... Args> void AddWarning     (Args&&... args)    const   {m_Messages.emplace_back("11:12:14",LogLevel::WARNING    ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__);}
-       template <typename... Args> void AddError       (Args&&... args)    const   {m_Messages.emplace_back("11:12:14",LogLevel::ERROR      ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__);}
-       template <typename... Args> void AddFatal       (Args&&... args)    const   {m_Messages.emplace_back("11:12:14",LogLevel::FATAL      ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__);}
-       template <typename... Args> void AddDebug       (Args&&... args)    const   {m_Messages.emplace_back("11:12:14",LogLevel::DEBUG      ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__);}
-       template <typename... Args> void AddMsg         (Args&&... args)    const   {m_Messages.emplace_back("11:12:14",LogLevel::MSG        ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__);}
+       template <typename... Args> void AddInfo        (Args&&... args)    const   {m_Messages.emplace_back(m_Timer->CurrentTime(),LogLevel::INFO       ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__);}
+       template <typename... Args> void AddWarning     (Args&&... args)    const   {m_Messages.emplace_back(m_Timer->CurrentTime(),LogLevel::WARNING    ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__);}
+       template <typename... Args> void AddError       (Args&&... args)    const   {m_Messages.emplace_back(m_Timer->CurrentTime(),LogLevel::ERROR      ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__);}
+       template <typename... Args> void AddFatal       (Args&&... args)    const   {m_Messages.emplace_back(m_Timer->CurrentTime(),LogLevel::FATAL      ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__);}
+       template <typename... Args> void AddDebug       (Args&&... args)    const   {m_Messages.emplace_back(m_Timer->CurrentTime(),LogLevel::DEBUG      ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__);}
+       template <typename... Args> void AddMsg         (Args&&... args)    const   {m_Messages.emplace_back(m_Timer->CurrentTime(),LogLevel::MSG        ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__);}
     private:
 
         std::string_view ReturnLogClassString( LogLevel log_level) const;
@@ -84,6 +85,8 @@ namespace engine
 
          mutable std::vector<LogMessage> m_Messages;
 
+        const SystemManager* m_SystemManager = nullptr;
+        const TimeSystem* m_Timer = nullptr;
      };
 
 }

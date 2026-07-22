@@ -5,29 +5,29 @@
 #include <string>
 #include <chrono>
 
-namespace debugtools
-{
-    class Timer
-    {
-    public:
-        explicit Timer(const std::string& id);
-
-        void Start();
-        void Stop();
-        void Reset();
-
-        long long ElapsedMs() const;
-        const std::string& GetId() const;
-
-    private:
-        std::string m_Id;
-
-        std::chrono::steady_clock::time_point m_StartTime;
-        std::chrono::steady_clock::time_point m_EndTime;
-
-        bool m_Running = false;
-    };
-}
+// namespace debugtools
+// {
+//     class Timer
+//     {
+//     public:
+//         explicit Timer(const std::string& id);
+//
+//         void Start();
+//         void Stop();
+//         void Reset();
+//
+//         long long ElapsedMs() const;
+//         const std::string& GetId() const;
+//
+//     private:
+//         std::string m_Id;
+//
+//         std::chrono::steady_clock::time_point m_StartTime;
+//         std::chrono::steady_clock::time_point m_EndTime;
+//
+//         bool m_Running = false;
+//     };
+// }
 
 
 

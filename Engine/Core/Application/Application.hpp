@@ -19,12 +19,13 @@
 //#include "../Engine/Manager/SystemManager/system_manager.hpp"
 #include "Additions/StartUpConfig/start_up_config.hpp"
 #include "Core/Manager/SystemManager.hpp"
-#include "API/renderer_api.hpp"
+#include "API/RendererApi.hpp"
 #include "EngineStartUp/EngineStartup.hpp"
 
 //LLLL
+#include "AppInterface/IAppInterface.hpp"
 #include "Core/Systems/Logger/LoggerSystem.hpp"
-#include "RenderingAPI/Renderer/renderer.hpp"
+#include "../Systems/Renderer/IRenderer/IRenderer.hpp"
 
 
 namespace engine
@@ -56,8 +57,8 @@ namespace engine
 
     protected:
         // for game-specific logic later
-        virtual void OnInit() {}//TODO
-        virtual void OnUpdate(float dt) {}
+        virtual void OnInit(engine::IAppInterface* engine) {}//TODO
+        virtual void OnUpdate(IAppInterface* engine) {}
        // virtual void OnRender(Renderer& m_Renderer) {}
         virtual void OnRender() {}
         virtual void OnShutdown() {} //TODO
@@ -67,7 +68,7 @@ namespace engine
 
         std::unique_ptr<engine::SystemManager> m_SystemManager;
 
-        std::unique_ptr<Renderer> m_Renderer;
+
 
 		//IDK if I need this but I will add it later if I do
         //TODO std::unique_ptr<AssetManager> m_AssetManager;

@@ -14,10 +14,14 @@ namespace engine
         m_SystemManager = this->GetSystemManager();
 
         m_Logger = m_SystemManager->GetSystem<LoggerSystem>();
+        m_Logger->AddInfo("Window System Initiation");
 
-            m_Window = std::unique_ptr<IWindow>(IWindow::Create( m_Title, m_Width, m_Height, m_SharedWindow, m_SystemManager ));
+        m_Window = std::unique_ptr<IWindow>(IWindow::Create( m_Title, m_Width, m_Height, m_SharedWindow, m_SystemManager ));
+
+        m_Logger->AddInfo("Window Instance Created");
             //TODO deal with err code
             if (Result result = m_Window->Initialize(); result.IsFailure()) return result;
+        m_Logger->AddInfo("Window Instance Initialized");
             return {};
     }
 

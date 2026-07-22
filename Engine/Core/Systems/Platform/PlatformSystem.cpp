@@ -19,7 +19,7 @@ namespace engine
             return SYSTEM_RESULT(SystemManagerNotSet,Error);//todo
         }
 
-        m_Logger->AddInfo("Platform Initiation ");
+        m_Logger->AddInfo("Platform System Initiation");
 
 
         if (Result result = GLFWCheck(); result.IsFailure()) return result; //Creates a var when it is needed /C++17

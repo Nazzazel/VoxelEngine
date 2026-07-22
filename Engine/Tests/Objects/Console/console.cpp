@@ -188,7 +188,7 @@ namespace engine
     
 
 
-    void Console::Draw(Renderer& renderer)
+    void Console::Draw(IRenderer& renderer)
     {
         m_shader->Bind();
 

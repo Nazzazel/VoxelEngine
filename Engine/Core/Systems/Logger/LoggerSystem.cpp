@@ -5,18 +5,24 @@
 #include "LoggerSystem.hpp"
 
 
+
+
 namespace engine
 {
     //std::vector<LogMessage> LoggerSystem::m_Messages;
 
     Result LoggerSystem::OnInit() // Forced
     {
-        //if (!m_Messages.empty()) std::cout << "dddddddddd" << "\n";
-       // DT_INFO("LoggerSystem Initiated");
-        //return MEM_ERR(None,Severity::Info)
-        //std::cout << "3" << std::endl;
-       // return MEM_ERR(AllocationFailed,Warning);
-        std::cout << "LOGGER Initialized" << "\n";
+        m_SystemManager = this->GetSystemManager();
+
+        m_Timer = m_SystemManager->GetSystem<TimeSystem>();
+
+        if (!m_SystemManager)
+        {
+            return SYSTEM_RESULT(SystemManagerNotSet,Error);//todo
+        }
+
+        AddInfo("Logger System Initialized");
         return {};
     }
 

@@ -6,8 +6,8 @@ add_executable(VoxelGame ${VOXEL_GAME_SOURCES}
         src/Core/camera.hpp
         ../thirdparty/tracy/public/TracyClient.cpp
         src/Core/Application/EntryPoint.cpp
-        src/Core/Application/voxel_game_app.cpp
-        src/Core/Application/voxel_game_app.hpp
+        src/Core/Application/VoxelGameApp.cpp
+        src/Core/Application/VoxelGameApp.hpp
         src/Input/Devices/Keyboard/keyboard.cpp
         src/Input/Devices/Keyboard/keyboard.hpp
         src/Input/Devices/Mouse/mouse.cpp

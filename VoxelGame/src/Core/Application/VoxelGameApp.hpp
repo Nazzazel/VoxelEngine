@@ -6,9 +6,9 @@
 
 
 #include "Core/Application/Application.hpp"
-#include "Engine/RenderingAPI/Renderer/renderer.hpp"
+#include "../../../../Engine/Core/Systems/Renderer/IRenderer/IRenderer.hpp"
 
-#include "DebugTools/Core/Logger/logger.hpp"
+#include "Core/Application/AppInterface/IAppInterface.hpp"
 
 #include <iostream>
 
@@ -21,9 +21,9 @@ namespace voxelgame
 
     protected:
 
-        void OnInit() override;
+        void OnInit(engine::IAppInterface* engine) override;
 
-        void OnUpdate(float dt) override;
+        void OnUpdate(engine::IAppInterface* engine) override;
 
         //void OnRender(engine::Renderer& renderer) override;
         void OnRender() override;
@@ -31,7 +31,6 @@ namespace voxelgame
         void OnShutdown() override;
 
     private:
-
         //std::unique_ptr<engine::Rot_Cube> m_Rot_Cube;//TODO delete
 
 

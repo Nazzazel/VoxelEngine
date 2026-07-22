@@ -98,6 +98,7 @@ namespace engine
             //Specific
             GLFWInitiationFail,
             WindowCreationFailed,
+            WindowInstanceAlreadyInitialized
         };
     }
     namespace configuration

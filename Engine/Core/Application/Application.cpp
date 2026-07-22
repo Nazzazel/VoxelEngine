@@ -2,6 +2,7 @@
 #include "Application.hpp"
 #include <GLFW/glfw3.h>
 
+#include "AppInterface/EngineCore.hpp"
 #include "Core/Systems/Window/WindowSystem.hpp"
 
 
@@ -28,8 +29,12 @@ namespace engine
        m_SystemManager = std::make_unique<engine::SystemManager>();
 
         engine::EngineStartup engine_startup{};
-        Result result = engine_startup.Init(*m_SystemManager,m_Settings);
+        if (Result result = engine_startup.Init(*m_SystemManager,m_Settings);result.IsFailure())
+        {
 
+            std::cout << "???//\n";
+
+        }
 
 
 
@@ -40,6 +45,7 @@ namespace engine
     Application::~Application()
     {
         Result result = m_SystemManager->ShutdownAll();//TODO / Result here is kinda useless, but I will (propably) do it later
+        auto info = result.Inspect();
     }
 
 
@@ -49,7 +55,11 @@ namespace engine
         LoggerSystem* logger = m_SystemManager->GetSystem<LoggerSystem>();
         WindowSystem* window = m_SystemManager->GetSystem<WindowSystem>();
 
+        //EngineCore engine = EngineCore{m_SystemManager.get()};
+        //OnInit(&engine);
+
         logger->AddInfo("dddd");
+
         while (m_EngineRunning && !window->GetWindow()->ShouldClose())
         {
             m_SystemManager->UpdateAll(1);
@@ -79,7 +89,7 @@ namespace engine
 //         //-------------------------------------------
 //         //Modeles That are being setup:
 //         Platform::Init();
-//         //debugtools::Logger
+//         ////TODO DEAL WITH THIS debugtools::Logger
 //         //
 //         //m_AssetManager = std::make_unique<AssetManager>(); // plus other managers
 //         //backends::RendererAPI::SetAPI(backends::RendererAPIType::OpenGL);// later will be deleted // TODO// it will be put as one of the managers
@@ -127,7 +137,7 @@ namespace engine
 //
 //
 //         DT_INFO("Application Init");
-// 		//debugtools::Logger::Log(debugtools::LogLevel::Info, "Application Init");
+// 		////TODO DEAL WITH THIS debugtools::Logger::Log(debugtools::LogLevel::Info, "Application Init");
 //         //----------------------------------------------------------------------------------
 //
 //         m_MainWindow = std::unique_ptr<IWindow>(

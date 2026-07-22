@@ -4,7 +4,6 @@
 #include <GLFW/glfw3.h>
 #include <glm/fwd.hpp>
 
-#include "Core/Logger/logger.hpp"
 
 
 namespace engine
@@ -171,7 +170,7 @@ namespace engine
 		m_vao->AddVertexBuffer(std::move(vbo));
         m_vao->SetIndexBuffer(IndexBuffer::Create(cubeIndices, std::size(cubeIndices))); //TODO Auto count
 
-       // debugtools::Logger::Log(debugtools::LogLevel::Info, "count" + std::to_string(std::size(cubeIndices)));
+       // //TODO DEAL WITH THIS debugtools::Logger::Log(debugtools::LogLevel::Info, "count" + std::to_string(std::size(cubeIndices)));
 
         //m_ibo->Bind();
 
@@ -189,7 +188,7 @@ namespace engine
 
     }
 
-    void Rot_Cube::Draw(Renderer& renderer)
+    void Rot_Cube::Draw(IRenderer& renderer)
     {
         m_shader->Bind();
 

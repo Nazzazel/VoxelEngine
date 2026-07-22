@@ -3,7 +3,7 @@
 //#include <memory>
 //
 //
-#include <Backends/API/renderer_api.hpp>
+#include <Backends/API/RendererApi.hpp>
 #include <Backends/OpenGL/Shader/opengl_shader.hpp>
 ////
 ////
@@ -67,12 +67,12 @@ namespace engine
    //     {
    //     case backends::RendererAPIType::Default:
    //     {
-		 //   debugtools::Logger::Log(debugtools::LogLevel::Error, "Renderer API not set!"); //TODO add Logger
+		 //   //TODO DEAL WITH THIS debugtools::Logger::Log(debugtools::LogLevel::Error, "Renderer API not set!"); //TODO add Logger
 		 //   return "";
    //     }
    //     case backends::RendererAPIType::OpenGL:
    //     {
-			//debugtools::Logger::Log(debugtools::LogLevel::Info, "Loading shader from file: " + filepath);
+			////TODO DEAL WITH THIS debugtools::Logger::Log(debugtools::LogLevel::Info, "Loading shader from file: " + filepath);
 			//return LoadShader(backends::RendererAPIType::OpenGL, filepath);
    //     }
 

@@ -90,6 +90,21 @@ namespace engine
          [[nodiscard]] constexpr Severity getSeverity()         const noexcept  { return static_cast<Severity>((m_packed >> 24) & 0xF); }
          [[nodiscard]] constexpr uint64_t getPayload()          const noexcept  { return (m_packed >> 28); }
 
+    public:
+        struct ResultInfo {
+            ResultCategory category;
+            uint16_t errorCode;
+            Severity severity;
+            uint64_t payload;
+        };
 
+        [[nodiscard]] constexpr ResultInfo Inspect() const noexcept {
+            return {
+                getCategory(),
+                getErrorCode(),
+                getSeverity(),
+                getPayload()
+            };
+        }
     };
 }

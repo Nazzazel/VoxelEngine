@@ -16,10 +16,6 @@ add_library(Engine STATIC ${ENGINE_SOURCES}
         Core/Base/Result/ResultCodes.hpp
         Core/Application/Additions/StartUpConfig/start_up_config.hpp
         Core/Systems/Window/IWindow/IWindow.hpp
-        Core/Platform/IInput.hpp
-        Core/Platform/PlatformTypes.hpp
-        Systems/Platform/GLFW/WindowGLFW.cpp
-        Systems/Platform/GLFW/WindowGLFW.hpp
         Core/Base/BaseTypes/Types.hpp
         Core/Base/--PreCompileHeaders--/pch.hpp
         Core/Base/--PreCompileHeaders--/OS_specific/WindowsHeaders.hpp
@@ -38,6 +34,16 @@ add_library(Engine STATIC ${ENGINE_SOURCES}
         Core/Systems/Window/IWindow/IWindow.cpp
         Core/Systems/Window/WindowSystem.cpp
         Core/Systems/Window/WindowSystem.hpp
+        Systems/Platform/GLFW/WindowGLFW.cpp
+        Core/Systems/Time/TimeSystem.cpp
+        Core/Systems/Time/TimeSystem.hpp
+        Core/Application/AppInterface/EngineCore.hpp
+        Core/Application/AppInterface/IAppInterface.hpp
+        Core/Systems/Systems.hpp
+        Core/Systems/Renderer/RendererSystem.cpp
+        Core/Systems/Renderer/RendererSystem.hpp
+
+
 
 )
 

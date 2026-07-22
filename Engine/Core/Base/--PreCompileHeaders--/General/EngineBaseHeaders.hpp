@@ -6,6 +6,3 @@
 #pragma once
 
 #include "Core/Base/Base.hpp"
-
-
-#include "Core/Systems/Logger/LoggerSystem.hpp"

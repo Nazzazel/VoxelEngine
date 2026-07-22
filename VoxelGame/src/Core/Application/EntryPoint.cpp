@@ -3,7 +3,7 @@
 //
 #include <tracy/Tracy.hpp>
 
-#include "voxel_game_app.hpp"
+#include "VoxelGameApp.hpp"
 #include "Core/Application/Application.hpp"
 
 

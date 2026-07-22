@@ -1,5 +1,5 @@
 #include "index_buffer.hpp"
-#include <Backends/API/renderer_api.hpp>
+#include <Backends/API/RendererApi.hpp>
 #include <Backends/OpenGL/Buffers/opengl_index_buffer.hpp>
 
 namespace engine
