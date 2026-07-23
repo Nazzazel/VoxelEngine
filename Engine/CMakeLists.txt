@@ -5,8 +5,15 @@ file(GLOB_RECURSE ENGINE_SOURCES
     "Platform/*.cpp"
     "RenderingAPI/*.cpp"
     "Src/*.cpp"
-    "Tests/*.cpp"  # <--- Ensure this line is present!
+    "Tests/*.cpp"
 )
+#add_custom_command(
+#        TARGET Engine POST_BUILD
+#        COMMAND ${CMAKE_COMMAND} -E copy_directory
+#        "${CMAKE_CURRENT_SOURCE_DIR}/Res"
+#        "$<TARGET_FILE_DIR:Engine>/Res"
+#        COMMENT "Copying resource files to output directory..."
+#)
 
 add_library(Engine STATIC ${ENGINE_SOURCES}
 #        Core/Application/Application.cpp
@@ -47,6 +54,11 @@ add_library(Engine STATIC ${ENGINE_SOURCES}
         Core/Systems/Assets/Shaders/ShaderManager.cpp
         Core/Systems/Assets/Shaders/ShaderManager.hpp
         Core/Systems/Assets/Shaders/Specialized/IComputeShader.hpp
+        Core/Systems/File/FileSystem.cpp
+        Core/Systems/File/FileSystem.hpp
+        Core/Systems/Assets/Shaders/Loader/ShaderLoader.cpp
+        Core/Systems/Assets/Shaders/Loader/ShaderLoader.hpp
+        Core/Base/Result/ResultHandler.hpp
 
 
 )
@@ -73,3 +85,8 @@ target_include_directories(Engine PUBLIC
 #        PUBLIC
 #        ${CMAKE_CURRENT_SOURCE_DIR}/Core/Base/--PreCompileHeaders--/pch.hpp
 #)
+target_precompile_headers(Engine
+        PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/Core/Base/--PreCompileHeaders--/pch.hpp
+)
+

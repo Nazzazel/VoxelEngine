@@ -37,7 +37,3 @@ add_subdirectory(VoxelGame)
 #Localisation of project
 add_definitions(-DPROJECT_ROOT="${CMAKE_SOURCE_DIR}/")
 
-target_precompile_headers(Engine
-        PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/Engine/Core/Base/--PreCompileHeaders--/pch.hpp
-)

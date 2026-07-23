@@ -8,6 +8,38 @@
 
 namespace engine
 {
+	enum class ShaderStage {
+		// ================================================
+		// GROUP 1: Pipeline Shaders (In Execution Order)
+		// ================================================
+		// Traditional Vertex & Input Assembly Path
+		Vertex,
+		TessellationControl,    // Hull Shader (Optional)
+		TessellationEvaluation, // Domain Shader (Optional)
+		Geometry,               // Geometry Shader (Optional)
+
+		// Modern Mesh Pipeline Path (Alternative to Vertex/Geom)
+		Task,                   // Amplification Shader (Optional)
+		Mesh,                   // Mesh Shader
+
+		// Rasterization & Output Path
+		Fragment,               // Pixel Shader
+
+		// ==========================================
+		// GROUP 2: Specialized / Standalone Shaders
+		// ==========================================
+		// General-purpose GPU compute
+		Compute,
+
+		// Ray Tracing Pipeline
+		RayGen,
+		Intersection,
+		AnyHit,
+		ClosestHit,
+		Miss,
+		Callable
+	};
+
     class IShader
     {
     public:
@@ -54,6 +86,12 @@ namespace engine
         virtual void SetDouble4     (const std::string& name, double x, double y, double z, double w    ) = 0;
       
 
+		virtual unsigned int ShaderStageToAPIStage(ShaderStage stage);// Bute masked fildter for pipl=pelines like which shader weill be enabled
+
+
+		// virtual unsigned int GetUniformLocation(const std::string& name) = 0;
+  //   	int GetUniformLocation(const std::string& name);
+
 
         //virtual = 0;
         //virtual = 0;
@@ -62,7 +100,8 @@ namespace engine
         //virtual = 0;
         
 
-		static std::unique_ptr<engine::IShader> Create(const std::string& vertexSrc, const std::string& fragmentSrc);
+		//static std::unique_ptr<engine::IShader> Create(const std::string& vertexSrc, const std::string& fragmentSrc);
+		static std::unique_ptr<engine::IShader> Create(const std::unordered_map<ShaderStage, std::string>& sources);
 
         //static std::unique_ptr<engine::GameShader> Create();
 

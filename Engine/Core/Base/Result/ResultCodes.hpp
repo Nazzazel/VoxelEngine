@@ -59,6 +59,7 @@ namespace engine
 
 
     #define MEMORY_RESULT(          err_code, severity) ENGINE_RESULT(Memory        , ::engine::memory::Error::err_code         , severity)//EXAMPLE MEM_ERR(None,1)
+    #define GRAPHIC_RESULT(         err_code, severity) ENGINE_RESULT(Graphics      , ::engine::graphics::Error::err_code       , severity)//EXAMPLE MEM_ERR(None,1)
 
     //#define MEM_ERR(err_code,     severity) ENGINE_RESULT(Memory , ::engine::memory::Error::err_code, severity)//EXAMPLE MEM_ERR(None,1)
 
@@ -84,6 +85,8 @@ namespace engine
             FailedToInitialize,
             SystemManagerNotSet,
             SystemNotFound,
+            FileSystemNotSet
+
         };
     }
     namespace platform
@@ -126,6 +129,17 @@ namespace engine
         };
     }
 
+    namespace graphics
+    {
+        enum class Error : uint16_t {
+            None = 0,
+            ShaderObjectDoesNotPossessNessesaryShaderStages,
+            ShaderObjectAPINotSupportingElementsOfPipeline
+
+
+
+        };
+    }
 
     //TODO add the rest of the categories
 

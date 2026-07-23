@@ -4,6 +4,7 @@
 
 
 #pragma once
+#include "Core/Base/Result/ResultHandler.hpp"
 #include "Core/Systems/IEngineSystem.hpp"
 #include "Core/Systems/Time/TimeSystem.hpp"
 #include "Core/Manager/SystemManager.hpp"
@@ -54,12 +55,21 @@ namespace engine
        template <typename... Args> void AddFatal       (Args&&... args)    const   {m_Messages.emplace_back(m_Timer->CurrentTime(),LogLevel::FATAL      ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__);}
        template <typename... Args> void AddDebug       (Args&&... args)    const   {m_Messages.emplace_back(m_Timer->CurrentTime(),LogLevel::DEBUG      ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__);}
        template <typename... Args> void AddMsg         (Args&&... args)    const   {m_Messages.emplace_back(m_Timer->CurrentTime(),LogLevel::MSG        ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__);}
+
+       template <typename... Args> void AddResult      (Result result)
+       {
+           SetResult(result);
+           std::string resultString = "[[ Category ] -> "+ GetStringResultCategory() + " ] : [[ ErrorCode ] -> " + GetStringErrorCode() + " ] : [[ Extras ] -> " + GetStringExtra() + " ]";
+           m_Messages.emplace_back(m_Timer->CurrentTime(),GetStringSeverity(),resultString,__FILE__,__LINE__);
+       }
     private:
 
         std::string_view ReturnLogClassString( LogLevel log_level) const;
 
         std::string GetFormatedLog(const LogMessage& log) const;
         std::string GetDetailedFormatedLog(const LogMessage& log) const;
+
+
 
     public:
          ~LoggerSystem() = default;
@@ -87,6 +97,161 @@ namespace engine
 
         const SystemManager* m_SystemManager = nullptr;
         const TimeSystem* m_Timer = nullptr;
+
+        LogLevel GetStringSeverity()
+        {
+            Severity serv = m_LogResult.getSeverity();
+            switch (serv)
+            {
+            case Severity::Info: return LogLevel::INFO; break;
+            case Severity::Warning: return LogLevel::WARNING; break;
+            case Severity::Error: return LogLevel::ERROR; break;
+            case Severity::Fatal: return LogLevel::FATAL; break;
+            }
+            return LogLevel::MSG;
+        }
+
+        std::string GetStringResultCategory()
+        {
+            ResultCategory category = m_LogResult.getCategory();
+            switch (category)
+            {
+                // --- General ---
+            case ResultCategory::General:       return "General";
+            case ResultCategory::System:        return "System";
+            case ResultCategory::Platform:      return "Platform";
+            case ResultCategory::Configuration: return "Configuration";
+
+                // --- Hardware / Resources ---
+            case ResultCategory::Memory:        return "Memory";
+            case ResultCategory::IO:            return "IO";
+            case ResultCategory::Graphics:      return "Graphics";
+            case ResultCategory::Audio:         return "Audio";
+            case ResultCategory::Input:         return "Input";
+            case ResultCategory::Networking:    return "Networking";
+
+                // --- Engine Logic ---
+            case ResultCategory::Physics:       return "Physics";
+            case ResultCategory::Scripting:     return "Scripting";
+            case ResultCategory::Animation:     return "Animation";
+            case ResultCategory::Entity:        return "Entity";
+            case ResultCategory::Threading:     return "Threading";
+
+                // --- Debug/Support ---
+            case ResultCategory::Profiling:     return "Profiling";
+            case ResultCategory::Logging:       return "Logging";
+
+            case ResultCategory::Count:
+            default:                            return "Unknown";
+            }
+        }
+
+       std::string GetStringErrorCode()
+        {
+            ResultCategory category = m_LogResult.getCategory();
+            uint16_t errorCode = m_LogResult.getErrorCode();
+
+            switch (category)
+        {
+        case ResultCategory::General:
+        {
+            switch (static_cast<general::Error>(errorCode))
+            {
+            case general::Error::None:             return "None";
+            case general::Error::InvalidParameter: return "InvalidParameter";
+            case general::Error::NotImplemented:   return "NotImplemented";
+            case general::Error::Timeout:          return "Timeout";
+            case general::Error::OperationFailed:  return "OperationFailed";
+            }
+            break;
+        }
+        case ResultCategory::System:
+        {
+            switch (static_cast<system::Error>(errorCode))
+            {
+            case system::Error::None:                     return "None";
+            case system::Error::SystemAlreadyInitialized: return "SystemAlreadyInitialized";
+            case system::Error::DependencyMissing:        return "DependencyMissing";
+            case system::Error::FailedToInitialize:       return "FailedToInitialize";
+            case system::Error::SystemManagerNotSet:      return "SystemManagerNotSet";
+            case system::Error::SystemNotFound:           return "SystemNotFound";
+            case system::Error::FileSystemNotSet:         return "FileSystemNotSet";
+            }
+            break;
+        }
+        case ResultCategory::Platform:
+        {
+            switch (static_cast<platform::Error>(errorCode))
+            {
+            case platform::Error::None:                         return "None";
+            case platform::Error::LibraryLoadFailed:            return "LibraryLoadFailed";
+            case platform::Error::GraphicsContextCreationFailed:return "GraphicsContextCreationFailed";
+            case platform::Error::ThreadingError:               return "ThreadingError";
+            case platform::Error::FileSystemAccessDenied:       return "FileSystemAccessDenied";
+            case platform::Error::GLFWInitiationFail:           return "GLFWInitiationFail";
+            case platform::Error::WindowCreationFailed:         return "WindowCreationFailed";
+            case platform::Error::WindowInstanceAlreadyInitialized: return "WindowInstanceAlreadyInitialized";
+            }
+            break;
+        }
+        case ResultCategory::Configuration:
+        {
+            switch (static_cast<configuration::Error>(errorCode))
+            {
+            case configuration::Error::None:                   return "None";
+            case configuration::Error::FileNotFound:           return "FileNotFound";
+            case configuration::Error::ParseError:             return "ParseError";
+            case configuration::Error::InvalidValue:           return "InvalidValue";
+            case configuration::Error::MissingRequiredSection: return "MissingRequiredSection";
+            }
+            break;
+        }
+        case ResultCategory::Memory:
+        {
+            switch (static_cast<memory::Error>(errorCode))
+            {
+            case memory::Error::None:             return "None";
+            case memory::Error::AllocationFailed: return "AllocationFailed";
+            case memory::Error::OutOfBounds:      return "OutOfBounds";
+            case memory::Error::AlignmentError:   return "AlignmentError";
+            case memory::Error::PoolExhausted:    return "PoolExhausted";
+            }
+            break;
+        }
+        case ResultCategory::Graphics:
+        {
+            switch (static_cast<graphics::Error>(errorCode))
+            {
+            case graphics::Error::None:                                           return "None";
+            case graphics::Error::ShaderObjectDoesNotPossessNessesaryShaderStages: return "ShaderObjectDoesNotPossessNessesaryShaderStages";
+            case graphics::Error::ShaderObjectAPINotSupportingElementsOfPipeline:  return "ShaderObjectAPINotSupportingElementsOfPipeline";
+            }
+            break;
+        }
+        default:
+            break;
+        }
+
+            return "UnknownErrorCode";
+        }
+
+
+        [[nodiscard]] std::string GetStringExtra() const
+        {
+            uint64_t extra = m_LogResult.getPayload();
+            // Extract line number from the lower 16 bits
+            uint16_t lineNumber = static_cast<uint16_t>(extra & 0xFFFF);
+
+            // Extract hash from the upper bits
+            uint16_t fileHash = static_cast<uint16_t>((extra >> 16) & 0xFFFF);
+
+            return "FileHash: " + std::to_string(fileHash) + " | Line: " + std::to_string(lineNumber);
+        }
+
+        void SetResult(Result result) {m_LogResult = result; }
+
+        private:
+            Result m_LogResult;
      };
 
 }

@@ -50,7 +50,7 @@ namespace engine
         #endif
 
         char buffer[16];
-        std::strftime(buffer, sizeof(buffer), "[%H:%M:%S]", &tm);
+        std::strftime(buffer, sizeof(buffer), "%H:%M:%S", &tm);
 
         return buffer;
     }

@@ -20,51 +20,64 @@ namespace engine
 	//std::unique_ptr<engine::GameShader> engine::GameShader::Create()
     //}
 
-    std::unique_ptr<engine::IShader> engine::IShader::Create(
-    	const std::string& vertexSrc,
-    	const std::string& fragmentSrc
+ //    std::unique_ptr<engine::IShader> engine::IShader::Create(
+ //    	const std::string& vertexSrc,
+ //    	const std::string& fragmentSrc
+ //
+ //
+ //
+ //    	)
+	// {
+ //        backends::RendererAPIType api = backends::RendererAPI::GetAPI();
+ //
+ //       // std::string basePath = "Res/Assets/Shaders/ShaderTypes/" + engine::ShaderLibrary::ShaderTypeToString(type) + "/" + backends::RendererAPI::RendererAPIToString(api) + "/";
+ //        std::string basePath = "Res/Assets/Shaders/ShaderTypes/Basic/OpenGL/";
+ //
+	// 	//AssetManager::Loa dShader(basePath + "vert.shader");
+ //
+ //        switch (api)
+ //        {
+ //        case backends::RendererAPIType::OpenGL:
+ //            return std::make_unique
+ //                <backends::OpenGLShader>( vertexSrc, fragmentSrc );
+ //
+	// 		//std::cout << basePath + "vert.shader" << std::endl;
+ //
+ //        case backends::RendererAPIType::Vulkan:
+ //            break;
+ //            //return std::make_shared<VulkanShader>(
+ //            //    basePath + "vulkan/vert.spv",
+ //            //    basePath + "vulkan/frag.spv"
+ //            //);
+ //
+ //        case backends::RendererAPIType::DirectX11:
+ //            break;
+ //            //return std::make_shared<DX11Shader>(
+ //            //    basePath + "directx/vert.hlsl",
+ //            //    basePath + "directx/frag.hlsl"
+ //            //);
+ //
+ //        default:
+ //            return nullptr;
+ //        }
+ //    	return nullptr;
+	// }
 
-
-
-    	)
+	std::unique_ptr<engine::IShader> Create(const std::unordered_map<ShaderStage, std::string>& sources)
 	{
-        backends::RendererAPIType api = backends::RendererAPI::GetAPI();
+		backends::RendererAPIType api = backends::RendererAPI::GetAPI();
 
-       // std::string basePath = "Res/Assets/Shaders/ShaderTypes/" + engine::ShaderLibrary::ShaderTypeToString(type) + "/" + backends::RendererAPI::RendererAPIToString(api) + "/";
-        std::string basePath = "Res/Assets/Shaders/ShaderTypes/Basic/OpenGL/";
 
-		//AssetManager::Loa dShader(basePath + "vert.shader");
 
-        switch (api)
-        {
-        case backends::RendererAPIType::OpenGL:
-            return std::make_unique
-                <backends::OpenGLShader>( vertexSrc, fragmentSrc );
 
-			//std::cout << basePath + "vert.shader" << std::endl;
-
-        case backends::RendererAPIType::Vulkan:
-            break;
-            //return std::make_shared<VulkanShader>(
-            //    basePath + "vulkan/vert.spv",
-            //    basePath + "vulkan/frag.spv"
-            //);
-
-        case backends::RendererAPIType::DirectX11:
-            break;
-            //return std::make_shared<DX11Shader>(
-            //    basePath + "directx/vert.hlsl",
-            //    basePath + "directx/frag.hlsl"
-            //);
-
-        default:
-            return nullptr;
-        }
-    	return nullptr;
 	}
 
+	unsigned int IShader::ShaderStageToAPIStage(ShaderStage stage)
+	{
 
 
+		
+	}
 
 
 
@@ -109,4 +122,5 @@ namespace engine
 
    //     return std::string();
    // }
+
 }

@@ -12,12 +12,14 @@ namespace engine
     {
         m_SystemManager = this->GetSystemManager();
 
-        m_Logger = m_SystemManager->GetSystem<LoggerSystem>();
-
         if (!m_SystemManager)
         {
             return SYSTEM_RESULT(SystemManagerNotSet,Error);//todo
         }
+
+        m_Logger = m_SystemManager->GetSystem<LoggerSystem>();
+
+
 
         m_Logger->AddInfo("Platform System Initiation");
 

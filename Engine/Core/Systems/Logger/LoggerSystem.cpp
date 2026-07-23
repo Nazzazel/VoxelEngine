@@ -15,12 +15,13 @@ namespace engine
     {
         m_SystemManager = this->GetSystemManager();
 
-        m_Timer = m_SystemManager->GetSystem<TimeSystem>();
-
         if (!m_SystemManager)
         {
             return SYSTEM_RESULT(SystemManagerNotSet,Error);//todo
         }
+
+        m_Timer = m_SystemManager->GetSystem<TimeSystem>();
+
 
         AddInfo("Logger System Initialized");
         return {};

@@ -194,16 +194,15 @@ namespace backends
         return m_Projection;
     }
 
-    void OpenGLRenderer::DrawIndexed(const std::unique_ptr<engine::VertexArray>& vao)
+    void OpenGLRenderer::DrawIndexed(uint32_t indexCount)
     {
         GL_SCOPE();
-		vao->Bind();
+		//vao->Bind();
 
 		//unsigned int count = vao->GetIndexBuffer()->GetCount();
-        unsigned int count = vao->GetIndexCount();
+        //unsigned int count = vao->GetIndexCount();
 
-        glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
-
+        glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, nullptr);
     }
 
 

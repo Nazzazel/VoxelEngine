@@ -24,7 +24,7 @@ namespace backends
 
         const glm::mat4& GetProjection() const override;
 
-		void DrawIndexed(const std::unique_ptr<engine::VertexArray>& vao) override;
+		void DrawIndexed(uint32_t indexCount) override;
 
     private:
 

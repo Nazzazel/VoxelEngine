@@ -6,7 +6,7 @@
 
 namespace backends
 {
-
+	//         m_vao->SetIndexBuffer(IndexBuffer::Create(cubeIndices, std::size(cubeIndices))); //TODO Auto count
 	OpenGLIndexBuffer::OpenGLIndexBuffer(unsigned int* indices, unsigned int count)
 		: m_Count(count)
 	{
