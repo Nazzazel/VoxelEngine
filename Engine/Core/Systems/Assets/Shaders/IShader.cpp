@@ -5,6 +5,8 @@
 //
 #include <Backends/API/RendererApi.hpp>
 #include <Backends/OpenGL/Shader/opengl_shader.hpp>
+
+#include "ShaderData.hpp"
 ////
 ////
 ////#include <Engine/Res/Assets/Shaders/ShadersLib/shader_library.hpp>
@@ -63,21 +65,28 @@ namespace engine
  //    	return nullptr;
 	// }
 
-	std::unique_ptr<engine::IShader> Create(const std::unordered_map<ShaderStage, std::string>& sources)
+	//std::unique_ptr<engine::IShader> Create(const std::unordered_map<ShaderStage, std::string>& sources)
+	// std::unique_ptr<engine::IShader> IShader::CreateInt(const std::unordered_map<int, int>& sources)
+	// {
+	//
+	//
+	// 	return nullptr;
+	// }
+	std::unique_ptr<engine::IShader> IShader::Create(const std::initializer_list<ShaderData> sources)
 	{
 		backends::RendererAPIType api = backends::RendererAPI::GetAPI();
+	//	sources[0].stage
 
 
-
-
+		return nullptr;
 	}
 
-	unsigned int IShader::ShaderStageToAPIStage(ShaderStage stage)
-	{
-
-
-		
-	}
+	//unsigned int IShader::ShaderStageToAPIStage(ShaderStage stage)
+	//{
+//
+//
+	//
+	//}
 
 
 

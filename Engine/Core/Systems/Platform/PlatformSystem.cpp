@@ -19,6 +19,10 @@ namespace engine
 
         m_Logger = m_SystemManager->GetSystem<LoggerSystem>();
 
+        if (!m_Logger)
+        {
+            return SYSTEM_RESULT(SystemNotFound,Error);//todo
+        }
 
 
         m_Logger->AddInfo("Platform System Initiation");

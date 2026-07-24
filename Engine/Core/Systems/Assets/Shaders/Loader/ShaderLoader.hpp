@@ -4,6 +4,7 @@
 
 
 #pragma once
+#include "Core/Systems/Assets/Shaders/IShader.hpp"
 
 
 namespace engine
@@ -11,8 +12,8 @@ namespace engine
     class ShaderLoader
     {
         public:
-        std::string GetSourceFromShader(std::string shaderPath);
-
+        std::string GetSourceFromShader(ShaderStage stage,std::string shaderPath);
+        
 
 
     };

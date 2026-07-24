@@ -8,6 +8,8 @@
 
 namespace engine
 {
+	struct ShaderData;
+
 	enum class ShaderStage {
 		// ================================================
 		// GROUP 1: Pipeline Shaders (In Execution Order)
@@ -86,7 +88,7 @@ namespace engine
         virtual void SetDouble4     (const std::string& name, double x, double y, double z, double w    ) = 0;
       
 
-		virtual unsigned int ShaderStageToAPIStage(ShaderStage stage);// Bute masked fildter for pipl=pelines like which shader weill be enabled
+		//virtual unsigned int ShaderStageToAPIStage(ShaderStage stage);// Bute masked fildter for pipl=pelines like which shader weill be enabled
 
 
 		// virtual unsigned int GetUniformLocation(const std::string& name) = 0;
@@ -101,7 +103,11 @@ namespace engine
         
 
 		//static std::unique_ptr<engine::IShader> Create(const std::string& vertexSrc, const std::string& fragmentSrc);
-		static std::unique_ptr<engine::IShader> Create(const std::unordered_map<ShaderStage, std::string>& sources);
+		//static std::unique_ptr<engine::IShader> Create(const std::unordered_map<ShaderStage, std::string>& sources);
+
+    	//static std::unique_ptr<engine::IShader> CreateInt(const std::unordered_map<int, int>& sources);
+
+		static std::unique_ptr<engine::IShader> Create(const std::initializer_list<ShaderData> sources);
 
         //static std::unique_ptr<engine::GameShader> Create();
 

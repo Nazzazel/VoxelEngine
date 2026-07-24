@@ -58,7 +58,7 @@ add_library(Engine STATIC ${ENGINE_SOURCES}
         Core/Systems/File/FileSystem.hpp
         Core/Systems/Assets/Shaders/Loader/ShaderLoader.cpp
         Core/Systems/Assets/Shaders/Loader/ShaderLoader.hpp
-        Core/Base/Result/ResultHandler.hpp
+        Core/Systems/Assets/Shaders/ShaderData.hpp
 
 
 )

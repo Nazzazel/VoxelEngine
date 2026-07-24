@@ -1,8 +1,11 @@
 //Engine
 #include "Application.hpp"
+
+#include <thread>
 #include <GLFW/glfw3.h>
 
 #include "AppInterface/EngineCore.hpp"
+#include "Core/Systems/Assets/AssetSystem.hpp"
 #include "Core/Systems/Window/WindowSystem.hpp"
 
 
@@ -52,19 +55,42 @@ namespace engine
 
     void Application::Run()
     {
+        TimeSystem* timer    = m_SystemManager->GetSystem<TimeSystem>();
         LoggerSystem* logger = m_SystemManager->GetSystem<LoggerSystem>();
         WindowSystem* window = m_SystemManager->GetSystem<WindowSystem>();
+
+        AssetSystem* asset   = m_SystemManager->GetSystem<AssetSystem>();
+
+
+        TraditionalPipelineShaderFlag flag{};
+        flag.SetFragment(true);
+        flag.SetVertex(true);
+        asset->GetShaderManager().SetTraditionalPipeline(flag);
+
+        asset->GetShaderManager().LoadEngineShader(ShaderTypeID::Basic);
 
         //EngineCore engine = EngineCore{m_SystemManager.get()};
         //OnInit(&engine);
 
         logger->AddInfo("dddd");
 
+        auto last_frame_time = std::chrono::steady_clock::now();
+
         while (m_EngineRunning && !window->GetWindow()->ShouldClose())
         {
-            m_SystemManager->UpdateAll(1);
+            // --- 1. Calculate Delta Time ---
+            auto current_frame_time = std::chrono::steady_clock::now();
+            std::chrono::duration<float> elapsed = current_frame_time - last_frame_time;
+            last_frame_time = current_frame_time;
+            float dt = elapsed.count();
+
+            if (Result result = m_SystemManager->UpdateAll(dt);result.IsFailure()) { logger->AddResult(result);}
+
+
            // std::cout << "ddddd\n";
         //End Of the Engine while() loop
+            //logger->AddInfo("FPS: ",timer->GetFPS());
+            std::this_thread::sleep_for(std::chrono::milliseconds(16));
         }
 
     }

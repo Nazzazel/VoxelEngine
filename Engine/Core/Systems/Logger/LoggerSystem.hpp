@@ -4,7 +4,6 @@
 
 
 #pragma once
-#include "Core/Base/Result/ResultHandler.hpp"
 #include "Core/Systems/IEngineSystem.hpp"
 #include "Core/Systems/Time/TimeSystem.hpp"
 #include "Core/Manager/SystemManager.hpp"
@@ -28,11 +27,11 @@ namespace engine
         std::string m_time;
         LogLevel m_level;
         std::string m_message;
-        const char* m_file;
+        std::string m_file;
         int m_line;
         //LogMessage(std::string time, LogLevel level, std::string message): m_time(time), m_level(level), m_message(message) {}
-        LogMessage(const std::string& time,const LogLevel level,const std::string& message, const char* file, const int line)
-        : m_time(time), m_level(level), m_message(message), m_file(file), m_line(line) {}
+        LogMessage(const std::string& time,const LogLevel level,const std::string message, std::string file, const int line)
+        : m_time(std::move(time)), m_level(level), m_message(std::move(message)), m_file(file), m_line(line) {}
     };
 
  class LoggerSystem : public IEngineSystem {
@@ -88,7 +87,8 @@ namespace engine
          template <typename... Args>
          std::string ArgToString(Args&&... args) const {
              std::stringstream ss;
-             (ss << ... << args);
+             (ss << ... << std::forward<Args>(args));
+            // (ss << ... << args);
              return ss.str();
          }
 

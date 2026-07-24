@@ -24,6 +24,9 @@ namespace engine
 
       if (Result result = m_SystemManager.RegisterSystem<TimeSystem     >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
       if (Result result = m_SystemManager.RegisterSystem<LoggerSystem   >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
+
+
+      //After Logger
       if (Result result = m_SystemManager.RegisterSystem<PlatformSystem >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
       if (Result result = m_SystemManager.RegisterSystem<WindowSystem   >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
       if (Result result = m_SystemManager.RegisterSystem<RendererSystem >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
@@ -53,13 +56,13 @@ namespace engine
       //if (auto result = m_SystemManager.RegisterSystem<PlatformSystem>(); result.IsFailure()) return result;
 
 
-      m_AssetManager->GetShaderManager().Add(engine::ShaderTypeID::Basic);
-
-      auto meshPipelineShader = engine::IShader::Create({
-        { engine::ShaderStage::Task, taskSource },
-        { engine::ShaderStage::Mesh, meshSource },
-        { engine::ShaderStage::Fragment, fragmentSource }
-    });
+    //   m_AssetManager->GetShaderManager().Add(engine::ShaderTypeID::Basic);
+    //
+    //   auto meshPipelineShader = engine::IShader::Create({
+    //     { engine::ShaderStage::Task, taskSource },
+    //     { engine::ShaderStage::Mesh, meshSource },
+    //     { engine::ShaderStage::Fragment, fragmentSource }
+    // });
 
       //std::unique_ptr<Renderer> m_Renderer;
 

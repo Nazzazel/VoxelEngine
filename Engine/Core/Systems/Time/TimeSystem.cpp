@@ -49,7 +49,7 @@ namespace engine
                 localtime_r(&time, &tm); // Note: Linux reverses the argument order!
         #endif
 
-        char buffer[16];
+        char buffer[32];
         std::strftime(buffer, sizeof(buffer), "%H:%M:%S", &tm);
 
         return buffer;

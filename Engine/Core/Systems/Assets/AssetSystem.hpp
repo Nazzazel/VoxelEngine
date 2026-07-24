@@ -18,7 +18,7 @@ namespace engine
     class AssetSystem : public IEngineSystem
     {
     public:
-
+        AssetSystem();
 
 
 
@@ -46,9 +46,9 @@ namespace engine
         LoggerSystem* m_Logger = nullptr;
         FileSystem* m_FileSystem = nullptr;
 
-        AssetProviderContext m_AssetProviderContext;
+        std::unique_ptr<AssetProviderContext> m_AssetProviderContext;
 
-        ShaderManager m_ShaderManager;
+        std::unique_ptr<ShaderManager> m_ShaderManager;
 
     };
 } // engine

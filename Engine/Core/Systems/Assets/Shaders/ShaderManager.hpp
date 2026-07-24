@@ -5,6 +5,7 @@
 
 #pragma once
 #include "IShader.hpp"
+#include "ShaderData.hpp"
 #include "Assets/Shader/ShaderTypeID.h"
 #include "Core/Systems/Assets/AssetProviderContext.hpp"
 #include "Core/Systems/Logger/LoggerSystem.hpp"
@@ -12,6 +13,7 @@
 namespace engine
 {
     // Optional: Separate ID enum for compute shaders if they don't share the same IDs as graphics shaders
+
 
     struct TraditionalPipelineShaderFlag
     {
@@ -63,7 +65,7 @@ namespace engine
     class ShaderManager
     {
     public:
-        explicit ShaderManager(AssetProviderContext& provider);//AssetProvider -> Specific instance that gives managers nessesary for propper work data ex. Root directory C:/.., /root/..
+        explicit ShaderManager(AssetProviderContext* provider);//AssetProvider -> Specific instance that gives managers nessesary for propper work data ex. Root directory C:/.., /root/..
         ~ShaderManager() = default;
 
         ShaderManager(const ShaderManager&) = delete;
@@ -81,8 +83,8 @@ namespace engine
 
         // Task Pipeline---        Graphics Shaders (Task + Mesh + Fragment ) ---
 
-       void LoadEngineShader(ShaderTypeID type);
-       void LoadCustomShader(ShaderTypeID type, const std::filesystem::path& path);
+       Result LoadEngineShader(ShaderTypeID type);
+       Result LoadCustomShader(ShaderTypeID type, const std::filesystem::path& path);
 
 
 
@@ -98,18 +100,21 @@ namespace engine
         Result EvaluateShaderByAPI(TraditionalPipelineShaderFlag flag );
         Result EvaluateShaderByAPI(TaskPipelineShaderFlag        flag );
 
+        ShaderData LoadShaderFromFilePath(ShaderStage stage, const std::filesystem::path& path,ShaderLanguage language, const std::string& customFileName="");
+
 
     private:
-        AssetProviderContext& m_AssetProvider;
+        AssetProviderContext* m_AssetProvider;
 
-        LoggerSystem* m_LoggerSystem;
+        LoggerSystem* m_Logger;
 
         // Separate storage for graphics vs compute pipelines
 
         //ShaderTypeID -> Type that determins overall Shader as a whole so full pipeline 1.Task/2.Traditional is represented by this Type
         std::unordered_map<ShaderTypeID, std::unique_ptr<IShader>> m_Shaders;
 
-
+        TraditionalPipelineShaderFlag m_TradFLag;
+        TaskPipelineShaderFlag        m_TaskFlag;
 
     };
 } // engine
