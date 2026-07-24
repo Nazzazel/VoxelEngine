@@ -89,13 +89,6 @@ namespace engine
         }
     }
 
-    void WindowGLFW::SwapBuffers()
-    {
-        if (m_Window)
-        {
-            glfwSwapBuffers(m_Window);
-        }
-    }
 
     Result WindowGLFW::SetName(const std::string& name)
     {

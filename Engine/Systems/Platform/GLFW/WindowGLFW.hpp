@@ -28,7 +28,6 @@ namespace engine
         void PollEvents() override;
 
         void MakeContextCurrent()  override;
-        void SwapBuffers() override;
 
         //Setters
          Result SetName(const std::string& name) override;

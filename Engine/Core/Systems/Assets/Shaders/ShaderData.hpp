@@ -14,7 +14,7 @@ namespace engine
     struct ShaderData
     {
         ShaderStage stage;
-        std::string shaderCode;
+        std::string shaderSource;
     };
 
     enum struct ShaderLanguage

@@ -38,6 +38,7 @@ namespace engine
 
         m_AssetProviderContext->SetAssetRoot(m_FileSystem->GetExecutableDir());
         m_AssetProviderContext->SetLoggerSystem(m_Logger);
+        m_AssetProviderContext->SetFileSystem(m_FileSystem);
 
 
         ShaderMangagerStart();

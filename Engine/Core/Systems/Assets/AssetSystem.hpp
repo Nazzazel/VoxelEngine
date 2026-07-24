@@ -1,6 +1,7 @@
 //
 // Created by nazzazel on 22.07.2026.
 //
+#pragma once
 
 
 #include "AssetProviderContext.hpp"

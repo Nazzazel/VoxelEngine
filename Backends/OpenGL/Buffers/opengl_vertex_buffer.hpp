@@ -9,7 +9,7 @@ namespace backends
 	{
 	public:
 		OpenGLVertexBuffer(const void* data, unsigned int size);
-		~OpenGLVertexBuffer();
+		~OpenGLVertexBuffer() override;
 		void Bind() const override;
 		void Unbind() const override;
 

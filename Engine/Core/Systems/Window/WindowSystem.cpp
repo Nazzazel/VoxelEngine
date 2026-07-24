@@ -33,6 +33,8 @@ namespace engine
     Result WindowSystem::OnUpdate(float dt)
     {
 
+        // 2. Poll window and input events (keeps the window alive/responsive)
+
         return {};
     }
 

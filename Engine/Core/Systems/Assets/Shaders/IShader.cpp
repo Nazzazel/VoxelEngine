@@ -17,6 +17,41 @@
 namespace engine
 {
 
+	std::unique_ptr<engine::IShader> IShader::Create( std::vector<ShaderData>& sources)
+	{
+		backends::RendererAPIType api = backends::RendererAPI::GetAPI();
+		//	sources[0].stage
+
+		       switch (api)
+		       {
+		       case backends::RendererAPIType::OpenGL:
+		           return std::make_unique
+		               <backends::OpenGLShader>(sources);
+
+				//std::cout << basePath + "vert.shader" << std::endl;
+
+		       case backends::RendererAPIType::Vulkan:
+		           break;
+		           //return std::make_shared<VulkanShader>(
+		           //    basePath + "vulkan/vert.spv",
+		           //    basePath + "vulkan/frag.spv"
+		           //);
+
+		       case backends::RendererAPIType::DirectX11:
+		           break;
+		           //return std::make_shared<DX11Shader>(
+		           //    basePath + "directx/vert.hlsl",
+		           //    basePath + "directx/frag.hlsl"
+		           //);
+
+		       default:
+		           return nullptr;
+		       }
+
+
+		return nullptr;
+	}
+
     //{
 	//std::unique_ptr<Shader> Shader::Create(const std::string& vertexSrc, const std::string& fragmentSrc)
 	//std::unique_ptr<engine::GameShader> engine::GameShader::Create()
@@ -72,14 +107,7 @@ namespace engine
 	//
 	// 	return nullptr;
 	// }
-	std::unique_ptr<engine::IShader> IShader::Create(const std::initializer_list<ShaderData> sources)
-	{
-		backends::RendererAPIType api = backends::RendererAPI::GetAPI();
-	//	sources[0].stage
 
-
-		return nullptr;
-	}
 
 	//unsigned int IShader::ShaderStageToAPIStage(ShaderStage stage)
 	//{

@@ -42,6 +42,28 @@ namespace engine
 		Callable
 	};
 
+	inline std::string ShaderStageToString(ShaderStage stage)
+	{
+		switch (stage)
+		{
+		case ShaderStage::Vertex:                return "Vertex";
+		case ShaderStage::TessellationControl:   return "TessellationControl";
+		case ShaderStage::TessellationEvaluation:return "TessellationEvaluation";
+		case ShaderStage::Geometry:              return "Geometry";
+		case ShaderStage::Task:                  return "Task";
+		case ShaderStage::Mesh:                  return "Mesh";
+		case ShaderStage::Fragment:              return "Fragment";
+		case ShaderStage::Compute:               return "Compute";
+		case ShaderStage::RayGen:                return "RayGen";
+		case ShaderStage::Intersection:          return "Intersection";
+		case ShaderStage::AnyHit:                return "AnyHit";
+		case ShaderStage::ClosestHit:            return "ClosestHit";
+		case ShaderStage::Miss:                  return "Miss";
+		case ShaderStage::Callable:              return "Callable";
+		}
+		return "Unknown";
+	}
+
     class IShader
     {
     public:
@@ -107,7 +129,8 @@ namespace engine
 
     	//static std::unique_ptr<engine::IShader> CreateInt(const std::unordered_map<int, int>& sources);
 
-		static std::unique_ptr<engine::IShader> Create(const std::initializer_list<ShaderData> sources);
+		//static std::unique_ptr<engine::IShader> Create(const std::initializer_list<ShaderData> sources);
+		static std::unique_ptr<engine::IShader> Create(std::vector<ShaderData>& sources);
 
         //static std::unique_ptr<engine::GameShader> Create();
 

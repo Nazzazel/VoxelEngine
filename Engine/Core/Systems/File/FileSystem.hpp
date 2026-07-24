@@ -109,6 +109,8 @@ namespace engine
         void Mount(const std::string& physicalPath);
 
         std::unique_ptr<IFile> OpenFile(const std::string& virtualPath);
+        std::unique_ptr<IFile> OpenFile(std::filesystem::path virtualPath);
+
 
         std::string NormalizePath(const std::string& path);
         std::string GetExecutableDir();

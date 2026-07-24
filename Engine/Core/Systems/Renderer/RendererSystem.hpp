@@ -25,6 +25,7 @@ namespace engine
         Result ChangeGraphicAPI(backends::RendererAPIType type);
 
         IRenderer* GetRenderer() const {return m_Renderer.get();}
+        IRenderer* GetRenderer() {return m_Renderer.get();}
 
         private:
         std::unique_ptr<IRenderer> m_Renderer;

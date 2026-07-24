@@ -29,6 +29,10 @@ namespace engine
       //After Logger
       if (Result result = m_SystemManager.RegisterSystem<PlatformSystem >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
       if (Result result = m_SystemManager.RegisterSystem<WindowSystem   >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
+
+
+      if (Result result = m_SystemManager.RegisterSystem<RendererSystem >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
+
       if (Result result = m_SystemManager.RegisterSystem<RendererSystem >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
       if (Result result = m_SystemManager.RegisterSystem<FileSystem     >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
 

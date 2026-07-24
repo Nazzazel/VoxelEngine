@@ -4,18 +4,17 @@
 
 //#include "Engine/Renderer/API/shader.hpp"
 #include "Core/Systems/Assets/Shaders/IShader.hpp"
+#include "Core/Systems/Assets/Shaders/ShaderData.hpp"
 
 
 namespace backends
 {
 
-
-
 	class OpenGLShader
 		: public engine::IShader
 	{
 	public:
-		OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc);
+		OpenGLShader( std::vector<engine::ShaderData>& sources);
 		~OpenGLShader();
 
 		OpenGLShader(const OpenGLShader&) = delete;
@@ -61,8 +60,9 @@ namespace backends
 		unsigned int m_Program;
 
 		unsigned int CompileShader(unsigned int type, const std::string& source);
-		unsigned int CreateShader(const std::string& vertexSrc, const std::string& fragmentSrc);
-	
+		//unsigned int CreateShader(const std::string& vertexSrc, const std::string& fragmentSrc);
+		unsigned int CreateShader( std::vector<engine::ShaderData>& sources);
+
 		std::unordered_map<std::string, int> m_UniformCache;
 
 		int GetUniformLocation(const std::string& name);

@@ -23,7 +23,6 @@ namespace engine
         virtual void PollEvents() = 0;
 
         virtual void MakeContextCurrent()  = 0;
-        virtual void SwapBuffers() = 0;
 
         //Setters
         [[nodiscard]] virtual Result SetName(const std::string& name) = 0;

@@ -25,7 +25,6 @@ namespace engine
         m_Logger = m_SystemManager->GetSystem<LoggerSystem>();
 
 
-        m_Logger->AddWarning("exe dir test 1 :::: ->>>>>",GetExecutableDir());
         // Mount default assets directory during engine startup
         namespace fs = std::filesystem;
         std::string path = GetExecutableDir() + "/Res/Assets/Shaders/Basic/OpenGL";
@@ -33,7 +32,7 @@ namespace engine
         fs::path projectRoot = path;
         //fs::path projectRoot = currentDir.parent_path().parent_path() / "";
         		if (fs::exists(projectRoot)) {
-        		    m_Logger->AddWarning("loh");
+        		    m_Logger->AddInfo(path);
 
         			// Successfully found the folder!
         		} else {
@@ -70,7 +69,22 @@ namespace engine
     }
 
     std::unique_ptr<IFile> FileSystem::OpenFile(const std::string& virtualPath) {
-        std::filesystem::path fullPath = std::filesystem::path(m_AssetRoot) / NormalizePath(virtualPath);
+      //  std::filesystem::path fullPath = std::filesystem::path(m_AssetRoot) / NormalizePath(virtualPath);
+
+        m_Logger->AddError("TODO/ THS PART :  std::unique_ptr<IFile> FileSystem::OpenFile(const std::string& virtualPath) {");
+
+
+       //std::cerr << "fullPath: " << fullPath << " \n";
+
+       //auto file = std::make_unique<NativeFile>(fullPath.string());
+       //if (!file->IsOpen()) {
+       //    return nullptr;
+       //}
+       //return file;
+        return nullptr;
+    }
+
+    std::unique_ptr<IFile> FileSystem::OpenFile(std::filesystem::path fullPath) {
 
         auto file = std::make_unique<NativeFile>(fullPath.string());
         if (!file->IsOpen()) {
@@ -78,6 +92,7 @@ namespace engine
         }
         return file;
     }
+
 
     std::string FileSystem::NormalizePath(const std::string& path) { //Strips down the path aka erase the / or \ at the front for reliable path like /root/ to root/ it ensures cros compability.
         if (!path.empty() && (path[0] == '/' || path[0] == '\\'))

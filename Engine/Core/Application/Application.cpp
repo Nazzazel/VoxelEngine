@@ -6,7 +6,9 @@
 
 #include "AppInterface/EngineCore.hpp"
 #include "Core/Systems/Assets/AssetSystem.hpp"
+#include "Core/Systems/Renderer/RendererSystem.hpp"
 #include "Core/Systems/Window/WindowSystem.hpp"
+#include "Tests/Objects/Rotating Cube/rcube.hpp"
 
 
 // #include <Platform/Input/Debug/debug_input.hpp>
@@ -61,16 +63,27 @@ namespace engine
 
         AssetSystem* asset   = m_SystemManager->GetSystem<AssetSystem>();
 
+        RendererSystem* renderer   = m_SystemManager->GetSystem<RendererSystem>();
+
 
         TraditionalPipelineShaderFlag flag{};
         flag.SetFragment(true);
         flag.SetVertex(true);
+        //flag.SetGeometry(true);
+        //flag.SetTessellationControl(true);
+        //flag.SetTessellationEvaluation(true);
+
         asset->GetShaderManager().SetTraditionalPipeline(flag);
 
         asset->GetShaderManager().LoadEngineShader(ShaderTypeID::Basic);
 
+
+
         //EngineCore engine = EngineCore{m_SystemManager.get()};
         //OnInit(&engine);
+        Rot_Cube rot_cube;
+        rot_cube.Init(*asset);
+
 
         logger->AddInfo("dddd");
 
@@ -86,6 +99,19 @@ namespace engine
 
             if (Result result = m_SystemManager->UpdateAll(dt);result.IsFailure()) { logger->AddResult(result);}
 
+
+
+            renderer->GetRenderer()->BeginFrame();
+
+
+
+            //---------------------------------------------------------
+            rot_cube.Draw(*renderer->GetRenderer());
+            //---------------------------------------------------------
+
+            renderer->GetRenderer()->EndFrame();
+
+            window->GetWindow()->SetName(std::to_string(timer->GetFPS()));
 
            // std::cout << "ddddd\n";
         //End Of the Engine while() loop

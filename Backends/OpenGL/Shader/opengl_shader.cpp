@@ -11,10 +11,11 @@
 
 namespace backends
 {
-	OpenGLShader::OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
+	OpenGLShader::OpenGLShader(std::vector<engine::ShaderData>& sources)
 	{
 		GL_SCOPE();
-		m_Program = CreateShader(vertexSrc, fragmentSrc);
+		m_Program = CreateShader(sources);
+
 	}
 	OpenGLShader::~OpenGLShader()
 	{
@@ -34,9 +35,108 @@ namespace backends
 
 
 
+
+
+	unsigned int OpenGLShader::CreateShader(std::vector<engine::ShaderData>& sources)
+	{
+		GL_SCOPE();
+		//std::cout << "//// DEV //// \n CreateShader\n " << vertexSrc << std::endl;
+		//std::cout << "//// DEV //// \n CreateShader\n " << fragmentSrc << std::endl;
+
+
+		//std::string vertexShaderSource		= ParseShader(vertexSrc		);
+		////std::string fragmentShaderSource	= ParseShader(fragmentSrc	);
+
+
+		////std::cout << vertexShaderSource << std::endl;
+		///
+		///
+		///
+		//sources.
+
+		unsigned int program = glCreateProgram();
+		unsigned int shader_type;
+
+		std::vector<unsigned int> shader_ids;
+
+		for (auto& data : sources)
+		{
+			//std::cout << "ffffffff: " << ShaderStageToString(data.stage) << "\n";
+			//std::cout << "ffffffff: " << "\n";
+			//std::cout << "hhhgdfghfdfghhg: " << "\n";
+
+
+			std::cout << "ShaderStage: " << ShaderStageToString(data.stage) << "\n";
+
+			switch (data.stage)
+			{
+				case engine::ShaderStage::Vertex:					{ shader_type = GL_VERTEX_SHADER; break;}
+				case engine::ShaderStage::TessellationControl:		{ shader_type = GL_TESS_CONTROL_SHADER; break;}
+				case engine::ShaderStage::TessellationEvaluation:	{ shader_type = GL_TESS_EVALUATION_SHADER; break;}
+				case engine::ShaderStage::Geometry:					{ shader_type = GL_GEOMETRY_SHADER; break;}
+				case engine::ShaderStage::Fragment:					{ shader_type = GL_FRAGMENT_SHADER; break;}
+
+				case engine::ShaderStage::Compute:					{ shader_type = GL_COMPUTE_SHADER; break;}
+			}
+
+			unsigned int shader = CompileShader(shader_type	, data.shaderSource);
+			if (shader){shader_ids.push_back(shader);}
+
+
+				//std::cout << "ffffffff: " << "\n";
+
+
+			//std::vector<engine::ShaderStage> stages;
+			//stages.emplace_back(data);
+
+
+			// Assuming ShaderData has a way to check its stage and get its source string/content
+		//	if (data.stage == engine::ShaderStage::Vertex)
+		//	{
+		//		//vertexSrc = data.Source; // or data.GetSource()
+		//	}
+		//	else if (data.Stage == engine::ShaderStage::Fragment)
+		//	{
+		//		//fragmentSrc = data.Source;
+		//	}
+		}
+		//
+
+		if (sources.size() == shader_ids.size())
+		{
+
+			std::cout << "ddddd: " << "\n";
+
+			for (auto& compiled_data : shader_ids)
+			{
+				glAttachShader(program, compiled_data);
+			}
+
+			glLinkProgram(program);
+			glValidateProgram(program);
+
+			for (auto& compiled_data : shader_ids)
+			{
+				glDeleteShader(compiled_data);
+			}
+
+			//glAttachShader(program, vs);
+			////glAttachShader(program, fs);
+			//glLinkProgram(program);
+			//glValidateProgram(program);
+			//glDeleteShader(vs);
+			//glDeleteShader(fs);
+			return program;
+
+
+		}
+
+		return 0; //TODO
+	}
+
 	unsigned int OpenGLShader::CompileShader(unsigned int type, const std::string& source)
 	{
-		GL_SCOPE(); 
+		GL_SCOPE();
 
 		unsigned int id = glCreateShader(type);
 		const char* src = source.c_str();
@@ -59,32 +159,6 @@ namespace backends
 		}
 		return id;
 		//return 0; //TODO
-	}
-
-	unsigned int OpenGLShader::CreateShader(const std::string& vertexSrc, const std::string& fragmentSrc)
-	{
-		GL_SCOPE();
-		//std::cout << "//// DEV //// \n CreateShader\n " << vertexSrc << std::endl;
-		//std::cout << "//// DEV //// \n CreateShader\n " << fragmentSrc << std::endl;
-
-
-		//std::string vertexShaderSource		= ParseShader(vertexSrc		);
-		////std::string fragmentShaderSource	= ParseShader(fragmentSrc	);
-
-
-		////std::cout << vertexShaderSource << std::endl;
-
-		unsigned int program = glCreateProgram();
-		unsigned int vs = CompileShader(GL_VERTEX_SHADER, vertexSrc);
-		unsigned int fs = CompileShader(GL_FRAGMENT_SHADER, fragmentSrc);
-		glAttachShader(program, vs);
-		glAttachShader(program, fs);
-		glLinkProgram(program);
-		glValidateProgram(program);
-		glDeleteShader(vs);
-		glDeleteShader(fs);
-		return program;
-		return 0; //TODO
 	}
 
 	int OpenGLShader::GetUniformLocation(const std::string& name)

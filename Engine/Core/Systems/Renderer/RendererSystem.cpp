@@ -41,8 +41,10 @@ namespace engine
 
     Result RendererSystem::OnUpdate(float dt)
     {
-       //m_Renderer->BeginFrame();
-       //m_Renderer->EndFrame();
+      // m_Renderer->BeginFrame();
+
+
+      // m_Renderer->EndFrame();
 
 
         return {};

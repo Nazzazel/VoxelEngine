@@ -49,6 +49,7 @@ namespace engine
 
     Result PlatformSystem::OnUpdate(float dt)
     {
+        glfwPollEvents();
         return {};
     }
     Result PlatformSystem::OnShutdown()

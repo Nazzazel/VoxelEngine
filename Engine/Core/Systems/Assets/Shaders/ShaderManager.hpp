@@ -102,11 +102,13 @@ namespace engine
 
         ShaderData LoadShaderFromFilePath(ShaderStage stage, const std::filesystem::path& path,ShaderLanguage language, const std::string& customFileName="");
 
+        std::string GetSourceFromShader(std::filesystem::path shaderPath,ShaderLanguage shaderLanguage);
 
     private:
         AssetProviderContext* m_AssetProvider;
 
-        LoggerSystem* m_Logger;
+        LoggerSystem*   m_Logger;
+        FileSystem*     m_FileSystem;
 
         // Separate storage for graphics vs compute pipelines
 

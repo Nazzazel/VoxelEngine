@@ -6,6 +6,7 @@
 
 #include "ShaderData.hpp"
 #include "API/RendererApi.hpp"
+#include "Loader/ShaderLoader.hpp"
 
 
 namespace engine
@@ -13,7 +14,8 @@ namespace engine
     ShaderManager::ShaderManager(AssetProviderContext* provider)
         :m_AssetProvider(provider)
     {
-        m_Logger = m_AssetProvider->GetLoggerSystem();
+        m_Logger        = m_AssetProvider->GetLoggerSystem();
+        m_FileSystem    = m_AssetProvider->GetFileSystem();
 
 
     }
@@ -44,19 +46,56 @@ namespace engine
 
 
         backends::RendererAPIType api = backends::RendererAPI::GetAPI();
-        std::string basePath = m_AssetProvider->GetAssetRoot();
-        //std::string basePath = m_AssetProvider->GetAssetRoot() + "Engine/Res/Assets/Shaders/";
+        //std::string basePath = m_AssetProvider->GetAssetRoot();
+        std::string basePath = m_AssetProvider->GetAssetRoot() + "/Res/Assets/Shaders/";
         basePath +=
             ShaderTypeIDToString(type) + // Conrerts the ShaderTypeID to a string to be used in the file path
                 "/" +
                     backends::RendererAPI::RendererAPIToString(api) + // API to string aka OpelGL to "OpenGL"
                         "/";
         m_Logger->AddInfo(basePath);
-       std::unique_ptr<engine::IShader> TraditionalPipelineShader = engine::IShader::Create({
-          // {ShaderStage::Vertex, basePath + "Shaders/Vertex.vert.glsl"}
-           LoadShaderFromFilePath(ShaderStage::Vertex,basePath),
-           LoadShaderFromFilePath(ShaderStage::Fragment,basePath)
-       });
+
+        //const std::initializer_list<ShaderData> TraditionalShaders{};
+      //  TraditionalShaders.a//
+
+        //TODO DEAL WITH PIPELINES HAVE AN IDEA THIS CLASS NEEDS RETHINKING RAYTHACIN PIPELINE TRADITIONAL PIPELINE TAST PIPELINE AND COMPUTE PIPELINE
+
+
+
+        std::vector<ShaderData> traditionalShaderStages;
+        if (m_TradFLag.HasVertex())                 {traditionalShaderStages.push_back(LoadShaderFromFilePath(ShaderStage::Vertex                   ,basePath,ShaderLanguage::GLSL));}
+        if (m_TradFLag.HasTessellationControl())    {traditionalShaderStages.push_back(LoadShaderFromFilePath(ShaderStage::TessellationControl      ,basePath,ShaderLanguage::GLSL));}
+        if (m_TradFLag.HasTessellationEvaluation()) {traditionalShaderStages.push_back(LoadShaderFromFilePath(ShaderStage::TessellationEvaluation   ,basePath,ShaderLanguage::GLSL));}
+        if (m_TradFLag.HasGeometry())               {traditionalShaderStages.push_back(LoadShaderFromFilePath(ShaderStage::Geometry                 ,basePath,ShaderLanguage::GLSL));}
+        if (m_TradFLag.HasFragment())               {traditionalShaderStages.push_back(LoadShaderFromFilePath(ShaderStage::Fragment                 ,basePath,ShaderLanguage::GLSL));}
+
+         std::unique_ptr<engine::IShader> f_TraditionalPipelineShader = engine::IShader::Create(traditionalShaderStages);
+        if (f_TraditionalPipelineShader)
+        {
+            m_Logger->AddInfo("Shader wa ssussesfully added to the list : -> ", ShaderTypeIDToString(type) );
+            m_Shaders.emplace(type,std::move(f_TraditionalPipelineShader));
+        }
+        else
+        {
+            m_Logger->AddError("f_TraditionalPipelineShader was not initiated ShaderManager.cpp: ");
+        }
+
+        //TODO TASK BASED PIPELINE I NEED TO UNDERSTAND THIS , not now.
+     //  std::vector<ShaderData> taskShaderStages;
+     //  if (m_TradFLag.HasVertex())                 {taskShaderStages.push_back(LoadShaderFromFilePath(ShaderStage::Vertex                   ,basePath,ShaderLanguage::GLSL));}
+     //  if (m_TradFLag.HasTessellationControl())    {taskShaderStages.push_back(LoadShaderFromFilePath(ShaderStage::TessellationControl      ,basePath,ShaderLanguage::GLSL));}
+     //  if (m_TradFLag.HasTessellationEvaluation()) {taskShaderStages.push_back(LoadShaderFromFilePath(ShaderStage::TessellationEvaluation   ,basePath,ShaderLanguage::GLSL));}
+     //  if (m_TradFLag.HasGeometry())               {taskShaderStages.push_back(LoadShaderFromFilePath(ShaderStage::Geometry                 ,basePath,ShaderLanguage::GLSL));}
+     //  if (m_TradFLag.HasFragment())               {taskShaderStages.push_back(LoadShaderFromFilePath(ShaderStage::Fragment                 ,basePath,ShaderLanguage::GLSL));}
+
+     //  std::unique_ptr<engine::IShader> f_TaskPipelineShader = engine::IShader::Create(taskShaderStages);
+
+
+       // std::unique_ptr<engine::IShader> TraditionalPipelineShader = engine::IShader::Create({
+       //    // {ShaderStage::Vertex, basePath + "Shaders/Vertex.vert.glsl"}
+       //     LoadShaderFromFilePath(ShaderStage::Vertex,basePath,ShaderLanguage::GLSL),
+       //     LoadShaderFromFilePath(ShaderStage::Fragment,basePath,ShaderLanguage::GLSL)
+       // });
 
         //{ShaderStage::Vertex, GetSourceFromShader(basePath)}
 
@@ -78,9 +117,6 @@ namespace engine
 
         return {};
     }
-
-
-
 
 
 	std::string ShaderManager::ShaderTypeIDToString(ShaderTypeID type)
@@ -109,6 +145,7 @@ namespace engine
             {
                 if (!flag.HasFragment() || !flag.HasVertex())
                 {
+                    m_Logger->AddError("Traditional Shader Pipeline - Shader Object does not posses nessesary shader stages ( Fragment or Vertex ) )");
                     return GRAPHIC_RESULT(ShaderObjectDoesNotPossessNessesaryShaderStages,Error);
                 }
                 return {};
@@ -183,10 +220,59 @@ namespace engine
         }
 
 
+
+
         std::filesystem::path shaderPath = path / (shaderName + extension);
 
+        //std::cout << shaderPath << std::endl;
 
 
+        data.shaderSource = GetSourceFromShader(shaderPath,language);
+
+        return data;
+    }
+
+    std::string ShaderManager::GetSourceFromShader(std::filesystem::path shaderPath,ShaderLanguage shaderLanguage)
+    {
+        // 1. Assuming m_FileSystem is available inside your ShaderManager
+        // Pass the path as a string to your FileSystem virtual/native router
+        auto file = m_FileSystem->OpenFile(shaderPath);
+
+       // std::cerr << "hhhh: " << file << " \n";
+
+
+
+        if (!file || !file->IsOpen())
+        {
+            m_Logger->AddError("File could not be opened via FileSystem: " , shaderPath);
+            return "";
+        }
+
+        m_Logger->AddInfo("File opened via FileSystem:  " , shaderPath);
+
+        // 2. Read the file contents as binary bytes using your IFile interface
+        std::vector<uint8_t> data = file->ReadAsBinary();
+
+        // 3. Convert the byte vector safely into a std::string text block
+        return std::string(data.begin(), data.end());
+
+
+        // std::ifstream stream(shaderPath);
+        //
+        // if (!stream.is_open())
+        // {
+        //     std::cerr << "File could not be opened\n";
+        //     return "";
+        // }
+        //
+        // std::stringstream ss;
+        // ss << stream.rdbuf();
+        // // std::cout << "  1454ghyghhdhg : \n ";
+        // // std::cout << "  hgffgg : " << stream.rdbuf() << " \n";
+        // return ss.str();
+        // //return ""; //TODO
+
+        return "";
     }
 
 
@@ -199,11 +285,26 @@ namespace engine
 
     IShader* ShaderManager::Get(ShaderTypeID type)
     {
-
+        for (auto& shader : m_Shaders)
+        {
+            if (shader.first == type)
+            {
+             return shader.second.get();
+            }
+        }
+        return nullptr;
     }
 
     const IShader* ShaderManager::Get(ShaderTypeID type) const
     {
+        for (auto& shader : m_Shaders)
+        {
+            if (shader.first == type)
+            {
+                return shader.second.get();
+            }
+        }
+        return nullptr;
     }
 
     void ShaderManager::Clear()

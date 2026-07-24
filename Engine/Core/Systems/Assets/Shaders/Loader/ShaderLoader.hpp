@@ -3,18 +3,19 @@
 //
 
 
-#pragma once
-#include "Core/Systems/Assets/Shaders/IShader.hpp"
-
-
-namespace engine
-{
-    class ShaderLoader
-    {
-        public:
-        std::string GetSourceFromShader(ShaderStage stage,std::string shaderPath);
-        
-
-
-    };
-} // engine
+// #pragma once
+// #include "Core/Systems/Assets/Shaders/IShader.hpp"
+// #include "Core/Systems/Assets/Shaders/ShaderData.hpp"
+//
+//
+// namespace engine
+// {
+//     class ShaderLoader
+//     {
+//         public:
+//        static std::string GetSourceFromShader(std::filesystem::path shaderPath,ShaderLanguage shaderLanguage);
+//
+//
+//
+//     };
+// } // engine

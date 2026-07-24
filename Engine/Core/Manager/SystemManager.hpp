@@ -47,7 +47,10 @@ namespace engine
             }
 
             Result UpdateAll(float dt) const{
-                for (auto& sys : m_Systems){ if (Result result = sys->OnUpdate(dt);result.IsFailure()) return result;}
+                for (auto& sys : m_Systems)
+                {
+                    if (Result result = sys->OnUpdate(dt);result.IsFailure()) return result;
+                }
                 return {};
             }
 

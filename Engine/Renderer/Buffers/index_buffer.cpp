@@ -1,11 +1,11 @@
 #include "index_buffer.hpp"
-#include <Backends/API/RendererApi.hpp>
-#include <Backends/OpenGL/Buffers/opengl_index_buffer.hpp>
+#include "Backends/API/RendererApi.hpp"
+#include "Backends/OpenGL/Buffers/opengl_index_buffer.hpp"
 
 namespace engine
 {
 
-    std::unique_ptr<IndexBuffer> engine::IndexBuffer::Create(unsigned int* indices, unsigned int count)
+    std::unique_ptr<IndexBuffer> IndexBuffer::Create(unsigned int* indices, unsigned int count)
     {
         backends::RendererAPIType api = backends::RendererAPI::GetAPI();
         //TODO add more cases for other APIs

@@ -6,7 +6,7 @@ namespace engine
 	class IndexBuffer
 	{
 	public:
-		~IndexBuffer() = default;
+		virtual ~IndexBuffer() = default;
 
 		virtual void Bind()		const = 0;
 		virtual void Unbind()	const = 0;
