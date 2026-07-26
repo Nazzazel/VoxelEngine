@@ -165,7 +165,9 @@ namespace backends
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     }
-    
+
+
+
     void OpenGLRenderer::EndFrame()
     {
            for (const auto& cmd : m_DrawCommands) {
@@ -176,9 +178,12 @@ namespace backends
 
                // 2. Upload per-draw matrices to the active shader
                engine::IShader* shader = cmd.material->GetShader();
+
+
                if (shader) {
-                   shader->SetMat4("u_Projection", m_ProjectionMatrix);
                    shader->SetMat4("u_Model", cmd.modelMatrix);
+                   shader->SetMat4("u_View", m_SceneData.viewMatrix);
+                   shader->SetMat4("u_Projection", m_SceneData.projectionMatrix);
                }
 
                // 3. Bind geometry and draw
@@ -226,13 +231,15 @@ namespace backends
 
         // Create a 3D perspective field of view instead of 2D screen pixels
         float aspect = (float)width / (float)height;
-        m_ProjectionMatrix = glm::perspective(glm::radians(45.0f), aspect, 0.1f, 100.0f);
-
+        m_SceneData.projectionMatrix = glm::perspective(glm::radians(45.0f), aspect, 0.1f, 100.0f);
     }
 
-    const glm::mat4& OpenGLRenderer::GetProjection() const
+    void OpenGLRenderer::SetSceneData(const engine::SceneData& scene_data)
     {
-        return m_ProjectionMatrix;
+
+        m_SceneData.cameraPosition = scene_data.cameraPosition;
+        m_SceneData.viewMatrix     = scene_data.viewMatrix;
+
     }
 
     void OpenGLRenderer::Submit(const engine::DrawCommand& command)

@@ -8,8 +8,14 @@
 
 namespace voxelgame
 {
+    void Camera::Rotate()
+    {
+
+    }
+
     void Camera::MoveFront(float amount)
     {
+
         m_position.x += amount;
     }
 
@@ -33,4 +39,6 @@ namespace voxelgame
 
         return glm::mat4(1.0f);
     }
+
+
 } // voxelgame

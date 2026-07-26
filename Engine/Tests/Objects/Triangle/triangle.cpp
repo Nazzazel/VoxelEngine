@@ -126,8 +126,8 @@ namespace engine
        // model = glm::rotate(model, glm::radians(5.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 
-        m_shader->SetMat4("u_Projection", renderer.GetProjection());
-        m_shader->SetMat4("u_Model", model);
+       // m_shader->SetMat4("u_Projection", renderer.());
+       // m_shader->SetMat4("u_Model", model);
         //m_shader->SetMat4("u_Projection", projection);
 
         m_vao->Bind();

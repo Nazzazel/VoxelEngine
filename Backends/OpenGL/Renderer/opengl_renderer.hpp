@@ -22,7 +22,7 @@ namespace backends
 
 		//void DrawTriangle() override; //TODO remove this later
 
-        const glm::mat4& GetProjection() const override;
+        void SetSceneData(const engine::SceneData& scene_data);
 
         void Submit(const engine::DrawCommand& command) override;
 
@@ -37,6 +37,8 @@ namespace backends
         std::vector<engine::DrawCommand> m_DrawCommands;
 
         int all_indexes;
+        engine::SceneData m_SceneData;
+
 
         //int location;
         //float increment = 0.0f;

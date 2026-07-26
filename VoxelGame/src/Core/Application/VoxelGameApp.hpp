@@ -12,6 +12,8 @@
 
 #include <iostream>
 
+#include "Tests/Objects/Rotating Cube/rcube.hpp"
+#include "VoxelGame/Game/Camera/Camera.hpp"
 #include "VoxelGame/Input/GameInput.hpp"
 
 namespace voxelgame
@@ -41,6 +43,8 @@ namespace voxelgame
         glm::vec3 finalPos;
 
         std::unique_ptr<voxelgame::Camera> m_camera;
+
+        engine::SceneData m_SceneData;
 
     };
 } // voxelgame

@@ -303,6 +303,9 @@ namespace engine
 
     void Rot_Cube::Draw(IRenderer& renderer)
     {
+
+
+
        // m_shader->Bind();
 
 

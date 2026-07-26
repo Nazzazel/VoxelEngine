@@ -7,13 +7,12 @@
 #include "triangle.hpp"
 #include "AppInterface/EngineCore.hpp"
 #include "Core/Systems/Assets/AssetSystem.hpp"
-#include "Core/Systems/Event/Events.hpp"
 #include "Core/Systems/Event/EventSystem.hpp"
 #include "Core/Systems/Renderer/RendererSystem.hpp"
 #include "Core/Systems/Window/WindowSystem.hpp"
+#include "EngineStartUp/EngineStartup.hpp"
 #include "Systems/Platform/Input/EngineInput.hpp"
-#include "Tests/Objects/Rotating Cube/rcube.hpp"
-#include "VoxelGame/src/Core/Application/VoxelGameApp.hpp"
+
 
 
 // #include <Platform/Input/Debug/debug_input.hpp>
@@ -110,15 +109,37 @@ namespace engine
 
         logger->AddInfo("dddd");
 
-        auto last_frame_time = std::chrono::steady_clock::now();
+       // auto last_frame_time = std::chrono::steady_clock::now();
+
+        const double TARGET_UPS = 60.0; // Updates Per Second
+        const double TIME_PER_UPDATE = 1.0 / TARGET_UPS;
+
+        double accumulator = 0.0;
+        auto lastTime = std::chrono::high_resolution_clock::now();
+
+
+        auto inside_looptime_past = std::chrono::high_resolution_clock::now();
+        auto inside_looptime_now = std::chrono::high_resolution_clock::now();
+        std::common_type<std::chrono::nanoseconds, std::chrono::nanoseconds>::type inside_looptime_diffrence;
+
+        double inside_loop = 0.0f;
+        double inside_loop_time = 0.0f;
+        double inside_loop_fps = 0.0f;
 
         while (m_EngineRunning && !window->GetWindow()->ShouldClose())
         {
+
+            auto currentTime = std::chrono::high_resolution_clock::now();
+            std::chrono::duration<double> elapsedTime = currentTime - lastTime;
+            lastTime = currentTime;
+
+            accumulator += elapsedTime.count();
+
             // --- 1. Calculate Delta Time ---
-            auto current_frame_time = std::chrono::steady_clock::now();
-            std::chrono::duration<float> elapsed = current_frame_time - last_frame_time;
-            last_frame_time = current_frame_time;
-            float dt = elapsed.count();
+           // auto current_frame_time = std::chrono::steady_clock::now();
+           // std::chrono::duration<float> elapsed = current_frame_time - last_frame_time;
+           // last_frame_time = current_frame_time;
+            float dt = elapsedTime.count();
 
             if (Result result = m_SystemManager->UpdateAll(dt);result.IsFailure()) { logger->AddResult(result);}
 
@@ -135,12 +156,90 @@ namespace engine
 
             renderer->GetRenderer()->EndFrame();
 
-            window->GetWindow()->SetName(std::to_string(timer->GetFPS()));
+            std::string name = "Outside : " + std::to_string(timer->GetFPS()) + " : Inside : " + std::to_string(inside_loop);
+
+            window->GetWindow()->SetName(name);
+
+
+
+
+
 
            // std::cout << "ddddd\n";
         //End Of the Engine while() loop
             //logger->AddInfo("FPS: ",timer->GetFPS());
             ///std::this_thread::sleep_for(std::chrono::milliseconds(16));
+            ///
+            //
+            //
+            //
+            // int loops = 0;
+            // while (accumulator >= TIME_PER_UPDATE && loops < 5) {
+            //
+            //
+            //
+            //     //   UpdateGameLogic(TIME_PER_UPDATE); // AI, Physics, Movement
+            //     //inside_loop = timer->GetFPS();
+            //
+            //     //window->GetWindow()->SetName(std::to_string(inside_loop));
+            //
+            //     accumulator -= TIME_PER_UPDATE;
+            //     loops++;
+            // }
+
+            // while (inside_loop >= TARGET_UPS)
+            // {
+            //     inside_loop = 0;
+            //     inside_loop_fps++;
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            //
+            // }
+
+
+            // Catch up on game logic if frames are dropping, but limit it so it doesn't spiral of death
+            // int loops = 0;
+            // while (accumulator >= TIME_PER_UPDATE && loops < 5) {
+            //    // UpdateGameLogic(TIME_PER_UPDATE); // AI, Physics, Movement
+            //
+            //
+            //     std::chrono::duration<double> gt = currentTime - lastTime;
+            //
+            //     inside_loop_fps = inside_loop/gt.count();
+            //
+            //     std::cout << "1:" << inside_loop_fps << " : " << inside_loop << std::endl;
+            //
+            //     accumulator -= TIME_PER_UPDATE;
+            //     loops++;
+            // }
+
+            int loops = 0;
+            while (accumulator >= TIME_PER_UPDATE && loops < 5)
+            {
+                inside_looptime_now = std::chrono::high_resolution_clock::now();
+                inside_looptime_diffrence = inside_looptime_now - inside_looptime_past;
+                inside_looptime_past = inside_looptime_now;
+
+
+
+
+
+                auto seconds_duration = std::chrono::duration_cast<std::chrono::microseconds>(inside_looptime_diffrence);
+
+                inside_loop_fps = 1.0f / seconds_duration.count();
+
+                std::cout << ":" << inside_loop_fps << " : " <<  seconds_duration  << std::endl;
+                inside_loop = 0;
+
+
+                loops++;
+            }
+            inside_loop++;
         }
 
     }

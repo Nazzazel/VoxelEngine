@@ -19,16 +19,12 @@
 //#include "../Engine/Manager/SystemManager/system_manager.hpp"
 #include "Additions/StartUpConfig/start_up_config.hpp"
 #include "Core/Manager/SystemManager.hpp"
-#include "API/RendererApi.hpp"
-#include "EngineStartUp/EngineStartup.hpp"
 
 //LLLL
 #include "AppInterface/IAppInterface.hpp"
-#include "Core/Systems/Logger/LoggerSystem.hpp"
+
 #include "../Systems/Renderer/IRenderer/IRenderer.hpp"
 #include "AppInterface/EngineCore.hpp"
-#include "Tests/Objects/Rotating Cube/rcube.hpp"
-#include "VoxelGame/Game/Camera/Camera.hpp"
 
 
 namespace engine

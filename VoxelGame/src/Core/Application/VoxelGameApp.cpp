@@ -5,6 +5,7 @@
 #include "VoxelGameApp.hpp"
 
 #include "Core/Systems/Input/InputSystem.hpp"
+#include "VoxelGame/Game/Camera/Camera.hpp"
 #include "VoxelGame/Input/GameInput.hpp"
 
 namespace voxelgame
@@ -41,10 +42,6 @@ namespace voxelgame
 
 
             m_camera = std::make_unique<voxelgame::Camera>();
-
-
-
-
         }
 
         void VoxelGameApp::OnUpdate(engine::IAppInterface* engine,float dt)
@@ -67,6 +64,11 @@ namespace voxelgame
          {
           m_camera->SetPosition(glm::vec3(0.0f));
          }
+         if (inputMap->IsKeyPressed(engine::KeyCodes::KEY_R))
+         {
+          //m_camera->Rotate(glm::vec3(0.0f));
+         }
+
 
           //  engine->GetLoggerSystem()->AddInfo("lol engine");
             // //TODO DEAL WITH THIS debugtools::Logger::Log(debugtools::LogLevel::Info, "DDDDDD");
@@ -101,8 +103,12 @@ namespace voxelgame
           // float ab = 3.0f;
 
            //m_Rot_Cube->AdditionalData(ab);
+           renderer.SetSceneData(m_SceneData);
            m_Rot_Cube->SetPosition(m_camera->GetPosition());
            m_Rot_Cube->Draw(renderer);
+
+
+
 
 
 

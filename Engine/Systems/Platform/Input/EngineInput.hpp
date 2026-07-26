@@ -41,13 +41,19 @@ namespace engine
         void GLFWEventCallbacks()
         {
 
-            //Event Subscriptions
 
+            //Event Subscriptions
             event_system->GetEventBus()->Subscribe<engine::events::WindowResizeEvent>([this](engine::events::WindowResizeEvent& e){
 
                 logger->AddCallbackMsg("Window resized to: ",e.Width ," x ",e.Height);
+                this->renderer->GetRenderer()->OnResize(e.Width ,e.Height);
+
+               // this->
 
             });
+
+
+
 
             event_system->GetEventBus()->Subscribe<engine::events::WindowFocusEvent>([this](engine::events::WindowFocusEvent& e){
 

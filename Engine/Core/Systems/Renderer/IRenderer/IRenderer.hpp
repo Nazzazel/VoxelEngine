@@ -21,16 +21,12 @@ namespace engine
 		std::shared_ptr<Mesh>		mesh;
 		std::shared_ptr<Material>	material;
 		glm::mat4 modelMatrix = glm::mat4(1.0f);
+	};
 
-
-		//uint32_t indexCount = 0;
-		//float customFloat = 0.0f; // For your m_i variable if needed per-draw
-
-
-		///later deal with opaque
-		///
-		///
-		//glm::mat4 modelMatrix;
+	struct SceneData {
+		glm::mat4 viewMatrix;
+		glm::mat4 projectionMatrix;
+		glm::vec3 cameraPosition;
 	};
 
 
@@ -46,11 +42,10 @@ namespace engine
         virtual void EndFrame() = 0;
 
         virtual void OnResize(int width, int height) = 0;
-        virtual const glm::mat4& GetProjection() const = 0;
-
 
     	// Add the Submit function
     	virtual void Submit(const DrawCommand& command) = 0;
+    	virtual void SetSceneData(const SceneData& scene_data) = 0;
 
 		//virtual void DrawTriangle() = 0; //TODO remove this later
         //virtual void DrawIndexed(const std::unique_ptr<VertexArray>& vao) = 0;
@@ -58,6 +53,7 @@ namespace engine
     	void DrawMeshTasks(uint32_t groupCountX, uint32_t groupCountY, uint32_t groupCountZ){};//TODO Later
 
         static std::unique_ptr<IRenderer> Create();
+
 	protected:
 		//std::unique_ptr<engine::ShaderLibrary> m_ShaderLibrary; //TODO remove this later
 

@@ -30,6 +30,7 @@ add_subdirectory(Engine)
 add_subdirectory(DebugTools)
 add_subdirectory(Backends)
 add_subdirectory(VoxelGame)
+#add_subdirectory(Try2)
 
 
 # Add your engine modules in order of dependencies
@@ -38,4 +39,5 @@ add_subdirectory(VoxelGame)
 add_definitions(-DPROJECT_ROOT="${CMAKE_SOURCE_DIR}/")
 
 # This runs IMMEDIATELY when CMake configures/reloads, not during the build.
-file(COPY "${CMAKE_SOURCE_DIR}/Engine/Res" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/VoxelGame")
+#file(COPY "${CMAKE_SOURCE_DIR}/Engine/Res" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/VoxelGame")
+file(COPY "${CMAKE_SOURCE_DIR}/Engine/Res" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/Try2")
