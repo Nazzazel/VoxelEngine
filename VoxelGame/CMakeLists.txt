@@ -1,4 +1,5 @@
 # Gather main.cpp alongside any demo scene structures (Triangle, Rot_Cube, etc.)
+
 file(GLOB_RECURSE VOXEL_GAME_SOURCES "*.cpp")
 
 add_executable(VoxelGame ${VOXEL_GAME_SOURCES}
@@ -16,6 +17,11 @@ add_executable(VoxelGame ${VOXEL_GAME_SOURCES}
         src/Input/Devices/Controller/controller.hpp
         src/Input/InputManager.cpp
         src/Input/InputManager.hpp
+        Input/GameInput.cpp
+        Input/GameInput.hpp
+        Game/Player.hpp
+        Game/Camera/Camera.cpp
+        Game/Camera/Camera.hpp
 )
 
 # 1. Add Tracy::TracyClient to the end of this list
@@ -32,10 +38,5 @@ target_precompile_headers(VoxelGame
 #        ${CMAKE_CURRENT_SOURCE_DIR}/Core/Base/--PreCompileHeaders--/pch.hpp
 #)
 
-add_custom_command(
-        TARGET VoxelGame POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory
-        "${CMAKE_SOURCE_DIR}/Engine/Res"
-        "$<TARGET_FILE_DIR:VoxelGame>/Res"
-        COMMENT "Copying resource files to VoxelGame output directory..."
-)
+
+

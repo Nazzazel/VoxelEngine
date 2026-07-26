@@ -28,7 +28,8 @@ namespace engine
             //---------------------------------------------------------------
             const  int windowWidth,
             const  int windowHeight,
-                   std::string title)
+                   std::string title
+                   )
             //---------------------------------------------------------------
         : m_windowWidth(windowWidth), m_windowHeight(windowHeight), m_title(std::move(title)) {}
 

@@ -12,7 +12,9 @@
 #include "Core/Systems/Window/WindowSystem.hpp"
 #include "../../Systems/Renderer/IRenderer/IRenderer.hpp"
 #include "Core/Systems/Assets/AssetSystem.hpp"
+#include "Core/Systems/Event/EventSystem.hpp"
 #include "Core/Systems/File/FileSystem.hpp"
+#include "Core/Systems/Input/InputSystem.hpp"
 
 
 namespace engine
@@ -31,12 +33,15 @@ namespace engine
       if (Result result = m_SystemManager.RegisterSystem<WindowSystem   >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
 
 
-      if (Result result = m_SystemManager.RegisterSystem<RendererSystem >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
+      if (Result result = m_SystemManager.RegisterSystem<EventSystem    >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
 
       if (Result result = m_SystemManager.RegisterSystem<RendererSystem >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
       if (Result result = m_SystemManager.RegisterSystem<FileSystem     >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
 
       if (Result result = m_SystemManager.RegisterSystem<AssetSystem    >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
+
+      //More Advanced Stuff
+      if (Result result = m_SystemManager.RegisterSystem<InputSystem    >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
 
 
 

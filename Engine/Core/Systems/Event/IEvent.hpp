@@ -8,7 +8,7 @@ namespace engine
 {
     struct IEvent
     {
-        virtual ~Event() = default;
+        virtual ~IEvent() = default;
         bool Handled = false;//Propagation
     };
 }

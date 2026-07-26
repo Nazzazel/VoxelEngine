@@ -23,7 +23,7 @@ namespace engine
             // Store the callback wrapped in std::function, casted to accept the base Event
             auto wrapper = [cb = std::forward<Func>(callback)](IEvent& e) {
                 cb(static_cast<T&>(e));
-            };
+            };//lAMBDASS ARE COOL
             m_Subscribers[typeid(T)].push_back(wrapper);
         }
 

@@ -1,10 +1,10 @@
 #pragma once
-#include "Engine/Renderer/Buffers/index_buffer.hpp"
+#include "Engine/Systems/Renderer/Buffers/IIndexBuffer.hpp"
 
 
 namespace backends
 {
-	class OpenGLIndexBuffer : public engine::IndexBuffer
+	class OpenGLIndexBuffer : public engine::IIndexBuffer
 	{
 	public:
 		OpenGLIndexBuffer(unsigned int* indices, unsigned int count);

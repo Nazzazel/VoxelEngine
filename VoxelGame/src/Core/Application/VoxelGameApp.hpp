@@ -6,11 +6,13 @@
 
 
 #include "Core/Application/Application.hpp"
-#include "../../../../Engine/Core/Systems/Renderer/IRenderer/IRenderer.hpp"
+#include "Engine/Core/Systems/Renderer/IRenderer/IRenderer.hpp"
 
 #include "Core/Application/AppInterface/IAppInterface.hpp"
 
 #include <iostream>
+
+#include "VoxelGame/Input/GameInput.hpp"
 
 namespace voxelgame
 {
@@ -23,16 +25,22 @@ namespace voxelgame
 
         void OnInit(engine::IAppInterface* engine) override;
 
-        void OnUpdate(engine::IAppInterface* engine) override;
+        void OnUpdate(engine::IAppInterface* engine,float dt) override;
 
         //void OnRender(engine::Renderer& renderer) override;
-        void OnRender() override;
+        void OnRender(engine::IRenderer& rendererm) override;
 
         void OnShutdown() override;
 
     private:
-        //std::unique_ptr<engine::Rot_Cube> m_Rot_Cube;//TODO delete
+        std::unique_ptr<engine::Rot_Cube> m_Rot_Cube;//TODO delete
+        GameInput input;
+        engine::KeybordInputStateMap* keybordInputStateMap;
 
+        std::unique_ptr<glm::vec3> m_pos_ptr;
+        glm::vec3 finalPos;
+
+        std::unique_ptr<voxelgame::Camera> m_camera;
 
     };
 } // voxelgame

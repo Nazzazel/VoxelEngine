@@ -126,6 +126,12 @@ namespace engine
         }
     }
 
+    std::string WindowGLFW::GetJoystickName(int jid) const
+    {
+        return glfwGetJoystickName(jid);
+       // return "";
+    }
+
     bool WindowGLFW::IsFocused() const
     {
         if (!m_Window) return false;

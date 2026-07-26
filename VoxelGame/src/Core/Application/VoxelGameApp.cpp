@@ -4,6 +4,9 @@
 
 #include "VoxelGameApp.hpp"
 
+#include "Core/Systems/Input/InputSystem.hpp"
+#include "VoxelGame/Input/GameInput.hpp"
+
 namespace voxelgame
 {
 
@@ -13,18 +16,59 @@ namespace voxelgame
 
         void VoxelGameApp::OnInit(engine::IAppInterface* engine)
         {
+            input = GameInput();
+           // input = &G;
+
+
+            m_pos_ptr = std::make_unique<glm::vec3>();
+            input.SetVec3Ptr(m_pos_ptr.get());
+
+
+            engine->GetLoggerSystem();
+            keybordInputStateMap = engine->GetInputSystem()->GetKeybordInputStateMap();
+           // keybordInputStateMap->SetIInput(&input);
+
+
+
             //std::cout << "ffff132424" << std::endl;
 
             //DT_ERROR("lol");//TODO first
             // //TODO DEAL WITH THIS debugtools::Logger::Log(debugtools::LogLevel::Info, "hhhhhhh");
-           // m_Rot_Cube = std::make_unique<engine::Rot_Cube>();
+            m_Rot_Cube = std::make_unique<engine::Rot_Cube>();
            // m_Rot_Cube->Init(GetAssetManager());
+            m_Rot_Cube->Init(*engine->GetAssetSystem());
+
+
+
+            m_camera = std::make_unique<voxelgame::Camera>();
+
+
+
 
         }
 
-        void VoxelGameApp::OnUpdate(engine::IAppInterface* engine)
+        void VoxelGameApp::OnUpdate(engine::IAppInterface* engine,float dt)
         {
-            engine->GetLoggerSystem()->AddInfo("lol engine");
+
+         // Get the input state map via your engine interface or stored pointer
+         auto inputMap = engine->GetInputSystem()->GetKeybordInputStateMap();
+
+         float moveSpeed = 5.0f * dt; // Scale by delta time!
+
+         if (inputMap->IsKeyPressed(engine::KeyCodes::KEY_W))
+         {
+          m_camera->MoveFront(moveSpeed);
+         }
+         if (inputMap->IsKeyPressed(engine::KeyCodes::KEY_S))
+         {
+          m_camera->MoveFront(-moveSpeed);
+         }
+         if (inputMap->IsKeyPressed(engine::KeyCodes::KEY_ESCAPE))
+         {
+          m_camera->SetPosition(glm::vec3(0.0f));
+         }
+
+          //  engine->GetLoggerSystem()->AddInfo("lol engine");
             // //TODO DEAL WITH THIS debugtools::Logger::Log(debugtools::LogLevel::Info, "DDDDDD");
             //auto shader = GetAssetManager().GetShaderManager().Get(engine::ShaderTypeID::Basic); //TODO remove this later
             //shader->Bind(); //TODO remove this later
@@ -49,12 +93,21 @@ namespace voxelgame
         }
 
         //void VoxelGameApp::OnRender(engine::Renderer& renderer)
-        void VoxelGameApp::OnRender()
+        void VoxelGameApp::OnRender(engine::IRenderer& renderer)
         {
+
+           // rot_cube.Draw(*renderer->GetRenderer());
+
           // float ab = 3.0f;
 
-          // m_Rot_Cube->AdditionalData(ab);
-          // m_Rot_Cube->Draw(renderer);
+           //m_Rot_Cube->AdditionalData(ab);
+           m_Rot_Cube->SetPosition(m_camera->GetPosition());
+           m_Rot_Cube->Draw(renderer);
+
+
+
+
+
           // //std::cout << "ggggg "<< std::endl;
           // //renderer.DrawTriangle(); //TODO remove this later
 

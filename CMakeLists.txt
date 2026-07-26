@@ -37,3 +37,5 @@ add_subdirectory(VoxelGame)
 #Localisation of project
 add_definitions(-DPROJECT_ROOT="${CMAKE_SOURCE_DIR}/")
 
+# This runs IMMEDIATELY when CMake configures/reloads, not during the build.
+file(COPY "${CMAKE_SOURCE_DIR}/Engine/Res" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/VoxelGame")

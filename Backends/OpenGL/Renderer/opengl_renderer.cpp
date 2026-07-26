@@ -12,6 +12,7 @@
 
 //DebugTools
 #include "Backends/OpenGL/Debug/GLScope.hpp"
+#include "Systems/Renderer/Renderer/DrawComponents.hpp"
 
 
 static void APIENTRY OpenGLDebugCallback(
@@ -106,48 +107,51 @@ namespace backends
 
 
 
+        {
+            //float positions[]
+            //{
+            //    -0.5f,  -0.5f,
+            //     0.5f,  -0.5f,
+            //     0.5f,   0.5f,
+            //    -0.5f,   0.5f
+            //};
+            //
+            //unsigned int indices[] = {
+            //    0,1,2,
+            //    2,3,0
+            //};
+            //
+            //unsigned int buffer;
+            //GLCall(glGenBuffers(1, &buffer));
+            //GLCall(glBindBuffer(GL_ARRAY_BUFFER, buffer));
+            //GLCall(glBufferData(GL_ARRAY_BUFFER, 4 * 2 * sizeof(float), positions, GL_STATIC_DRAW));
+            //
+            //GLCall(glEnableVertexAttribArray(0));
+            //// READ THE dock.gl
+            ////(const pointer*) - casting to pointer
+            //GLCall(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0));
+            //
+            //unsigned int ibo;
+            //GLCall(glGenBuffers(1, &ibo));
+            //GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo));
+            //GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW));
+            //
+            //
+            //
+            //ShaderProgramSource source = ParseShader("../Engine/Res/shaders/Basic.shader");
+            //
+            //unsigned int shader = CreateShader(source.VertexSource, source.FragmentSource);
+            //GLCall(glUseProgram(shader));
+            //
+            //GLCall(location = glGetUniformLocation(shader, "u_Color"));
+            //ASSERT(location != -1);
+            //GLCall(glUniform4f(location, 0.8f, 0.3f, 0.8f, 1.0f));
+            //
+            //r = 0.0f;
+            //increment = 0.05f;
 
-        //float positions[]
-        //{
-        //    -0.5f,  -0.5f,
-        //     0.5f,  -0.5f,
-        //     0.5f,   0.5f,
-        //    -0.5f,   0.5f
-        //};
-        //
-        //unsigned int indices[] = {
-        //    0,1,2,
-        //    2,3,0
-        //};
-        //
-        //unsigned int buffer;
-        //GLCall(glGenBuffers(1, &buffer));
-        //GLCall(glBindBuffer(GL_ARRAY_BUFFER, buffer));
-        //GLCall(glBufferData(GL_ARRAY_BUFFER, 4 * 2 * sizeof(float), positions, GL_STATIC_DRAW));
-        //
-        //GLCall(glEnableVertexAttribArray(0));
-        //// READ THE dock.gl
-        ////(const pointer*) - casting to pointer
-        //GLCall(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0));
-        //
-        //unsigned int ibo;
-        //GLCall(glGenBuffers(1, &ibo));
-        //GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo));
-        //GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW));
-        //
-        //
-        //
-        //ShaderProgramSource source = ParseShader("../Engine/Res/shaders/Basic.shader");
-        //
-        //unsigned int shader = CreateShader(source.VertexSource, source.FragmentSource);
-        //GLCall(glUseProgram(shader));
-        //
-        //GLCall(location = glGetUniformLocation(shader, "u_Color"));
-        //ASSERT(location != -1);
-        //GLCall(glUniform4f(location, 0.8f, 0.3f, 0.8f, 1.0f));
-        //
-        //r = 0.0f;
-        //increment = 0.05f;
+
+        }
 
 
 
@@ -164,6 +168,43 @@ namespace backends
     
     void OpenGLRenderer::EndFrame()
     {
+           for (const auto& cmd : m_DrawCommands) {
+               if (!cmd.mesh || !cmd.material) continue;
+
+               // 1. Bind material (binds shader and uploads its custom uniforms)
+               cmd.material->Bind();
+
+               // 2. Upload per-draw matrices to the active shader
+               engine::IShader* shader = cmd.material->GetShader();
+               if (shader) {
+                   shader->SetMat4("u_Projection", m_ProjectionMatrix);
+                   shader->SetMat4("u_Model", cmd.modelMatrix);
+               }
+
+               // 3. Bind geometry and draw
+               cmd.mesh->GetVertexArray()->Bind();
+               DrawIndexed(cmd.mesh->GetIndexCount());
+           }
+
+            //if (!command.shader || !command.vertexArray) continue;
+//
+            //command.shader->Bind();
+//
+            //// Send global camera/projection matrix and local model matrix
+            //command.shader->SetMat4("u_Projection", m_Projection);
+            //command.shader->SetMat4("u_Model", command.modelMatrix);
+            //command.shader->SetFloat("u_X", command.customFloat); // If you're passing your custom float
+//
+            //// Bind vertex array and issue draw call
+            //command.vertexArray->Bind();
+            //DrawIndexed(command.indexCount);
+
+        m_DrawCommands.clear();
+
+       // std::cout << "Cubes        : " <<m_DrawCommands.size()   << std::endl;
+       // std::cout << "Cubes Points : " <<m_DrawCommands.size()*8 << std::endl;
+
+
         glfwSwapBuffers(glfwGetCurrentContext());
     }
 
@@ -185,13 +226,18 @@ namespace backends
 
         // Create a 3D perspective field of view instead of 2D screen pixels
         float aspect = (float)width / (float)height;
-        m_Projection = glm::perspective(glm::radians(45.0f), aspect, 0.1f, 100.0f);
+        m_ProjectionMatrix = glm::perspective(glm::radians(45.0f), aspect, 0.1f, 100.0f);
 
     }
 
     const glm::mat4& OpenGLRenderer::GetProjection() const
     {
-        return m_Projection;
+        return m_ProjectionMatrix;
+    }
+
+    void OpenGLRenderer::Submit(const engine::DrawCommand& command)
+    {
+        m_DrawCommands.push_back(command);
     }
 
     void OpenGLRenderer::DrawIndexed(uint32_t indexCount)

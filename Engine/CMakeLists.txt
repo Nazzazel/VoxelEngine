@@ -59,17 +59,25 @@ add_library(Engine STATIC ${ENGINE_SOURCES}
         Core/Systems/Assets/Shaders/Loader/ShaderLoader.cpp
         Core/Systems/Assets/Shaders/Loader/ShaderLoader.hpp
         Core/Systems/Assets/Shaders/ShaderData.hpp
-        Renderer/Buffers/vertex_array.hpp
-        Renderer/Buffers/vertex_array.cpp
-        Renderer/Buffers/vertex_buffer.hpp
-        Renderer/Buffers/vertex_buffer.cpp
-        Renderer/Buffers/index_buffer.hpp
-        Renderer/Buffers/index_buffer.cpp
+        Systems/Renderer/Buffers/IVertexArray.hpp
+        Systems/Renderer/Buffers/IVertexArray.cpp
+        Systems/Renderer/Buffers/IVertexBuffer.hpp
+        Systems/Renderer/Buffers/IVertexBuffer.cpp
+        Systems/Renderer/Buffers/IIndexBuffer.hpp
+        Systems/Renderer/Buffers/IIndexBuffer.cpp
         Core/Systems/Event/EventSystem.cpp
         Core/Systems/Event/EventSystem.hpp
         Core/Systems/Event/EventBus.hpp
         Core/Systems/Event/IEvent.hpp
         Core/Systems/Event/Events.hpp
+        Systems/Renderer/Renderer/DrawComponents.hpp
+        Systems/Platform/Input/EngineInput.hpp
+        Systems/Platform/Input/InputMapStates.hpp
+        Systems/Platform/Input/KeyCodes.hpp
+        Systems/Platform/Input/IInput.hpp
+        Core/Systems/Input/InputSystem.cpp
+        Core/Systems/Input/InputSystem.hpp
+        Core/Base/--PreCompileHeaders--/General/Graphic.hpp
 
 )
 

@@ -31,6 +31,8 @@ namespace engine
         virtual void GetWindowSize(int &windowWidth, int &windowHeight) = 0;
         virtual void GetFramebufferSize(int &framebufferWidth,int &framebufferHeight) = 0;
 
+        [[nodiscard]] virtual std::string GetJoystickName(int jid) const = 0 ;
+
         //Bool
         [[nodiscard]] virtual bool IsFocused() const = 0;
         [[nodiscard]] virtual bool IsMinimized() const = 0;

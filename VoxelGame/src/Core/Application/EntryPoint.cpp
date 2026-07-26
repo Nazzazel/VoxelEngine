@@ -12,6 +12,7 @@ int main()
 {
     engine::WindowConfig win_config(1280,720,"GameEngine");
     engine::AdditionalParams additionalParams{ .m_debugMode = true};
+
     engine::AppSettings settings(win_config, additionalParams);
 
     voxelgame::VoxelGameApp app(settings);

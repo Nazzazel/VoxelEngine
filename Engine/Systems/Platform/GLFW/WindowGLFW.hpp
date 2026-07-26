@@ -36,6 +36,9 @@ namespace engine
         void GetWindowSize(int &windowWidth, int &windowHeight) override;
         void GetFramebufferSize(int &framebufferWidth,int &framebufferHeight) override;
 
+        std::string GetJoystickName(int jid) const override;
+
+
         //Bool
          [[nodiscard]] bool IsFocused() const override;
          [[nodiscard]] bool IsMinimized() const override;

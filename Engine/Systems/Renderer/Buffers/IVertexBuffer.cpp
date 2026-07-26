@@ -1,4 +1,4 @@
-#include "vertex_buffer.hpp"
+#include "IVertexBuffer.hpp"
 #include "Backends/OpenGL/Buffers/opengl_vertex_buffer.hpp"
 #include "Backends/API/RendererApi.hpp"
 
@@ -6,7 +6,7 @@
 namespace engine
 {
 
-    std::unique_ptr<VertexBuffer> VertexBuffer::Create(const void* data, unsigned int size)
+    std::unique_ptr<IVertexBuffer> IVertexBuffer::Create(const void* data, unsigned int size)
     {
 		backends::RendererAPIType api = backends::RendererAPI::GetAPI();
 		//TODO add more cases for other APIs
@@ -34,7 +34,7 @@ namespace engine
             break;
             //TODO
         }
-        return std::unique_ptr<VertexBuffer>();
+        return std::unique_ptr<IVertexBuffer>();
     }
 
 }

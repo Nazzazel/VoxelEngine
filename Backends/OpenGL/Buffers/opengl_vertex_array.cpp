@@ -1,6 +1,6 @@
 #include "opengl_vertex_array.hpp"
-#include "Engine/Renderer/Buffers/vertex_buffer.hpp"
-#include "Engine/Renderer/Buffers/buffer_layout.hpp"
+#include "Engine/Systems/Renderer/Buffers/IVertexBuffer.hpp"
+#include "Engine/Systems/Renderer/Buffers/IBufferLayout.hpp"
 #include <glad/glad.h>
 
 #include "Backends/OpenGL/Debug/GLScope.hpp"
@@ -35,12 +35,15 @@ namespace backends
         glBindVertexArray(0);
     }
 
-    void OpenGLVertexArray::AddVertexBuffer(std::unique_ptr<engine::VertexBuffer> vb)
+    void OpenGLVertexArray::AddVertexBuffer(std::unique_ptr<engine::IVertexBuffer> vb)
     {
         GL_SCOPE();
-        Bind();
-        
 
+
+        vb->Bind();
+
+
+        Bind();
         //m_VertexBuffers.emplace_back()
             
         const auto& layout = vb->GetLayout();
@@ -51,10 +54,13 @@ namespace backends
         {
             glEnableVertexAttribArray(index);
 
+            //std::cout << element.Name << std::endl;
+
             glVertexAttribPointer(
                 index,
                 GetComponentCount(element.Type),
-                GL_FLOAT,
+                ShaderDataTypeToOpenGLBaseType(element.Type),
+             //GL_FLOAT,
                 element.Normalised ? GL_TRUE : GL_FALSE,
                 layout.GetStride(),
                 (const void*)element.Offset
@@ -137,7 +143,7 @@ namespace backends
 
 
 
-    void OpenGLVertexArray::SetIndexBuffer(std::unique_ptr<engine::IndexBuffer> ibo)
+    void OpenGLVertexArray::SetIndexBuffer(std::unique_ptr<engine::IIndexBuffer> ibo)
     {
         Bind();
         ibo->Bind();
@@ -152,7 +158,8 @@ namespace backends
         return m_IndexBuffer ? m_IndexBuffer->GetCount() : 0;
     }
 
-    static GLenum ShaderDataTypeToOpenGLBaseType(engine::ShaderDataType type)
+    GLenum OpenGLVertexArray::ShaderDataTypeToOpenGLBaseType(engine::ShaderDataType type)
+    //static GLenum ShaderDataTypeToOpenGLBaseType(engine::ShaderDataType type)
     {
         switch (type)   
         {

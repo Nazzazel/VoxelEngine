@@ -26,6 +26,9 @@
 #include "AppInterface/IAppInterface.hpp"
 #include "Core/Systems/Logger/LoggerSystem.hpp"
 #include "../Systems/Renderer/IRenderer/IRenderer.hpp"
+#include "AppInterface/EngineCore.hpp"
+#include "Tests/Objects/Rotating Cube/rcube.hpp"
+#include "VoxelGame/Game/Camera/Camera.hpp"
 
 
 namespace engine
@@ -53,21 +56,24 @@ namespace engine
         void StopGameRunning() { m_GameRunning = false; }
         void StartGameRunning() { m_GameRunning = true; }
 
+
+        void RunDDD(int a);
+
         //TODO other types of getters for ex toolmanager
 
     protected:
         // for game-specific logic later
-        virtual void OnInit(engine::IAppInterface* engine) {}//TODO
-        virtual void OnUpdate(IAppInterface* engine) {}
+        virtual void OnInit(engine::IAppInterface* engine){};//TODO
+        virtual void OnUpdate(IAppInterface* engine,float dt) {}
        // virtual void OnRender(Renderer& m_Renderer) {}
-        virtual void OnRender() {}
+        virtual void OnRender(engine::IRenderer& renderer) {}
         virtual void OnShutdown() {} //TODO
 
     private:
 
 
         std::unique_ptr<engine::SystemManager> m_SystemManager;
-
+        LoggerSystem* logger;
 
 
 		//IDK if I need this but I will add it later if I do
@@ -93,11 +99,13 @@ namespace engine
 
 
         AppSettings m_Settings;//INIT and app settings get from the projects stitting atop/using engine
+        EngineCore* core;
+
 
         float deltaTime = 0.0f;;
         bool m_EngineRunning = true;
         bool m_GameRunning = true;
-
+       // Rot_Cube rot_cube;
 
         // void StatsInit();
         void FpsDelta();
@@ -116,4 +124,6 @@ namespace engine
 
 
     };
+
+
 }

@@ -7,4 +7,5 @@
 
 // STL
 #include "Std.hpp"
+#include "Graphic.hpp"
 #include "EngineBaseHeaders.hpp"

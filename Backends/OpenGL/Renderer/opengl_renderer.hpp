@@ -24,12 +24,20 @@ namespace backends
 
         const glm::mat4& GetProjection() const override;
 
+        void Submit(const engine::DrawCommand& command) override;
+
+
+
 		void DrawIndexed(uint32_t indexCount) override;
 
 
     private:
+        glm::mat4 m_ProjectionMatrix;
 
-        glm::mat4 m_Projection;
+        std::vector<engine::DrawCommand> m_DrawCommands;
+
+        int all_indexes;
+
         //int location;
         //float increment = 0.0f;
         //float r = 0.0f;

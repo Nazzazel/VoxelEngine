@@ -3,10 +3,9 @@
 
 #include "Core/Systems/Assets/AssetSystem.hpp"
 #include "Core/Systems/Renderer/IRenderer/IRenderer.hpp"
-#include "Core/Systems/Assets/Shaders/IShader.hpp"
-#include "Engine/Renderer/Buffers/vertex_array.hpp"
-#include "Engine/Renderer/Buffers/vertex_buffer.hpp"
-#include "Engine/Renderer/Buffers/index_buffer.hpp"
+#include "Engine/Systems/Renderer/Buffers/IVertexArray.hpp"
+#include "Engine/Systems/Renderer/Buffers/IVertexBuffer.hpp"
+#include "Engine/Systems/Renderer/Buffers/IIndexBuffer.hpp"
 
 namespace engine
 {
@@ -25,21 +24,28 @@ namespace engine
 
 		void Init(AssetSystem& assets);
 
+
+		void SetPosition(const glm::vec3& position) { m_Position = position; }
+		void Translate(const glm::vec3& offset) { m_Position += offset; }
+
 		void Draw(IRenderer& renderer);
-		void AdditionalData(float& i);
+		//void AdditionalData(float& i);
 
 
 	private:
-		std::unique_ptr<VertexArray>  m_vao;
+		//std::shared_ptr<IVertexArray>  m_vao;
 		//std::unique_ptr<VertexBuffer> m_vbo;
 		//std::unique_ptr<IndexBuffer>  m_ibo;
+		std::shared_ptr<Mesh> m_Mesh;
+		std::shared_ptr<Material> m_Material;
 
 		engine::IShader* m_shader = nullptr;
 
 		//ERASE LATER
-		int location;
-		float m_i;
+		//int location;
+		//float m_i;
 
+		glm::vec3 m_Position = glm::vec3(0.0f);
 	};
 
 }

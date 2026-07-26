@@ -229,6 +229,8 @@ namespace engine
 
         data.shaderSource = GetSourceFromShader(shaderPath,language);
 
+      //  m_Logger->AddInfo("Shader Content: \n " , data.shaderSource);
+
         return data;
     }
 

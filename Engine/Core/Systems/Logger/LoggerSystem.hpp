@@ -55,6 +55,13 @@ namespace engine
        template <typename... Args> void AddDebug       (Args&&... args)    const   {m_Messages.emplace_back(m_Timer->CurrentTime(),LogLevel::DEBUG      ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__);}
        template <typename... Args> void AddMsg         (Args&&... args)    const   {m_Messages.emplace_back(m_Timer->CurrentTime(),LogLevel::MSG        ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__);}
 
+       template <typename... Args> void AddCallbackMsg (Args&&... args)    const
+       {
+          // m_Messages.emplace_back(m_Timer->CurrentTime(),LogLevel::INFO       ,ArgToString(std::forward<Args>(args)...),__FILE__,__LINE__);
+       }
+
+
+
        template <typename... Args> void AddResult      (Result result)
        {
            SetResult(result);

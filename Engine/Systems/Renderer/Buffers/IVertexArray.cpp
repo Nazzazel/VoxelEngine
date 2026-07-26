@@ -1,10 +1,10 @@
-#include "vertex_array.hpp"
+#include "IVertexArray.hpp"
 #include "Backends/API/RendererApi.hpp"
 #include "Backends/OpenGL/Buffers/opengl_vertex_array.hpp"
 
 namespace engine
 {
-	std::unique_ptr<VertexArray> VertexArray::Create()
+	std::unique_ptr<IVertexArray> IVertexArray::Create()
 	{
 		backends::RendererAPIType api = backends::RendererAPI::GetAPI();
 		//TODO add more cases for other APIs
@@ -26,7 +26,7 @@ namespace engine
 			break;
 			//TODO
 		}
-		return std::unique_ptr<VertexArray>();
+		return std::unique_ptr<IVertexArray>();
 	}
 
 }
