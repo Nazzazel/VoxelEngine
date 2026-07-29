@@ -18,6 +18,7 @@ namespace engine
         m_Logger = m_SystemManager->GetSystem<LoggerSystem>();
 
         keyboardInputStateMap = std::make_unique<KeybordInputStateMap>();
+        mouseInputState = std::make_unique<MouseInputState>();
 
         return {};
     }
@@ -36,5 +37,10 @@ namespace engine
     {
 
         return keyboardInputStateMap.get();
+    }
+
+    MouseInputState*      InputSystem::GetMouseInputState()
+    {
+        return mouseInputState.get();
     }
 } // engine

@@ -35,6 +35,7 @@ namespace engine
         void Init()
         {
             keyboardInputStateMap = input->GetKeybordInputStateMap();
+            mouseInputStateMap = input->GetMouseInputState();
         }
 
 
@@ -111,27 +112,34 @@ namespace engine
 
             event_system->GetEventBus()->Subscribe<engine::events::MouseMovedEvent>([this](engine::events::MouseMovedEvent& e){
 
-                  logger->AddCallbackMsg("Mouse Moved: X ->", e.MouseX, "      Y ->" ,e.MouseY);
+                  //logger->AddInfo("Mouse Moved: X ->", e.MouseX, "      Y ->" ,e.MouseY);
+                  mouseInputStateMap->UpdatePosition(e.MouseX, e.MouseY);
 
             });
 
             event_system->GetEventBus()->Subscribe<engine::events::MouseButtonPressedEvent>([this](engine::events::MouseButtonPressedEvent& e){
-
+                  mouseInputStateMap->UpdateInputStates(e.Button, true);
                   logger->AddCallbackMsg("Mouse Key presses:", e.Button);
 
             });
 
             event_system->GetEventBus()->Subscribe<engine::events::MouseButtonReleasedEvent>([this](engine::events::MouseButtonReleasedEvent& e){
+                    mouseInputStateMap->UpdateInputStates(e.Button, false);
+                  //logger->AddInfo("Mouse Key released:", e.Button);
 
-                  logger->AddCallbackMsg("Mouse Key released:", e.Button);
+            });
+
+            event_system->GetEventBus()->Subscribe<engine::events::MouseScrolledEvent>([this](engine::events::MouseScrolledEvent& e){
+                mouseInputStateMap->UpdateScrollPosition(e.XOffset,e.YOffset);
+                //mouseInputStateMap->UpdateInputStates(e.Button, false);
+                    //logger->AddInfo("Mouse SCROLLED X: ", e.XOffset , "     Y: ", e.YOffset);
 
             });
 
-            event_system->GetEventBus()->Subscribe<engine::events::KeyReleasedEvent>([this](engine::events::KeyReleasedEvent& e){
 
-                  logger->AddCallbackMsg("Key released:", e.KeyCode);
 
-            });
+
+
 
         }
         private:
@@ -148,6 +156,7 @@ namespace engine
 
 
         KeybordInputStateMap* keyboardInputStateMap = nullptr;
+        MouseInputState* mouseInputStateMap = nullptr;
 
 
     };

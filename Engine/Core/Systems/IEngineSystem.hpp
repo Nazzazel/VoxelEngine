@@ -19,6 +19,7 @@ namespace engine
         virtual Result OnUpdate(float dt) = 0;
         virtual Result OnShutdown() = 0;
 
+
         //Link that adds a way of using other systems inside of other systems
         //Reason: Capability of calling and using logger inside of other systems without making it a singleton
         //TODO make sure that uninitiated systems are not capable of causing problems

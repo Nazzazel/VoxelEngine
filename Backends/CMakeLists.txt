@@ -4,7 +4,8 @@ file(GLOB_RECURSE BACKENDS_SOURCES "*.cpp")
 add_library(Backends STATIC ${BACKENDS_SOURCES}
         OpenGL/tests/tests.cpp
         OpenGL/tests/tests.hpp
-        OpenGL/tests/stb_image.h)
+        OpenGL/tests/stb_image.h
+        OpenGL/tests/light1.hpp)
 
 # Ensure dependencies can locate top-level includes
 target_include_directories(Backends PUBLIC .)

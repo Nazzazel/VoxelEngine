@@ -10,8 +10,10 @@ out vec2 TexCoord;
 
 
 uniform mat4 u_Projection;
-uniform mat4 u_Model; // <-- Add this uniform
-uniform float u_X;
+uniform mat4 u_View;
+uniform mat4 u_Model;
+
+
 void main()
 {
     v_Color = a_Color;
@@ -20,11 +22,13 @@ void main()
 
     // We multiply Projection * Model * Position.
     // We also temporarily subtract 3.0 from Z so it sits in front of the camera.
-    vec4 worldPosition = u_Model * vec4(a_Position, 1.0);
-    worldPosition.z -= 3.0f;
+   // vec4 worldPosition = u_Model * vec4(a_Position, 1.0);
+    //worldPosition.z -= 3.0f;
 
     //gl_Position = u_Projection * vec4(a_Position.xy, a_Position.z - 5, 1.0);
-    gl_Position = u_Projection * worldPosition;
+    gl_Position = u_Projection * u_View * u_Model * vec4(a_Position, 1.0);
+
+    //gl_Position = u_Projection * worldPosition * u_Model * vec4(a_Position, 0.5);
 }
 
 //#version 330 core

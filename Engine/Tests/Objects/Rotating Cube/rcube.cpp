@@ -310,16 +310,17 @@ namespace engine
 
 
         // 1. Calculate a rotation angle based on elapsed time
-        float time = (float)glfwGetTime();
-
-        // 2. Create an identity matrix, then rotate it
-        glm::mat4 model = glm::mat4(1.0f);
-
-        //model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
-        model = glm::translate(model, m_Position);
-
-        // Rotate over time around a diagonal axis (X and Y) so we see it in 3D
-        model = glm::rotate(model, time * glm::radians(20.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+      //  float time = (float)glfwGetTime();
+        // float time = 1;
+        //
+        // // 2. Create an identity matrix, then rotate it
+        // glm::mat4 model = glm::mat4(1.0f);
+        //
+        // //model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+        // model = glm::translate(model, m_Position);
+        //
+        // // Rotate over time around a diagonal axis (X and Y) so we see it in 3D
+        // model = glm::rotate(model, time * glm::radians(20.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
         //location = glGetUniformLocation(m_shader->GetID(), "u_Color");
         //glUniform4f(location, 0.8f, 0.3f, 0.8f, 1.0f);
@@ -355,18 +356,34 @@ namespace engine
         //m_vao->Bind();
        // renderer.DrawIndexed(m_vao->GetIndexCount());
         DrawCommand cmd;
-        cmd.modelMatrix = model;
-        cmd.material = m_Material;
-        cmd.mesh     = m_Mesh;
-
-       //cmd.vertexArray = m_vao;
-       //cmd.shader = m_shader;
-       //cmd.modelMatrix = model;
-       //cmd.indexCount = m_vao->GetIndexCount();
-       //cmd.customFloat = m_i;
 
 
-        renderer.Submit(cmd);
+     //  float time = (float)glfwGetTime();
+     float time = 1;
+
+     // 2. Create an identity matrix, then rotate it
+     glm::mat4 model = glm::mat4(1.0f);
+
+
+      //model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+      model = glm::translate(model, m_Position);
+
+      // Rotate over time around a diagonal axis (X and Y) so we see it in 3D
+      model = glm::rotate(model, time * glm::radians(20.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
+      cmd.modelMatrix = model;
+      cmd.material = m_Material;
+      cmd.mesh     = m_Mesh;
+
+      //cmd.vertexArray = m_vao;
+      //cmd.shader = m_shader;
+      //cmd.modelMatrix = model;
+      //cmd.indexCount = m_vao->GetIndexCount();
+      //cmd.customFloat = m_i;
+
+
+      renderer.Submit(cmd);
+
 
     }
 }

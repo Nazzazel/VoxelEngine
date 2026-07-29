@@ -3,8 +3,6 @@
 file(GLOB_RECURSE VOXEL_GAME_SOURCES "*.cpp")
 
 add_executable(VoxelGame ${VOXEL_GAME_SOURCES}
-        src/Core/camera.cpp
-        src/Core/camera.hpp
         ../thirdparty/tracy/public/TracyClient.cpp
         src/Core/Application/EntryPoint.cpp
         src/Core/Application/VoxelGameApp.cpp
@@ -20,8 +18,31 @@ add_executable(VoxelGame ${VOXEL_GAME_SOURCES}
         Input/GameInput.cpp
         Input/GameInput.hpp
         Game/Player.hpp
-        Game/Camera/Camera.cpp
-        Game/Camera/Camera.hpp
+        Game/Core/Systems/Camera/Camera.cpp
+        Game/Core/Systems/Camera/Camera.hpp
+        Game/Core/Systems/Rendering/DotOnTheScreen.cpp
+        Game/Core/Systems/Rendering/DotOnTheScreen.hpp
+        Core/Game/GameMain.cpp
+        Core/Game/GameMain.hpp
+        Core/Game/EngineAccessLayer.cpp
+        Core/Game/EngineAccessLayer.hpp
+        Core/Game/GameInitClass.cpp
+        Core/Game/GameInitClass.hpp
+        Games/Minecraft/core/Minecraft.cpp
+        Games/Minecraft/core/Minecraft.hpp
+        Games/Minecraft/client/main/GameConfig.cpp
+        Games/Minecraft/client/main/GameConfig.hpp
+        Games/VoxelGame/core/VoxelGame.cpp
+        Games/VoxelGame/core/VoxelGame.hpp
+        Game/Core/Client/Input/InputHandler.cpp
+        Game/Core/Client/Input/InputHandler.hpp
+        Games/OpenGLTests/OpenGLTestsApp.cpp
+        Games/OpenGLTests/OpenGLTestsApp.hpp
+        Games/OpenGLTests/Tests/Objects/RotatingCube/RotatingCube.cpp
+        Games/OpenGLTests/Tests/Objects/RotatingCube/RotatingCube.hpp
+        Games/OpenGLTests/Tests/Objects/Chunk/Chunk.cpp
+        Games/OpenGLTests/Tests/Objects/Chunk/Chunk.hpp
+
 )
 
 # 1. Add Tracy::TracyClient to the end of this list

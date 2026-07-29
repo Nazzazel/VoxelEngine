@@ -21,6 +21,7 @@ namespace engine
 
 
         KeybordInputStateMap* GetKeybordInputStateMap();
+        MouseInputState* GetMouseInputState();
 
     private:
         SystemManager* m_SystemManager = nullptr;
@@ -28,6 +29,7 @@ namespace engine
 
 
         std::unique_ptr<KeybordInputStateMap> keyboardInputStateMap;
+        std::unique_ptr<MouseInputState> mouseInputState;
 
     };
 } // engine

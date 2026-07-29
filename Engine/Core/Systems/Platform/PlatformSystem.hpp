@@ -6,6 +6,7 @@
 #pragma once
 #include "Core/Systems/IEngineSystem.hpp"
 #include "Core/Systems/Logger/LoggerSystem.hpp"
+#include "GLFW/glfw3.h"
 
 namespace engine
 {
@@ -16,7 +17,6 @@ namespace engine
         Result OnInit() override;// Forced
         Result OnUpdate(float dt) override;
         Result OnShutdown() override;
-
 
     private:
         //void callbacks

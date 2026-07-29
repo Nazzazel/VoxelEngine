@@ -9,7 +9,61 @@
 
 namespace engine
 {
+    struct MouseInputState
+    {
+        float x = 0.0f;
+        float y = 0.0f;
+        float xDelta = 0.0f;
+        float yDelta = 0.0f;
 
+        float m_xScrollDelta = 0.0f;
+        float m_yScrollDelta = 0.0f;
+
+        bool firstMouse = true;
+
+        void UpdatePosition(float mouseX, float mouseY)
+        {
+            if (firstMouse)
+            {
+                x = mouseX;
+                y = mouseY;
+                firstMouse = false;
+            }
+
+            xDelta = mouseX - x;
+            yDelta = y - mouseY; // Reversed for standard OpenGL screen coords
+
+            x = mouseX;
+            y = mouseY;
+        }
+
+        void UpdateScrollPosition(float xScrollDelta, float yScrollDelta)
+        {
+                m_xScrollDelta = xScrollDelta;
+                m_yScrollDelta = yScrollDelta;
+        }
+
+        void ResetDeltas()
+        {
+
+            xDelta = 0.0f;
+            yDelta = 0.0f;
+
+            m_xScrollDelta = 0;
+            m_yScrollDelta = 0;
+
+        }
+
+        void UpdateInputStates(const int32_t& keyCode, bool IsKeyPressed)
+        {
+            mouseKeyStates[keyCode] = IsKeyPressed;
+        }
+
+
+
+
+        std::vector<bool> mouseKeyStates = std::vector(30, false);;
+    };
 
 
     struct KeybordInputStateMap
@@ -60,6 +114,7 @@ namespace engine
 
         IInput* m_input = nullptr;
         std::vector<bool> keyStates = std::vector(500, false);;
+
     };
 
 

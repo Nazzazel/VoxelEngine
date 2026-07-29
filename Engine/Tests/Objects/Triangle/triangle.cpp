@@ -131,6 +131,6 @@ namespace engine
         //m_shader->SetMat4("u_Projection", projection);
 
         m_vao->Bind();
-        renderer.DrawIndexed(m_vao->GetIndexCount());
+        renderer.DrawIndexed(m_vao->GetIndexCount(),1);
     }
 }

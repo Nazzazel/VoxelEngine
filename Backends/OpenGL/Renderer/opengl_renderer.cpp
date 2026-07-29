@@ -15,6 +15,10 @@
 #include "Systems/Renderer/Renderer/DrawComponents.hpp"
 
 
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/string_cast.hpp>
+
+
 static void APIENTRY OpenGLDebugCallback(
     GLenum source,
     GLenum type,
@@ -52,7 +56,7 @@ namespace backends
 
     OpenGLRenderer::OpenGLRenderer()
     {
-		//TODO DEAL WITH THIS //TODO DEAL WITH THIS debugtools::Logger::Log(debugtools::LogLevel::Info, "OpenGL Renderer Created");
+        //TODO DEAL WITH THIS //TODO DEAL WITH THIS debugtools::Logger::Log(debugtools::LogLevel::Info, "OpenGL Renderer Created");
         int nrAttributes;
         glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
         std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes << std::endl;
@@ -188,7 +192,7 @@ namespace backends
 
                // 3. Bind geometry and draw
                cmd.mesh->GetVertexArray()->Bind();
-               DrawIndexed(cmd.mesh->GetIndexCount());
+               DrawIndexed(cmd.mesh->GetIndexCount(),2);
            }
 
             //if (!command.shader || !command.vertexArray) continue;
@@ -230,15 +234,33 @@ namespace backends
         //);
 
         // Create a 3D perspective field of view instead of 2D screen pixels
-        float aspect = (float)width / (float)height;
-        m_SceneData.projectionMatrix = glm::perspective(glm::radians(45.0f), aspect, 0.1f, 100.0f);
+        m_aspectRatio = (float)width / (float)height;
+        //m_SceneData.projectionMatrix = glm::perspective(glm::radians(45.0f), m_aspectRatio, 0.1f, 100.0f);
+
+    }
+
+    float OpenGLRenderer::GetAspectRatio()
+    {
+        return m_aspectRatio;
     }
 
     void OpenGLRenderer::SetSceneData(const engine::SceneData& scene_data)
     {
+        m_SceneData = scene_data;
 
-        m_SceneData.cameraPosition = scene_data.cameraPosition;
-        m_SceneData.viewMatrix     = scene_data.viewMatrix;
+        //std::string matrixString = glm::to_string(m_SceneData.viewMatrix);
+        //std::cout << "2View Matrix   : " << matrixString << std::endl;
+
+       // std::cout << "---------------------------------------------------------------";
+       // std::cout << m_SceneData.viewMatrix << std::endl;
+// std::cout << "---------------------------------------------------------------";
+
+
+
+
+        //m_SceneData.projectionMatrix = scene_data.projectionMatrix;
+        //m_SceneData.cameraPosition   = scene_data.cameraPosition;
+        //m_SceneData.viewMatrix       = scene_data.viewMatrix;
 
     }
 
@@ -247,13 +269,30 @@ namespace backends
         m_DrawCommands.push_back(command);
     }
 
-    void OpenGLRenderer::DrawIndexed(uint32_t indexCount)
+    void OpenGLRenderer::DrawIndexed(uint32_t indexCount,int8_t mode)
     {
         GL_SCOPE();
+        switch (mode)
+        {
+        case 0:glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);break;
+        case 1:glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); break;
+        case 2:glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); break;
+        }
+
+        //GL_SCOPE();
 		//vao->Bind();
+
+       // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        // Optional: Change color uniform to black or contrast color for lines
+        // shader->SetInt("u_RenderMode", 1);
+        // glLineWidth(1.5f); // Note: glLineWidth > 1.0 has limited driver support in core profile
+        //glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, nullptr);
 
 		//unsigned int count = vao->GetIndexBuffer()->GetCount();
         //unsigned int count = vao->GetIndexCount();
+        //glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+        // Optional: Make points larger so they are clearly visible
+        //glPointSize(6.0f);
 
         glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, nullptr);
     }

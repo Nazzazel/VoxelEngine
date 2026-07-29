@@ -14,7 +14,7 @@
 
 
 //System
-
+#include "Core/Application/AppInterface/IAppInterface.hpp"
 
 //#include "../Engine/Manager/SystemManager/system_manager.hpp"
 #include "Additions/StartUpConfig/start_up_config.hpp"
@@ -59,11 +59,11 @@ namespace engine
 
     protected:
         // for game-specific logic later
-        virtual void OnInit(engine::IAppInterface* engine){};//TODO
-        virtual void OnUpdate(IAppInterface* engine,float dt) {}
+        virtual void OnInit(IAppInterface& engine){};//TODO
+        virtual void OnUpdate(IAppInterface& engine,float dt) {};
        // virtual void OnRender(Renderer& m_Renderer) {}
-        virtual void OnRender(engine::IRenderer& renderer) {}
-        virtual void OnShutdown() {} //TODO
+        virtual void OnRender(IRenderer& renderer) {};
+        virtual void OnShutdown() {}; //TODO
 
     private:
 

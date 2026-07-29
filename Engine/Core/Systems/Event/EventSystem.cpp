@@ -126,11 +126,18 @@ namespace engine
             });
 
 
+            // Mouse Scroll Callback
+            glfwSetScrollCallback(nativeWindow, [](GLFWwindow* window, double xOffset, double yOffset)
+            {
+                auto eventBus = static_cast<EventBus*>(glfwGetWindowUserPointer(window));
+                if (eventBus)
+                {
+                    eventBus->Emit<events::MouseScrolledEvent>((float)xOffset, (float)yOffset);
+                }
+            });
 
 
-
-
-
+            
 
 
 

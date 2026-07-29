@@ -20,6 +20,8 @@ namespace backends
 
         void OnResize(int width, int height) override;
 
+        float GetAspectRatio() override;
+
 		//void DrawTriangle() override; //TODO remove this later
 
         void SetSceneData(const engine::SceneData& scene_data);
@@ -28,7 +30,7 @@ namespace backends
 
 
 
-		void DrawIndexed(uint32_t indexCount) override;
+		void DrawIndexed(uint32_t indexCount,int8_t mode) override;
 
 
     private:

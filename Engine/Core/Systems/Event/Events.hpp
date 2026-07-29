@@ -72,8 +72,17 @@ namespace engine
 
         struct MouseButtonReleasedEvent : public IEvent
         {
+
             int Button;
             MouseButtonReleasedEvent(int button) : Button(button) {}
+
+        };
+
+        struct MouseScrolledEvent : public IEvent
+        {
+            float XOffset;
+            float YOffset;
+            MouseScrolledEvent(float xOffset, float yOffset) : XOffset(xOffset), YOffset(yOffset) {}
         };
 
 

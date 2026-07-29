@@ -49,12 +49,16 @@ namespace engine
 
 		//virtual void DrawTriangle() = 0; //TODO remove this later
         //virtual void DrawIndexed(const std::unique_ptr<VertexArray>& vao) = 0;
-        virtual void DrawIndexed(uint32_t indexCount) = 0;
+        virtual void DrawIndexed(uint32_t indexCount,int8_t mode) = 0;
     	void DrawMeshTasks(uint32_t groupCountX, uint32_t groupCountY, uint32_t groupCountZ){};//TODO Later
+
+    	virtual float GetAspectRatio() = 0;
 
         static std::unique_ptr<IRenderer> Create();
 
 	protected:
+    	float m_aspectRatio = 0.0f;
+
 		//std::unique_ptr<engine::ShaderLibrary> m_ShaderLibrary; //TODO remove this later
 
 

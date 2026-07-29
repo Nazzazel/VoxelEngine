@@ -21,10 +21,11 @@ namespace engine
         Result OnInit() override;// Forced
         Result OnUpdate(float dt) override;
         Result OnShutdown() override;
-
+        void   EnableCursor(bool enable);
 
 
         IWindow* GetWindow() const;
+
 
         //Setters
         void PreInitWindowConfig(const std::string& title, int width, int height, IWindow* shared = nullptr);

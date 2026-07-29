@@ -6,18 +6,21 @@
 
 
 #include "Core/Application/Application.hpp"
-#include "Engine/Core/Systems/Renderer/IRenderer/IRenderer.hpp"
+//#include "Engine/Core/Systems/Renderer/IRenderer/IRenderer.hpp"
 
-#include "Core/Application/AppInterface/IAppInterface.hpp"
+//#include "Core/Application/AppInterface/IAppInterface.hpp"
 
-#include <iostream>
+///#include <iostream>
 
-#include "Tests/Objects/Rotating Cube/rcube.hpp"
-#include "VoxelGame/Game/Camera/Camera.hpp"
-#include "VoxelGame/Input/GameInput.hpp"
+//#include "Tests/Objects/Rotating Cube/rcube.hpp"
+//#include "../../../Game/Core/Systems/Camera/Camera.hpp"
+//#include "VoxelGame/Game/Core/Client/Input/InputHandler.hpp"
+#include "VoxelGame/Games/OpenGLTests/OpenGLTestsApp.hpp"
+//#include "VoxelGame/Input/GameInput.hpp"
 
 namespace voxelgame
 {
+
     class VoxelGameApp : public engine::Application
     {
     public:
@@ -25,26 +28,33 @@ namespace voxelgame
 
     protected:
 
-        void OnInit(engine::IAppInterface* engine) override;
+        void OnInit(engine::IAppInterface& engine) override;
 
-        void OnUpdate(engine::IAppInterface* engine,float dt) override;
+        void OnUpdate(engine::IAppInterface& engine,float dt) override;
 
         //void OnRender(engine::Renderer& renderer) override;
-        void OnRender(engine::IRenderer& rendererm) override;
+        void OnRender(engine::IRenderer& renderer) override;
 
         void OnShutdown() override;
 
     private:
-        std::unique_ptr<engine::Rot_Cube> m_Rot_Cube;//TODO delete
-        GameInput input;
-        engine::KeybordInputStateMap* keybordInputStateMap;
+       //std::unique_ptr<engine::Rot_Cube> m_Rot_Cube;//TODO delete
+      //  std::unique_ptr<InputHandler> input_handler;//TODO delete
 
-        std::unique_ptr<glm::vec3> m_pos_ptr;
-        glm::vec3 finalPos;
 
-        std::unique_ptr<voxelgame::Camera> m_camera;
+        std::unique_ptr<opengltests::OpenGLTestsApp> m_OpenGLTestsApp;
 
-        engine::SceneData m_SceneData;
+       // engine::KeybordInputStateMap* keybordInputStateMap;
+
+        //std::unique_ptr<glm::vec3> m_pos_ptr;
+        //glm::vec3 finalPos;
+
+       // std::unique_ptr<voxelgame::Camera> m_camera;
+
+      //  engine::SceneData m_SceneData;
+
+
+
 
     };
 } // voxelgame

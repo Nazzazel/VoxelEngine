@@ -34,6 +34,8 @@ namespace engine
         m_Logger->AddInfo("Setup GLFW Hint");
 
 
+        //GLFWwindow* nativeWindow = engine->GetWindowSystem()->GetWindow()->GetNativeWindow();
+
         // m_LoggerSystemPtr = m_SystemManager->GetSystem<engine::LoggerSystem>();
         // if (!m_LoggerSystemPtr)
         // {
@@ -44,6 +46,7 @@ namespace engine
         //engine::Platform::Init();
         return {};
     }
+
 
 
 

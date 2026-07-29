@@ -100,7 +100,7 @@ namespace engine
 
 
         EngineCore engine = EngineCore{m_SystemManager.get()};
-        OnInit(&engine);
+        OnInit(engine);
 
        // rot_cube.Init(*asset);
         //Triangle triangle;
@@ -117,14 +117,9 @@ namespace engine
         double accumulator = 0.0;
         auto lastTime = std::chrono::high_resolution_clock::now();
 
-
-        auto inside_looptime_past = std::chrono::high_resolution_clock::now();
-        auto inside_looptime_now = std::chrono::high_resolution_clock::now();
-        std::common_type<std::chrono::nanoseconds, std::chrono::nanoseconds>::type inside_looptime_diffrence;
+        const auto target_frame_duration = std::chrono::nanoseconds(1000000000 / 60);
 
         double inside_loop = 0.0f;
-        double inside_loop_time = 0.0f;
-        double inside_loop_fps = 0.0f;
 
         while (m_EngineRunning && !window->GetWindow()->ShouldClose())
         {
@@ -143,7 +138,7 @@ namespace engine
 
             if (Result result = m_SystemManager->UpdateAll(dt);result.IsFailure()) { logger->AddResult(result);}
 
-            OnUpdate(&engine, dt);
+            OnUpdate(engine, dt);
 
             renderer->GetRenderer()->BeginFrame();
 
@@ -156,90 +151,19 @@ namespace engine
 
             renderer->GetRenderer()->EndFrame();
 
-            std::string name = "Outside : " + std::to_string(timer->GetFPS()) + " : Inside : " + std::to_string(inside_loop);
+          //  std::string name = "Outside : " + std::to_string(timer->GetFPS()) + " : Inside : " + std::to_string(inside_loop);
 
-            window->GetWindow()->SetName(name);
+            window->GetWindow()->SetName(std::to_string(timer->GetFPS()));
 
+            // High-resolution clock to track inner loop time
+            auto frame_start = std::chrono::high_resolution_clock::now();
 
-
-
-
-
-           // std::cout << "ddddd\n";
-        //End Of the Engine while() loop
-            //logger->AddInfo("FPS: ",timer->GetFPS());
-            ///std::this_thread::sleep_for(std::chrono::milliseconds(16));
-            ///
-            //
-            //
-            //
-            // int loops = 0;
-            // while (accumulator >= TIME_PER_UPDATE && loops < 5) {
-            //
-            //
-            //
-            //     //   UpdateGameLogic(TIME_PER_UPDATE); // AI, Physics, Movement
-            //     //inside_loop = timer->GetFPS();
-            //
-            //     //window->GetWindow()->SetName(std::to_string(inside_loop));
-            //
-            //     accumulator -= TIME_PER_UPDATE;
-            //     loops++;
-            // }
-
-            // while (inside_loop >= TARGET_UPS)
-            // {
-            //     inside_loop = 0;
-            //     inside_loop_fps++;
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            //
-            // }
+            // --- INNER LOOP (Locked to 60 UPS) ---
+            // Put your game logic, physics update, or per-frame tasks here:
+            // update_game_state();
+            // -------------------------------------
 
 
-            // Catch up on game logic if frames are dropping, but limit it so it doesn't spiral of death
-            // int loops = 0;
-            // while (accumulator >= TIME_PER_UPDATE && loops < 5) {
-            //    // UpdateGameLogic(TIME_PER_UPDATE); // AI, Physics, Movement
-            //
-            //
-            //     std::chrono::duration<double> gt = currentTime - lastTime;
-            //
-            //     inside_loop_fps = inside_loop/gt.count();
-            //
-            //     std::cout << "1:" << inside_loop_fps << " : " << inside_loop << std::endl;
-            //
-            //     accumulator -= TIME_PER_UPDATE;
-            //     loops++;
-            // }
-
-            int loops = 0;
-            while (accumulator >= TIME_PER_UPDATE && loops < 5)
-            {
-                inside_looptime_now = std::chrono::high_resolution_clock::now();
-                inside_looptime_diffrence = inside_looptime_now - inside_looptime_past;
-                inside_looptime_past = inside_looptime_now;
-
-
-
-
-
-                auto seconds_duration = std::chrono::duration_cast<std::chrono::microseconds>(inside_looptime_diffrence);
-
-                inside_loop_fps = 1.0f / seconds_duration.count();
-
-                std::cout << ":" << inside_loop_fps << " : " <<  seconds_duration  << std::endl;
-                inside_loop = 0;
-
-
-                loops++;
-            }
-            inside_loop++;
         }
 
     }
