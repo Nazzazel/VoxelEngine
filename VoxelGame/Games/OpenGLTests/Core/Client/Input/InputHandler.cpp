@@ -12,12 +12,12 @@ namespace opengltests
     {
         KeyboardHandler(dt);
         MouseHandler(dt);
-
+        m_engine.GetWindowSystem().EnableCursor(false);
         moveSpeed = 2.5f * dt;
 
 
     }
-    bool cursorbool = true;
+    bool cursorbool = false;
 
 
     void InputHandler::KeyboardHandler(float dt)
@@ -48,11 +48,12 @@ namespace opengltests
         }
         if (m_keyboardInputStateMap.IsKeyPressed(engine::KeyCodes::KEY_ESCAPE))
         {
-            cursorbool = !cursorbool;
-            m_engine.GetWindowSystem().EnableCursor(cursorbool);
+           // cursorbool = !cursorbool;
+            //cursorbool = false;
+            m_engine.GetWindowSystem().EnableCursor(true);
            // m_engine.GetWindowSystem().EnableCursor(cursorbool);
                     //m_camera->SetPosition(glm::vec3(0.0f));
-            m_camera.SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+           // m_camera.SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
         }
         if (m_keyboardInputStateMap.IsKeyPressed(engine::KeyCodes::KEY_R))
         {

@@ -58,6 +58,7 @@ namespace backends
         // load and generate the texture
         int width, height, nrChannels;
         //unsigned char *data = stbi_load("container.jpg", &width, &height, &nrChannels, 0);
+        stbi_set_flip_vertically_on_load(true);
         unsigned char *data = stbi_load("/home/nazzazel/Programming/cpp/projects/VoxelEngine/Engine/Res/Assets/Textures/container.jpg", &width, &height, &nrChannels, 0);
         if (data)
         {
