@@ -13,7 +13,7 @@ namespace opengltests
         KeyboardHandler(dt);
         MouseHandler(dt);
         m_engine.GetWindowSystem().EnableCursor(false);
-        moveSpeed = 2.5f * dt;
+        moveSpeed = SpeedMultiplyer * dt;
 
 
     }
@@ -59,6 +59,16 @@ namespace opengltests
         {
           //m_camera->Rotate(glm::vec3(0.0f));
             m_camera.Rotate(0,0.01f);
+        }
+
+        if (m_keyboardInputStateMap.IsKeyPressed(engine::KeyCodes::KEY_LEFT_SHIFT))
+        {
+            if (SpeedMultiplyer < 20.0f)
+            {
+                SpeedMultiplyer += 0.01f;
+            }
+
+
         }
 
     }

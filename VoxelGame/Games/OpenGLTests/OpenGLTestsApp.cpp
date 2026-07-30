@@ -21,8 +21,8 @@ namespace opengltests
 
        glm::ivec3 chunkPos(0, 0, 0);
 
-       m_Chunk = std::make_unique<Chunk>(chunkPos);
-       m_Chunk->BuildMesh(engine.GetAssetSystem());
+       m_Chunk = std::make_unique<Chunk>(chunkPos,engine.GetAssetSystem());
+       m_Chunk->BuildMesh();
     }
 
 
@@ -72,8 +72,10 @@ namespace opengltests
     {
 
         renderer.SetSceneData(m_opengl_camera->GetSceneData());
-
+      //  m_Chunk->SetBlock(0,0,0, 0);
         m_Chunk->Draw(renderer);
+
+
 
       //for (unsigned int i = 0; i < sizeof(cubePositions) / sizeof(cubePositions[0]); i++)
       //{

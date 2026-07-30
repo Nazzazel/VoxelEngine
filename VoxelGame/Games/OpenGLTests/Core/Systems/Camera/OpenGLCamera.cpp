@@ -75,15 +75,18 @@ namespace opengltests
         if (amount > 0.0f)
         {
             cameraSpeed = amount;
-            cameraPos += cameraSpeed * cameraFront;
+            //cameraPos += cameraSpeed * movementFront;
+            cameraPos += (glm::vec3(movementFront.x, 0.0f,movementFront.z ) * cameraSpeed );
+
+            //cameraPos += glm::vec3(0, 0, cameraSpeed);
 
         }
 
         if (amount < 0.0f)
         {
             cameraSpeed = amount;
-            cameraPos += cameraSpeed * cameraFront;
-
+            //cameraPos += cameraSpeed * movementFront;
+            cameraPos += (glm::vec3(movementFront.x, 0.0f,movementFront.z ) * cameraSpeed );
         }
 
        // m_position.x += amount;
@@ -97,14 +100,14 @@ namespace opengltests
         if (amount > 0.0f)
         {
             cameraSpeed = -amount;
-            cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+            cameraPos += glm::normalize(glm::cross(movementFront, cameraUp)) * cameraSpeed;
             //cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
         }
 
         if (amount < 0.0f)
         {
             cameraSpeed = amount;
-            cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+            cameraPos -= glm::normalize(glm::cross(movementFront, cameraUp)) * cameraSpeed;
             //cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
         }
 
@@ -115,8 +118,12 @@ namespace opengltests
     void OpenGLCamera::MoveUp(float amount)
     {
         cameraSpeed = amount;
-        m_position.x += amount;
+       // m_position.x += amount;
         //m_position += m_up * amount;
+        cameraPos -= cameraUp * cameraSpeed;
+
+
+
     }
 
     void OpenGLCamera::SetPosition(const glm::vec3& pos)
@@ -160,6 +167,10 @@ namespace opengltests
 
         //view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 
+       // std::cout << std::to_string(cameraPos) << std::endl;
+        std::cout << " | X:" << cameraPos.x << " | Y:" << cameraPos.y << " | Z:" << cameraPos.z << std::endl;
+
+        //glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
         glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 
         return view;
@@ -226,11 +237,15 @@ namespace opengltests
 
         glm::vec3 front;
         front.x = cos(glm::radians(m_yaw)) * cos(glm::radians(m_pitch));
+
+        //front.y = cameraFront.y;
         front.y = sin(glm::radians(m_pitch));
+
         front.z = sin(glm::radians(m_yaw)) * cos(glm::radians(m_pitch));
+
+
+        movementFront = glm::vec3(front.x, cameraFront.y, front.z);
         cameraFront = glm::normalize(front);
-
-
      ////// Constrain pitch to avoid screen flipping
      //if (m_pitch > 89.0f)  m_pitch = 89.0f;
      //if (m_pitch < -89.0f) m_pitch = -89.0f;

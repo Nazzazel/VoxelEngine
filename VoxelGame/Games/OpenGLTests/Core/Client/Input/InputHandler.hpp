@@ -45,5 +45,6 @@ namespace opengltests
         OpenGLCamera& m_camera;
 
         float moveSpeed;
+        float SpeedMultiplyer = 2.5f;
     };
 } // voxelgame

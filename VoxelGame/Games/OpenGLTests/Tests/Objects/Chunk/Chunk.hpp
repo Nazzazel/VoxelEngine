@@ -24,10 +24,10 @@ namespace opengltests
 
         static constexpr int CHUNK_SIZE = 16;
 
-        explicit Chunk(glm::ivec3 chunkPos);
+        explicit Chunk(glm::ivec3 chunkPos,engine::AssetSystem& assets);
         ~Chunk() = default;
 
-        void BuildMesh(engine::AssetSystem& assets);
+        void BuildMesh();
         void Draw(engine::IRenderer& renderer);
 
 
@@ -36,7 +36,7 @@ namespace opengltests
 
         // Example block modification hook for later (mining/placing)
         void SetBlock(int x, int y, int z, uint8_t blockID);
-        [[nodiscard]] uint8_t GetBlock(int x, int y, int z) const;
+        [[nodiscard]] uint16_t GetBlock(int x, int y, int z) const;
 
         private:
         glm::ivec3 m_ChunkPosition;
@@ -45,9 +45,9 @@ namespace opengltests
         std::shared_ptr<engine::Material> m_Material;
        // std::shared_ptr<engine::IShader> m_Shader;
 
-        std::vector<uint8_t> m_Blocks;
+        std::vector<uint16_t> m_Blocks;
 
-
+        engine::AssetSystem& m_assets;
 
 
         //ffff
