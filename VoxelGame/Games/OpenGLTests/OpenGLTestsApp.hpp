@@ -5,6 +5,7 @@
 
 #pragma once
 #include "Core/Application/AppInterface/IAppInterface.hpp"
+#include "Core/Base/VoxelGameHeaders/WorldCoord.hpp"
 #include "Core/Client/Input/InputHandler.hpp"
 #include "Core/Systems/Renderer/IRenderer/IRenderer.hpp"
 #include "Tests/Objects/RotatingCube/RotatingCube.hpp"
@@ -27,8 +28,12 @@ namespace opengltests
         std::unique_ptr<OpenGLCamera> m_opengl_camera;
 
         std::unique_ptr<RotatingCube> m_Rot_Cube;//TODO delete
-        std::unique_ptr<Chunk> m_Chunk;//TODO delete
+        //std::unique_ptr<Chunk> m_Chunk;//TODO delete
 
+        std::vector<std::unique_ptr<Chunk>> loadedChunks;
+
+
+        WorldCoord m_worldPosition;
 
     };
 } // opengltests

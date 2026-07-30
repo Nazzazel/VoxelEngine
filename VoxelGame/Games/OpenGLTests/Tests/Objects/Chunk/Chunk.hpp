@@ -14,6 +14,7 @@
 #include "Engine/Systems/Renderer/Buffers/IVertexArray.hpp"
 #include "Engine/Systems/Renderer/Buffers/IVertexBuffer.hpp"
 #include "Engine/Systems/Renderer/Buffers/IIndexBuffer.hpp"
+#include "VoxelGame/Games/OpenGLTests/Core/Base/VoxelGameHeaders/WorldCoord.hpp"
 
 
 namespace opengltests
@@ -28,7 +29,7 @@ namespace opengltests
         ~Chunk() = default;
 
         void BuildMesh();
-        void Draw(engine::IRenderer& renderer);
+        void Draw(engine::IRenderer& renderer,const WorldCoord& cameraPosition);
 
 
         // Getters / Setters for world logic or future compute integration
@@ -49,7 +50,7 @@ namespace opengltests
 
         engine::AssetSystem& m_assets;
 
-
+        //WorldCoord& m_worldPosition;
         //ffff
        // glm::vec3 m_Position = glm::vec3(0.0f);
 

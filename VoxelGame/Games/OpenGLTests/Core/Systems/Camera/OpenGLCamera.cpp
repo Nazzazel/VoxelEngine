@@ -14,7 +14,9 @@
 namespace opengltests
 {
     OpenGLCamera::OpenGLCamera()
-    : m_position(0.0f, 0.0f, 0.0f),
+    :
+    //m_position(0.0f, 0.0f, 0.0f)
+    //,
          //m_front(0.0f, 0.0f, -1.0f),
          //m_up(0.0f, 1.0f, 0.0f),
          //m_right(1.0f, 0.0f, 0.0f),
@@ -56,7 +58,7 @@ namespace opengltests
     void OpenGLCamera::RecalculateProjection()
     {
         //TODO Try Out Later
-        m_SceneData.projectionMatrix = glm::perspective(glm::radians(fov), m_AspectRatio, 0.1f, 100.0f);
+        m_SceneData.projectionMatrix = glm::perspective(glm::radians(fov), m_AspectRatio, 0.1f, 1000.0f);
 
     }
    // void Camera::Update(float aspectRatio)
@@ -76,17 +78,18 @@ namespace opengltests
         {
             cameraSpeed = amount;
             //cameraPos += cameraSpeed * movementFront;
-            cameraPos += (glm::vec3(movementFront.x, 0.0f,movementFront.z ) * cameraSpeed );
+            //cameraPos += (glm::vec3(movementFront.x, 0.0f,movementFront.z ) * cameraSpeed );
 
             //cameraPos += glm::vec3(0, 0, cameraSpeed);
-
+            Move(glm::vec3(movementFront.x, 0.0f,movementFront.z ) * cameraSpeed );
         }
 
         if (amount < 0.0f)
         {
             cameraSpeed = amount;
             //cameraPos += cameraSpeed * movementFront;
-            cameraPos += (glm::vec3(movementFront.x, 0.0f,movementFront.z ) * cameraSpeed );
+            //cameraPos += (glm::vec3(movementFront.x, 0.0f,movementFront.z ) * cameraSpeed );
+            Move(glm::vec3(movementFront.x, 0.0f,movementFront.z ) * cameraSpeed );
         }
 
        // m_position.x += amount;
@@ -100,15 +103,17 @@ namespace opengltests
         if (amount > 0.0f)
         {
             cameraSpeed = -amount;
-            cameraPos += glm::normalize(glm::cross(movementFront, cameraUp)) * cameraSpeed;
+           // cameraPos += glm::normalize(glm::cross(movementFront, cameraUp)) * cameraSpeed;
             //cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+            Move((glm::normalize(glm::cross(movementFront, cameraUp)) * cameraSpeed));
         }
 
         if (amount < 0.0f)
         {
             cameraSpeed = amount;
-            cameraPos -= glm::normalize(glm::cross(movementFront, cameraUp)) * cameraSpeed;
+           // cameraPos -= glm::normalize(glm::cross(movementFront, cameraUp)) * cameraSpeed;
             //cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+            Move(-(glm::normalize(glm::cross(movementFront, cameraUp)) * cameraSpeed) );
         }
 
         //m_position.x += amount;
@@ -120,20 +125,25 @@ namespace opengltests
         cameraSpeed = amount;
        // m_position.x += amount;
         //m_position += m_up * amount;
-        cameraPos -= cameraUp * cameraSpeed;
+        //cameraPos -= cameraUp * cameraSpeed;
 
-
+        Move(-(cameraUp * cameraSpeed));
 
     }
 
     void OpenGLCamera::SetPosition(const glm::vec3& pos)
     {
-        m_position = pos;
+        m_WorldCameraPosition.localOffset = pos;
     }
 
     const glm::vec3& OpenGLCamera::GetPosition() const
     {
-     return m_position;
+     return m_WorldCameraPosition.localOffset;
+    }
+
+    const WorldCoord& OpenGLCamera::GetWorldPosition() const
+    {
+        return m_WorldCameraPosition;
     }
 
     void OpenGLCamera::SetScoll(float xScrollDelta, float yScrollDelta)
@@ -168,10 +178,36 @@ namespace opengltests
         //view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 
        // std::cout << std::to_string(cameraPos) << std::endl;
-        std::cout << " | X:" << cameraPos.x << " | Y:" << cameraPos.y << " | Z:" << cameraPos.z << std::endl;
+
+      // m_worldPosition.chunkCoord.x
+      // m_worldPosition.chunkCoord.x
+      // m_worldPosition.chunkCoord.x
+
+
+        //std::cout
+//
+        //<< " | X:" << m_worldPosition.chunkCoord.x *16 + m_worldPosition.localOffset.x
+        //<< " | Y:" << m_worldPosition.chunkCoord.y *16 + m_worldPosition.localOffset.y
+        //<< " | Z:" << m_worldPosition.chunkCoord.z *16 + m_worldPosition.localOffset.z
+//
+        //<< std::endl;
+
+
+        glm::vec3 renderPos = m_WorldCameraPosition.localOffset + glm::vec3(m_WorldCameraPosition.chunkCoord*16);
+
+
+        std::cout
+
+        << " | CX:" << m_WorldCameraPosition.chunkCoord.x << " | X:" << m_WorldCameraPosition.localOffset.x
+        << " | CY:" << m_WorldCameraPosition.chunkCoord.y << " | Y:" << m_WorldCameraPosition.localOffset.y
+        << " | CZ:" << m_WorldCameraPosition.chunkCoord.z << " | Z:" << m_WorldCameraPosition.localOffset.z
+
+        << std::endl;
+       // std::cout << " | X:" << cameraPos.x << " | Y:" << cameraPos.y << " | Z:" << cameraPos.z << std::endl;
 
         //glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
-        glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+
+        glm::mat4 view = glm::lookAt(renderPos, renderPos + cameraFront, cameraUp);
 
         return view;
 
@@ -269,5 +305,49 @@ namespace opengltests
      //   //Re-calculate the Right and Up vector
       // m_right = glm::normalize(glm::cross(m_front, m_worldUp));
        //m_up    = glm::normalize(glm::cross(m_right, m_front));
+    }
+
+
+    void OpenGLCamera::Move(glm::vec3 delta)
+    {
+        m_WorldCameraPosition.localOffset += delta;
+
+        // Handle chunk overflow (assuming chunk size is 16.0f)
+            if (m_WorldCameraPosition.localOffset.x >= 16.0f)
+        {
+            m_WorldCameraPosition.chunkCoord.x += 1;
+            m_WorldCameraPosition.localOffset.x -= 16.0f;
+        }
+        else if (m_WorldCameraPosition.localOffset.x < 0.0f)
+        {
+            m_WorldCameraPosition.chunkCoord.x -= 1;
+            m_WorldCameraPosition.localOffset.x += 16.0f;
+        }
+//
+//
+        if (m_WorldCameraPosition.localOffset.z >= 16.0f)
+        {
+            m_WorldCameraPosition.chunkCoord.z += 1;
+            m_WorldCameraPosition.localOffset.z -= 16.0f;
+        }
+        else if (m_WorldCameraPosition.localOffset.z < 0.0f)
+        {
+            m_WorldCameraPosition.chunkCoord.z -= 1;
+            m_WorldCameraPosition.localOffset.z += 16.0f;
+        }
+//
+//
+        if (m_WorldCameraPosition.localOffset.y >= 16.0f)
+        {
+            m_WorldCameraPosition.chunkCoord.y += 1;
+            m_WorldCameraPosition.localOffset.y -= 16.0f;
+        }
+        else if (m_WorldCameraPosition.localOffset.y < 0.0f)
+        {
+            m_WorldCameraPosition.chunkCoord.y -= 1;
+            m_WorldCameraPosition.localOffset.y += 16.0f;
+        }
+
+
     }
 } // voxelgame

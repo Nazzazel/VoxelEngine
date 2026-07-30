@@ -17,11 +17,10 @@
 namespace opengltests
 {
     Chunk::Chunk(glm::ivec3 chunkPos,engine::AssetSystem& assets):
-        m_ChunkPosition(chunkPos),m_assets(assets)
+        m_ChunkPosition(chunkPos*16),m_assets(assets)
     {
-        m_Blocks.resize(CHUNK_SIZE * CHUNK_SIZE * CHUNK_SIZE, 0);
+        m_Blocks.resize(CHUNK_SIZE * CHUNK_SIZE * CHUNK_SIZE, 1);
         //m_Blocks.resize(4096, 0);
-
 
        // for (int x = 0; x < CHUNK_SIZE; ++x) {
        //     for (int z = 0; z < CHUNK_SIZE; ++z) {
@@ -32,58 +31,58 @@ namespace opengltests
        //     }
        // }
 
-        for (int x = 0; x < CHUNK_SIZE; ++x) {
-            for (int z = 0; z < CHUNK_SIZE; ++z) {
-                for (int y = 0; y < CHUNK_SIZE; ++y) { // 4
-                    //int index = x*z*y; lot like this due to 0zy || x0y || xz0 are going to return 0 aka the same idea
+// for (int x = 0; x < CHUNK_SIZE; ++x) {
+//     for (int z = 0; z < CHUNK_SIZE; ++z) {
+//         for (int y = 0; y < CHUNK_SIZE; ++y) { // 4
+//             //int index = x*z*y; lot like this due to 0zy || x0y || xz0 are going to return 0 aka the same idea
 
 
-                    int index =
-                          x                            + // 15           = 15
-                        ( z * CHUNK_SIZE             ) + // 15 * 16      = 240
-                        ( y * CHUNK_SIZE * CHUNK_SIZE) ; // 15 * 16 * 16 = 3840
-                                                         //                 ||
-                                                         //                4095
-                    m_Blocks[index] = 1; // Solid block ID 1
-                    /*
-                     *
-                     *
-                     *
-                     *
-                     *
-                     *          \------------------------\
-                     *         | \                        \
-                     *        |   \                        \
-                     *       |     \                        \
-                     *      |       \                        \
-                     *     |         \                        \
-                     *    \           \________________________\
-                     *     \          |              \         |
-                     *      \        |                \       |
-                     *       \      |                  \     |
-                     *        \    |                    \   |
-                     *         \  |                      \ |
-                     *          \|________________________\
-                     *
-                     *
-                     *
-                     *          16x16x16 = 4096
-                     *
-                     *          int index = x
-                     *          + (y * CHUNK_SIZE) + (z * CHUNK_SIZE * CHUNK_SIZE);
-                     *
-                     *          ID =
-                     *
-                     *
-                     */
+//             int index =
+//                   x                            + // 15           = 15
+//                 ( z * CHUNK_SIZE             ) + // 15 * 16      = 240
+//                 ( y * CHUNK_SIZE * CHUNK_SIZE) ; // 15 * 16 * 16 = 3840
+//                                                  //                 ||
+//                                                  //                4095
+//             m_Blocks[index] = 1; // Solid block ID 1
+//             /*
+//              *
+//              *
+//              *
+//              *
+//              *
+//              *          \------------------------\
+//              *         | \                        \
+//              *        |   \                        \
+//              *       |     \                        \
+//              *      |       \                        \
+//              *     |         \                        \
+//              *    \           \________________________\
+//              *     \          |              \         |
+//              *      \        |                \       |
+//              *       \      |                  \     |
+//              *        \    |                    \   |
+//              *         \  |                      \ |
+//              *          \|________________________\
+//              *
+//              *
+//              *
+//              *          16x16x16 = 4096
+//              *
+//              *          int index = x
+//              *          + (y * CHUNK_SIZE) + (z * CHUNK_SIZE * CHUNK_SIZE);
+//              *
+//              *          ID =
+//              *
+//              *
+//              */
 
 
 
 
 
-                }
-            }
-        }
+//         }
+//     }
+// }
        // SetBlock(0,0,0, 0);
 
 
@@ -129,12 +128,22 @@ namespace opengltests
                         float z1 = (float)(z+1);
 
                             // Check if neighbors are air (0 means exposed face)
-                            bool top    = (GetBlock(x, y + 1, z) == 0);
-                            bool bottom = (GetBlock(x, y - 1, z) == 0);
-                            bool left   = (GetBlock(x - 1, y, z) == 0);
-                            bool right  = (GetBlock(x + 1, y, z) == 0);
-                            bool front  = (GetBlock(x, y, z + 1) == 0);
-                            bool back   = (GetBlock(x, y, z - 1) == 0);
+                           bool top    = (GetBlock(x, y + 1, z) == 0);
+                           bool bottom = (GetBlock(x, y - 1, z) == 0);
+                           bool left   = (GetBlock(x - 1, y, z) == 0);
+                           bool right  = (GetBlock(x + 1, y, z) == 0);
+                           bool front  = (GetBlock(x, y, z + 1) == 0);
+                           bool back   = (GetBlock(x, y, z - 1) == 0);
+
+
+                    //bool top    =true;
+                    //bool bottom =true;
+                    //bool left   =true;
+                    //bool right  =true;
+                    //bool front  =true;
+                    //bool back   =true;
+
+
                         //bool topAir = (y == CHUNK_SIZE - 1) || (m_Blocks[x + (y + 1) * CHUNK_SIZE + z * CHUNK_SIZE * CHUNK_SIZE] == 0);
 
                         if (front)
@@ -265,187 +274,11 @@ namespace opengltests
               }
           }
       }
-        // 24 Vertices for a distinct-colored cube
 
-        // float Vertices[] =
-        // {
-        //     // Vertex position    //Color                 //Texture Cords
-        //     0.0f, 0.0f, 0.0f,     0.0f, 0.0f, 0.0f,       0.0f, 0.0f,
-        //     0.0f, 0.0f, 0.0f,     0.0f, 0.0f, 0.0f,       1.0f, 0.0f,
-        //     0.0f, 0.0f, 0.0f,     0.0f, 0.0f, 0.0f,       1.0f, 1.0f,
-        //     0.0f, 0.0f, 0.0f,     0.0f, 0.0f, 0.0f,       0.0f, 0.0f
-        // };
-
-        //float Vertices[];
-
-        // for (int x = 0; x < CHUNK_SIZE; ++x)
-        // {
-        //     for (int y = 0; y < CHUNK_SIZE; ++y)
-        //     {
-        //         for (int z = 0; z < CHUNK_SIZE; ++z)
-        //         {
-        //
-        //
-        //
-        //         }
-        //     }
-        // }
-
-
-        float cubeVertices[] = {
-            // Front face (Red)
-            -0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 0.0f , 1.0f, 1.0f,
-             0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 0.0f , 1.0f, 0.0f,
-             0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.0f , 0.0f, 0.0f,
-            -0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.0f , 0.0f, 1.0f,
-           // Back face (Green)
-            -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 0.0f , 1.0f, 1.0f,
-            -0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.0f , 1.0f, 0.0f,
-             0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.0f , 0.0f, 0.0f,
-             0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 0.0f , 0.0f, 1.0f,
-           // Top face (Blue)
-            -0.5f,  0.5f, -0.5f,  0.0f, 0.0f, 1.0f , 1.0f, 1.0f,
-            -0.5f,  0.5f,  0.5f,  0.0f, 0.0f, 1.0f , 1.0f, 0.0f,
-             0.5f,  0.5f,  0.5f,  0.0f, 0.0f, 1.0f , 0.0f, 0.0f,
-             0.5f,  0.5f, -0.5f,  0.0f, 0.0f, 1.0f , 0.0f, 1.0f,
-           // Bottom face (Yellow)
-            -0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 0.0f , 1.0f, 1.0f,
-             0.5f, -0.5f, -0.5f,  1.0f, 1.0f, 0.0f , 1.0f, 0.0f,
-             0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 0.0f , 0.0f, 0.0f,
-            -0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 0.0f , 0.0f, 1.0f,
-           // Right face (Magenta)
-             0.5f, -0.5f, -0.5f,  1.0f, 0.0f, 1.0f , 1.0f, 1.0f,
-             0.5f,  0.5f, -0.5f,  1.0f, 0.0f, 1.0f , 1.0f, 0.0f,
-             0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 1.0f , 0.0f, 0.0f,
-             0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 1.0f , 0.0f, 1.0f,
-           // Left face (Cyan)
-            -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 1.0f , 1.0f, 1.0f,
-            -0.5f, -0.5f,  0.5f,  0.0f, 1.0f, 1.0f , 1.0f, 0.0f,
-            -0.5f,  0.5f,  0.5f,  0.0f, 1.0f, 1.0f , 0.0f, 0.0f,
-            -0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 1.0f , 0.0f, 1.0f
-       };
-
-        // 12 Triangles (6 faces * 2 triangles)
-        uint32_t cubeIndices[] = {
-            0,  1,  2,  2,  3,  0,
-            4,  5,  6,  6,  7,  4,
-            8,  9,  10, 10, 11, 8,
-            12, 13, 14, 14, 15, 12,
-            16, 17, 18, 18, 19, 16,
-            20, 21, 22, 22, 23, 20
-        };
-
-
-{
-        //float faceVertices[] =
-        //{
-        /// std::vector<float> faceVertices = {
-        //         0, 0, 0,      0.0f, 1.0f, 0.0f,  0.0f, 0.0f,
-        //         0, 1, 0,      0.0f, 1.0f, 0.0f,  1.0f, 0.0f,
-        //         1, 1, 0,      0.0f, 1.0f, 0.0f,  1.0f, 1.0f,
-        //         0, 0, 0,      0.0f, 1.0f, 0.0f,  0.0f, 1.0f
-        //};
-
-
-        //float faceVertices[] =
-        //{
-        //    // std::vector<float> faceVertices = {
-        //    0.0f, 0.0f, 0.0f,      1.0f, 0.0f, 0.0f,     0.0f, 0.0f,
-        //    0.0f, 1.0f, 0.0f,      0.0f, 1.0f, 0.0f,     1.0f, 0.0f,
-        //    1.0f, 1.0f, 0.0f,      0.0f, 1.0f, 1.0f,     1.0f, 1.0f
-        //};
-
-
-        //float faceVertices[] =
-        //{
-        //    // position (pixels)   // color
-        //    0.5f, -0.5f,  0.5f,       1.0f, 0.0f, 0.0f ,1.0f, 1.0f,
-        //     0.5f, -0.5f,  0.5f,       1.0f, 0.0f, 0.0f ,1.0f, 0.0f,
-        //     0.5f,  0.5f,  0.5f,       1.0f, 0.0f, 0.0f ,0.0f, 0.0f,
-        //    -0.5f,  0.5f,  0.5f,       1.0f, 0.0f, 0.0f ,0.0f, 1.0f
-        //   };
-
-        // float faceVertices[] =
-        // {
-        //     //x y z
-        //     // position (pixels)   // color
-        //      0.0f,  0.0f,  0.0f,       1.0f, 0.0f, 0.0f,
-        //      1.0f,  0.0f,  0.0f,       1.0f, 0.0f, 0.0f,
-        //      1.0f,  1.0f,  0.0f,       1.0f, 0.0f, 0.0f,
-        //      0.0f,  1.0f,  0.0f,       1.0f, 0.0f, 0.0f
-        // };
-
-
-        //  float faceVertices[] =
-        //  {
-        //
-        //      //Front
-        //      //x y z
-        //      // position               // color              //Texture //TODO IF TEXTURE WOULD BE ROTATED TRY TO DEAL WITH TEXTURE CORDS
-        //      0.0f,  0.0f,  1.0f,       1.0f, 0.0f, 0.0f,     0.0f, 0.0f, //0
-        //      1.0f,  0.0f,  1.0f,       1.0f, 0.0f, 0.0f,     1.0f, 0.0f, //1
-        //      1.0f,  1.0f,  1.0f,       1.0f, 0.0f, 0.0f,     1.0f, 1.0f, //2
-        //      0.0f,  1.0f,  1.0f,       1.0f, 0.0f, 0.0f,     0.0f, 1.0f, //3
-        //
-        //      //<- left from the front x y z
-        //      0.0f,  1.0f,  0.0f,       0.0f, 1.0f, 0.0f,     1.0f, 1.0f, //4
-        //      0.0f,  0.0f,  0.0f,       0.0f, 1.0f, 0.0f,     1.0f, 0.0f, //5
-        //
-        //
-        //      1.0f,  1.0f,  0.0f,       0.0f, 1.0f, 0.0f,     0.0f, 0.0f, //6
-        //      0.0f,  1.0f,  1.0f,       0.0f, 1.0f, 0.0f,     0.0f, 1.0f  //7
-        //
-        // };
-        //            0.0f,  0.0f,  1.0f,       1.0f, 0.0f, 0.0f,     0.0f, 0.0f, //0        1.0f, 0.0f, //0
-        //            1.0f,  0.0f,  1.0f,       1.0f, 0.0f, 0.0f,     1.0f, 0.0f, //1        0.0f, 0.0f, //1
-        //            1.0f,  1.0f,  1.0f,       1.0f, 0.0f, 0.0f,     1.0f, 1.0f, //2        0.0f, 1.0f, //2
-        //            0.0f,  1.0f,  1.0f,       1.0f, 0.0f, 0.0f,     0.0f, 1.0f, //3        1.0f, 1.0f, //3
-    }
-      //  float faceVertices[] =
-      //  {
-      //      //x y z
-      //      // position               // color              //Texture //TODO IF TEXTURE WOULD BE ROTATED TRY TO DEAL WITH TEXTURE CORDS
-      //      0.0f,  0.0f,  1.0f,       1.0f, 0.0f, 0.0f,     0.0f, 0.0f, //0        1.0f, 0.0f, //0 1 1
-      //      1.0f,  0.0f,  1.0f,       1.0f, 0.0f, 0.0f,     1.0f, 0.0f, //1        0.0f, 0.0f, //1 0 1
-      //      1.0f,  1.0f,  1.0f,       1.0f, 0.0f, 0.0f,     1.0f, 1.0f, //2        0.0f, 1.0f, //2 0 0
-      //      0.0f,  1.0f,  1.0f,       1.0f, 0.0f, 0.0f,     0.0f, 1.0f, //3        1.0f, 1.0f, //3 1 0
-//
-      // };
-
-
-
-
-
-       //std::vector<float> faceVertices = {
-       ////      //x y z
-       ////      // position               // color              //Texture //TODO IF TEXTURE WOULD BE ROTATED TRY TO DEAL WITH TEXTURE CORDS
-       //         0.0f,  0.0f,  1.0f,       1.0f, 0.0f, 0.0f,     0.0f, 0.0f,
-       //         1.0f,  0.0f,  1.0f,       1.0f, 0.0f, 0.0f,     1.0f, 0.0f,
-       //         1.0f,  1.0f,  1.0f,       1.0f, 0.0f, 0.0f,     1.0f, 1.0f,
-       //         0.0f,  1.0f,  1.0f,       1.0f, 0.0f, 0.0f,     0.0f, 1.0f,
-       //};
-      //  vertices.insert(vertices.end(), faceVertices.begin(), faceVertices.end());
-      //  // Add indices for this quad
-      //  indices.push_back(indexOffset + 0);
-      //  indices.push_back(indexOffset + 1);
-      //  indices.push_back(indexOffset + 2);
-      //  indices.push_back(indexOffset + 2);
-      //  indices.push_back(indexOffset + 3);
-      //  indices.push_back(indexOffset + 0);
-      //  indexOffset += 4;
-
-      // uint32_t Indices[] = {
-      //     //Face
-      //     0,1,2,
-      //     2,3,0,
-      // };
 
         m_Shader = m_assets.GetShaderManager().Get(engine::ShaderTypeID::Basic);
 
-
         m_Material = std::make_shared<engine::Material>(m_Shader);
-
-    // m_Material->SetFloat4()
 
 
      backends::tests(); //t
@@ -455,23 +288,6 @@ namespace opengltests
       ,{engine::ShaderDataType::Float3,"a_Color"}
       ,{engine::ShaderDataType::Float2,"a_TexCoord"}
       };
-
-        //m_Mesh = std::make_shared<engine::Mesh>(
-        //   cubeVertices,
-        //   sizeof(cubeVertices),
-        //   layout,
-        //   cubeIndices,
-        //   std::size(cubeIndices)
-        //);
-
-//
-        //m_Mesh = std::make_shared<engine::Mesh>(
-        //   faceVertices,
-        //   sizeof(faceVertices),
-        //   layout,
-        //   Indices,
-        //   std::size(Indices)
-        //);
 
         m_Mesh = std::make_shared<engine::Mesh>(
            vertices.data(),
@@ -491,36 +307,65 @@ namespace opengltests
 
 
 
-    void Chunk::Draw(engine::IRenderer& renderer)
+    void Chunk::Draw(engine::IRenderer& renderer, const WorldCoord& cameraPosition)
     {
-
-
         if (!m_Mesh) return;
 
         engine::DrawCommand cmd;
 
 
-          float time = (float)glfwGetTime();
-        //float time = 1;
+         // float time = (float)glfwGetTime();
+        float time = 1;
 
 
-        float halfChunkSize = (float)CHUNK_SIZE / 2.0f;
-        glm::vec3 centerOffset = glm::vec3(halfChunkSize, halfChunkSize, halfChunkSize);
+        //float halfChunkSize = (float)CHUNK_SIZE / 2.0f;
+        //glm::vec3 centerOffset = glm::vec3(halfChunkSize, halfChunkSize, halfChunkSize);
 
         // 2. Create an identity matrix, then rotate it
-        glm::mat4 model = glm::mat4(1.0f);
-        glm::vec3 worldPos = glm::vec3(
-            0.0f, -19.0f, 0.0f
-        );
+
+        //glm::ivec3 worldPos = glm::ivec3(
+        //    0.0, -19.0, 0.0
+        //);
+        // Convert chunk absolute world grid to relative local coordinates for the shader
+        //glm::vec3 relativeChunkPos = glm::vec3(m_worldPosition.chunkCoord - cameraChunkAnchor) * 16.0f; // assuming 16 blocks wide chunks
+
+
+        //glm::ivec3 relativePos = m_ChunkPosition - cameraPosition.chunkCoord; //- cameraPosition;
 
         //model = glm::translate(model, glm::vec3(0.5f, 0.0f, 0.5f));
-        model = glm::translate(model, worldPos);
 
-        model = glm::translate(model, centerOffset);
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(m_ChunkPosition));
+
+        //model = glm::translate(model, centerOffset);
         // Rotate over time around a diagonal axis (X and Y) so we see it in 3D
-        model = glm::rotate(model, time * 1 * glm::radians(20.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+       // model = glm::rotate(model, time * 1 * glm::radians(20.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        //model = glm::rotate(model, glm::radians(20.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
-        model = glm::translate(model, -centerOffset);
+       // model = glm::translate(model, -centerOffset)
+
+        //
+        //
+        //
+        //
+        //// Inside your main render loop or scene manager
+        //glm::ivec3 cameraAnchor = playerCamera.GetWorldCoord().chunkCoord;
+//
+        //for (auto& chunk : loadedChunks)
+        //{
+        //    // Convert chunk's absolute world ivec3 to a relative vec3 using the camera anchor
+        //    glm::vec3 relativeChunkPos = glm::vec3(chunk.worldCoord - cameraAnchor);
+//
+        //    glm::mat4 model = glm::mat4(1.0f);
+        //    model = glm::translate(model, relativeChunkPos);
+//
+        //    // Send 'model' matrix to shader...
+        //}
+        //
+        //
+        //
+        //
+        //
 
         cmd.modelMatrix = model;
         cmd.material = m_Material;

@@ -42,6 +42,14 @@ add_executable(VoxelGame ${VOXEL_GAME_SOURCES}
         Games/OpenGLTests/Tests/Objects/RotatingCube/RotatingCube.hpp
         Games/OpenGLTests/Tests/Objects/Chunk/Chunk.cpp
         Games/OpenGLTests/Tests/Objects/Chunk/Chunk.hpp
+        Games/OpenGLTests/Tests/Objects/Chunk/SubChunk.cpp
+        Games/OpenGLTests/Tests/Objects/Chunk/SubChunk.hpp
+        Games/OpenGLTests/Core/Base/VoxelGameHeaders/WorldCoord.hpp
+        Games/OpenGLTests/Tests/Objects/Items/Item.cpp
+        Games/OpenGLTests/Tests/Objects/Items/Item.hpp
+        Games/OpenGLTests/Tests/Objects/Items/Block.cpp
+        Games/OpenGLTests/Tests/Objects/Items/Block.hpp
+        Games/OpenGLTests/Tests/Objects/Items/BlockList.hpp
 
 )
 
