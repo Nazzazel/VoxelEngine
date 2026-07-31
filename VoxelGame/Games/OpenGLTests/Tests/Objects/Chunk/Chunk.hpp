@@ -4,6 +4,7 @@
 
 
 #pragma once
+#include "SubChunk.hpp"
 #include "Core/Systems/Assets/AssetSystem.hpp"
 #include "Core/Systems/Renderer/IRenderer/IRenderer.hpp"
 
@@ -55,6 +56,10 @@ namespace opengltests
        // glm::vec3 m_Position = glm::vec3(0.0f);
 
         engine::IShader* m_Shader = nullptr;
+
+
+        std::vector<SubChunk> subChunks;
+        int chunkX, chunkZ;
     };
 
 

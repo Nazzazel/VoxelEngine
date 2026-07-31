@@ -16,74 +16,82 @@
 
 namespace opengltests
 {
-    Chunk::Chunk(glm::ivec3 chunkPos,engine::AssetSystem& assets):
-        m_ChunkPosition(chunkPos*16),m_assets(assets)
+    Chunk::Chunk(glm::ivec3 chunkPos,engine::AssetSystem& assets) :
+        m_ChunkPosition(chunkPos * 16), m_assets(assets)
     {
-        m_Blocks.resize(CHUNK_SIZE * CHUNK_SIZE * CHUNK_SIZE, 1);
+        subChunks.begin();
+
+        subChunks.reserve(24);
+        for (int i = 0; i < 24; ++i)
+        {
+            // Pass local sub-chunk position (e.g., stacking them along the Y axis)
+            glm::ivec3 subChunkPos = glm::ivec3(chunkPos.x, i, chunkPos.z);
+            subChunks.emplace_back(subChunkPos, m_assets);
+        }
+
+
+       // m_Blocks.resize(CHUNK_SIZE * CHUNK_SIZE * CHUNK_SIZE, 1);
         //m_Blocks.resize(4096, 0);
 
-       // for (int x = 0; x < CHUNK_SIZE; ++x) {
-       //     for (int z = 0; z < CHUNK_SIZE; ++z) {
-       //         for (int y = 0; y < 4; ++y) { // 4
-       //             int index = x + (y * CHUNK_SIZE) + (z * CHUNK_SIZE * CHUNK_SIZE);
-       //             m_Blocks[index] = 1; // Solid block ID 1
-       //         }
-       //     }
-       // }
+        // for (int x = 0; x < CHUNK_SIZE; ++x) {
+        //     for (int z = 0; z < CHUNK_SIZE; ++z) {
+        //         for (int y = 0; y < 4; ++y) { // 4
+        //             int index = x + (y * CHUNK_SIZE) + (z * CHUNK_SIZE * CHUNK_SIZE);
+        //             m_Blocks[index] = 1; // Solid block ID 1
+        //         }
+        //     }
+        // }
 
-// for (int x = 0; x < CHUNK_SIZE; ++x) {
-//     for (int z = 0; z < CHUNK_SIZE; ++z) {
-//         for (int y = 0; y < CHUNK_SIZE; ++y) { // 4
-//             //int index = x*z*y; lot like this due to 0zy || x0y || xz0 are going to return 0 aka the same idea
-
-
-//             int index =
-//                   x                            + // 15           = 15
-//                 ( z * CHUNK_SIZE             ) + // 15 * 16      = 240
-//                 ( y * CHUNK_SIZE * CHUNK_SIZE) ; // 15 * 16 * 16 = 3840
-//                                                  //                 ||
-//                                                  //                4095
-//             m_Blocks[index] = 1; // Solid block ID 1
-//             /*
-//              *
-//              *
-//              *
-//              *
-//              *
-//              *          \------------------------\
-//              *         | \                        \
-//              *        |   \                        \
-//              *       |     \                        \
-//              *      |       \                        \
-//              *     |         \                        \
-//              *    \           \________________________\
-//              *     \          |              \         |
-//              *      \        |                \       |
-//              *       \      |                  \     |
-//              *        \    |                    \   |
-//              *         \  |                      \ |
-//              *          \|________________________\
-//              *
-//              *
-//              *
-//              *          16x16x16 = 4096
-//              *
-//              *          int index = x
-//              *          + (y * CHUNK_SIZE) + (z * CHUNK_SIZE * CHUNK_SIZE);
-//              *
-//              *          ID =
-//              *
-//              *
-//              */
+        // for (int x = 0; x < CHUNK_SIZE; ++x) {
+        //     for (int z = 0; z < CHUNK_SIZE; ++z) {
+        //         for (int y = 0; y < CHUNK_SIZE; ++y) { // 4
+        //             //int index = x*z*y; lot like this due to 0zy || x0y || xz0 are going to return 0 aka the same idea
 
 
+        //             int index =
+        //                   x                            + // 15           = 15
+        //                 ( z * CHUNK_SIZE             ) + // 15 * 16      = 240
+        //                 ( y * CHUNK_SIZE * CHUNK_SIZE) ; // 15 * 16 * 16 = 3840
+        //                                                  //                 ||
+        //                                                  //                4095
+        //             m_Blocks[index] = 1; // Solid block ID 1
+        //             /*
+        //              *
+        //              *
+        //              *
+        //              *
+        //              *
+        //              *          \------------------------\
+        //              *         | \                        \
+        //              *        |   \                        \
+        //              *       |     \                        \
+        //              *      |       \                        \
+        //              *     |         \                        \
+        //              *    \           \________________________\
+        //              *     \          |              \         |
+        //              *      \        |                \       |
+        //              *       \      |                  \     |
+        //              *        \    |                    \   |
+        //              *         \  |                      \ |
+        //              *          \|________________________\
+        //              *
+        //              *
+        //              *
+        //              *          16x16x16 = 4096
+        //              *
+        //              *          int index = x
+        //              *          + (y * CHUNK_SIZE) + (z * CHUNK_SIZE * CHUNK_SIZE);
+        //              *
+        //              *          ID =
+        //              *
+        //              *
+        //              */
 
 
-
-//         }
-//     }
-// }
-       // SetBlock(0,0,0, 0);
+        //         }
+        //     }
+        // }
+        // SetBlock(0,0,0, 0);
 
 
         // for (int x = 0; x < m_Blocks.size(); ++x)
@@ -92,7 +100,6 @@ namespace opengltests
         //     //std::cout << m_Blocks.size() << std::endl;
         //
         // }
-
     }
 
     void Chunk::BuildMesh()
@@ -296,9 +303,6 @@ namespace opengltests
                   indices.data(),
                 indices.size()
         );
-
-
-
     }
 
 
