@@ -59,7 +59,7 @@ namespace opengltests
         float m_yaw         = -90.0f;
         float m_pitch       = 0.0f;
         float m_AspectRatio = 1.6f;
-        float fov       = 45.0f;
+        float fov           = 45.0f;
 
 
 

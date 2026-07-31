@@ -23,10 +23,10 @@ namespace opengltests
     class SubChunk
     {
     public:
-        static constexpr int SUB_CHUNK_SIZE = 16;
+        uint8_t SUB_CHUNK_SIZE = 16; //Max 256 block chunk
 
-
-        SubChunk(glm::ivec3 chunkPos,engine::AssetSystem& assets);
+        SubChunk();
+        SubChunk(uint8_t f_SUB_CHUNK_SIZE, glm::ivec3 chunkPos,engine::AssetSystem& assets);
         ~SubChunk() = default;
 
        // std::vector<uint16_t > pallette;

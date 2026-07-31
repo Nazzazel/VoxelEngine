@@ -63,11 +63,11 @@ namespace opengltests
 
         if (m_keyboardInputStateMap.IsKeyPressed(engine::KeyCodes::KEY_LEFT_SHIFT))
         {
-            if (SpeedMultiplyer < 20.0f)
-            {
-                SpeedMultiplyer += 0.01f;
-            }
-
+           //if (SpeedMultiplyer < 50.0f)
+           //{
+           //    SpeedMultiplyer += 0.01f;
+           //}
+            SpeedMultiplyer = 50.0f;
 
         }
 

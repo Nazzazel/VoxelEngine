@@ -25,6 +25,7 @@ namespace opengltests
         public:
 
         static constexpr int CHUNK_SIZE = 16;
+        static constexpr int SUB_CHUNK_STACK_SIZE = 24;
 
         explicit Chunk(glm::ivec3 chunkPos,engine::AssetSystem& assets);
         ~Chunk() = default;
@@ -41,6 +42,9 @@ namespace opengltests
         [[nodiscard]] uint16_t GetBlock(int x, int y, int z) const;
 
         private:
+        std::array<SubChunk, SUB_CHUNK_STACK_SIZE> BuildFullChunk(glm::ivec3 chunkPos,engine::AssetSystem& assets);
+
+
         glm::ivec3 m_ChunkPosition;
 
         std::shared_ptr<engine::Mesh> m_Mesh;
@@ -58,7 +62,10 @@ namespace opengltests
         engine::IShader* m_Shader = nullptr;
 
 
-        std::vector<SubChunk> subChunks;
+        //std::vector<SubChunk> subChunks;
+        std::array<SubChunk, SUB_CHUNK_STACK_SIZE> subChunks;
+
+
         int chunkX, chunkZ;
     };
 

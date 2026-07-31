@@ -6,12 +6,15 @@
 
 namespace opengltests
 {
-    SubChunk::SubChunk(glm::ivec3 chunkPos,engine::AssetSystem& assets)
+    SubChunk::SubChunk(){} //TEMP CONSTRUCTOR FOR ARRAY INIT// REASON FAST MEMORY
+
+    SubChunk::SubChunk(uint8_t f_SUB_CHUNK_SIZE, glm::ivec3 chunkPos,engine::AssetSystem& assets)
     //:m_ChunkPosition(chunkPos*16),m_assets(assets)
     {
+        SUB_CHUNK_SIZE = f_SUB_CHUNK_SIZE;
         //chunkData = {5000,0};
-        //chunkData.resize(4096, 1);
-        chunkData.resize(SUB_CHUNK_SIZE * SUB_CHUNK_SIZE * SUB_CHUNK_SIZE, 1);
+        chunkData.resize(4096, 1);
+        //chunkData.resize(SUB_CHUNK_SIZE * SUB_CHUNK_SIZE * SUB_CHUNK_SIZE, 1);
     }
 
     void SubChunk::SetBlock(int x, int y, int z, uint16_t blockID)

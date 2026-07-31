@@ -21,22 +21,23 @@ namespace opengltests
        //m_Rot_Cube->Init(engine.GetAssetSystem());
 
 
-      // glm::ivec3 chunkPos(20, 0, 20);
+       //glm::ivec3 chunkPos(6, 0, 6);
+       glm::ivec3 chunkPos(20, 0, 20);
 
 
-        // for (int x = -(chunkPos.x/2); x < chunkPos.x/2; x++)
-        // {
-        //  for (int y = -1; y < chunkPos.y; y++)
-        //  {
-        //   for (int z = -(chunkPos.z/2); z < chunkPos.z/2; z++)
-        //   {
-        //    auto& newChunk = loadedChunks.emplace_back(std::make_unique<Chunk>(glm::vec3(x,y,z), engine.GetAssetSystem()));
-        //    newChunk->BuildMesh();
-        //   }
-        //  }
-        // }
-     auto& newChunk = loadedChunks.emplace_back(std::make_unique<Chunk>(glm::vec3(0,-2,0), engine.GetAssetSystem()));
-     newChunk->BuildMesh();
+        for (int x = -(chunkPos.x/2); x < chunkPos.x/2; x++)
+        {
+         for (int y = -1; y < chunkPos.y; y++)
+         {
+          for (int z = -(chunkPos.z/2); z < chunkPos.z/2; z++)
+          {
+           auto& newChunk = loadedChunks.emplace_back(std::make_unique<Chunk>(glm::vec3(x,y,z), engine.GetAssetSystem()));
+           newChunk->BuildMesh();
+          }
+         }
+        }
+     //auto& newChunk = loadedChunks.emplace_back(std::make_unique<Chunk>(glm::vec3(0,-2,0), engine.GetAssetSystem()));
+     //newChunk->BuildMesh();
 
 
         //loadedChunks.emplace_back(newChunk);
