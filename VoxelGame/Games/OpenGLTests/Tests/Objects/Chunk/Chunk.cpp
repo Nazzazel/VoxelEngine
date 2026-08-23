@@ -16,11 +16,15 @@
 
 namespace opengltests
 {
-    Chunk::Chunk(glm::ivec3 chunkPos,engine::AssetSystem& assets) :
+    Chunk::Chunk(glm::ivec3 chunkPos,engine::AssetSystem& assets,engine::OpenGLTexture& texture) :
+   // Chunk::Chunk(glm::ivec3 chunkPos,engine::AssetSystem& assets) :
         m_ChunkPosition(chunkPos * 16),
         m_assets(assets),
-        subChunks(Chunk::BuildFullChunk(chunkPos,assets))
+        subChunks(Chunk::BuildFullChunk(chunkPos,assets)),
+        m_Texture(texture)
     {
+
+
        // subChunks.begin();
 
       // subChunks.reserve(24);
@@ -117,8 +121,14 @@ namespace opengltests
         uint32_t indexOffset = 0;
 
 
-        uint32_t totalHeight = SUB_CHUNK_STACK_SIZE * CHUNK_SIZE;
-       //Iterate through every block in the 16x16x16 grid
+        uint32_t totalHeight = SUB_CHUNK_STACK_SIZE * CHUNK_SIZE;// x *  16 = all y blocks
+
+
+        size_t estimatedBlocks = CHUNK_SIZE * totalHeight * CHUNK_SIZE;
+        vertices.reserve(estimatedBlocks * 3);
+        indices.reserve(estimatedBlocks * 3);
+
+        //Iterate through every block in the 16x16x16 grid
        for (int x = 0; x < CHUNK_SIZE; ++x)
        {
            for (int y = 0; y < totalHeight; ++y) {
@@ -272,15 +282,21 @@ namespace opengltests
 
         m_Shader = m_assets.GetShaderManager().Get(engine::ShaderTypeID::Basic);
 
-        m_Material = std::make_shared<engine::Material>(m_Shader);
+        m_Material = std::make_unique<engine::Material>(m_Shader,m_Texture);
+      //  m_Material = std::make_unique<engine::Material>(m_Shader);
+        //m_Material -> AddTexture()
 
 
-     backends::tests(); //t
+       // m_Material->SetFloat()//todo
+
+
+     //backends::tests(); //t
      const engine::BufferLayout layout =
       {
        {engine::ShaderDataType::Float3,"a_Position"}
       ,{engine::ShaderDataType::Float3,"a_Color"}
       ,{engine::ShaderDataType::Float2,"a_TexCoord"}
+
       };
 
 
@@ -289,6 +305,7 @@ namespace opengltests
 
 
 
+        //m_Mesh = std::make_unique<engine::Mesh>(
         m_Mesh = std::make_shared<engine::Mesh>(
            vertices.data(),
          vertices.size() * sizeof(float),
@@ -311,6 +328,8 @@ namespace opengltests
         engine::DrawCommand cmd;
 
 
+
+
          // float time = (float)glfwGetTime();
         float time = 1;
 
@@ -330,6 +349,8 @@ namespace opengltests
         //glm::ivec3 relativePos = m_ChunkPosition - cameraPosition.chunkCoord; //- cameraPosition;
 
         //model = glm::translate(model, glm::vec3(0.5f, 0.0f, 0.5f));
+
+
 
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(m_ChunkPosition));
@@ -366,7 +387,9 @@ namespace opengltests
 
         cmd.modelMatrix = model;
         cmd.material = m_Material;
+       // cmd.material = std::move(m_Material);
         cmd.mesh     = m_Mesh;
+       // cmd.mesh     = std::move(m_Mesh);
 
         renderer.Submit(cmd);
     }

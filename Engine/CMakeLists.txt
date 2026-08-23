@@ -78,6 +78,10 @@ add_library(Engine STATIC ${ENGINE_SOURCES}
         Core/Systems/Input/InputSystem.cpp
         Core/Systems/Input/InputSystem.hpp
         Core/Base/--PreCompileHeaders--/General/Graphic.hpp
+        Systems/Renderer/Model/Model.cpp
+        Systems/Renderer/Model/Model.hpp
+        Systems/Renderer/Texture/OpenGLTexture.cpp
+        Systems/Renderer/Texture/OpenGLTexture.hpp
 
 )
 

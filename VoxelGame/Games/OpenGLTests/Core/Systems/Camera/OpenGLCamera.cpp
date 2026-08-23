@@ -195,14 +195,14 @@ namespace opengltests
 
         glm::vec3 renderPos = m_WorldCameraPosition.localOffset + glm::vec3(m_WorldCameraPosition.chunkCoord*16);
 
-
-        std::cout
-
-        << " | CX:" << m_WorldCameraPosition.chunkCoord.x << " | X:" << m_WorldCameraPosition.localOffset.x
-        << " | CY:" << m_WorldCameraPosition.chunkCoord.y << " | Y:" << m_WorldCameraPosition.localOffset.y
-        << " | CZ:" << m_WorldCameraPosition.chunkCoord.z << " | Z:" << m_WorldCameraPosition.localOffset.z
-
-        << std::endl;
+//
+       // std::cout
+//
+       // << " | CX:" << m_WorldCameraPosition.chunkCoord.x << " | X:" << m_WorldCameraPosition.localOffset.x
+       // << " | CY:" << m_WorldCameraPosition.chunkCoord.y << " | Y:" << m_WorldCameraPosition.localOffset.y
+       // << " | CZ:" << m_WorldCameraPosition.chunkCoord.z << " | Z:" << m_WorldCameraPosition.localOffset.z
+//
+       // << std::endl;
        // std::cout << " | X:" << cameraPos.x << " | Y:" << cameraPos.y << " | Z:" << cameraPos.z << std::endl;
 
         //glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);

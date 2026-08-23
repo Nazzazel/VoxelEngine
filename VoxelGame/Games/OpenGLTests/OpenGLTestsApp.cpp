@@ -6,36 +6,58 @@
 
 
 
-
 namespace opengltests
 {
+ //   loadedChunks = std::vector<Chunk> loadedChunks[render_distance*render_distance];
+
     void OpenGLTestsApp::OnInit(engine::IAppInterface& engine)
     {
 
 
+
         m_opengl_camera = std::make_unique<opengltests::OpenGLCamera>();
         m_input_handler = std::make_unique<InputHandler>(engine.GetInputSystem(),*m_opengl_camera, engine);
+
+     loadedChunks.reserve(render_distance*render_distance);
+
+
+        ///
+
 
 
        //m_Rot_Cube = std::make_unique<RotatingCube>();
        //m_Rot_Cube->Init(engine.GetAssetSystem());
 
 
-       //glm::ivec3 chunkPos(6, 0, 6);
+      // glm::ivec3 chunkPos(6, 0, 6);
        glm::ivec3 chunkPos(20, 0, 20);
+       //nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnb
+       //
+    for (int x = -(chunkPos.x/2); x < chunkPos.x/2; x++)
+    {
+    // for (int y = -1; y < chunkPos.y; y++)
+    // {
+      for (int z = -(chunkPos.z/2); z < chunkPos.z/2; z++)
+      {
+       std::cout   << "mark  \n";
+       ///auto& newChunk = loadedChunks.emplace_back(std::make_unique<Chunk>(glm::vec3(x,y,z), engine.GetAssetSystem(),texture));
+       auto& newChunk = loadedChunks.emplace_back(Chunk(glm::vec3(x,-1,z), engine.GetAssetSystem(),texture));
+       newChunk.BuildMesh();
+      }
+   //  }
+    }
 
 
-        for (int x = -(chunkPos.x/2); x < chunkPos.x/2; x++)
-        {
-         for (int y = -1; y < chunkPos.y; y++)
-         {
-          for (int z = -(chunkPos.z/2); z < chunkPos.z/2; z++)
-          {
-           auto& newChunk = loadedChunks.emplace_back(std::make_unique<Chunk>(glm::vec3(x,y,z), engine.GetAssetSystem()));
-           newChunk->BuildMesh();
-          }
-         }
-        }
+     //newChunk->BuildMesh();
+
+
+
+   //  auto& newChunk = loadedChunks.emplace_back(std::make_unique<Chunk>(glm::vec3(1,1,1), engine.GetAssetSystem()));//havege the pointer on a vector<chunk> to avoid overhead
+     // auto& newChunk = loadedChunks.emplace_back(std::make_unique<Chunk>(glm::vec3(1,1,1), engine.GetAssetSystem(),texture));//havege the pointer on a vector<chunk> to avoid overhead
+     // newChunk->BuildMesh();
+
+
+
      //auto& newChunk = loadedChunks.emplace_back(std::make_unique<Chunk>(glm::vec3(0,-2,0), engine.GetAssetSystem()));
      //newChunk->BuildMesh();
 
@@ -53,43 +75,15 @@ namespace opengltests
 
     void OpenGLTestsApp::OnUpdate(engine::IAppInterface& engine, float dt)
     {
+
+     UpdateWindowSize(engine, dt);
         m_input_handler->OnUpdate(dt);
-         auto windowObj = engine.GetWindowSystem().GetWindow();
-         int width, height;
-         windowObj->GetWindowSize(width, height);
 
-         static int lastWidth = 0;
-         static int lastHeight = 0;
-
-         if (width != lastWidth || height != lastHeight)
-         {
-          lastWidth = width;
-          lastHeight = height;
-
-          if (height > 0)
-          {
-           float aspect = static_cast<float>(width) / static_cast<float>(height);
-           m_opengl_camera->SetAspectRatio(aspect); // Updates projection matrix only when size changes!
-          }
-         }
 
 
 
 
     }
-
-   // glm::vec3 cubePositions[] = {
-   //     glm::vec3( 0.0f,  0.0f,  0.0f),
-   //     glm::vec3( 2.0f,  5.0f, -15.0f),
-   //     glm::vec3(-1.5f, -2.2f, -2.5f),
-   //     glm::vec3(-3.8f, -2.0f, -12.3f),
-   //     glm::vec3( 2.4f, -0.4f, -3.5f),
-   //     glm::vec3(-1.7f,  3.0f, -7.5f),
-   //     glm::vec3( 1.3f, -2.0f, -2.5f),
-   //     glm::vec3( 1.5f,  2.0f, -2.5f),
-   //     glm::vec3( 1.5f,  0.2f, -1.5f),
-   //     glm::vec3(-1.3f,  1.0f, -1.5f)
-   //};
 
 
     void OpenGLTestsApp::OnRender(engine::IRenderer& renderer)
@@ -99,9 +93,9 @@ namespace opengltests
       //  m_Chunk->SetBlock(0,0,0, 0);
         //m_Chunk->Draw(renderer , m_opengl_camera.get()->GetWorldPosition());
 
-        for (const auto& chunk : loadedChunks)
+        for ( auto& chunk : loadedChunks)
         {
-         chunk->Draw(renderer, m_opengl_camera->GetWorldPosition());
+         chunk.Draw(renderer, m_opengl_camera->GetWorldPosition());
         }
 
       //for (unsigned int i = 0; i < sizeof(cubePositions) / sizeof(cubePositions[0]); i++)
@@ -118,5 +112,27 @@ namespace opengltests
 
     }
 
+    void OpenGLTestsApp::UpdateWindowSize(engine::IAppInterface& engine, float dt)
+    {
 
+     auto windowObj = engine.GetWindowSystem().GetWindow();
+     int width, height;
+     windowObj->GetWindowSize(width, height);
+
+     static int lastWidth = 0;
+     static int lastHeight = 0;
+
+     if (width != lastWidth || height != lastHeight)
+     {
+      lastWidth = width;
+      lastHeight = height;
+
+      if (height > 0)
+      {
+       float aspect = static_cast<float>(width) / static_cast<float>(height);
+       m_opengl_camera->SetAspectRatio(aspect); // Updates projection matrix only when size changes!
+      }
+     }
+
+    }
 } // opengltests

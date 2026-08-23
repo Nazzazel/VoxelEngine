@@ -279,7 +279,7 @@ namespace engine
      //    });
 
 
-        m_Material = std::make_shared<Material>(m_shader);
+       // m_Material = std::make_shared<Material>(m_shader);
 
 
 

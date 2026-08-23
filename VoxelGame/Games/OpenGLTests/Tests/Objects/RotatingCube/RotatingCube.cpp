@@ -70,7 +70,7 @@ namespace opengltests
         m_shader = assets.GetShaderManager().Get(engine::ShaderTypeID::Basic);
 
 
-        m_Material = std::make_shared<engine::Material>(m_shader);
+        ///m_Material = std::make_shared<engine::Material>(m_shader);
 
     // m_Material->SetFloat4()
 

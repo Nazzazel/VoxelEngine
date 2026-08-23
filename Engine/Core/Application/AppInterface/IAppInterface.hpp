@@ -18,9 +18,13 @@ namespace engine
 
         virtual class EventSystem&      GetEventSystem      () = 0;
         virtual class RendererSystem&   GetRendererSystem   () = 0;
-        virtual class FileSystem&       GetFileSystem       () = 0;
-        virtual class AssetSystem&      GetAssetSystem      () = 0;
+        virtual class FileSystem&       GetFileSystem       () = 0;// Load Files
+        virtual class AssetSystem&      GetAssetSystem      () = 0;// Open FIles and manages them
         //() = 0;
+        //virtual class EventSystem&      GetEventSystem      () = 0; //WindowState // ex: Main Menu,Game,Settings ect
+        //
+
+
 
         virtual class InputSystem& GetInputSystem() = 0;
 

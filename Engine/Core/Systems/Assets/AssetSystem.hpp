@@ -37,6 +37,9 @@ namespace engine
         ShaderManager& GetShaderManager();
         const ShaderManager& GetShaderManager() const;
 
+        ShaderManager& GetTextureManager();
+        const   ShaderManager& GetTextureManager() const;
+
 
     private:
         void SetUpIAssetProvider();
@@ -50,6 +53,7 @@ namespace engine
         std::unique_ptr<AssetProviderContext> m_AssetProviderContext;
 
         std::unique_ptr<ShaderManager> m_ShaderManager;
+        std::unique_ptr<ShaderManager> m_TextureManager;
 
     };
 } // engine

@@ -9,6 +9,10 @@
 #include "Systems/Renderer/Buffers/IVertexArray.hpp"
 
 
+
+#include "Systems/Renderer/Texture/OpenGLTexture.hpp"
+
+
 namespace engine
 {
     class DrawComponents
@@ -16,7 +20,8 @@ namespace engine
 
     class Material {
     public:
-        Material(IShader* shader) : m_Shader(shader) {}
+        Material(IShader* shader, engine::OpenGLTexture& texture) : m_Texture(texture),m_Shader(shader) {}
+        //Material(IShader* shader) :m_Shader(shader) {}
         ~Material() = default;
 
         void Bind() {
@@ -26,11 +31,21 @@ namespace engine
                 for (const auto& [name, val] : m_Floats)   m_Shader->SetFloat(name, val);
                 for (const auto& [name, val] : m_Vec4s)    m_Shader->SetFloat4(name, val.r, val.g, val.b, val.a);
                 for (const auto& [name, val] : m_Mat4s)    m_Shader->SetMat4(name, val);
+
+                m_Texture.Bind();
+                m_Texture.SetUniforms(m_Shader,"tex0",0);
             }
+
+
         }
+
+       // engine::OpenGLTexture& m_Texture;
+
+
 
         IShader* GetShader() const { return m_Shader; }
         void SetShader(IShader* shader) { m_Shader = shader; }
+
 
         // Uniform Setters (stores them to be applied when Bind() is called)
         void SetFloat(const std::string& name, float value) { m_Floats[name] = value; }
@@ -44,11 +59,20 @@ namespace engine
         std::unordered_map<std::string, float> m_Floats;
         std::unordered_map<std::string, glm::vec4> m_Vec4s;
         std::unordered_map<std::string, glm::mat4> m_Mat4s;
+
+        engine::OpenGLTexture& m_Texture;
+
     };
 
     class Mesh {
     public:
-        Mesh(float* vertices, uint32_t vertexSize, const BufferLayout& layout, uint32_t* indices, uint32_t indexCount) {
+        Mesh(
+            float* vertices, // a list of "points" that contain information about the "point"; ex: relative position of an object; color coordinates; texture coordinates
+            uint32_t vertexSize, // size of a list containing vertices
+            const BufferLayout& layout, //THe way information is structured
+            uint32_t* indices, //all of the indices // indice - a pattern of order in which vertices are drawn
+            uint32_t indexCount //the size of the indices
+            ){
             m_VertexArray = IVertexArray::Create();
 
             auto vertexBuffer = IVertexBuffer::Create(vertices, vertexSize);

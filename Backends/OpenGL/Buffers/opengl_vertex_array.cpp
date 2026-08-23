@@ -56,6 +56,11 @@ namespace backends
 
             //std::cout << element.Name << std::endl;
 
+
+            // Gives offserts and propper "names" of vertex poi nts from vertex itself.
+            // ex: //Space coords  //Color cords //texuture coords
+            // ex: -1.0, 1.0, 0.0, -1.0, 1.0, 0.0  1.0, 0.0
+
             glVertexAttribPointer(
                 index,
                 GetComponentCount(element.Type),
@@ -65,6 +70,7 @@ namespace backends
                 layout.GetStride(),
                 (const void*)element.Offset
             );
+            //
 
             index++;
         }

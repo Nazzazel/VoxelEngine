@@ -10,6 +10,7 @@
 #include "Core/Systems/Renderer/IRenderer/IRenderer.hpp"
 #include "Tests/Objects/RotatingCube/RotatingCube.hpp"
 #include "Core/Systems/Window/WindowSystem.hpp"
+#include "Systems/Renderer/Texture/OpenGLTexture.hpp"
 #include "Tests/Objects/Chunk/Chunk.hpp"
 
 namespace opengltests
@@ -17,11 +18,18 @@ namespace opengltests
     class OpenGLTestsApp
     {
         public:
+
         void OnInit(engine::IAppInterface& engine);//TODO
         void OnUpdate(engine::IAppInterface& engine,float dt);
         //void OnRender(Renderer& m_Renderer) {}
         void OnRender(engine::IRenderer& renderer);
         void OnShutdown(); //TODO
+
+
+    private:
+        int8_t render_distance = 15;
+
+        void UpdateWindowSize(engine::IAppInterface& engine,float dt);
 
         private:
         std::unique_ptr<InputHandler> m_input_handler;//TODO delete
@@ -30,9 +38,10 @@ namespace opengltests
         std::unique_ptr<RotatingCube> m_Rot_Cube;//TODO delete
         //std::unique_ptr<Chunk> m_Chunk;//TODO delete
 
-        std::vector<std::unique_ptr<Chunk>> loadedChunks;
+        //std::vector<std::unique_ptr<Chunk>> loadedChunks;
+        std::vector<Chunk> loadedChunks;
 
-
+        engine::OpenGLTexture texture;
         WorldCoord m_worldPosition;
 
     };

@@ -190,6 +190,8 @@ namespace backends
                    shader->SetMat4("u_Projection", m_SceneData.projectionMatrix);
                }
 
+
+
                // 3. Bind geometry and draw
                cmd.mesh->GetVertexArray()->Bind();
                DrawIndexed(cmd.mesh->GetIndexCount(),2);

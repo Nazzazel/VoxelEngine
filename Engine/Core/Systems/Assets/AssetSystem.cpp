@@ -69,7 +69,8 @@ namespace engine
             ShaderManager& AssetSystem::GetShaderManager()      {return *m_ShaderManager;}
     const   ShaderManager& AssetSystem::GetShaderManager() const{return *m_ShaderManager;}
 
-
+            ShaderManager& AssetSystem::GetTextureManager()      {return *m_ShaderManager;}
+    const   ShaderManager& AssetSystem::GetTextureManager() const{return *m_ShaderManager;}
 
     void AssetSystem::SetUpIAssetProvider()
     {

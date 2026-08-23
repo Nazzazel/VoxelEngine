@@ -46,7 +46,7 @@ namespace backends
 
     void tests::one()
     {
-
+        //glActiveTexture()
         unsigned int texture;
         glGenTextures(1, &texture);
         glBindTexture(GL_TEXTURE_2D, texture);
@@ -62,10 +62,15 @@ namespace backends
         unsigned char *data = stbi_load("/home/nazzazel/Programming/cpp/projects/VoxelEngine/Engine/Res/Assets/Textures/container.jpg", &width, &height, &nrChannels, 0);
         if (data)
         {
+           // uint b = static_cast<uint>(*data);
 
-            std::cout << "SUccess to load texture" << std::endl;
+
+
+            std::cout << "SUccess to load texture: \n" << static_cast<int>(*data) << "\n ------------------\n END" << std::endl;
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
             glGenerateMipmap(GL_TEXTURE_2D);
+
+            //GL_TEXTURE0;
         }
         else
         {

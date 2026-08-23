@@ -97,7 +97,7 @@ namespace opengltests
 
 
 
-        m_Material = std::make_shared<engine::Material>(m_shader);
+       // m_Material = std::make_shared<engine::Material>(m_shader);
 
 
 
