@@ -107,7 +107,9 @@ namespace opengltests
         //
         // }
 
-
+        auto time = assets.GetSystemManager()->GetSystem<engine::TimeSystem>();
+     //   std::cout <<        time->CurrentTime() << "\n";
+        std::cout <<        time->GetDeltaTime() << "\n";
 
         BuildMesh();
     }
@@ -129,155 +131,311 @@ namespace opengltests
         indices.reserve(estimatedBlocks * 3);
 
         //Iterate through every block in the 16x16x16 grid
-       for (int x = 0; x < CHUNK_SIZE; ++x)
-       {
-           for (int y = 0; y < totalHeight; ++y) {
+        for (int subChunkIndex = 0; subChunkIndex < SUB_CHUNK_STACK_SIZE; ++subChunkIndex)
+        {
+          for (int localY = 0; localY < CHUNK_SIZE; ++localY)
+                {
+                    for (int x = 0; x < CHUNK_SIZE; ++x)
+                    {
+                       for (int z = 0; z < CHUNK_SIZE; ++z) {
+                            // int blockID = m_Blocks[x + y * CHUNK_SIZE + z * CHUNK_SIZE * CHUNK_SIZE];
+                                //int blockID = GetBlock(x, y, z);
 
-               for (int z = 0; z < CHUNK_SIZE; ++z) {
-                    // int blockID = m_Blocks[x + y * CHUNK_SIZE + z * CHUNK_SIZE * CHUNK_SIZE];
-                        int blockID = GetBlock(x, y, z);
+                                int absoluteY = (subChunkIndex * CHUNK_SIZE) + localY;
+                                int blockID = subChunks[subChunkIndex].GetBlock(x, localY, z);
 
-                        // If it's air (0), skip it
-                        if (blockID == 0) continue;
+                                // If it's air (0), skip it
+                                if (blockID == 0) continue;
 
-                        // CHECK NEIGHBORS (Basic Face Culling)
-                        // If a neighboring block exists, we skip generating that inner face!
-                        // (For simplicity in this skeleton, we will generate all 6 faces if exposed,
-                        // or check bounds. Here is the concept for checking the top neighbor):
+                                // CHECK NEIGHBORS (Basic Face Culling)
+                                // If a neighboring block exists, we skip generating that inner face!
+                                // (For simplicity in this skeleton, we will generate all 6 faces if exposed,
+                                // or check bounds. Here is the concept for checking the top neighbor):
 
-                        float x0 = (float)x; float x1 = (float)(x+1);
-                        float y0 = (float)y;float y1 = (float)(y+1);
-                        float z0 = (float)z;float z1 = (float)(z+1);
-
-
-                        // Check if neighbors are air (0 means exposed face)
-                        bool top    = (GetBlock(x, y + 1, z) == 0);
-                        bool bottom = (GetBlock(x, y - 1, z) == 0);
-                        bool left   = (GetBlock(x - 1, y, z) == 0);
-                        bool right  = (GetBlock(x + 1, y, z) == 0);
-                        bool front  = (GetBlock(x, y, z + 1) == 0);
-                        bool back   = (GetBlock(x, y, z - 1) == 0);
+                                float x0 = (float)x; float x1 = (float)(x+1);
+                                float y0 = (float)absoluteY;float y1 = (float)(absoluteY+1);
+                                float z0 = (float)z;float z1 = (float)(z+1);
 
 
-                    //bool top    =true;
-                    //bool bottom =true;
-                    //bool left   =true;
-                    //bool right  =true;
-                    //bool front  =true;
-                    //bool back   =true;
+                                // Check if neighbors are air (0 means exposed face)
+                                bool top    = (GetBlock(x, absoluteY + 1, z) == 0);
+                                bool bottom = (GetBlock(x, absoluteY - 1, z) == 0);
+                                bool left   = (GetBlock(x - 1, absoluteY, z) == 0);
+                                bool right  = (GetBlock(x + 1, absoluteY, z) == 0);
+                                bool front  = (GetBlock(x, absoluteY, z + 1) == 0);
+                                bool back   = (GetBlock(x, absoluteY, z - 1) == 0);
 
 
-                        //bool topAir = (y == CHUNK_SIZE - 1) || (m_Blocks[x + (y + 1) * CHUNK_SIZE + z * CHUNK_SIZE * CHUNK_SIZE] == 0);
+                            //bool top    =true;
+                            //bool bottom =true;
+                            //bool left   =true;
+                            //bool right  =true;
+                            //bool front  =true;
+                            //bool back   =true;
 
-                        if (front)
-                        {
-                            // Format matching your buffer layout: Position(3), Color/Normal(3), UV(2)
-                            std::vector<float> faceVerticesFront = {
-                                //  X      Y      Z
-                                x0,  y0,  z1,       1.0f, 0.0f, 0.0f,     0.0f, 0.0f,
-                                x1,  y0,  z1,       1.0f, 0.0f, 0.0f,     1.0f, 0.0f,
-                                x1,  y1,  z1,       1.0f, 0.0f, 0.0f,     1.0f, 1.0f,
-                                x0,  y1,  z1,       1.0f, 0.0f, 0.0f,     0.0f, 1.0f,
 
-                            };
-                            vertices.insert(vertices.end(), faceVerticesFront.begin(), faceVerticesFront.end());
-                            // Add indices for this quad
-                            indices.push_back(indexOffset + 0);indices.push_back(indexOffset + 1);
-                            indices.push_back(indexOffset + 2);indices.push_back(indexOffset + 2);
-                            indices.push_back(indexOffset + 3);indices.push_back(indexOffset + 0);
-                            indexOffset += 4;
-                        }
-                        if (left)
-                        {
-                            std::vector<float> faceVerticesLeft = {
-                                //  X      Y      Z
-                                x0,  y0,  z0,       0.0f, 1.0f, 0.0f,     0.0f, 0.0f, // x0,  y0,  z1,   0 0 1 /
-                                x0,  y0,  z1,       0.0f, 1.0f, 0.0f,     1.0f, 0.0f, // x1,  y0,  z1,   1 0 1 /
-                                x0,  y1,  z1,       0.0f, 1.0f, 0.0f,     1.0f, 1.0f, // x1,  y1,  z1,   1 1 1 /
-                                x0,  y1,  z0,       0.0f, 1.0f, 0.0f,     0.0f, 1.0f, // x0,  y1,  z1,   0 1 1 /
+                                //bool topAir = (y == CHUNK_SIZE - 1) || (m_Blocks[x + (y + 1) * CHUNK_SIZE + z * CHUNK_SIZE * CHUNK_SIZE] == 0);
 
-                            };
-                            vertices.insert(vertices.end(), faceVerticesLeft.begin(), faceVerticesLeft.end());
-                            // Add indices for this quad
-                                 indices.push_back(indexOffset + 0);indices.push_back(indexOffset + 1);
-                                 indices.push_back(indexOffset + 2);indices.push_back(indexOffset + 2);
-                                 indices.push_back(indexOffset + 3);indices.push_back(indexOffset + 0);
-                                 indexOffset += 4;
-                        }
-                        if (back)
-                        {
-                            std::vector<float> faceVerticesBack = {
-                                //  X      Y      Z
-                                x1,  y0,  z0,       0.0f, 0.0f, 1.0f,     0.0f, 0.0f,
-                                x0,  y0,  z0,       0.0f, 0.0f, 1.0f,     1.0f, 0.0f,
-                                x0,  y1,  z0,       0.0f, 0.0f, 1.0f,     1.0f, 1.0f,
-                                x1,  y1,  z0,       0.0f, 0.0f, 1.0f,     0.0f, 1.0f,
+                                if (front)
+                                {
+                                    // Format matching your buffer layout: Position(3), Color/Normal(3), UV(2)
+                                    std::vector<float> faceVerticesFront = {
+                                        //  X      Y      Z
+                                        x0,  y0,  z1,       1.0f, 0.0f, 0.0f,     0.0f, 0.0f,
+                                        x1,  y0,  z1,       1.0f, 0.0f, 0.0f,     1.0f, 0.0f,
+                                        x1,  y1,  z1,       1.0f, 0.0f, 0.0f,     1.0f, 1.0f,
+                                        x0,  y1,  z1,       1.0f, 0.0f, 0.0f,     0.0f, 1.0f,
 
-                            };
-                            vertices.insert(vertices.end(), faceVerticesBack.begin(), faceVerticesBack.end());
-                            // Add indices for this quad
-                            indices.push_back(indexOffset + 0);indices.push_back(indexOffset + 1);
-                            indices.push_back(indexOffset + 2);indices.push_back(indexOffset + 2);
-                            indices.push_back(indexOffset + 3);indices.push_back(indexOffset + 0);
-                            indexOffset += 4;
-                       }
-                        if (right)
-                        {
-                            std::vector<float> faceVerticesRight = {
-                                //  X      Y      Z
-                                x1,  y0,  z1,       1.0f, 1.0f, 0.0f,     0.0f, 0.0f, // x0,  y0,  z1,   0 0 1 /
-                                x1,  y0,  z0,       1.0f, 1.0f, 0.0f,     1.0f, 0.0f, // x1,  y0,  z1,   1 0 1 /
-                                x1,  y1,  z0,       1.0f, 1.0f, 0.0f,     1.0f, 1.0f, // x1,  y1,  z1,   1 1 1 /
-                                x1,  y1,  z1,       1.0f, 1.0f, 0.0f,     0.0f, 1.0f, // x0,  y1,  z1,   0 1 1 /
+                                    };
+                                    vertices.insert(vertices.end(), faceVerticesFront.begin(), faceVerticesFront.end());
+                                    // Add indices for this quad
+                                    indices.push_back(indexOffset + 0);indices.push_back(indexOffset + 1);
+                                    indices.push_back(indexOffset + 2);indices.push_back(indexOffset + 2);
+                                    indices.push_back(indexOffset + 3);indices.push_back(indexOffset + 0);
+                                    indexOffset += 4;
+                                }
+                                if (left)
+                                {
+                                    std::vector<float> faceVerticesLeft = {
+                                        //  X      Y      Z
+                                        x0,  y0,  z0,       0.0f, 1.0f, 0.0f,     0.0f, 0.0f, // x0,  y0,  z1,   0 0 1 /
+                                        x0,  y0,  z1,       0.0f, 1.0f, 0.0f,     1.0f, 0.0f, // x1,  y0,  z1,   1 0 1 /
+                                        x0,  y1,  z1,       0.0f, 1.0f, 0.0f,     1.0f, 1.0f, // x1,  y1,  z1,   1 1 1 /
+                                        x0,  y1,  z0,       0.0f, 1.0f, 0.0f,     0.0f, 1.0f, // x0,  y1,  z1,   0 1 1 /
 
-                            };
-                            vertices.insert(vertices.end(), faceVerticesRight.begin(), faceVerticesRight.end());
-                            // Add indices for this quad
-                            indices.push_back(indexOffset + 0);indices.push_back(indexOffset + 1);
-                            indices.push_back(indexOffset + 2);indices.push_back(indexOffset + 2);
-                            indices.push_back(indexOffset + 3);indices.push_back(indexOffset + 0);
-                            indexOffset += 4;
-                        }
-                        if (top)
-                        {
-                            std::vector<float> faceVerticesTop = {
-                                //  X      Y      Z
-                                x0,  y1,  z1,       0.0f, 1.0f, 1.0f,     0.0f, 0.0f,
-                                x1,  y1,  z1,       0.0f, 1.0f, 1.0f,     1.0f, 0.0f,
-                                x1,  y1,  z0,       0.0f, 1.0f, 1.0f,     1.0f, 1.0f,
-                                x0,  y1,  z0,       0.0f, 1.0f, 1.0f,     0.0f, 1.0f,
+                                    };
+                                    vertices.insert(vertices.end(), faceVerticesLeft.begin(), faceVerticesLeft.end());
+                                    // Add indices for this quad
+                                         indices.push_back(indexOffset + 0);indices.push_back(indexOffset + 1);
+                                         indices.push_back(indexOffset + 2);indices.push_back(indexOffset + 2);
+                                         indices.push_back(indexOffset + 3);indices.push_back(indexOffset + 0);
+                                         indexOffset += 4;
+                                }
+                                if (back)
+                                {
+                                    std::vector<float> faceVerticesBack = {
+                                        //  X      Y      Z
+                                        x1,  y0,  z0,       0.0f, 0.0f, 1.0f,     0.0f, 0.0f,
+                                        x0,  y0,  z0,       0.0f, 0.0f, 1.0f,     1.0f, 0.0f,
+                                        x0,  y1,  z0,       0.0f, 0.0f, 1.0f,     1.0f, 1.0f,
+                                        x1,  y1,  z0,       0.0f, 0.0f, 1.0f,     0.0f, 1.0f,
 
-                            };
-                            vertices.insert(vertices.end(), faceVerticesTop.begin(), faceVerticesTop.end());
-                             // Add indices for this quad
-                            indices.push_back(indexOffset + 0);indices.push_back(indexOffset + 1);
-                            indices.push_back(indexOffset + 2);indices.push_back(indexOffset + 2);
-                            indices.push_back(indexOffset + 3);indices.push_back(indexOffset + 0);
-                            indexOffset += 4;
-                        }
-                        if (bottom)
-                        {
-                            std::vector<float> faceVerticesBottom = {
-                                //  X      Y      Z
-                                x0,  y0,  z0,       1.0f, 1.0f, 1.0f,     0.0f, 0.0f, // x0,  y0,  z1,   0 0 1 /
-                                x1,  y0,  z0,       1.0f, 1.0f, 1.0f,     1.0f, 0.0f, // x1,  y0,  z1,   1 0 1 /
-                                x1,  y0,  z1,       1.0f, 1.0f, 1.0f,     1.0f, 1.0f, // x1,  y1,  z1,   1 1 1 /
-                                x0,  y0,  z1,       1.0f, 1.0f, 1.0f,     0.0f, 1.0f, // x0,  y1,  z1,   0 1 1 /
+                                    };
+                                    vertices.insert(vertices.end(), faceVerticesBack.begin(), faceVerticesBack.end());
+                                    // Add indices for this quad
+                                    indices.push_back(indexOffset + 0);indices.push_back(indexOffset + 1);
+                                    indices.push_back(indexOffset + 2);indices.push_back(indexOffset + 2);
+                                    indices.push_back(indexOffset + 3);indices.push_back(indexOffset + 0);
+                                    indexOffset += 4;
+                               }
+                                if (right)
+                                {
+                                    std::vector<float> faceVerticesRight = {
+                                        //  X      Y      Z
+                                        x1,  y0,  z1,       1.0f, 1.0f, 0.0f,     0.0f, 0.0f, // x0,  y0,  z1,   0 0 1 /
+                                        x1,  y0,  z0,       1.0f, 1.0f, 0.0f,     1.0f, 0.0f, // x1,  y0,  z1,   1 0 1 /
+                                        x1,  y1,  z0,       1.0f, 1.0f, 0.0f,     1.0f, 1.0f, // x1,  y1,  z1,   1 1 1 /
+                                        x1,  y1,  z1,       1.0f, 1.0f, 0.0f,     0.0f, 1.0f, // x0,  y1,  z1,   0 1 1 /
 
-                            };
-                            vertices.insert(vertices.end(), faceVerticesBottom.begin(), faceVerticesBottom.end());
-                            // Add indices for this quad
-                            indices.push_back(indexOffset + 0);indices.push_back(indexOffset + 1);
-                            indices.push_back(indexOffset + 2);indices.push_back(indexOffset + 2);
-                            indices.push_back(indexOffset + 3);indices.push_back(indexOffset + 0);
-                            indexOffset += 4;
-                        }
+                                    };
+                                    vertices.insert(vertices.end(), faceVerticesRight.begin(), faceVerticesRight.end());
+                                    // Add indices for this quad
+                                    indices.push_back(indexOffset + 0);indices.push_back(indexOffset + 1);
+                                    indices.push_back(indexOffset + 2);indices.push_back(indexOffset + 2);
+                                    indices.push_back(indexOffset + 3);indices.push_back(indexOffset + 0);
+                                    indexOffset += 4;
+                                }
+                                if (top)
+                                {
+                                    std::vector<float> faceVerticesTop = {
+                                        //  X      Y      Z
+                                        x0,  y1,  z1,       0.0f, 1.0f, 1.0f,     0.0f, 0.0f,
+                                        x1,  y1,  z1,       0.0f, 1.0f, 1.0f,     1.0f, 0.0f,
+                                        x1,  y1,  z0,       0.0f, 1.0f, 1.0f,     1.0f, 1.0f,
+                                        x0,  y1,  z0,       0.0f, 1.0f, 1.0f,     0.0f, 1.0f,
 
-                    //}
-                    // Repeat checks for bottom, left, right, front, back faces...
+                                    };
+                                    vertices.insert(vertices.end(), faceVerticesTop.begin(), faceVerticesTop.end());
+                                     // Add indices for this quad
+                                    indices.push_back(indexOffset + 0);indices.push_back(indexOffset + 1);
+                                    indices.push_back(indexOffset + 2);indices.push_back(indexOffset + 2);
+                                    indices.push_back(indexOffset + 3);indices.push_back(indexOffset + 0);
+                                    indexOffset += 4;
+                                }
+                                if (bottom)
+                                {
+                                    std::vector<float> faceVerticesBottom = {
+                                        //  X      Y      Z
+                                        x0,  y0,  z0,       1.0f, 1.0f, 1.0f,     0.0f, 0.0f, // x0,  y0,  z1,   0 0 1 /
+                                        x1,  y0,  z0,       1.0f, 1.0f, 1.0f,     1.0f, 0.0f, // x1,  y0,  z1,   1 0 1 /
+                                        x1,  y0,  z1,       1.0f, 1.0f, 1.0f,     1.0f, 1.0f, // x1,  y1,  z1,   1 1 1 /
+                                        x0,  y0,  z1,       1.0f, 1.0f, 1.0f,     0.0f, 1.0f, // x0,  y1,  z1,   0 1 1 /
+
+                                    };
+                                    vertices.insert(vertices.end(), faceVerticesBottom.begin(), faceVerticesBottom.end());
+                                    // Add indices for this quad
+                                    indices.push_back(indexOffset + 0);indices.push_back(indexOffset + 1);
+                                    indices.push_back(indexOffset + 2);indices.push_back(indexOffset + 2);
+                                    indices.push_back(indexOffset + 3);indices.push_back(indexOffset + 0);
+                                    indexOffset += 4;
+                                }
+
+                            //}
+                            // Repeat checks for bottom, left, right, front, back faces...
+                      }
+                  }
               }
-          }
-      }
+
+        }
+      //   for (int y = 0; y < totalHeight; ++y)
+      //   {
+      //       for (int x = 0; x < CHUNK_SIZE; ++x)
+      //       {
+      //          for (int z = 0; z < CHUNK_SIZE; ++z) {
+      //               // int blockID = m_Blocks[x + y * CHUNK_SIZE + z * CHUNK_SIZE * CHUNK_SIZE];
+      //                   int blockID = GetBlock(x, y, z);
+      //
+      //                   // If it's air (0), skip it
+      //                   if (blockID == 0) continue;
+      //
+      //                   // CHECK NEIGHBORS (Basic Face Culling)
+      //                   // If a neighboring block exists, we skip generating that inner face!
+      //                   // (For simplicity in this skeleton, we will generate all 6 faces if exposed,
+      //                   // or check bounds. Here is the concept for checking the top neighbor):
+      //
+      //                   float x0 = (float)x; float x1 = (float)(x+1);
+      //                   float y0 = (float)y;float y1 = (float)(y+1);
+      //                   float z0 = (float)z;float z1 = (float)(z+1);
+      //
+      //
+      //                   // Check if neighbors are air (0 means exposed face)
+      //                   bool top    = (GetBlock(x, y + 1, z) == 0);
+      //                   bool bottom = (GetBlock(x, y - 1, z) == 0);
+      //                   bool left   = (GetBlock(x - 1, y, z) == 0);
+      //                   bool right  = (GetBlock(x + 1, y, z) == 0);
+      //                   bool front  = (GetBlock(x, y, z + 1) == 0);
+      //                   bool back   = (GetBlock(x, y, z - 1) == 0);
+      //
+      //
+      //               //bool top    =true;
+      //               //bool bottom =true;
+      //               //bool left   =true;
+      //               //bool right  =true;
+      //               //bool front  =true;
+      //               //bool back   =true;
+      //
+      //
+      //                   //bool topAir = (y == CHUNK_SIZE - 1) || (m_Blocks[x + (y + 1) * CHUNK_SIZE + z * CHUNK_SIZE * CHUNK_SIZE] == 0);
+      //
+      //                   if (front)
+      //                   {
+      //                       // Format matching your buffer layout: Position(3), Color/Normal(3), UV(2)
+      //                       std::vector<float> faceVerticesFront = {
+      //                           //  X      Y      Z
+      //                           x0,  y0,  z1,       1.0f, 0.0f, 0.0f,     0.0f, 0.0f,
+      //                           x1,  y0,  z1,       1.0f, 0.0f, 0.0f,     1.0f, 0.0f,
+      //                           x1,  y1,  z1,       1.0f, 0.0f, 0.0f,     1.0f, 1.0f,
+      //                           x0,  y1,  z1,       1.0f, 0.0f, 0.0f,     0.0f, 1.0f,
+      //
+      //                       };
+      //                       vertices.insert(vertices.end(), faceVerticesFront.begin(), faceVerticesFront.end());
+      //                       // Add indices for this quad
+      //                       indices.push_back(indexOffset + 0);indices.push_back(indexOffset + 1);
+      //                       indices.push_back(indexOffset + 2);indices.push_back(indexOffset + 2);
+      //                       indices.push_back(indexOffset + 3);indices.push_back(indexOffset + 0);
+      //                       indexOffset += 4;
+      //                   }
+      //                   if (left)
+      //                   {
+      //                       std::vector<float> faceVerticesLeft = {
+      //                           //  X      Y      Z
+      //                           x0,  y0,  z0,       0.0f, 1.0f, 0.0f,     0.0f, 0.0f, // x0,  y0,  z1,   0 0 1 /
+      //                           x0,  y0,  z1,       0.0f, 1.0f, 0.0f,     1.0f, 0.0f, // x1,  y0,  z1,   1 0 1 /
+      //                           x0,  y1,  z1,       0.0f, 1.0f, 0.0f,     1.0f, 1.0f, // x1,  y1,  z1,   1 1 1 /
+      //                           x0,  y1,  z0,       0.0f, 1.0f, 0.0f,     0.0f, 1.0f, // x0,  y1,  z1,   0 1 1 /
+      //
+      //                       };
+      //                       vertices.insert(vertices.end(), faceVerticesLeft.begin(), faceVerticesLeft.end());
+      //                       // Add indices for this quad
+      //                            indices.push_back(indexOffset + 0);indices.push_back(indexOffset + 1);
+      //                            indices.push_back(indexOffset + 2);indices.push_back(indexOffset + 2);
+      //                            indices.push_back(indexOffset + 3);indices.push_back(indexOffset + 0);
+      //                            indexOffset += 4;
+      //                   }
+      //                   if (back)
+      //                   {
+      //                       std::vector<float> faceVerticesBack = {
+      //                           //  X      Y      Z
+      //                           x1,  y0,  z0,       0.0f, 0.0f, 1.0f,     0.0f, 0.0f,
+      //                           x0,  y0,  z0,       0.0f, 0.0f, 1.0f,     1.0f, 0.0f,
+      //                           x0,  y1,  z0,       0.0f, 0.0f, 1.0f,     1.0f, 1.0f,
+      //                           x1,  y1,  z0,       0.0f, 0.0f, 1.0f,     0.0f, 1.0f,
+      //
+      //                       };
+      //                       vertices.insert(vertices.end(), faceVerticesBack.begin(), faceVerticesBack.end());
+      //                       // Add indices for this quad
+      //                       indices.push_back(indexOffset + 0);indices.push_back(indexOffset + 1);
+      //                       indices.push_back(indexOffset + 2);indices.push_back(indexOffset + 2);
+      //                       indices.push_back(indexOffset + 3);indices.push_back(indexOffset + 0);
+      //                       indexOffset += 4;
+      //                  }
+      //                   if (right)
+      //                   {
+      //                       std::vector<float> faceVerticesRight = {
+      //                           //  X      Y      Z
+      //                           x1,  y0,  z1,       1.0f, 1.0f, 0.0f,     0.0f, 0.0f, // x0,  y0,  z1,   0 0 1 /
+      //                           x1,  y0,  z0,       1.0f, 1.0f, 0.0f,     1.0f, 0.0f, // x1,  y0,  z1,   1 0 1 /
+      //                           x1,  y1,  z0,       1.0f, 1.0f, 0.0f,     1.0f, 1.0f, // x1,  y1,  z1,   1 1 1 /
+      //                           x1,  y1,  z1,       1.0f, 1.0f, 0.0f,     0.0f, 1.0f, // x0,  y1,  z1,   0 1 1 /
+      //
+      //                       };
+      //                       vertices.insert(vertices.end(), faceVerticesRight.begin(), faceVerticesRight.end());
+      //                       // Add indices for this quad
+      //                       indices.push_back(indexOffset + 0);indices.push_back(indexOffset + 1);
+      //                       indices.push_back(indexOffset + 2);indices.push_back(indexOffset + 2);
+      //                       indices.push_back(indexOffset + 3);indices.push_back(indexOffset + 0);
+      //                       indexOffset += 4;
+      //                   }
+      //                   if (top)
+      //                   {
+      //                       std::vector<float> faceVerticesTop = {
+      //                           //  X      Y      Z
+      //                           x0,  y1,  z1,       0.0f, 1.0f, 1.0f,     0.0f, 0.0f,
+      //                           x1,  y1,  z1,       0.0f, 1.0f, 1.0f,     1.0f, 0.0f,
+      //                           x1,  y1,  z0,       0.0f, 1.0f, 1.0f,     1.0f, 1.0f,
+      //                           x0,  y1,  z0,       0.0f, 1.0f, 1.0f,     0.0f, 1.0f,
+      //
+      //                       };
+      //                       vertices.insert(vertices.end(), faceVerticesTop.begin(), faceVerticesTop.end());
+      //                        // Add indices for this quad
+      //                       indices.push_back(indexOffset + 0);indices.push_back(indexOffset + 1);
+      //                       indices.push_back(indexOffset + 2);indices.push_back(indexOffset + 2);
+      //                       indices.push_back(indexOffset + 3);indices.push_back(indexOffset + 0);
+      //                       indexOffset += 4;
+      //                   }
+      //                   if (bottom)
+      //                   {
+      //                       std::vector<float> faceVerticesBottom = {
+      //                           //  X      Y      Z
+      //                           x0,  y0,  z0,       1.0f, 1.0f, 1.0f,     0.0f, 0.0f, // x0,  y0,  z1,   0 0 1 /
+      //                           x1,  y0,  z0,       1.0f, 1.0f, 1.0f,     1.0f, 0.0f, // x1,  y0,  z1,   1 0 1 /
+      //                           x1,  y0,  z1,       1.0f, 1.0f, 1.0f,     1.0f, 1.0f, // x1,  y1,  z1,   1 1 1 /
+      //                           x0,  y0,  z1,       1.0f, 1.0f, 1.0f,     0.0f, 1.0f, // x0,  y1,  z1,   0 1 1 /
+      //
+      //                       };
+      //                       vertices.insert(vertices.end(), faceVerticesBottom.begin(), faceVerticesBottom.end());
+      //                       // Add indices for this quad
+      //                       indices.push_back(indexOffset + 0);indices.push_back(indexOffset + 1);
+      //                       indices.push_back(indexOffset + 2);indices.push_back(indexOffset + 2);
+      //                       indices.push_back(indexOffset + 3);indices.push_back(indexOffset + 0);
+      //                       indexOffset += 4;
+      //                   }
+      //
+      //               //}
+      //               // Repeat checks for bottom, left, right, front, back faces...
+      //         }
+      //     }
+      // }
 
 
         m_Shader = m_assets.GetShaderManager().Get(engine::ShaderTypeID::Basic);
