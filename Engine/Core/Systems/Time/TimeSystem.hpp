@@ -4,6 +4,7 @@
 
 
 #pragma once
+#include "Timer.hpp"
 #include "Core/Systems/IEngineSystem.hpp"
 
 
@@ -27,13 +28,9 @@ namespace engine
         [[nodiscard]] float GetFPS() const;
 
 
-        void AddTimer(const std::string& id);
-        void RemoveTimer(const std::string& id);
-        [[nodiscard]] long long GetElapsedMs() const;
+
 
     private:
-        Timer* FindTimer(const std::string& id);
-
 
 
         float m_DeltaTime = 0.0f;

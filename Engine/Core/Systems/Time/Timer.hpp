@@ -12,16 +12,38 @@ namespace engine
     {
 
         public:
+            enum class  Accuracy
+            {
+                Hour,
+                Minute,
+                Second,
+                MilliSecond,
+                MicroSecond,
+                NanoSecond
+                //Count
+            };
+
+
+
             explicit Timer(const std::string& id);
 
             void Start();
             void Stop();
             void Reset();
+            void SetState(bool state);
+
+
+            void SetAccuracy(Accuracy accuracy);
 
             long long ElapsedMs() const;
             const std::string& GetId() const;
+            std::string GetAccuracy();
+            std::string GetAccuracy(Accuracy accuracy);
+            std::string GetUnit();
 
         private:
+            Accuracy m_Accuracy = Accuracy::MilliSecond;
+
             std::string m_Id;
 
             std::chrono::steady_clock::time_point m_StartTime; 

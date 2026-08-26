@@ -15,6 +15,7 @@
 #include "Core/Systems/Event/EventSystem.hpp"
 #include "Core/Systems/File/FileSystem.hpp"
 #include "Core/Systems/Input/InputSystem.hpp"
+#include "Core/Systems/Time/TimerSystem.hpp"
 
 
 namespace engine
@@ -26,6 +27,7 @@ namespace engine
 
       if (Result result = m_SystemManager.RegisterSystem<TimeSystem     >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
       if (Result result = m_SystemManager.RegisterSystem<LoggerSystem   >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
+      if (Result result = m_SystemManager.RegisterSystem<TimerSystem    >(); result.IsFailure()) return result; //Creates a var when it is needed /C++17
 
 
       //After Logger

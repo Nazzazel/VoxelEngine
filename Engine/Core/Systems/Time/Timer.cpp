@@ -27,17 +27,40 @@ namespace engine
 
     void Timer::Reset()
     {
-        m_Running = false;
+        m_StartTime = std::chrono::steady_clock::now();
     }
 
+    void Timer::SetState(bool state)
+    {
+        m_Running = state;
+    }
+
+    void Timer::SetAccuracy(Accuracy accuracy)
+    {
+        m_Accuracy = accuracy;
+    }
 
 
     long long Timer::ElapsedMs() const
     {
         if (m_Running)
         {
-            return std::chrono::duration_cast<std::chrono::milliseconds>(
-                std::chrono::steady_clock::now() - m_StartTime).count();
+            switch (m_Accuracy)
+            {
+                case Accuracy::Hour:        {return std::chrono::duration_cast<std::chrono::hours>          (std::chrono::steady_clock::now() - m_StartTime).count();}
+                case Accuracy::Minute:      {return std::chrono::duration_cast<std::chrono::minutes>        (std::chrono::steady_clock::now() - m_StartTime).count();}
+                case Accuracy::Second:      {return std::chrono::duration_cast<std::chrono::seconds>        (std::chrono::steady_clock::now() - m_StartTime).count();}
+                case Accuracy::MilliSecond: {return std::chrono::duration_cast<std::chrono::milliseconds>   (std::chrono::steady_clock::now() - m_StartTime).count();}
+                case Accuracy::MicroSecond: {return std::chrono::duration_cast<std::chrono::microseconds>   (std::chrono::steady_clock::now() - m_StartTime).count();}
+                case Accuracy::NanoSecond:  {return std::chrono::duration_cast<std::chrono::nanoseconds>    (std::chrono::steady_clock::now() - m_StartTime).count();}
+
+               // case Accuracy::Count:  {return std::chrono::duration_cast<std::chrono::hours>    (std::chrono::steady_clock::now() - m_StartTime).count();}
+               // case A
+                default: return 0;
+            }
+
+           // return std::chrono::duration_cast<std::chrono::milliseconds>(
+               // std::chrono::steady_clock::now() - m_StartTime).count();
         }
         return std::chrono::duration_cast<std::chrono::milliseconds>(
             m_EndTime - m_StartTime).count();
@@ -48,6 +71,59 @@ namespace engine
         return m_Id;
     }
 
+    std::string Timer::GetAccuracy()
+    {
+        switch (m_Accuracy)
+        {
+        case Accuracy::Hour:        {return std::string("Hour");}
+        case Accuracy::Minute:      {return std::string("Minute");}
+        case Accuracy::Second:      {return std::string("Second");}
+        case Accuracy::MilliSecond: {return std::string("Millisecond");}
+        case Accuracy::MicroSecond: {return std::string("Microsecond");}
+        case Accuracy::NanoSecond:  {return std::string("Nanosecond");}
+
+        // case Accuracy::Count:  {return std::chrono::duration_cast<std::chrono::hours>    (std::chrono::steady_clock::now() - m_StartTime).count();}
+        // case A
+        default: return "NULL";
+        }
+
+    }
+
+    std::string Timer::GetAccuracy(Accuracy accuracy)
+    {
+        switch (accuracy)
+        {
+        case Accuracy::Hour:        {return std::string("Hour");}
+        case Accuracy::Minute:      {return std::string("Minute");}
+        case Accuracy::Second:      {return std::string("Second");}
+        case Accuracy::MilliSecond: {return std::string("Millisecond");}
+        case Accuracy::MicroSecond: {return std::string("Microsecond");}
+        case Accuracy::NanoSecond:  {return std::string("Nanosecond");}
+
+        // case Accuracy::Count:  {return std::chrono::duration_cast<std::chrono::hours>    (std::chrono::steady_clock::now() - m_StartTime).count();}
+        // case A
+        default: return "NULL";
+        }
+
+    }
+
+    std::string Timer::GetUnit()
+    {
+        switch (m_Accuracy)
+        {
+        case Accuracy::Hour:        {return std::string("h");}
+        case Accuracy::Minute:      {return std::string("m");}
+        case Accuracy::Second:      {return std::string("s");}
+        case Accuracy::MilliSecond: {return std::string("ms");}
+        case Accuracy::MicroSecond: {return std::string("us");}
+        case Accuracy::NanoSecond:  {return std::string("ns");}
+
+        // case Accuracy::Count:  {return std::chrono::duration_cast<std::chrono::hours>    (std::chrono::steady_clock::now() - m_StartTime).count();}
+        // case A
+        default: return "NULL";
+        }
+
+    }
 
 } // engine
 

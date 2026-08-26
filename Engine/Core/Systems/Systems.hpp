@@ -6,6 +6,7 @@
 #pragma once
 #include "Core/Systems/Time/TimeSystem.hpp"
 #include "Core/Systems/Logger/LoggerSystem.hpp"
+#include "Core/Systems/Time/TimerSystem.hpp"
 #include "Core/Systems/Platform/PlatformSystem.hpp"
 #include "Core/Systems/Window/WindowSystem.hpp"
 

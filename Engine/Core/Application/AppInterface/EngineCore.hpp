@@ -17,6 +17,7 @@ namespace engine
             :
         m_timeSystem(*systemManager->GetSystem<TimeSystem>()),
         m_logger_system(*systemManager->GetSystem<LoggerSystem>()),
+        m_timerSystem(*systemManager->GetSystem<TimerSystem>()),
 
         m_platform_system(*systemManager->GetSystem<PlatformSystem>()),
         m_window_system(*systemManager->GetSystem<WindowSystem>()),
@@ -34,7 +35,7 @@ namespace engine
     private:
         TimeSystem& m_timeSystem;
         LoggerSystem& m_logger_system;
-
+        TimerSystem& m_timerSystem;
 
         PlatformSystem& m_platform_system;
         WindowSystem&   m_window_system;
@@ -52,6 +53,7 @@ namespace engine
 
         TimeSystem&    GetTimeSystem()     override { return m_timeSystem; }
         LoggerSystem&  GetLoggerSystem()   override { return m_logger_system; }
+        TimerSystem&    GetTimerSystem()     override { return m_timerSystem; }
 
         PlatformSystem&  GetPlatformSystem()   override { return m_platform_system; }
         WindowSystem&  GetWindowSystem()   override { return m_window_system; }

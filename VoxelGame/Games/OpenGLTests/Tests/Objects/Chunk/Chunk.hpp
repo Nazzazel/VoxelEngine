@@ -31,7 +31,7 @@ namespace opengltests
         public:
 
         static constexpr int CHUNK_SIZE = 16;
-        static constexpr int SUB_CHUNK_STACK_SIZE =1;
+        static constexpr int SUB_CHUNK_STACK_SIZE =24;
 
        explicit Chunk(glm::ivec3 chunkPos,engine::AssetSystem& assets,engine::OpenGLTexture& texture);
         //explicit Chunk(glm::ivec3 chunkPos,engine::AssetSystem& assets);

@@ -12,6 +12,7 @@ namespace engine
         virtual ~IAppInterface() = default;
         virtual class TimeSystem& GetTimeSystem() = 0;
         virtual class LoggerSystem& GetLoggerSystem() = 0;
+        virtual class TimerSystem& GetTimerSystem() = 0;
 
         virtual class PlatformSystem&   GetPlatformSystem   () = 0;
         virtual class WindowSystem&     GetWindowSystem     () = 0;

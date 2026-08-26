@@ -84,6 +84,8 @@ add_library(Engine STATIC ${ENGINE_SOURCES}
         Systems/Renderer/Texture/OpenGLTexture.hpp
         Core/Systems/Time/Timer.cpp
         Core/Systems/Time/Timer.hpp
+        Core/Systems/Time/TimerSystem.cpp
+        Core/Systems/Time/TimerSystem.hpp
 
 )
 

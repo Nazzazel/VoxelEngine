@@ -4,6 +4,7 @@
 
 #include "OpenGLTestsApp.hpp"
 
+#include "Core/Systems/Time/TimerSystem.hpp"
 
 
 namespace opengltests
@@ -33,6 +34,13 @@ namespace opengltests
        glm::ivec3 chunkPos(20, 0, 20);
        //nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnb
        //
+
+     engine.GetTimerSystem().AddTimer("Chunk Timer");
+     engine.GetTimerSystem().StartTimer("Chunk Timer");
+     //engine.GetTimerSystem().SetTimerAccuracy(engine::Timer::Accuracy::MicroSecond);
+     engine.GetTimerSystem().SetTimerAccuracy(engine::Timer::Accuracy::MilliSecond);
+
+
     for (int x = -(chunkPos.x/2); x < chunkPos.x/2; x++)
     {
     // for (int y = -1; y < chunkPos.y; y++)
@@ -43,6 +51,8 @@ namespace opengltests
        ///auto& newChunk = loadedChunks.emplace_back(std::make_unique<Chunk>(glm::vec3(x,y,z), engine.GetAssetSystem(),texture));
        auto& newChunk = loadedChunks.emplace_back(Chunk(glm::vec3(x,-1,z), engine.GetAssetSystem(),texture));
        newChunk.BuildMesh();
+       engine.GetTimerSystem().GetElapsedMs();
+       engine.GetTimerSystem().ResetTimer();
       }
    //  }
     }
