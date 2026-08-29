@@ -31,7 +31,7 @@ namespace opengltests
 
 
       // glm::ivec3 chunkPos(6, 0, 6);
-       glm::ivec3 chunkPos(20, 0, 20);
+       glm::ivec3 chunkPos(7, 0, 7);
        //nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnb
        //
 

@@ -12,8 +12,21 @@ namespace opengltests
     //:m_ChunkPosition(chunkPos*16),m_assets(assets)
     {
         SUB_CHUNK_SIZE = f_SUB_CHUNK_SIZE;
+
         //chunkData = {5000,0};
-        chunkData.resize(4096, 1);
+        std::cout << "x:" << chunkPos.x<< " y: " <<chunkPos.y<< " z: " << chunkPos.z<< std::endl;
+
+        if (chunkPos.y ==2)
+        {
+            chunkData.resize(SUB_CHUNK_SIZE*SUB_CHUNK_SIZE*SUB_CHUNK_SIZE, 0);
+        }
+        else
+        {
+            chunkData.resize(SUB_CHUNK_SIZE*SUB_CHUNK_SIZE*SUB_CHUNK_SIZE, 1);
+        }
+
+
+        //chunkData.resize(SUB_CHUNK_SIZE*SUB_CHUNK_SIZE*SUB_CHUNK_SIZE, 1);
         //chunkData.resize(SUB_CHUNK_SIZE * SUB_CHUNK_SIZE * SUB_CHUNK_SIZE, 1);
     }
 
