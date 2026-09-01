@@ -181,11 +181,400 @@ namespace opengltests
         //Iterate through every block in the 16x16x16 grid
         for (int subChunkIndex = 0; subChunkIndex < SUB_CHUNK_STACK_SIZE; ++subChunkIndex)
         {
+            if (subChunks[subChunkIndex].GetSubChunkState()==0) //EMPTY
+            {
+                //std::cout << "Empty \n";
+                continue;
+            }
+            if (subChunks[subChunkIndex].GetSubChunkState()==1) //SOLID
+            {
+                //
+                // for (int localY = 0; localY < CHUNK_SIZE; ++localY)
+                // {
 
-            if(subChunks[subChunkIndex].isEmpty){continue;}
+                    // 1. TOP FACE (y = 15 layer, looking up at absoluteY + 1)
+                    for (int z = 0; z < 16; ++z) {
+                        for (int x = 0; x < 16; ++x) {
+
+                            int absoluteY = (subChunkIndex * CHUNK_SIZE) + CHUNK_SIZE-1;
+                           // int absoluteY = 15; // Top layer of the sub-chunk
+                            //int absoluteY = CHUNK_SIZE-1; // Top layer of the sub-chunk
+
+                            float fx0 = (float)x;
+                            float fx1 = (float)(x+1);
+
+                            float fy0 = (float)absoluteY;
+                            float fy1 = (float)(absoluteY+1);
+
+                            float fz0 = (float)z;
+                            float fz1 = (float)(z+1);
+
+
+                            if (GetBlock(x, absoluteY + 1, z) == 0) { // Check if neighbor above is air
+                                // Compute voxel positions (fx0, fy1, fz0, etc.)
+                                appendFaces(fx0, fy1, fz1, fx1, fy1, fz1, fx1, fy1, fz0, fx0, fy1, fz0, 1.0f, 0.0f, 0.0f, false);
+                            }
+                        }
+                    }
+
+                    // 2. BOTTOM FACE (y = 0 layer, looking down at absoluteY - 1)
+                    for (int z = 0; z < 16; ++z) {
+                        for (int x = 0; x < 16; ++x) {
+                            int absoluteY = (subChunkIndex * CHUNK_SIZE) +0;
+                            // int absoluteY = 15; // Top layer of the sub-chunk
+                            //int absoluteY = CHUNK_SIZE-1; // Top layer of the sub-chunk
+
+                            float fx0 = (float)x;
+                            float fx1 = (float)(x+1);
+
+                            float fy0 = (float)absoluteY;
+                            float fy1 = (float)(absoluteY+1);
+
+                            float fz0 = (float)z;
+                            float fz1 = (float)(z+1);
+                            if (GetBlock(x, absoluteY - 1, z) == 0) {
+                                appendFaces(fx0, fy0, fz0, fx1, fy0, fz0, fx1, fy0, fz1, fx0, fy0, fz1, 0.0f, 1.0f, 0.0f, false);
+                            }
+                        }
+                    }
+
+                    // 3. FRONT FACE (z = 15 layer)
+                    for (int y = 0; y < 16; ++y) {
+                        for (int x = 0; x < 16; ++x) {
+
+
+                            //                           appendFaces(
+                           //fx0,    fy0,    fz1,
+                           //fx1,    fy0,    fz1,
+                           //fx1,    fy1,    fz1,
+                           //fx0,    fy1,    fz1,
+                           //1.0f, 0.0f, 0.0f,
+                           //false
+                           //);
+                            ////
+                        int absoluteY = y + (subChunkIndex * CHUNK_SIZE);//todo add offset
+
+                          float fx0 = (float)x;
+                          float fx1 = (float)(x+1);
+
+                          float fy0 = (float)absoluteY;
+                          float fy1 = (float)(absoluteY+1);
+
+                          //float fz0 = (float)CHUNK_SIZE-1;
+                          float fz1 = (float)(CHUNK_SIZE);
+
+                            if (GetBlock(x, absoluteY, CHUNK_SIZE) == 0) { // Checking neighbor in front (+z)
+                                appendFaces(fx0, fy0, fz1, fx1, fy0, fz1, fx1, fy1, fz1, fx0, fy1, fz1, 0.0f, 0.0f, 1.0f, false);
+                            }
+                        }
+                    }
+
+                    // 4. BACK FACE (z = 0 layer)
+                    for (int y = 0; y < 16; ++y) {
+                        for (int x = 0; x < 16; ++x) {
+                            //int absoluteY = y;
+
+                            int absoluteY = y + (subChunkIndex * CHUNK_SIZE);//todo add offset
+
+                            float fx0 = (float)x;
+                            float fx1 = (float)(x+1);
+
+                            float fy0 = (float)absoluteY;
+                            float fy1 = (float)(absoluteY+1);
+
+                            float fz0 = (float)0;
+                            //float fz1 = (float)(CHUNK_SIZE);
+
+                            if (GetBlock(x, absoluteY, -1) == 0) { // Checking neighbor behind (-z)
+                                appendFaces(fx1, fy0, fz0, fx0, fy0, fz0, fx0, fy1, fz0, fx1, fy1, fz0, 1.0f, 1.0f, 0.0f, false);
+                            }
+                        }
+                    }
+               // if (left)
+               // {
+               //     appendFaces(
+               //         fx0,    fy0,    fz0,
+               //         fx0,    fy0,    fz1,
+               //         fx0,    fy1,    fz1,
+               //         fx0,    fy1,    fz0,
+               //         0.0f, 1.0f, 0.0f,
+               //         false);
+               //     //appendFaces(fx0,fy0,fz0,   1,1,1,  1,1,1,  1,1,1, 1,1,1);
+               // }
+                    // 5. LEFT FACE (x = 0 layer)
+                    for (int y = 0; y < 16; ++y) {
+                        for (int z = 0; z < 16; ++z) {
+                           // int absoluteY = y;
+
+
+                            int absoluteY = y + (subChunkIndex * CHUNK_SIZE);//todo add offset
+
+                            float fx0 = (float)0;//CHange
+                            float fx1 = (float)1;
+
+                            float fy0 = (float)absoluteY;
+                            float fy1 = (float)(absoluteY+1);
+
+                            float fz0 = (float)z;
+                            float fz1 = (float)(z+1);
+                            if (GetBlock(-1, absoluteY, z) == 0) { // Checking neighbor to the left (-x)
+                                appendFaces(
+                                    fx0, fy0, fz0,
+                                    fx0, fy0, fz1,
+                                    fx0, fy1, fz1,
+                                    fx0, fy1, fz0,
+                                    0.0f, 1.0f, 1.0f, false);
+                            }
+                        }
+                    }
+
+                    // 6. RIGHT FACE (x = 15 layer)
+                    for (int y = 0; y < 16; ++y) {
+                        for (int z = 0; z < 16; ++z) {
+                            int absoluteY = y + (subChunkIndex * CHUNK_SIZE);//todo add offset
+
+                          //  float fx0 = (float)CHUNK_SIZE-1;
+                            float fx1 = (float)CHUNK_SIZE;
+
+                            float fy0 = (float)absoluteY;
+                            float fy1 = (float)(absoluteY+1);
+
+                            float fz0 = (float)z;
+                            float fz1 = (float)(z+1);
+
+                            if (GetBlock(16, absoluteY, z) == 0) { // Checking neighbor to the right (+x)
+                                 appendFaces(
+                                     fx1, fy0, fz1,
+                                     fx1, fy0, fz0,
+                                     fx1, fy1, fz0,
+                                     fx1, fy1, fz1,
+                                     1.0f, 1.0f, 1.0f, false);
+                            }
+                        }
+                    }
+                //}
+
+                {
+
+
+
+                //std::cout << "solidd \n";
+
+               // int localY = 0;
+               // int localX = 0;
+               // int localZ = 0;
+               // for (int x = 0; x < CHUNK_SIZE; ++x)
+               // {
+               //     for (int z = 0; z < CHUNK_SIZE; ++z)
+               //     {
+               //         int absoluteY = (subChunkIndex * CHUNK_SIZE) + localY;
+               //         int blockID = subChunks[subChunkIndex].GetBlock(x, localY, z);
+               //
+               //         float fx0 = (float)x;
+               //         float fx1 = (float)(x+1);
+               //
+               //         float fy0 = (float)absoluteY;
+               //         float fy1 = (float)(absoluteY+1);
+               //
+               //         float fz0 = (float)z;
+               //         float fz1 = (float)(z+1);
+               //
+               //         bool top    = (GetBlock(x, absoluteY + 1, z) == 0);
+               //     }
+               // }
+
+
+//
+//                   for (int localY = 0; localY < CHUNK_SIZE; ++localY)
+//                   {
+//                       for (int x = 0; x < CHUNK_SIZE; ++x)
+//                       {
+//                           for (int z = 0; z < CHUNK_SIZE; ++z)
+//                           {
+//                               int absoluteY = (subChunkIndex * CHUNK_SIZE) + localY;
+//                               int blockID = subChunks[subChunkIndex].GetBlock(x, localY+1, z);
+//
+//                               //std::cout <<"LOcal block: "<< blockID << "Y:" << localY <<"\n";
+//                               std::cout <<"LOcal +1block: "<< blockID << "Y:" << localY <<"\n";
+//
+//                            if (localY == CHUNK_SIZE-1) //top
+//                            {
+//                                bool top    = (GetBlock(x, absoluteY + 1, z) == 0);
+//                                if (top)
+//                                {
+//                                    std::cout <<"stafgdfsdsfgdfg: " << "TRUE" <<"\n";
+//
+//                                    float fx0 = (float)x;
+//                                    float fx1 = (float)(x+1);
+//
+//                                    float fy0 = (float)absoluteY;
+//                                    float fy1 = (float)(absoluteY+1);
+//
+//                                    float fz0 = (float)z;
+//                                    float fz1 = (float)(z+1);
+//                                    appendFaces(
+//                                        fx0,    fy1,    fz1,
+//                                        fx1,    fy1,    fz1,
+//                                        fx1,    fy1,    fz0,
+//                                        fx0,    fy1,    fz0,
+//                                        1.0f, 1.0f, 0.0f,
+//                                        false);
+//                                    //appendFaces(fx0,fy0,fz0,   1,1,1,  1,1,1,  1,1,1, 1,1,1);
+//                                }
+//
+//
+//                            }
+//                            if (localY == 0)
+//                            {
+//                                bool bottom = (GetBlock(x, absoluteY - 1, z) == 0);
+//                                //bool top    = (GetBlock(x, absoluteY + 1, z) == 0);
+//
+//
+//                                float fx0 = (float)x;
+//                                float fx1 = (float)(x+1);
+//
+//                                float fy0 = (float)absoluteY;
+//                                float fy1 = (float)(absoluteY+1);
+//
+//                                float fz0 = (float)z;
+//                                float fz1 = (float)(z+1);
+//                                if (bottom)
+//                                {
+//                                    appendFaces(
+//                                        fx0,    fy0,    fz0,
+//                                        fx1,    fy0,    fz0,
+//                                        fx1,    fy0,    fz1,
+//                                        fx0,    fy0,    fz1,
+//                                        1.0f, 1.0f, 1.0f,
+//                                        false);
+//                                    //appendFaces(fx0,fy0,fz0,   1,1,1,  1,1,1,  1,1,1, 1,1,1);
+//                                }
+//
+//                            }
+//                            // {
+//                            //
+//                            // }
+//
+//
+//
+//
+//
+//
+//
+//                               //if (localY == 0 || localY == CHUNK_SIZE-1)
+//                               {
+//
+//
+//                                   float fx0 = (float)x;
+//                                   float fx1 = (float)(x+1);
+//
+//                                   float fy0 = (float)absoluteY;
+//                                   float fy1 = (float)(absoluteY+1);
+//
+//                                   float fz0 = (float)z;
+//                                   float fz1 = (float)(z+1);
+//
+//
+//                                   // Check if neighbors are air (0 means exposed face)
+//                                   bool top    = (GetBlock(x, absoluteY + 1, z) == 0);
+//                                   bool bottom = (GetBlock(x, absoluteY - 1, z) == 0);
+//                                   bool left   = (GetBlock(x - 1, absoluteY, z) == 0);
+//                                   bool right  = (GetBlock(x + 1, absoluteY, z) == 0);
+//                                   bool front  = (GetBlock(x, absoluteY, z + 1) == 0);
+//                                   bool back   = (GetBlock(x, absoluteY, z - 1) == 0);
+//
+//                          //         if (front)
+//                          //{
+//                          //    appendFaces(
+//                          //     fx0,    fy0,    fz1,
+//                          //     fx1,    fy0,    fz1,
+//                          //     fx1,    fy1,    fz1,
+//                          //     fx0,    fy1,    fz1,
+//                          //     1.0f, 0.0f, 0.0f,
+//                          //     false
+//                          //     );
+//                          //}
+// //
+//                         if (left)
+//                         {
+//                             appendFaces(
+//                                 fx0,    fy0,    fz0,
+//                                 fx0,    fy0,    fz1,
+//                                 fx0,    fy1,    fz1,
+//                                 fx0,    fy1,    fz0,
+//                                 0.0f, 1.0f, 0.0f,
+//                                 false);
+//                             //appendFaces(fx0,fy0,fz0,   1,1,1,  1,1,1,  1,1,1, 1,1,1);
+//                         }
+// //
+//                          //if (back)
+//                          //{
+//                          //    appendFaces(
+//                          //        fx1,    fy0,    fz0,
+//                          //        fx0,    fy0,    fz0,
+//                          //        fx0,    fy1,    fz0,
+//                          //        fx1,    fy1,    fz0,
+//                          //        0.0f, 0.0f, 1.0f,
+//                          //        false);
+//                          //    //appendFaces(fx0,fy0,fz0,   1,1,1,  1,1,1,  1,1,1, 1,1,1);
+//                          //}
+// //
+//                          //if (right)
+//                          //{
+//                          //    appendFaces(
+//                          //        fx1,    fy0,    fz1,
+//                          //        fx1,    fy0,    fz0,
+//                          //        fx1,    fy1,    fz0,
+//                          //        fx1,    fy1,    fz1,
+//                          //        0.0f, 1.0f, 1.0f,
+//                          //        false);
+//                          //    //appendFaces(fx0,fy0,fz0,   1,1,1,  1,1,1,  1,1,1, 1,1,1);
+//                          //}
+// //
+//                          //if (top)
+//                          //{
+//                          //    appendFaces(
+//                          //        fx0,    fy1,    fz1,
+//                          //        fx1,    fy1,    fz1,
+//                          //        fx1,    fy1,    fz0,
+//                          //        fx0,    fy1,    fz0,
+//                          //        1.0f, 1.0f, 0.0f,
+//                          //        false);
+//                          //    //appendFaces(fx0,fy0,fz0,   1,1,1,  1,1,1,  1,1,1, 1,1,1);
+//                          //}
+// //
+//                          //if (bottom)
+//                          //{
+//                          //    appendFaces(
+//                          //        fx0,    fy0,    fz0,
+//                          //        fx1,    fy0,    fz0,
+//                          //        fx1,    fy0,    fz1,
+//                          //        fx0,    fy0,    fz1,
+//                          //        1.0f, 1.0f, 1.0f,
+//                          //        false);
+//                          //    //appendFaces(fx0,fy0,fz0,   1,1,1,  1,1,1,  1,1,1, 1,1,1);
+//                          //}
+//
+//                               }
+//
+//
+//                           }
+//                       }
+//                   }
+                }
+                 continue;
+             }
+
+
+            //if(subChunks[subChunkIndex].isEmpty){continue;}
 
             for (int localY = 0; localY < CHUNK_SIZE; ++localY)
             {
+
+
+
+
+
                 for (int x = 0; x < CHUNK_SIZE; ++x)
                 {
                     for (int z = 0; z < CHUNK_SIZE; ++z)
@@ -308,114 +697,7 @@ namespace opengltests
                                false);
                            //appendFaces(fx0,fy0,fz0,   1,1,1,  1,1,1,  1,1,1, 1,1,1);
                        }
-                       // }
-                        // else
-                        // {
-                        //
-                        //         if (front)
-                        //         {
-                        //             // Format matching your buffer layout: Position(3), Color/Normal(3), UV(2)
-                        //             std::vector<float> faceVerticesFront = {
-                        //                 //  X      Y      Z
-                        //                 fx0,  fy0,  fz1,       1.0f, 0.0f, 0.0f,     0.0f, 0.0f,
-                        //                 fx1,  fy0,  fz1,       1.0f, 0.0f, 0.0f,     1.0f, 0.0f,
-                        //                 fx1,  fy1,  fz1,       1.0f, 0.0f, 0.0f,     1.0f, 1.0f,
-                        //                 fx0,  fy1,  fz1,       1.0f, 0.0f, 0.0f,     0.0f, 1.0f,
-                        //
-                        //             };
-                        //             vertices.insert(vertices.end(), faceVerticesFront.begin(), faceVerticesFront.end());
-                        //             // Add indices for this quad
-                        //             indices.push_back(indexOffset + 0);indices.push_back(indexOffset + 1);
-                        //             indices.push_back(indexOffset + 2);indices.push_back(indexOffset + 2);
-                        //             indices.push_back(indexOffset + 3);indices.push_back(indexOffset + 0);
-                        //             indexOffset += 4;
-                        //         }
-                        //         if (left)
-                        //         {
-                        //             std::vector<float> faceVerticesLeft = {
-                        //                 //  X      Y      Z
-                        //                 fx0,  fy0,  fz0,       0.0f, 1.0f, 0.0f,     0.0f, 0.0f, // fx0,  fy0,  fz1,   0 0 1 /
-                        //                 fx0,  fy0,  fz1,       0.0f, 1.0f, 0.0f,     1.0f, 0.0f, // fx1,  fy0,  fz1,   1 0 1 /
-                        //                 fx0,  fy1,  fz1,       0.0f, 1.0f, 0.0f,     1.0f, 1.0f, // fx1,  fy1,  fz1,   1 1 1 /
-                        //                 fx0,  fy1,  fz0,       0.0f, 1.0f, 0.0f,     0.0f, 1.0f, // fx0,  fy1,  fz1,   0 1 1 /
-                        //
-                        //             };
-                        //             vertices.insert(vertices.end(), faceVerticesLeft.begin(), faceVerticesLeft.end());
-                        //             // Add indices for this quad
-                        //                  indices.push_back(indexOffset + 0);indices.push_back(indexOffset + 1);
-                        //                  indices.push_back(indexOffset + 2);indices.push_back(indexOffset + 2);
-                        //                  indices.push_back(indexOffset + 3);indices.push_back(indexOffset + 0);
-                        //                  indexOffset += 4;
-                        //         }
-                        //         if (back)
-                        //         {
-                        //             std::vector<float> faceVerticesBack = {
-                        //                 //  X      Y      Z
-                        //                 fx1,  fy0,  fz0,       0.0f, 0.0f, 1.0f,     0.0f, 0.0f,
-                        //                 fx0,  fy0,  fz0,       0.0f, 0.0f, 1.0f,     1.0f, 0.0f,
-                        //                 fx0,  fy1,  fz0,       0.0f, 0.0f, 1.0f,     1.0f, 1.0f,
-                        //                 fx1,  fy1,  fz0,       0.0f, 0.0f, 1.0f,     0.0f, 1.0f,
-                        //
-                        //             };
-                        //             vertices.insert(vertices.end(), faceVerticesBack.begin(), faceVerticesBack.end());
-                        //             // Add indices for this quad
-                        //             indices.push_back(indexOffset + 0);indices.push_back(indexOffset + 1);
-                        //             indices.push_back(indexOffset + 2);indices.push_back(indexOffset + 2);
-                        //             indices.push_back(indexOffset + 3);indices.push_back(indexOffset + 0);
-                        //             indexOffset += 4;
-                        //        }
-                        //         if (right)
-                        //         {
-                        //             std::vector<float> faceVerticesRight = {
-                        //                 //  X      Y      Z
-                        //                 fx1,  fy0,  fz1,       1.0f, 1.0f, 0.0f,     0.0f, 0.0f, // fx0,  fy0,  fz1,   0 0 1 /
-                        //                 fx1,  fy0,  fz0,       1.0f, 1.0f, 0.0f,     1.0f, 0.0f, // fx1,  fy0,  fz1,   1 0 1 /
-                        //                 fx1,  fy1,  fz0,       1.0f, 1.0f, 0.0f,     1.0f, 1.0f, // fx1,  fy1,  fz1,   1 1 1 /
-                        //                 fx1,  fy1,  fz1,       1.0f, 1.0f, 0.0f,     0.0f, 1.0f, // fx0,  fy1,  fz1,   0 1 1 /
-                        //
-                        //             };
-                        //             vertices.insert(vertices.end(), faceVerticesRight.begin(), faceVerticesRight.end());
-                        //             // Add indices for this quad
-                        //             indices.push_back(indexOffset + 0);indices.push_back(indexOffset + 1);
-                        //             indices.push_back(indexOffset + 2);indices.push_back(indexOffset + 2);
-                        //             indices.push_back(indexOffset + 3);indices.push_back(indexOffset + 0);
-                        //             indexOffset += 4;
-                        //         }
-                        //         if (top)
-                        //         {
-                        //             std::vector<float> faceVerticesTop = {
-                        //                 //  X      Y      Z
-                        //                 fx0,  fy1,  fz1,       0.0f, 1.0f, 1.0f,     0.0f, 0.0f,
-                        //                 fx1,  fy1,  fz1,       0.0f, 1.0f, 1.0f,     1.0f, 0.0f,
-                        //                 fx1,  fy1,  fz0,       0.0f, 1.0f, 1.0f,     1.0f, 1.0f,
-                        //                 fx0,  fy1,  fz0,       0.0f, 1.0f, 1.0f,     0.0f, 1.0f,
-                        //
-                        //             };
-                        //             vertices.insert(vertices.end(), faceVerticesTop.begin(), faceVerticesTop.end());
-                        //              // Add indices for this quad
-                        //             indices.push_back(indexOffset + 0);indices.push_back(indexOffset + 1);
-                        //             indices.push_back(indexOffset + 2);indices.push_back(indexOffset + 2);
-                        //             indices.push_back(indexOffset + 3);indices.push_back(indexOffset + 0);
-                        //             indexOffset += 4;
-                        //         }
-                        //         if (bottom)
-                        //         {
-                        //             std::vector<float> faceVerticesBottom = {
-                        //                 //  X      Y      Z
-                        //                 fx0,  fy0,  fz0,       1.0f, 1.0f, 1.0f,     0.0f, 0.0f, // fx0,  fy0,  fz1,   0 0 1 /
-                        //                 fx1,  fy0,  fz0,       1.0f, 1.0f, 1.0f,     1.0f, 0.0f, // fx1,  fy0,  fz1,   1 0 1 /
-                        //                 fx1,  fy0,  fz1,       1.0f, 1.0f, 1.0f,     1.0f, 1.0f, // fx1,  fy1,  fz1,   1 1 1 /
-                        //                 fx0,  fy0,  fz1,       1.0f, 1.0f, 1.0f,     0.0f, 1.0f, // fx0,  fy1,  fz1,   0 1 1 /
-                        //
-                        //             };
-                        //             vertices.insert(vertices.end(), faceVerticesBottom.begin(), faceVerticesBottom.end());
-                        //             // Add indices for this quad
-                        //             indices.push_back(indexOffset + 0);indices.push_back(indexOffset + 1);
-                        //             indices.push_back(indexOffset + 2);indices.push_back(indexOffset + 2);
-                        //             indices.push_back(indexOffset + 3);indices.push_back(indexOffset + 0);//TODO emplace back
-                        //             indexOffset += 4;
-                        //         }
-                        // }
+
                   }
               }
             }
@@ -835,8 +1117,11 @@ namespace opengltests
     std::array<SubChunk, Chunk::SUB_CHUNK_STACK_SIZE> Chunk::BuildFullChunk(glm::ivec3 chunkPos, engine::AssetSystem& assets)
     {
         std::array<SubChunk, SUB_CHUNK_STACK_SIZE> temporaryChunks;//SUB_CHUNK_STACK_SIZE =24 layers of sub chunks
+
+        if (chunkPos.x == 1 && chunkPos.z == 1){return temporaryChunks;}
         for (uint8_t i = 0; i < SUB_CHUNK_STACK_SIZE; i++)
         {
+            chunkPos.y = i;
             temporaryChunks[i] = SubChunk(CHUNK_SIZE,chunkPos, assets);
         }
         return temporaryChunks;

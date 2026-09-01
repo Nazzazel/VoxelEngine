@@ -30,8 +30,8 @@ namespace opengltests
        //m_Rot_Cube->Init(engine.GetAssetSystem());
 
 
-      // glm::ivec3 chunkPos(6, 0, 6);
-       glm::ivec3 chunkPos(7, 0, 7);
+       glm::ivec3 chunkPos(50, 0, 50);
+      // glm::ivec3 chunkPos(4, 0, 4);
        //nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnb
        //
 
@@ -49,7 +49,7 @@ namespace opengltests
       {
        std::cout   << "mark  \n";
        ///auto& newChunk = loadedChunks.emplace_back(std::make_unique<Chunk>(glm::vec3(x,y,z), engine.GetAssetSystem(),texture));
-       auto& newChunk = loadedChunks.emplace_back(Chunk(glm::vec3(x,-1,z), engine.GetAssetSystem(),texture));
+       auto& newChunk = loadedChunks.emplace_back(Chunk(glm::vec3(x,-5,z), engine.GetAssetSystem(),texture));
        newChunk.BuildMesh();
        engine.GetTimerSystem().GetElapsedMs();
        engine.GetTimerSystem().ResetTimer();

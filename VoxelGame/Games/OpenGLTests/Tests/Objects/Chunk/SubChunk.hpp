@@ -34,13 +34,19 @@ namespace opengltests
 
         std::vector<glm::uint16_t> chunkData;
 
-        bool isEmpty = false;
+        //bool isEmpty = false;
+        //bool isSolid = false;
 
         void SetBlock(int x, int y, int z, uint16_t blockID);
         [[nodiscard]] uint16_t GetBlock(int x, int y, int z) const;
+        void UpdateState();
+
+        enum class SubChunkState : uint8_t { Empty=0, Solid=1, Mixed=3 };
+
+        int GetSubChunkState() const;
 
     private:
-
+        SubChunkState m_State = SubChunkState::Empty;
 
 
     };

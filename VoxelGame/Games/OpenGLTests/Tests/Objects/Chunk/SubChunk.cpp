@@ -16,7 +16,7 @@ namespace opengltests
         //chunkData = {5000,0};
         std::cout << "x:" << chunkPos.x<< " y: " <<chunkPos.y<< " z: " << chunkPos.z<< std::endl;
 
-        if (chunkPos.y ==2)
+        if (chunkPos.y ==1000)
         {
             chunkData.resize(SUB_CHUNK_SIZE*SUB_CHUNK_SIZE*SUB_CHUNK_SIZE, 0);
         }
@@ -25,7 +25,7 @@ namespace opengltests
             chunkData.resize(SUB_CHUNK_SIZE*SUB_CHUNK_SIZE*SUB_CHUNK_SIZE, 1);
         }
 
-
+        UpdateState();
         //chunkData.resize(SUB_CHUNK_SIZE*SUB_CHUNK_SIZE*SUB_CHUNK_SIZE, 1);
         //chunkData.resize(SUB_CHUNK_SIZE * SUB_CHUNK_SIZE * SUB_CHUNK_SIZE, 1);
     }
@@ -57,6 +57,32 @@ namespace opengltests
         return 0;
     }
 
+    void SubChunk::UpdateState() {
+        bool hasAir = false;
+        bool hasSolid = false;
 
+        for (auto block : chunkData) {
+            if (block == 0) hasAir = true;
+            else hasSolid = true;
+        }
+
+        if (!hasAir) m_State = SubChunkState::Solid;
+        else if (!hasSolid) m_State = SubChunkState::Empty;
+        else m_State = SubChunkState::Mixed;
+        std::cout << "state:" << static_cast<int>(m_State) << std::endl;
+        //m_State = SubChunkState::Solid;
+    }
+
+    int SubChunk::GetSubChunkState() const
+    {
+        switch (m_State)
+        {
+            case SubChunkState::Empty: return 0;
+            case SubChunkState::Solid: return 1;
+            case SubChunkState::Mixed: return 2;
+        }
+
+        return -1;
+    }
 } // opengltests
 
