@@ -18,6 +18,14 @@ namespace backends
 		glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
 	}
 
+	void OpenGLVertexBuffer::UpdateData(const void* data, uint32_t size)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
+		// glBufferSubData modifies existing buffer data starting from offset 0
+
+		glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
+	}
+
 	OpenGLVertexBuffer::~OpenGLVertexBuffer()
 	{
 		GL_SCOPE();

@@ -20,7 +20,9 @@ namespace engine
 
     class Material {
     public:
-        Material(IShader* shader, engine::OpenGLTexture& texture) : m_Texture(texture),m_Shader(shader) {}
+       // Material(std::shared_ptr<IShader> shader, std::shared_ptr<engine::OpenGLTexture> texture = nullptr) :
+        Material(engine::IShader* shader, std::shared_ptr<engine::OpenGLTexture> texture = nullptr) :
+        m_Texture(texture),m_Shader(shader) {}
         //Material(IShader* shader) :m_Shader(shader) {}
         ~Material() = default;
 
@@ -32,8 +34,11 @@ namespace engine
                 for (const auto& [name, val] : m_Vec4s)    m_Shader->SetFloat4(name, val.r, val.g, val.b, val.a);
                 for (const auto& [name, val] : m_Mat4s)    m_Shader->SetMat4(name, val);
 
-                m_Texture.Bind();
-                m_Texture.SetUniforms(m_Shader,"tex0",0);
+                if (m_Texture!=nullptr)
+                {
+                m_Texture->Bind();
+                m_Texture->SetUniforms(m_Shader,"tex0",0);
+                }
             }
 
 
@@ -53,14 +58,15 @@ namespace engine
         void SetMat4(const std::string& name, const glm::mat4& value) { m_Mat4s[name] = value; }
 
     private:
-        IShader* m_Shader = nullptr;
+        //std::shared_ptr<IShader> m_Shader = nullptr;
+        engine::IShader* m_Shader = nullptr;
 
         // Caching uniform values so the material remembers its state
         std::unordered_map<std::string, float> m_Floats;
         std::unordered_map<std::string, glm::vec4> m_Vec4s;
         std::unordered_map<std::string, glm::mat4> m_Mat4s;
-
-        engine::OpenGLTexture& m_Texture;
+        std::shared_ptr<engine::OpenGLTexture> m_Texture; // Now a pointer!
+      //  engine::OpenGLTexture& m_Texture;
 
     };
 
@@ -77,19 +83,29 @@ namespace engine
 
             auto vertexBuffer = IVertexBuffer::Create(vertices, vertexSize);
             vertexBuffer->SetLayout(layout);
+            m_VertexBuffer = vertexBuffer.get();
             m_VertexArray->AddVertexBuffer(std::move(vertexBuffer));
 
             auto indexBuffer = IIndexBuffer::Create(indices, indexCount);
             m_VertexArray->SetIndexBuffer(std::move(indexBuffer));
         }
 
+
+
         ~Mesh() = default;
+
+        // Add this method to update vertex data dynamically
+        void UpdateVertices(const void* data, uint32_t size) {
+            m_VertexBuffer->Bind();
+            m_VertexBuffer->UpdateData(data, size);
+        }
 
         const std::shared_ptr<IVertexArray>& GetVertexArray() const { return m_VertexArray; }
         uint32_t GetIndexCount() const { return m_VertexArray->GetIndexCount(); }
 
     private:
         std::shared_ptr<IVertexArray> m_VertexArray;
+        IVertexBuffer* m_VertexBuffer;
     };
 
 

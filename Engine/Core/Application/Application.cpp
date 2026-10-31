@@ -86,6 +86,7 @@ namespace engine
         asset->GetShaderManager().SetTraditionalPipeline(flag);
 
         asset->GetShaderManager().LoadEngineShader(ShaderTypeID::Basic);
+        asset->GetShaderManager().LoadEngineShader(ShaderTypeID::UI);
 
 
 

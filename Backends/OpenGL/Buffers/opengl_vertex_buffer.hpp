@@ -14,6 +14,8 @@ namespace backends
 		void Unbind() const override;
 
 
+		// Add this method:
+		void UpdateData(const void* data, uint32_t size) override;
 		//Layout
 		void SetLayout(const engine::BufferLayout& layout) override		{
 			m_Layout = layout; }

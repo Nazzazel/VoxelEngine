@@ -215,4 +215,8 @@ namespace backends
 	void OpenGLShader::SetDouble3(const std::string& name, double x, double y, double z)			{ GL_SCOPE(); glUniform3d(GetUniformLocation(name), x, y, z		); }
 	void OpenGLShader::SetDouble4(const std::string& name, double x, double y, double z, double w)	{ GL_SCOPE(); glUniform4d(GetUniformLocation(name), x, y, z, w	); }
 
+
+	void OpenGLShader::SetVec2(const std::string& name, const glm::vec2& value)						{GL_SCOPE(); glUniform2fv(GetUniformLocation(name), 1, glm::value_ptr(value)); }
+	void OpenGLShader::SetVec3(const std::string& name, const glm::vec3& value)						{GL_SCOPE(); glUniform3fv(GetUniformLocation(name), 1, glm::value_ptr(value)); }
+	void OpenGLShader::SetVec4(const std::string& name, const glm::vec4& value)						{GL_SCOPE(); glUniform4fv(GetUniformLocation(name), 1, glm::value_ptr(value)); }
 }

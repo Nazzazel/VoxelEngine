@@ -10,6 +10,9 @@
 
 namespace engine
 {
+
+
+
     enum class LogLevel
     {
         ERROR,
@@ -169,6 +172,7 @@ namespace engine
             case general::Error::NotImplemented:   return "NotImplemented";
             case general::Error::Timeout:          return "Timeout";
             case general::Error::OperationFailed:  return "OperationFailed";
+            case general::Error::ObjectIsANullpointer:  return "Object Is A Nullpointer";
             }
             break;
         }
@@ -232,9 +236,22 @@ namespace engine
             case graphics::Error::None:                                           return "None";
             case graphics::Error::ShaderObjectDoesNotPossessNessesaryShaderStages: return "ShaderObjectDoesNotPossessNessesaryShaderStages";
             case graphics::Error::ShaderObjectAPINotSupportingElementsOfPipeline:  return "ShaderObjectAPINotSupportingElementsOfPipeline";
+            case graphics::Error::TextureIsANullpointer:  return "Texture Is A Nullpointer";
             }
             break;
         }
+        //case ResultCategory::G:
+        //    {
+        //        switch (static_cast<graphics::Error>(errorCode))
+        //        {
+        //        case graphics::Error::None:                                           return "None";
+        //        case graphics::Error::ShaderObjectDoesNotPossessNessesaryShaderStages: return "ShaderObjectDoesNotPossessNessesaryShaderStages";
+        //        case graphics::Error::ShaderObjectAPINotSupportingElementsOfPipeline:  return "ShaderObjectAPINotSupportingElementsOfPipeline";
+        //        }
+        //         break;
+        //}
+
+
         default:
             break;
         }

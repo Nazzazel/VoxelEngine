@@ -4,6 +4,7 @@
 
 
 #pragma once
+#include "Core/Application/AppInterface/IAppInterface.hpp"
 #include "Core/Systems/Renderer/IRenderer/IRenderer.hpp"
 #include "VoxelGame/Games/OpenGLTests/Core/Base/VoxelGameHeaders/WorldCoord.hpp"
 
@@ -13,7 +14,7 @@ namespace opengltests
     class OpenGLCamera
     {
     public:
-        OpenGLCamera();
+        OpenGLCamera(engine::IAppInterface& engine);
 
         void MoveFront(float amount);
         void MoveRight(float amount);
@@ -31,9 +32,15 @@ namespace opengltests
 
         void SetAspectRatio(float aspect);
 
+        void GetInfo();
+
         engine::SceneData GetSceneData() const;
 
     private:
+        engine::IAppInterface& m_engine;
+
+
+
         void Move(glm::vec3 delta);
 
 
@@ -64,6 +71,10 @@ namespace opengltests
 
 
         WorldCoord m_WorldCameraPosition;
+
+        WorldCoord old_m_WorldCameraPosition = WorldCoord();
+
+        WorldCoord  diff_m_WorldCameraPosition= WorldCoord();
        // engine::IRenderer& m_renderer;
 
         //glm::quaterian

@@ -11,6 +11,7 @@
 #include "Tests/Objects/RotatingCube/RotatingCube.hpp"
 #include "Core/Systems/Window/WindowSystem.hpp"
 #include "Systems/Renderer/Texture/OpenGLTexture.hpp"
+#include "Tests/Objects/Text.hpp"
 #include "Tests/Objects/Chunk/Chunk.hpp"
 
 namespace opengltests
@@ -23,6 +24,7 @@ namespace opengltests
         void OnUpdate(engine::IAppInterface& engine,float dt);
         //void OnRender(Renderer& m_Renderer) {}
         void OnRender(engine::IRenderer& renderer);
+        void rendquadtest(engine::IRenderer& renderer);
         void OnShutdown(); //TODO
 
 
@@ -41,8 +43,11 @@ namespace opengltests
         //std::vector<std::unique_ptr<Chunk>> loadedChunks;
         std::vector<Chunk> loadedChunks;
 
-        engine::OpenGLTexture texture;
+        std::shared_ptr<engine::OpenGLTexture> texture;
         WorldCoord m_worldPosition;
+        std::unique_ptr<opengltests::Text> m_text;
+
+       // engine::IAppInterface& m_engine; //TODO DELETE THIS LATER
 
     };
 } // opengltests

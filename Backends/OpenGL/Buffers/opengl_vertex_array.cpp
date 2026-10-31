@@ -35,6 +35,8 @@ namespace backends
         glBindVertexArray(0);
     }
 
+
+
     void OpenGLVertexArray::AddVertexBuffer(std::unique_ptr<engine::IVertexBuffer> vb)
     {
         GL_SCOPE();
@@ -78,7 +80,8 @@ namespace backends
 
 
 
-        m_VertexBuffers.push_back(std::move(vb));
+       m_VertexBuffers.push_back(std::move(vb));
+        //m_VertexBuffers.push_back(vb);
 
 
 

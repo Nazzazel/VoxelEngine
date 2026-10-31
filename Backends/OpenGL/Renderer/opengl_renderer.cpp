@@ -59,7 +59,7 @@ namespace backends
         //TODO DEAL WITH THIS //TODO DEAL WITH THIS debugtools::Logger::Log(debugtools::LogLevel::Info, "OpenGL Renderer Created");
         int nrAttributes;
         glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
-        std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes << std::endl;
+        //std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes << std::endl;
     }
 
     OpenGLRenderer::~OpenGLRenderer()

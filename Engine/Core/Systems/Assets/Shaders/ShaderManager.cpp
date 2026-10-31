@@ -72,7 +72,7 @@ namespace engine
          std::unique_ptr<engine::IShader> f_TraditionalPipelineShader = engine::IShader::Create(traditionalShaderStages);
         if (f_TraditionalPipelineShader)
         {
-            m_Logger->AddInfo("Shader wa ssussesfully added to the list : -> ", ShaderTypeIDToString(type) );
+            m_Logger->AddInfo("Shader wa successfully added to the list : -> ", ShaderTypeIDToString(type) );
             m_Shaders.emplace(type,std::move(f_TraditionalPipelineShader));
         }
         else
@@ -278,7 +278,7 @@ namespace engine
     }
 
 
-    Result ShaderManager::LoadCustomShader(ShaderTypeID type, const std::filesystem::path& path) //loadion custom way of load shaders from for example // maybe later a specification of api
+    Result ShaderManager::LoadCustomShader(ShaderTypeID type, const std::filesystem::path& path) //todo loadion custom way of load shaders from for example // maybe later a specification of api
     {
 
         //TODO LATER

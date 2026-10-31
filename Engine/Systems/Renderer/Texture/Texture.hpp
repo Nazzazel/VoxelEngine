@@ -11,8 +11,8 @@ namespace engine
 
         virtual ~Texture() = default;
 
-        virtual void Bind() = 0;
-        virtual void UnBind() = 0;
+        virtual Result Bind() = 0;
+        virtual Result UnBind() = 0;
 
         virtual int GetWidth() const = 0;
         virtual int GetHeight() const = 0;

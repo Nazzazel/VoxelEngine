@@ -24,6 +24,7 @@ namespace opengltests
     {
         if (m_keyboardInputStateMap.IsKeyPressed(engine::KeyCodes::KEY_W))
         {
+            m_engine.GetLoggerSystem().AddInfo("move speed",moveSpeed);
             m_camera.MoveFront(moveSpeed);
         }
         if (m_keyboardInputStateMap.IsKeyPressed(engine::KeyCodes::KEY_S))
@@ -32,6 +33,7 @@ namespace opengltests
         }
         if (m_keyboardInputStateMap.IsKeyPressed(engine::KeyCodes::KEY_A))
         {
+            m_engine.GetLoggerSystem().AddInfo("move speed ->",moveSpeed);
             m_camera.MoveRight(moveSpeed);
         }
         if (m_keyboardInputStateMap.IsKeyPressed(engine::KeyCodes::KEY_D))

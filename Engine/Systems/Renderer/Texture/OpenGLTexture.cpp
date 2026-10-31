@@ -36,7 +36,10 @@ namespace engine
         int width, height, nrChannels;
         //unsigned char *data = stbi_load("container.jpg", &width, &height, &nrChannels, 0);
         stbi_set_flip_vertically_on_load(true);
+        // unsigned char *data = stbi_load("container.jpg", &width, &height, &nrChannels, 0);
         unsigned char *data = stbi_load("/home/nazzazel/Programming/cpp/projects/VoxelEngine/Engine/Res/Assets/Textures/container.jpg", &width, &height, &nrChannels, 0);
+
+
         if (data)
         {
             // uint b = static_cast<uint>(*data);
@@ -57,6 +60,37 @@ namespace engine
         stbi_image_free(data);
         glBindTexture(type, 0);
     }
+
+    OpenGLTexture::OpenGLTexture(unsigned char* data, int width, int height)
+    {
+        type = GL_TEXTURE_2D;
+        glGenTextures(1, &ID);
+        //glActiveTexture(GL_TEXTURE0);//TODO texture active
+        glBindTexture(GL_TEXTURE_2D, ID);
+
+        glTexImage2D(
+            GL_TEXTURE_2D,
+            0,
+            GL_RGB,
+            width,
+            height,
+            0,
+            GL_RGB,
+            GL_UNSIGNED_BYTE,
+            data);
+
+
+        // set the texture wrapping/filtering options (on the currently bound texture object)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+
+
+        glBindTexture(type, 0);
+    }
+
     /*
      *
     *  // Assigns the type of the texture ot the texture object
@@ -141,7 +175,7 @@ namespace engine
  */
 
 
-    void OpenGLTexture::SetUniforms(IShader* shader,const char* uniform,GLuint unit )
+    void OpenGLTexture::SetUniforms(engine::IShader* shader,const char* uniform,GLuint unit )
     {
         // Gets the location of the uniform
       //  GLuint texUni = glGetUniformLocation(shader.ID, uniform);
@@ -155,12 +189,12 @@ namespace engine
     }
 
 
-    void OpenGLTexture::Bind()
+    Result OpenGLTexture::Bind()
     {
         glBindTexture(GL_TEXTURE_2D, ID);
     }
 
-    void OpenGLTexture::UnBind()
+    Result OpenGLTexture::UnBind()
     {
         glBindTexture(GL_TEXTURE_2D, 0);
     }

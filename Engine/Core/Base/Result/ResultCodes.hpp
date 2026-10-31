@@ -5,13 +5,12 @@
 #pragma once
 #include <cstdint>
 #include <string_view>
-
+#include <type_traits>
 #include "Result.hpp"
 
 
 namespace engine
 {
-
     constexpr uint64_t Hash(const char* s_ptr) {
         uint32_t hash = 5381;
         //for (const char c : s_ptr) hash = ((hash << 5) + hash) + c;
@@ -40,7 +39,7 @@ namespace engine
     //err_code is a basic pepresentation of an undelyting message send as a universal "id".
     //The err_code could be both for INFO,ERROR or Warning or any other severity level
     //naming conventin was made due to ussual usecase and avoiding of repetivenes like result_code
-    #define ENGINE_RESULT(category, err_code, severity) \
+#define ENGINE_RESULT(category, err_code, severity) \
     ::engine::Result::Create(::engine::ResultCategory::category,\
     static_cast<uint16_t>(err_code),\
     ::engine::Severity::severity, \
@@ -52,14 +51,14 @@ namespace engine
 
     //#define _RESULT(code, sev) ::engine::memory::MemoryErr(code, sev, __LINE__, __FILE__)
     //FOR First arg("Memory","General") look up result.hpp
-    #define GENERAL_RESULT(         err_code, severity) ENGINE_RESULT(General       , ::engine::general::Error::err_code        , severity)//EXAMPLE GENERAL_ERR(None,Info)
-    #define SYSTEM_RESULT(          err_code, severity) ENGINE_RESULT(System        , ::engine::system::Error::err_code         , severity)//
-    #define PLATFORM_RESULT(        err_code, severity) ENGINE_RESULT(Platform      , ::engine::platform::Error::err_code       , severity)//
-    #define CONFIGURATION_RESULT(   err_code, severity) ENGINE_RESULT(Configuration , ::engine::configuration::Error::err_code   , severity)//
+#define GENERAL_RESULT(         err_code, severity) ENGINE_RESULT(General       , ::engine::general::Error::err_code        , severity)//EXAMPLE GENERAL_ERR(None,Info)
+#define SYSTEM_RESULT(          err_code, severity) ENGINE_RESULT(System        , ::engine::system::Error::err_code         , severity)//
+#define PLATFORM_RESULT(        err_code, severity) ENGINE_RESULT(Platform      , ::engine::platform::Error::err_code       , severity)//
+#define CONFIGURATION_RESULT(   err_code, severity) ENGINE_RESULT(Configuration , ::engine::configuration::Error::err_code   , severity)//
 
 
-    #define MEMORY_RESULT(          err_code, severity) ENGINE_RESULT(Memory        , ::engine::memory::Error::err_code         , severity)//EXAMPLE MEM_ERR(None,1)
-    #define GRAPHIC_RESULT(         err_code, severity) ENGINE_RESULT(Graphics      , ::engine::graphics::Error::err_code       , severity)//EXAMPLE MEM_ERR(None,1)
+#define MEMORY_RESULT(          err_code, severity) ENGINE_RESULT(Memory        , ::engine::memory::Error::err_code         , severity)//EXAMPLE MEM_ERR(None,1)
+#define GRAPHIC_RESULT(         err_code, severity) ENGINE_RESULT(Graphics      , ::engine::graphics::Error::err_code       , severity)//EXAMPLE MEM_ERR(None,1)
 
     //#define MEM_ERR(err_code,     severity) ENGINE_RESULT(Memory , ::engine::memory::Error::err_code, severity)//EXAMPLE MEM_ERR(None,1)
 
@@ -72,7 +71,8 @@ namespace engine
             InvalidParameter,
             NotImplemented,
             Timeout,
-            OperationFailed
+            OperationFailed,
+            ObjectIsANullpointer,
         };
     }
 
@@ -134,15 +134,65 @@ namespace engine
         enum class Error : uint16_t {
             None = 0,
             ShaderObjectDoesNotPossessNessesaryShaderStages,
-            ShaderObjectAPINotSupportingElementsOfPipeline
+            ShaderObjectAPINotSupportingElementsOfPipeline,
+            TextureIsANullpointer
+
 
 
 
         };
     }
 
+    // namespace graphicaAPI
+    // {
+    //     enum class Error : uint16_t {
+    //         None = 0,
+    //         TextureIsANullpointer,
+    //
+    //
+    //
+    //     };
+    // }
+    //
+
     //TODO add the rest of the categories
 
+    // static Result IsNULL(void* ptr) noexcept {if (ptr == nullptr) return GENERAL_RESULT(ObjectIsANullpointer,Error);}
+    // template <typename T>
+    // static Result CheckNotNull(T ptr) noexcept
+    // {
+    //     if (ptr != nullptr && *ptr != nullptr) {
+    //         return Result();
+    //     }
+    //     return GENERAL_RESULT(ObjectIsANullpointer, Error);
+    // }
+    //
+        template <typename T>
+        static Result CheckAnything(T&& val) noexcept {
+        // 1. Check if it is a pointer type using compile-time traits
+        if constexpr (std::is_pointer_v<std::decay_t<T>>) {
 
+            // It IS a pointer! First, check if the outer pointer is null.
+            if (val == nullptr) {
+                return GENERAL_RESULT(ObjectIsANullpointer, Error);
+            }
+
+            // 2. EXTRA INTELLIGENCE: Check if it's a pointer-to-pointer (like T** or Texture**)
+            using InnerType = std::remove_pointer_t<std::decay_t<T>>;
+            if constexpr (std::is_pointer_v<InnerType>) {
+                // If the inner value is ALSO a pointer, check if it's null too!
+                if (*val == nullptr) {
+                    return GENERAL_RESULT(ObjectIsANullpointer, Error); // Or your error macro
+                }
+            }
+
+            return Result();
+        }
+        else {
+            // It is NOT a pointer (it's a raw value like an int, float, or struct 'x')
+            // Regular values can't be null pointers, so we consider them valid here.
+            return Result();
+        }
+    }
 
 }

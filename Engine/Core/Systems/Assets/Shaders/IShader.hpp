@@ -108,7 +108,12 @@ namespace engine
         virtual void SetDouble2     (const std::string& name, double x, double y                        ) = 0;
         virtual void SetDouble3     (const std::string& name, double x, double y, double z              ) = 0;
         virtual void SetDouble4     (const std::string& name, double x, double y, double z, double w    ) = 0;
-      
+
+		// Vectors
+		virtual void SetVec2(const std::string& name, const glm::vec2& value) = 0;
+		virtual void SetVec3(const std::string& name, const glm::vec3& value) = 0;
+		virtual void SetVec4(const std::string& name, const glm::vec4& value) = 0;
+
 
 		//virtual unsigned int ShaderStageToAPIStage(ShaderStage stage);// Bute masked fildter for pipl=pelines like which shader weill be enabled
 

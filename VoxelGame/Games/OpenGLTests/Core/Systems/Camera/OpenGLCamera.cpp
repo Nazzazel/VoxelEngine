@@ -9,12 +9,16 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/string_cast.hpp>
 
+#include "Core/Systems/Logger/LoggerSystem.hpp"
 #include "GLFW/glfw3.h"
 
 namespace opengltests
 {
-    OpenGLCamera::OpenGLCamera()
+    OpenGLCamera::OpenGLCamera(engine::IAppInterface& engine)
+    //OpenGLCamera::OpenGLCamera()
     :
+    m_engine(engine),
+
     //m_position(0.0f, 0.0f, 0.0f)
     //,
          //m_front(0.0f, 0.0f, -1.0f),
@@ -39,7 +43,7 @@ namespace opengltests
 
     void OpenGLCamera::Update(float dt)
     {
-
+        GetInfo();
         RecalculateProjection();
     }
 
@@ -51,6 +55,47 @@ namespace opengltests
         RecalculateProjection();
 
         //m_SceneData.projectionMatrix =  glm::perspective(glm::radians(45.0f),  m_AspectRatio, 0.1f, 100.0f);
+
+    }
+
+    void OpenGLCamera::GetInfo()
+    {
+
+        // union { T x, r, s; };
+        // union { T y, g, t; };
+        // union { T z, b, p; };
+
+      // m_engine.GetLoggerSystem().AddInfo("x",m_WorldCameraPosition.chunkCoord.x, " | y",m_WorldCameraPosition.chunkCoord.y," | z",m_WorldCameraPosition.chunkCoord.z);
+      // m_engine.GetLoggerSystem().AddInfo("r",m_WorldCameraPosition.chunkCoord.r, " | g",m_WorldCameraPosition.chunkCoord.g," | b",m_WorldCameraPosition.chunkCoord.b);
+      // m_engine.GetLoggerSystem().AddInfo("s",m_WorldCameraPosition.chunkCoord.s, " | t",m_WorldCameraPosition.chunkCoord.t," | p",m_WorldCameraPosition.chunkCoord.p);
+
+        //m_engine.GetLoggerSystem().AddInfo("x",m_WorldCameraPosition.localOffset.x, " | y",m_WorldCameraPosition.localOffset.y," | z",m_WorldCameraPosition.localOffset.z);
+        //m_engine.GetLoggerSystem().AddInfo("r",m_WorldCameraPosition.localOffset.r, " | g",m_WorldCameraPosition.localOffset.g," | b",m_WorldCameraPosition.localOffset.b);
+        //m_engine.GetLoggerSystem().AddInfo("s",m_WorldCameraPosition.localOffset.s, " | t",m_WorldCameraPosition.localOffset.t," | p",m_WorldCameraPosition.localOffset.p);
+
+
+        //m_engine.GetLoggerSystem().AddInfo("x",m_WorldCameraPosition.localOffset.x, " | y",m_WorldCameraPosition.localOffset.y," | z",m_WorldCameraPosition.localOffset.z);
+
+
+//todo cocococooccooclcolclc cool
+       // diff_m_WorldCameraPosition = WorldCoordDiffrence(m_WorldCameraPosition,old_m_WorldCameraPosition);
+       // old_m_WorldCameraPosition = m_WorldCameraPosition;
+//
+       // m_engine.GetLoggerSystem().AddInfo("x",diff_m_WorldCameraPosition.localOffset.x, " | y",diff_m_WorldCameraPosition.localOffset.y," | z",diff_m_WorldCameraPosition.localOffset.z);
+       // m_engine.GetLoggerSystem().AddInfo("r",diff_m_WorldCameraPosition.localOffset.r, " | g",diff_m_WorldCameraPosition.localOffset.g," | b",diff_m_WorldCameraPosition.localOffset.b);
+       // m_engine.GetLoggerSystem().AddInfo("s",diff_m_WorldCameraPosition.localOffset.s, " | t",diff_m_WorldCameraPosition.localOffset.t," | p",diff_m_WorldCameraPosition.localOffset.p);
+
+      // m_engine.GetLoggerSystem().AddInfo("x",m_WorldCameraPosition.chunkCoord.x);
+      // m_engine.GetLoggerSystem().AddInfo("x",m_WorldCameraPosition.chunkCoord.x);
+      // m_engine.GetLoggerSystem().AddInfo("x",m_WorldCameraPosition.chunkCoord.x);
+      // m_engine.GetLoggerSystem().AddInfo("x",m_WorldCameraPosition.chunkCoord.x);
+      // m_engine.GetLoggerSystem().AddInfo("x",m_WorldCameraPosition.chunkCoord.x);
+      // m_engine.GetLoggerSystem().AddInfo("x",m_WorldCameraPosition.chunkCoord.x);
+      // m_engine.GetLoggerSystem().AddInfo("x",m_WorldCameraPosition.chunkCoord.x);
+      // m_engine.GetLoggerSystem().AddInfo("x",m_WorldCameraPosition.chunkCoord.x);
+      // m_engine.GetLoggerSystem().AddInfo("x",m_WorldCameraPosition.chunkCoord.x);
+      // m_engine.GetLoggerSystem().AddInfo("x",m_WorldCameraPosition.chunkCoord.x);
+
 
     }
 
@@ -70,6 +115,8 @@ namespace opengltests
 //
    // }
 
+
+
     void OpenGLCamera::MoveFront(float amount)
     {
 
@@ -82,6 +129,7 @@ namespace opengltests
 
             //cameraPos += glm::vec3(0, 0, cameraSpeed);
             Move(glm::vec3(movementFront.x, 0.0f,movementFront.z ) * cameraSpeed );
+            //logg
         }
 
         if (amount < 0.0f)
@@ -348,6 +396,7 @@ namespace opengltests
             m_WorldCameraPosition.localOffset.y += 16.0f;
         }
 
+        //GetInfo();
 
     }
 } // voxelgame

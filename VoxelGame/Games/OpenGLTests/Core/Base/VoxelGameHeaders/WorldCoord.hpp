@@ -19,5 +19,28 @@ namespace opengltests
             glm::ivec3 diff = chunkCoord - renderAnchor;
             return glm::vec3(diff) + localOffset;
         }
+
+
+
     };
+
+    inline WorldCoord WorldCoordDiffrence (WorldCoord& newWorldCoord, WorldCoord& oldWorldCoord)
+    {
+        WorldCoord diff_WorldCoord;// TODO deal with the copy
+
+        diff_WorldCoord.localOffset.x = newWorldCoord.localOffset.x - oldWorldCoord.localOffset.x;
+        diff_WorldCoord.localOffset.y = newWorldCoord.localOffset.y - oldWorldCoord.localOffset.y;
+        diff_WorldCoord.localOffset.z = newWorldCoord.localOffset.z - oldWorldCoord.localOffset.z;
+
+        diff_WorldCoord.localOffset.r = newWorldCoord.localOffset.r - oldWorldCoord.localOffset.r;
+        diff_WorldCoord.localOffset.g = newWorldCoord.localOffset.g - oldWorldCoord.localOffset.g;
+        diff_WorldCoord.localOffset.b = newWorldCoord.localOffset.b - oldWorldCoord.localOffset.b;
+
+        diff_WorldCoord.localOffset.s = newWorldCoord.localOffset.s - oldWorldCoord.localOffset.s;
+        diff_WorldCoord.localOffset.t = newWorldCoord.localOffset.t - oldWorldCoord.localOffset.t;
+        diff_WorldCoord.localOffset.p = newWorldCoord.localOffset.p - oldWorldCoord.localOffset.p;
+
+
+        return diff_WorldCoord;
+    }
 }

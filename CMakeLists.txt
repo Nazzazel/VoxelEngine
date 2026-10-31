@@ -4,6 +4,8 @@ project(VoxelEngine LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# --- 1. FIND EXTERNAL PACKAGES ---
+find_package(Freetype REQUIRED)
 
 # add_library(glad STATIC thirdparty/glad/src/glad.c)
 # set_source_files_properties(thirdparty/glad/src/glad.c PROPERTIES LANGUAGE CXX)
@@ -17,6 +19,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # 1. Define the library
 add_library(glad STATIC thirdparty/glad/src/glad.c)
+
 set_source_files_properties(thirdparty/glad/src/glad.c PROPERTIES LANGUAGE CXX)
 
 # 2. IMPORTANT: Use PUBLIC here so that any target that links to 'glad'
@@ -32,7 +35,8 @@ add_subdirectory(Backends)
 add_subdirectory(VoxelGame)
 #add_subdirectory(Try2)
 
-
+target_link_libraries(Engine PRIVATE Freetype::Freetype)
+target_link_libraries(VoxelGame PRIVATE Freetype::Freetype)
 # Add your engine modules in order of dependencies
 
 #Localisation of project

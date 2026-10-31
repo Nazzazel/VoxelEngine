@@ -2,6 +2,8 @@
 
 file(GLOB_RECURSE VOXEL_GAME_SOURCES "*.cpp")
 
+
+
 add_executable(VoxelGame ${VOXEL_GAME_SOURCES}
         ../thirdparty/tracy/public/TracyClient.cpp
         src/Core/Application/EntryPoint.cpp
@@ -50,8 +52,13 @@ add_executable(VoxelGame ${VOXEL_GAME_SOURCES}
         Games/OpenGLTests/Tests/Objects/Items/Block.cpp
         Games/OpenGLTests/Tests/Objects/Items/Block.hpp
         Games/OpenGLTests/Tests/Objects/Items/BlockList.hpp
+        Games/OpenGLTests/Tests/Objects/Chunk/ChunkManager.cpp
+        Games/OpenGLTests/Tests/Objects/Chunk/ChunkManager.hpp
+        Games/OpenGLTests/Tests/Objects/Text.cpp
+        Games/OpenGLTests/Tests/Objects/Text.hpp
 
 )
+
 
 # 1. Add Tracy::TracyClient to the end of this list
 target_link_libraries(VoxelGame PRIVATE Engine glad glfw )

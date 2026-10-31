@@ -14,7 +14,7 @@ namespace opengltests
         SUB_CHUNK_SIZE = f_SUB_CHUNK_SIZE;
 
         //chunkData = {5000,0};
-        std::cout << "x:" << chunkPos.x<< " y: " <<chunkPos.y<< " z: " << chunkPos.z<< std::endl;
+     //   std::cout << "x:" << chunkPos.x<< " y: " <<chunkPos.y<< " z: " << chunkPos.z<< std::endl;
 
         if (chunkPos.y ==1000)
         {
@@ -69,7 +69,7 @@ namespace opengltests
         if (!hasAir) m_State = SubChunkState::Solid;
         else if (!hasSolid) m_State = SubChunkState::Empty;
         else m_State = SubChunkState::Mixed;
-        std::cout << "state:" << static_cast<int>(m_State) << std::endl;
+       // std::cout << "state:" << static_cast<int>(m_State) << std::endl;
         //m_State = SubChunkState::Solid;
     }
 

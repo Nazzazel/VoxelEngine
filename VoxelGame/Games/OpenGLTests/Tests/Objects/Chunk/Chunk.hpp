@@ -33,7 +33,8 @@ namespace opengltests
         static constexpr int CHUNK_SIZE = 16;
         static constexpr int SUB_CHUNK_STACK_SIZE =1;
 
-       explicit Chunk(glm::ivec3 chunkPos,engine::AssetSystem& assets,engine::OpenGLTexture& texture);
+       //explicit Chunk(glm::ivec3 chunkPos,engine::AssetSystem& assets,engine::OpenGLTexture& texture);
+       explicit Chunk(glm::ivec3 chunkPos,engine::AssetSystem& assets,std::shared_ptr<engine::OpenGLTexture> texture);
         //explicit Chunk(glm::ivec3 chunkPos,engine::AssetSystem& assets);
         ~Chunk() = default;
 
@@ -67,7 +68,7 @@ namespace opengltests
        // glm::vec3 m_Position = glm::vec3(0.0f);
 
         engine::IShader* m_Shader = nullptr;
-        engine::OpenGLTexture& m_Texture;
+        std::shared_ptr<engine::OpenGLTexture> m_Texture;
 
         //std::vector<SubChunk> subChunks;
         std::array<SubChunk, SUB_CHUNK_STACK_SIZE> subChunks;

@@ -16,11 +16,12 @@ namespace engine
         public:
         //OpenGLTexture(const char* image, GLenum texType, GLenum slot, GLenum format, GLenum pixelType);
         OpenGLTexture();
+        OpenGLTexture(unsigned char* data, int width, int height);//Text Texture constructor
 
-        void SetUniforms(IShader* shader,const char* uniform,GLuint unit);
+        void SetUniforms(engine::IShader* shader,const char* uniform,GLuint unit);
 
-        void Bind() override;
-        void UnBind() override;
+        Result Bind() override;
+        Result UnBind() override;
         int GetWidth() const override;
         int GetHeight() const override;
         int Delete() const override;

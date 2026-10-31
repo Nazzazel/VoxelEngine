@@ -56,6 +56,10 @@ namespace backends
 		void SetDouble3     (const std::string& name, double x, double y, double z              )override;
 		void SetDouble4     (const std::string& name, double x, double y, double z, double w    )override;
 
+		// Vectors
+		void SetVec2		(const std::string& name, const glm::vec2& value					)override;
+		void SetVec3		(const std::string& name, const glm::vec3& value					)override;
+		void SetVec4		(const std::string& name, const glm::vec4& value					)override;
 	private:
 		unsigned int m_Program;
 
