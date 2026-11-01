@@ -63,6 +63,9 @@ namespace backends
             // ex: //Space coords  //Color cords //texuture coords
             // ex: -1.0, 1.0, 0.0, -1.0, 1.0, 0.0  1.0, 0.0
 
+            std::cout << index << std::endl;
+
+
             glVertexAttribPointer(
                 index,
                 GetComponentCount(element.Type),

@@ -91,8 +91,8 @@ namespace opengltests
 
     void OpenGLTestsApp::OnUpdate(engine::IAppInterface& engine, float dt)
     {
-      //m_engine = engine;
-     UpdateWindowSize(engine, dt);
+        //m_engine = engine;
+        UpdateWindowSize(engine, dt);
         m_input_handler->OnUpdate(dt);
 
 
@@ -109,13 +109,14 @@ namespace opengltests
       //  m_Chunk->SetBlock(0,0,0, 0);
         //m_Chunk->Draw(renderer , m_opengl_camera.get()->GetWorldPosition());
 
-     //for ( auto& chunk : loadedChunks)
-     //{
-     // chunk.Draw(renderer, m_opengl_camera->GetWorldPosition());
-     //}
+    for ( auto& chunk : loadedChunks)
+    {
+     chunk.Draw(renderer, m_opengl_camera->GetWorldPosition());
+    }
 
-       m_text->Draw(renderer,"123456789",0.5,0.5,1,glm::vec3(0,0,0));
-  //rendquadtest(renderer);
+    m_text->Draw(renderer,"123",0.5,0.5,1,glm::vec3(255,0,0));
+     //rendquadtest(renderer);
+
 
 
 

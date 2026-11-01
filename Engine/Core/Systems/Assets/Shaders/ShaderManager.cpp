@@ -69,7 +69,7 @@ namespace engine
         if (m_TradFLag.HasGeometry())               {traditionalShaderStages.push_back(LoadShaderFromFilePath(ShaderStage::Geometry                 ,basePath,ShaderLanguage::GLSL));}
         if (m_TradFLag.HasFragment())               {traditionalShaderStages.push_back(LoadShaderFromFilePath(ShaderStage::Fragment                 ,basePath,ShaderLanguage::GLSL));}
 
-         std::unique_ptr<engine::IShader> f_TraditionalPipelineShader = engine::IShader::Create(traditionalShaderStages);
+         std::unique_ptr<engine::IShader> f_TraditionalPipelineShader = engine::IShader::Create(traditionalShaderStages,ShaderTypeIDToString(type));
         if (f_TraditionalPipelineShader)
         {
             m_Logger->AddInfo("Shader wa successfully added to the list : -> ", ShaderTypeIDToString(type) );

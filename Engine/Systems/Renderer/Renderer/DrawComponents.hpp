@@ -34,11 +34,17 @@ namespace engine
                 for (const auto& [name, val] : m_Vec4s)    m_Shader->SetFloat4(name, val.r, val.g, val.b, val.a);
                 for (const auto& [name, val] : m_Mat4s)    m_Shader->SetMat4(name, val);
 
-                if (m_Texture!=nullptr)
-                {
+
+
+
                 m_Texture->Bind();
-                m_Texture->SetUniforms(m_Shader,m_UniformName.c_str(),0);
-                }
+                //m_Texture->SetUniforms(m_Shader,"tex0",0);//todo later
+                //m_Texture->SetUniforms(m_Shader,"textTexture",0);//todo later
+               //if (m_Texture!=nullptr)
+               //{
+               //m_Texture->Bind();
+               //m_Texture->SetUniforms(m_Shader,"tex0",0);//todo later
+               //}
             }
 
 

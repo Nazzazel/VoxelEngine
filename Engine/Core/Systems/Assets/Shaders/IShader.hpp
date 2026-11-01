@@ -73,6 +73,7 @@ namespace engine
 		virtual void Bind()     const  = 0;
 		virtual void Unbind()   const = 0;
 
+		virtual std::string GetType()   const = 0;
 
         //Float
         virtual void SetFloat       (const std::string& name, float value                           ) = 0;
@@ -135,7 +136,7 @@ namespace engine
     	//static std::unique_ptr<engine::IShader> CreateInt(const std::unordered_map<int, int>& sources);
 
 		//static std::unique_ptr<engine::IShader> Create(const std::initializer_list<ShaderData> sources);
-		static std::unique_ptr<engine::IShader> Create(std::vector<ShaderData>& sources);
+		static std::unique_ptr<engine::IShader> Create(std::vector<ShaderData>& sources, std::string type);
 
         //static std::unique_ptr<engine::GameShader> Create();
 

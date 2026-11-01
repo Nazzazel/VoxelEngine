@@ -17,7 +17,8 @@
 namespace engine
 {
 
-	std::unique_ptr<engine::IShader> IShader::Create( std::vector<ShaderData>& sources)
+
+	std::unique_ptr<engine::IShader> IShader::Create( std::vector<ShaderData>& sources, std::string type)
 	{
 		backends::RendererAPIType api = backends::RendererAPI::GetAPI();
 		//	sources[0].stage
@@ -26,7 +27,7 @@ namespace engine
 		       {
 		       case backends::RendererAPIType::OpenGL:
 		           return std::make_unique
-		               <backends::OpenGLShader>(sources);
+		               <backends::OpenGLShader>(sources,type);
 
 				//std::cout << basePath + "vert.shader" << std::endl;
 

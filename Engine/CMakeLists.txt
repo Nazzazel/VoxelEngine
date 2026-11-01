@@ -88,6 +88,7 @@ add_library(Engine STATIC ${ENGINE_SOURCES}
         Core/Systems/Time/TimerSystem.hpp
         "Systems/Renderer/Text Render/TextRenderer.cpp"
         "Systems/Renderer/Text Render/TextRenderer.hpp"
+        Core/Systems/File/OtherTutorials/filesystem.h
 
 )
 

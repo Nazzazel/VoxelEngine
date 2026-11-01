@@ -186,8 +186,11 @@ namespace engine
         // Sets the value of the uniform
        // glUniform1i(texUni, unit);
 
-       // shader->Bind();
+       // std::cout << "Setting uniform: " << uniform << " | shader: " << shader->GetType() << std::endl;
+
+        shader->Bind();
         shader->SetUInt(uniform,unit);
+        //shader->Unbind();
     }
 
 
@@ -196,14 +199,14 @@ namespace engine
        GL_SCOPE();
         //while (glGetError() != GL_NO_ERROR);
 
-        glBindTexture(GL_TEXTURE_2D, ID);
+        glBindTexture(type, ID);
+        //glBindTexture(GL_TEXTURE_2D, ID);
 
       //  GLenum err =0 ;
       //  while ((err = glGetError()) != GL_NO_ERROR) {
       //      std::cout << ">>> BIND ERROR DETECTED! Code: " << err << " on Texture ID: " << ID << std::endl;
       //  }
         return Result();
-
     }
 
     Result OpenGLTexture::UnBind()

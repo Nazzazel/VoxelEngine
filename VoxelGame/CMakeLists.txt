@@ -73,6 +73,83 @@ target_precompile_headers(VoxelGame
 #        PUBLIC
 #        ${CMAKE_CURRENT_SOURCE_DIR}/Core/Base/--PreCompileHeaders--/pch.hpp
 #)
+#add_custom_command(
+#        TARGET VoxelGame POST_BUILD
+#        COMMAND ${CMAKE_COMMAND} -E remove_directory "$<TARGET_FILE_DIR:VoxelGame>/Res"
+#        COMMAND ${CMAKE_COMMAND} -E copy_directory
+#        "${CMAKE_SOURCE_DIR}/Engine/Res"
+#        "${CMAKE_CURRENT_BINARY_DIR}"
+#)
+
+#add_custom_command(
+#        TARGET VoxelGame POST_BUILD
+#        COMMAND ${CMAKE_COMMAND} -E copy_directory
+#        "${CMAKE_SOURCE_DIR}/Engine/Res"
+#        "${CMAKE_SOURCE_DIR}/cmake-build-relese/VoxelGame"
+#)
+
+add_custom_command(
+        TARGET VoxelGame POST_BUILD
+        # 1. Wipe out the old Res folder so it never keeps stale/deleted files
+        #        COMMAND ${CMAKE_COMMAND} -E remove_directory "$<TARGET_FILE_DIR:VoxelGame>/Res"
+#        COMMAND ${CMAKE_COMMAND} -E remove_directory "$<TARGET_FILE_DIR:VoxelGame>"
+#       COMMAND ${CMAKE_COMMAND} -E remove "$<TARGET_FILE_DIR:VoxelGame>/VoxelGame"
+#        COMMAND ${CMAKE_COMMAND} -E remove_directory "$<TARGET_FILE_DIR:VoxelGame>/Res"
+#
+#        COMMAND ${CMAKE_COMMAND} -E rename "$<TARGET_FILE_DIR:VoxelGame>/VoxelGame"
+#        "$<TARGET_FILE_DIR:VoxelGame>/VoxelGame1"
+
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_SOURCE_DIR}/Engine/Res"
+        "$<TARGET_FILE_DIR:VoxelGame>/Res"
+        COMMENT "Copying Engine/Res folder to output directory..."
+
+)
+#
+#add_custom_command(
+#        TARGET VoxelGame POST_BUILD
+#        # 1. Wipe out the old Res folder so it never keeps stale/deleted files
+##        COMMAND ${CMAKE_COMMAND} -E remove_directory "$<TARGET_FILE_DIR:VoxelGame>/Res"
+#        # 2. Freshly copy the entire directory on every build/debug press
+#
+#
+#
+#        #        COMMAND ${CMAKE_COMMAND} -E make_directory "$<TARGET_FILE_DIR:VoxelGame>/Temp"
+#        #
+#        #        COMMAND ${CMAKE_COMMAND} -E copy
+#        #        "$<TARGET_FILE_DIR:VoxelGame>/VoxelGame"
+#        #        "$<TARGET_FILE_DIR:VoxelGame>/Temp"
+#        #
+#        #        COMMAND ${CMAKE_COMMAND} -E remove "$<TARGET_FILE_DIR:VoxelGame>/VoxelGame"
+#
+#
+#
+#        COMMAND ${CMAKE_COMMAND} -E rename "$<TARGET_FILE_DIR:VoxelGame>/VoxelGame1"
+#        "$<TARGET_FILE_DIR:VoxelGame>/VoxelGame"
+#
+#
+#
+##        COMMAND ${CMAKE_COMMAND} -E copy
+##        "$<TARGET_FILE_DIR:VoxelGame>/Temp"
+##        "$<TARGET_FILE_DIR:VoxelGame>/"
+#
+#
+#)
 
 
+
+# 1. Create a custom target that has no output files (forcing it to always run)
+#add_custom_target(CopyResAlways ALL
+#        COMMAND ${CMAKE_COMMAND} -E remove_directory "$<TARGET_FILE_DIR:VoxelGame>/Res"
+#        COMMAND ${CMAKE_COMMAND} -E copy_directory
+#        "${CMAKE_SOURCE_DIR}/Engine/Res"
+#        "$<TARGET_FILE_DIR:VoxelGame>/Res"
+#
+#        #        #        "$<TARGET_FILE_DIR:VoxelGame>/VoxelGame"
+#        #        #        "$<TARGET_FILE_DIR:VoxelGame>/Temp"
+#        COMMENT "Always copying Engine/Res folder..."
+#)
+#
+## 2. Make sure this target runs AFTER VoxelGame finishes building
+#add_dependencies(CopyResAlways VoxelGame)
 

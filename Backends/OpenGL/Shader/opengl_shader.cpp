@@ -11,9 +11,10 @@
 
 namespace backends
 {
-	OpenGLShader::OpenGLShader(std::vector<engine::ShaderData>& sources)
+	OpenGLShader::OpenGLShader(std::vector<engine::ShaderData>& sources, std::string type)
 	{
 		GL_SCOPE();
+		m_Type = type;
 		m_Program = CreateShader(sources);
 
 	}
@@ -33,8 +34,10 @@ namespace backends
 		glUseProgram(0);
 	}
 
-
-
+	std::string OpenGLShader::GetType() const
+	{
+		return m_Type;
+	}
 
 
 	unsigned int OpenGLShader::CreateShader(std::vector<engine::ShaderData>& sources)

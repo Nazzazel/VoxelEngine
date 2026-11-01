@@ -14,7 +14,7 @@ namespace backends
 		: public engine::IShader
 	{
 	public:
-		OpenGLShader( std::vector<engine::ShaderData>& sources);
+		OpenGLShader( std::vector<engine::ShaderData>& sources, std::string type);
 		~OpenGLShader();
 
 		OpenGLShader(const OpenGLShader&) = delete;
@@ -22,6 +22,9 @@ namespace backends
 
 		void Bind()		const override;
 		void Unbind()	const override;
+
+		std::string GetType()  const override ;
+
 
 		//Float
 		void SetFloat		(const std::string& name, float value							)override;
@@ -62,6 +65,8 @@ namespace backends
 		void SetVec4		(const std::string& name, const glm::vec4& value					)override;
 	private:
 		unsigned int m_Program;
+
+		std::string m_Type;
 
 		unsigned int CompileShader(unsigned int type, const std::string& source);
 		//unsigned int CreateShader(const std::string& vertexSrc, const std::string& fragmentSrc);
