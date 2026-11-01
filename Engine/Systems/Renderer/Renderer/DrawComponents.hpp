@@ -37,7 +37,7 @@ namespace engine
                 if (m_Texture!=nullptr)
                 {
                 m_Texture->Bind();
-                m_Texture->SetUniforms(m_Shader,"tex0",0);
+                m_Texture->SetUniforms(m_Shader,m_UniformName.c_str(),0);
                 }
             }
 
@@ -96,6 +96,10 @@ namespace engine
 
         // Add this method to update vertex data dynamically
         void UpdateVertices(const void* data, uint32_t size) {
+            if (!m_VertexBuffer) {
+                std::cerr << "[Error] Attempted to update vertices on a null VertexBuffer!\n";
+                return;
+            }
             m_VertexBuffer->Bind();
             m_VertexBuffer->UpdateData(data, size);
         }

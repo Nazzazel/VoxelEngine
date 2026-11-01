@@ -97,6 +97,10 @@ namespace backends
         glViewport(0, 0, width, height);
         OnResize(width, height);
 
+
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
         // Basic OpenGL state
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LESS);
@@ -174,28 +178,45 @@ namespace backends
 
     void OpenGLRenderer::EndFrame()
     {
-           for (const auto& cmd : m_DrawCommands) {
-               if (!cmd.mesh || !cmd.material) continue;
 
-               // 1. Bind material (binds shader and uploads its custom uniforms)
-               cmd.material->Bind();
+        ///IMPORTANT
+           //for (const auto& cmd : m_DrawCommands) {
+           //    if (!cmd.mesh || !cmd.material) continue;
+//
+           //    // 1. Bind material (binds shader and uploads its custom uniforms)
+           //    cmd.material->Bind();
+//
+           //    // 2. Upload per-draw matrices to the active shader
+           //    engine::IShader* shader = cmd.material->GetShader();
+//
+//
+           //    if (shader) {
+           //        shader->SetMat4("u_Model", cmd.modelMatrix);
+           //        shader->SetMat4("u_View", m_SceneData.viewMatrix);
+           //        shader->SetMat4("u_Projection", m_SceneData.projectionMatrix);
+           //    }
+           //
+           //
+           //
+           //
+//
+        ///IMPORTANT
 
-               // 2. Upload per-draw matrices to the active shader
-               engine::IShader* shader = cmd.material->GetShader();
-
-
-               if (shader) {
-                   shader->SetMat4("u_Model", cmd.modelMatrix);
-                   shader->SetMat4("u_View", m_SceneData.viewMatrix);
-                   shader->SetMat4("u_Projection", m_SceneData.projectionMatrix);
-               }
 
 
 
-               // 3. Bind geometry and draw
-               cmd.mesh->GetVertexArray()->Bind();
-               DrawIndexed(cmd.mesh->GetIndexCount(),2);
-           }
+
+
+
+
+
+
+
+
+           //    // 3. Bind geometry and draw
+           //    cmd.mesh->GetVertexArray()->Bind();
+           //    DrawIndexed(cmd.mesh->GetIndexCount(),2);
+           //}
 
             //if (!command.shader || !command.vertexArray) continue;
 //

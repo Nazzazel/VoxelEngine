@@ -26,7 +26,7 @@ namespace opengltests
 
     struct Character {
         std::shared_ptr<engine::OpenGLTexture> Texture; // Your engine's texture class!
-
+        //unsigned int TextureID;
       //  std: // OpenGL texture handle for the glyph
         glm::ivec2   Size;      // Size of glyph
         glm::ivec2   Bearing;   // Offset from baseline to left/top of glyph
@@ -40,6 +40,7 @@ namespace opengltests
         Text(engine::AssetSystem& assets, const std::string& fontPath,std::shared_ptr<engine::OpenGLTexture> texture);
         void TextRender(std::string text);
         void Draw(engine::IRenderer& renderer, const std::string& text, float x, float y, float scale, glm::vec3 color);
+        void TestDrawSquare(engine::IRenderer& renderer);
 
         ~Text() = default;
         //void BuildMesh();

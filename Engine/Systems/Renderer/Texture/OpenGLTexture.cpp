@@ -11,7 +11,7 @@
 
 #include "OpenGL/tests/stb_image.h"
 
-
+#include "Backends/OpenGL/Debug/GLScope.hpp"
 namespace engine
 {
 
@@ -65,17 +65,19 @@ namespace engine
     {
         type = GL_TEXTURE_2D;
         glGenTextures(1, &ID);
-        //glActiveTexture(GL_TEXTURE0);//TODO texture active
+        glActiveTexture(GL_TEXTURE0);//TODO texture active
         glBindTexture(GL_TEXTURE_2D, ID);
+
+        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
         glTexImage2D(
             GL_TEXTURE_2D,
             0,
-            GL_RGB,
+            GL_RED,//GL_RGB
             width,
             height,
             0,
-            GL_RGB,
+            GL_RED,
             GL_UNSIGNED_BYTE,
             data);
 
@@ -191,12 +193,24 @@ namespace engine
 
     Result OpenGLTexture::Bind()
     {
+       GL_SCOPE();
+        //while (glGetError() != GL_NO_ERROR);
+
         glBindTexture(GL_TEXTURE_2D, ID);
+
+      //  GLenum err =0 ;
+      //  while ((err = glGetError()) != GL_NO_ERROR) {
+      //      std::cout << ">>> BIND ERROR DETECTED! Code: " << err << " on Texture ID: " << ID << std::endl;
+      //  }
+        return Result();
+
     }
 
     Result OpenGLTexture::UnBind()
     {
+        GL_SCOPE();
         glBindTexture(GL_TEXTURE_2D, 0);
+        return Result();
     }
 
     int OpenGLTexture::GetWidth() const
