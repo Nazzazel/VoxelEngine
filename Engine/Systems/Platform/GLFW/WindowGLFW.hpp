@@ -37,7 +37,7 @@ namespace engine
         void GetFramebufferSize(int &framebufferWidth,int &framebufferHeight) override;
 
         std::string GetJoystickName(int jid) const override;
-
+        int GetID() const override;
 
         //Bool
          [[nodiscard]] bool IsFocused() const override;

@@ -38,7 +38,7 @@ namespace engine
 
 
                 m_Texture->Bind();
-                //m_Texture->SetUniforms(m_Shader,"tex0",0);//todo later
+                m_Texture->SetUniforms(m_Shader,"tex0",0);//todo later
                 //m_Texture->SetUniforms(m_Shader,"textTexture",0);//todo later
                //if (m_Texture!=nullptr)
                //{

@@ -529,7 +529,7 @@ namespace opengltests
 
 
 
-    void Chunk::Draw(engine::IRenderer& renderer, const WorldCoord& cameraPosition)
+    void Chunk::Draw(engine::IRenderer& renderer, const WorldCoord& cameraPosition, engine::SceneData m_SceneData)
     {
         if (!m_Mesh) return;
 
@@ -595,6 +595,11 @@ namespace opengltests
         //
         //
         //
+        m_Material->Bind();
+
+                m_Shader->SetMat4("u_Model", model);
+                //m_Shader->SetMat4("u_View", m_SceneData.viewMatrix);
+                //m_Shader->SetMat4("u_Projection", m_SceneData.projectionMatrix);
 
         cmd.modelMatrix = model;
         cmd.material = m_Material;

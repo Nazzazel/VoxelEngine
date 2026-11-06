@@ -39,7 +39,7 @@ namespace opengltests
        // Text(engine::AssetSystem& assets,engine::OpenGLTexture& texture);
         Text(engine::AssetSystem& assets, const std::string& fontPath,std::shared_ptr<engine::OpenGLTexture> texture);
         void TextRender(std::string text);
-        void Draw(engine::IRenderer& renderer, const std::string& text, float x, float y, float scale, glm::vec3 color);
+        void Draw(engine::IRenderer& renderer, const std::string& text, float x, float y, float scale, glm::vec3 color, engine::SceneData m_SceneData);
         void TestDrawSquare(engine::IRenderer& renderer);
 
         ~Text() = default;

@@ -172,17 +172,45 @@ namespace opengltests
     }
 
 
-    void Text::Draw(engine::IRenderer& renderer, const std::string& text, float x, float y, float scale, glm::vec3 color)
+    void Text::Draw(engine::IRenderer& renderer, const std::string& text, float x, float y, float scale, glm::vec3 color, engine::SceneData m_SceneData)
     {
 
 
        /// Text::TestDrawSquare(renderer);
 
         // 1. Set up a temporary identity/ortho scene data so it draws on the screen in NDC space (-1 to 1)
-       //engine::SceneData uiSceneData;
-       //uiSceneData.viewMatrix = glm::mat4(1.0f);
-       //uiSceneData.projectionMatrix = glm::mat4(1.0f); // Identity means coordinates range from -1 to 1
-       //renderer.SetSceneData(uiSceneData);
+       engine::SceneData uiSceneData;
+       uiSceneData.viewMatrix = glm::mat4(1.0f);
+
+
+
+
+        float t = glfwGetTime();
+
+        //float a = std::fmod(t, 1.0f);
+        float a = t;
+
+        // Get elapsed time in seconds (e.g., using GLFW)
+        float time = (float)glfwGetTime();
+
+        // Create an identity matrix
+        glm::mat4 transform = glm::mat4(1.0f);
+        //PrintMatrix(transform);
+        // Option A: Smooth back-and-forth sliding using sin()
+        // sin(time) outputs values between -1.0 and 1.0.
+        // Multiplying by 0.8 keeps it safely within visible Normalized Device Coordinates (-1 to 1).
+        // transform[3][0] = sin(time) * 0.8f; // w1 (X translation)
+        // transform[3][1] = sin(time) * 0.8f; // w1 (X translation)
+
+
+        transform[3][0] = -1.0f;
+        transform[3][1] = -1.0f;
+
+        //PrintMatrix(transform);
+        uiSceneData.projectionMatrix = transform; // Identity means coordinates range from -1 to 1
+
+
+       renderer.SetSceneData(uiSceneData);
 
 //         m_Shader->Bind();
 //         m_Shader->SetVec3("textColor", color); // Or m_Shader->SetUniform("textColor", color); depending on your wrapper
@@ -301,12 +329,17 @@ namespace opengltests
 
         Character ch = it->second;
 
-        // 2. Force hardcoded screen position at (0.5, 0.5) with a fixed large size (e.g., 0.4 width/height)
-        float xpos = 0.0f;
+        float xpos = 1.95f;
+        //Max 0 - 2.0 aka -1 <-> 1 Normalised
         //float xpos = 0.5f;
+       // float xpos = x + ch.Bearing.x-1 * scale;
+    //    std::cout << "x = " << xpos << std::endl;
+        float ypos = 1.95f;
 
-        float ypos = 0.0f;
         //float ypos = 0.5f;
+
+
+       // float ypos = y - (ch.Size.y - ch.Bearing.y) * scale;
 
         float w = 0.1f;
         float h = 0.4f;
@@ -373,7 +406,7 @@ namespace opengltests
    //       //
               // Submit draw command for this character
              engine::DrawCommand cmd;
-             cmd.modelMatrix = glm::mat4(1.0f);
+             //cmd.modelMatrix = glm::mat4(1.0f);
              cmd.material = m_Material;
              cmd.mesh = m_Mesh;
              renderer.Submit(cmd);

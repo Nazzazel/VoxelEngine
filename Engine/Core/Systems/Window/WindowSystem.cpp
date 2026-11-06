@@ -12,6 +12,8 @@ namespace engine
 
     Result WindowSystem::OnInit() // Forced
     {
+
+
         m_SystemManager = this->GetSystemManager();
 
         if (!m_SystemManager)
@@ -22,16 +24,9 @@ namespace engine
         m_Logger = m_SystemManager->GetSystem<LoggerSystem>();
         m_Logger->AddInfo("Window System Initiation");
 
-        m_Window = std::unique_ptr<IWindow>(IWindow::Create( m_Title, m_Width, m_Height, m_SharedWindow, m_SystemManager ));
-
-        m_Logger->AddInfo("Window Instance Created");
-            //TODO deal with err code
-            if (Result result = m_Window->Initialize(); result.IsFailure()) return result;
-        m_Logger->AddInfo("Window Instance Initialized");
-
 
         //static_cast<GLFWwindow*>(m_Window.get()->GetNativeWindow());
-
+            return AddWindow();
 
 
 
@@ -53,9 +48,32 @@ namespace engine
         //glfwSetInputMode(static_cast<GLFWwindow*>(m_Window->GetNativeWindow()), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     }
 
+    Result WindowSystem::AddWindow()
+    {
+        m_WindowList.emplace_back(std::unique_ptr<IWindow>(IWindow::Create( m_Title, m_Width, m_Height, m_SharedWindow, m_SystemManager )));
+
+        //m_Window = std::unique_ptr<IWindow>(IWindow::Create( m_Title, m_Width, m_Height, m_SharedWindow, m_SystemManager ));
+
+        m_Logger->AddInfo("Window Instance Created ", m_Title);
+        //TODO deal with err code
+        if (Result result = m_Window->Initialize(); result.IsFailure()) return result;
+        m_Logger->AddInfo("Window Instance Initialized ", m_Title);
+        return {};
+    }
+
+    Result WindowSystem::RemoveWindow()
+    {
+    }
+
+    Result WindowSystem::SetWindowVisibility(bool visible)
+    {
+    }
+
 
     Result WindowSystem::OnUpdate(float dt)
     {
+
+
 
         // 2. Poll window and input events (keeps the window alive/responsive)
 
@@ -71,6 +89,7 @@ namespace engine
 
     IWindow* WindowSystem::GetWindow() const
     {
+
         return m_Window.get();
     }
 

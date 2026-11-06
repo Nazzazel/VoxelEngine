@@ -16,12 +16,18 @@ namespace engine
     class WindowSystem : public IEngineSystem
     {
     public:
+        WindowSystem() {};
         ~WindowSystem() override = default;
 
         Result OnInit() override;// Forced
         Result OnUpdate(float dt) override;
         Result OnShutdown() override;
         void   EnableCursor(bool enable);
+
+        Result AddWindow();
+        Result RemoveWindow();
+
+        Result SetWindowVisibility(bool visible);
 
 
         IWindow* GetWindow() const;
@@ -32,6 +38,7 @@ namespace engine
 
     private:
         std::unique_ptr<IWindow> m_Window;
+        std::vector<std::unique_ptr<IWindow>> m_WindowList;
 
 
 
@@ -40,7 +47,7 @@ namespace engine
 
     private:
         int m_Width = 0, m_Height = 0;
-        std::string m_Title;
+        std::string m_Title; 
         IWindow* m_SharedWindow;
     };
 } // engine

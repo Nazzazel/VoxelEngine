@@ -267,6 +267,17 @@ namespace backends
 
     void OpenGLRenderer::EndFrame()
     {
+//
+       // x0:, y0:, z0:, w0:
+       // x1:, y1:, z1:, w1:
+       // x2:, y2:, z2:, w2:
+       // x3:, y3:, z3:, w3:
+//
+       // x0:, x1:, x2:, x3:
+       // y0:, y1:, y2:, y3:
+       // z0:, z1:, z2:, z3:
+       // w0:, w1:, w2:, w3:
+
 
         ///IMPORTANT
            for (const auto& cmd : m_DrawCommands) {
@@ -279,11 +290,57 @@ namespace backends
                engine::IShader* shader = cmd.material->GetShader();
 
 
+              //  PrintMatrix(mat4);
+               //
+               // glm::mat4 mat1 = glm::mat4(
+               //          0.5f,0.0f,0.0f,0.0f,
+               //          0.0f,0.5f,0.0f,0.0f,
+               //          0.0f,0.0f,0.0f,0.0f,
+               //          0.0f,0.0f,0.0f,1.0f
+               //          );
+
+
+              // glm::vec4 vec4 = glm::vec4(0.5f, 0.5f, 0.0f, 1.0f);
+               //vec4(a_Position.xy, 0.0, 1.0);
+               //glm::mat4 mat = mat4*mat1;
+              // PrintMatrix(mat);
+
                if (shader) {
                    shader->SetMat4("u_Model", cmd.modelMatrix);
                    shader->SetMat4("u_View", m_SceneData.viewMatrix);
                    shader->SetMat4("u_Projection", m_SceneData.projectionMatrix);
-                  // shader->SetMat4("u_Projection", glm::ortho(0.0f, 800.0f, 0.0f, 600.0f));
+                  //shader->SetMat4("u_Projection", glm::ortho(0.0f, 800.0f, 0.0f, 600.0f));
+
+                  //shader->SetMat4("u_Projection",
+                  //    glm::mat4(
+                  //        1.0f,1.0f,1.0f,1.0f,
+                  //        1.0f,1.0f,1.0f,1.0f,
+                  //        1.0f,1.0f,1.0f,1.0f,
+                  //        1.0f,1.0f,1.0f,1.0f
+//
+                  //        ));
+
+                   //float t = glfwGetTime()/100.0f;
+
+                   // 1. Define your inputs
+                   // glm::mat4 u_Projection = mat4;
+                   // glm::vec2 a_Position = glm::vec2(0.5f, 0.5f); // or whatever your current vertex is
+                   //
+                   // // 2. Perform the exact same vector-matrix multiplication
+                   // glm::vec4 gl_Position = u_Projection * glm::vec4(a_Position, 0.0f, 1.0f);
+                   //
+                   //
+                   // // 3. Print the clip-space coordinates
+                   // std::cout << "gl_Position: ("
+                   //           << gl_Position.x << ", "
+                   //           << gl_Position.y << ", "
+                   //           << gl_Position.z << ", "
+                   //           << gl_Position.w << ")\n";
+
+                   // 4. Calculate Normalized Device Coordinates (NDC) if using perspective projection
+                   //glm::vec3 ndc = glm::vec3(gl_Position) / gl_Position.w;
+
+                 // shader->SetMat4("u_Projection",transform);
                }
 
            //    // 3. Bind geometry and draw
@@ -362,6 +419,20 @@ namespace backends
     //     glBindVertexArray(0);
     //     glBindTexture(GL_TEXTURE_2D, 0);
      //}
+
+    void OpenGLRenderer::PrintMatrix(const glm::mat4& mat) {
+        const float* p = glm::value_ptr(mat);
+        std::cout << "--- Matrix (Column-Major) ---\n";
+        for (int row = 0; row < 4; ++row) {
+            std::cout << "[ ";
+            for (int col = 0; col < 4; ++col) {
+                // Indexing column-major: col * 4 + row
+                std::cout << p[col * 4 + row] << " ";
+            }
+            std::cout << "]\n";
+        }
+        std::cout << "-----------------------------\n";
+    }
 
 
     void OpenGLRenderer::OnResize(int width, int height)

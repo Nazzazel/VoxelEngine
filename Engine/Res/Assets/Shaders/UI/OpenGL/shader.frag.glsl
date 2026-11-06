@@ -9,6 +9,8 @@
 
 #version 330 core
 in vec2 TexCoords;
+//in vec4 v_DebugColor;
+
 out vec4 FragColor;
 
 uniform sampler2D textTexture;
@@ -25,8 +27,11 @@ void main()
 //    FragColor = vec4(textColor, 1.0) * vec4(1.0, 1.0, 1.0, sampled);
 
     // Samples the red channel of the FreeType bitmap as transparency
+
     float sampled = texture(textTexture, TexCoords).r;
     FragColor = vec4(textColor, 1.0) * vec4(1.0, 1.0, 1.0, sampled);
+
+    //FragColor=v_DebugColor;
 
 }
 

@@ -17,11 +17,13 @@ namespace engine
 	class Material;
 	class Mesh;
 
+
 	struct DrawCommand {
 		//std::shared_ptr<Mesh>		mesh;
 		std::shared_ptr<Mesh>		mesh;
 		//std::shared_ptr<Material>	material;
 		std::shared_ptr<Material>	material;
+
 		glm::mat4 modelMatrix = glm::mat4(1.0f);
 	};
 
@@ -30,6 +32,9 @@ namespace engine
 		glm::mat4 projectionMatrix;
 		glm::vec3 cameraPosition;
 	};
+
+
+
 
 
     class IRenderer

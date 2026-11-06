@@ -39,7 +39,7 @@ namespace opengltests
         ~Chunk() = default;
 
         void BuildMesh();
-        void Draw(engine::IRenderer& renderer,const WorldCoord& cameraPosition);
+        void Draw(engine::IRenderer& renderer,const WorldCoord& cameraPosition, engine::SceneData m_SceneData);
 
 
         // Getters / Setters for world logic or future compute integration

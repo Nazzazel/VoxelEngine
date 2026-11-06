@@ -109,12 +109,13 @@ namespace opengltests
       //  m_Chunk->SetBlock(0,0,0, 0);
         //m_Chunk->Draw(renderer , m_opengl_camera.get()->GetWorldPosition());
 
-    for ( auto& chunk : loadedChunks)
-    {
-     chunk.Draw(renderer, m_opengl_camera->GetWorldPosition());
-    }
+  for ( auto& chunk : loadedChunks)
+  {
+   chunk.Draw(renderer, m_opengl_camera->GetWorldPosition(),m_opengl_camera->GetSceneData());
+  }
 
-    m_text->Draw(renderer,"123",0.5,0.5,1,glm::vec3(255,0,0));
+     renderer.SetSceneData(m_opengl_camera->GetSceneData());
+    //m_text->Draw(renderer,"123",0,0,1,glm::vec3(255,0,0));
      //rendquadtest(renderer);
 
 
